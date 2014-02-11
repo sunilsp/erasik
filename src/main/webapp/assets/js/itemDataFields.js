@@ -174,7 +174,7 @@ $("document").ready(function() {
     });
     
 	submitAjax = function(){
-		$.post("submitItemTypes.html",function(data){
+		$.post("submitItemTypes.html",$("#itemTypeForm").serialize(),function(data){
 			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});

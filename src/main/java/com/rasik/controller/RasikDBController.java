@@ -95,7 +95,10 @@ class RasikDBController{
 				}
 				else{
 					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
-						return "Itemtype already exists";
+						response.getOutputStream().print("Itemtype already exists");
+						response.setStatus(200);
+						return null;
+						
 					}
 					else{
 					model.addAttribute("message", "Itemtype already exists");
