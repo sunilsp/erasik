@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="rasiknew" match-name="authors"/>
+  <table-filter match-catalog="rasiknew" match-name="awarddetail"/>
+  <table-filter match-catalog="rasiknew" match-name="bindingtype"/>
+  <table-filter match-catalog="rasiknew" match-name="category"/>
+  <table-filter match-catalog="rasiknew" match-name="currency"/>
+  <table-filter match-catalog="rasiknew" match-name="customer"/>
+  <table-filter match-catalog="rasiknew" match-name="customertype"/>
+  <table-filter match-catalog="rasiknew" match-name="discounts"/>
+  <table-filter match-catalog="rasiknew" match-name="itemlanguage"/>
+  <table-filter match-catalog="rasiknew" match-name="items"/>
+  <table-filter match-catalog="rasiknew" match-name="itemsauthors"/>
+  <table-filter match-catalog="rasiknew" match-name="itemscategory"/>
+  <table-filter match-catalog="rasiknew" match-name="itemscustomerrating"/>
+  <table-filter match-catalog="rasiknew" match-name="itemsedition"/>
+  <table-filter match-catalog="rasiknew" match-name="itemspublsuppl"/>
+  <table-filter match-catalog="rasiknew" match-name="itemsstockcenter"/>
+  <table-filter match-catalog="rasiknew" match-name="itemtype"/>
+  <table-filter match-catalog="rasiknew" match-name="publsuppl"/>
+  <table-filter match-catalog="rasiknew" match-name="stockcenter"/>
+  <table-filter match-catalog="rasiknew" match-name="translation"/>
+  <table-filter match-catalog="rasiknew" match-name="transporter"/>
+  <table-filter match-catalog="rasiknew" match-name="transporttypes"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+	<head th:substituteby="html/common :: headerFragment1">
+
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+
+	</head>
+	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
+	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
+	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
+	<!--[if gt IE 8]><!-->
+	<body>
+		<!--<![endif]-->
+		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
+		<header class="clearfix">
+			<div class="container" th:include="html/common :: contactMenuFragment"></div>
+		</header>
+
+		<section role="banner">
+			<hgroup>
+				<h1>Edit Database</h1>
+				<h2>Rasik Database</h2>
+			</hgroup>
+		</section>
+		<!-- // banner ends -->
+		<div class="ym-wrapper">
+			<div class="ym-grid">
+			<article class="ym-g960-12 ym-gl">
+					<div class="ym-gbox">
+						<div id="validationFeedback">
+					<span></span>
+					</div>
+						<form class="clearfix tableDataFields" id="customerForm"  th:action="@{/admin/submitItem.html}"  th:object="${item}"  action="message.html" name="itemForm"  method="post">
+
+							<fieldset title="Add New Item" class="foldedset">
+							<ul>
+							<li class="elem-3">
+								<label for="itemTypeDropdown" th:text="@{Item Type}" class="required">Item Type : </label>
+								<select tabindex="10" id="itemTypeDropdown" name="itemTypeDropdown">
+									<option th:each="itemtype : ${itemTypeList}" th:value="${itemtype.itemTypeId}" th:text="${itemtype.description}">Wireframe</option>
+								</select>
+								<input type="button" tabindex="15" th:id="addItemTypeAjax" id="addItemType" name="addItemType" value="New Item Type"/>
+										
+							</li>
+							<li class="elem-3">
+								<label for="bindingTypeDropdown" th:text="@{binding_Type}" class="required">Binding Type : </label>
+								<select tabindex="20" id="bindingTypeDropdown" name="bindingTypeDropdown">
+									<option th:each="bindingtype : ${bindingTypeList}" th:value="${bindingtype.bindingTypeId}" th:text="${bindingtype.bindingTypeName}">Wireframe</option>
+								</select>
+								<input type="button" tabindex="25" id="addbindingType" name="addbindingType" value="New binding Type"/>
+							</li>
+							<li class="elem-3">
+								<label for="discountDropdown" th:text="@{Discount}" class="required">Discount: </label>
+								<select tabindex="30" id="discountDropdown" name="discountDropdown">
+									<option th:each="discounts : ${discountsList}" th:value="${discounts.discountId}" th:text="${discounts.description}">Wireframe</option>
+								</select>
+								<input type="button" tabindex="35" id="addDiscount" name="addDiscount" value="New Discout Type"/>
+							</li>
+							<li class="elem-3">
+								<label for="languageDropdown" th:text="@{Language}" class="required">Language: </label>
+								<select tabindex="40" id="languageDropdown" name="languageDropdown">
+									<option th:each="itemLanguage : ${itemLanguagesList}" th:value="${itemLanguage.languageId}" th:text="${itemLanguage.languageName}">Wireframe</option>
+								</select>
+							</li>
+							<li class="elem-3">
+								<label for="edition" th:text="@{Edition}" class="required">Edition : </label>
+								<select tabindex="50" id="editionDropdown" name="editionDropdown">
+									<option th:each="itemsEdition : ${itemsEditionList}" th:value="${itemsEdition.itemsEditionid}" th:text="${itemsEdition.itemsedition}">Wireframe</option>
+								</select>
+								<input type="button" tabindex="55" id="addEdtion" name="addEdition" value="New Edition"/>
+							</li>
+							<li class="elem-3">
+								<label for="userBookCode" th:text="@{Book Code}" class="required">Book Code : </label>
+								<input type="text" tabindex="60" autocomplete="on" required="on" name="userBookCode" id="userBookCode" th:field="*{userBookCode}"/>
+							</li>
+							<li class="elem-3">
+								<label for="englishName" th:text="@{English Name}" class="required">English Name : </label>
+								<input type="text" tabindex="60" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
+							</li>
+							<li class="elem-3">
+								<label for="marathiName" th:text="@{Marathi Name}" class="required">Marathi Name : </label>
+								<input type="text" tabindex="70" autocomplete="on" required="on" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
+							</li>
+							<li class="elem-3">
+								<label for="publisherCode" th:text="@{Pub Code}" class="required">Pub Code : </label>
+								<input type="text" tabindex="80" autocomplete="on" required="on" name="publisherCode" id="publisherCode" th:field="*{publisherCode}"/>
+							</li>
+							<li class="elem-3">
+								<label for="price" th:text="@{Price}" class="required">Price : </label>
+								<input type="text" tabindex="90" autocomplete="on" required="on" name="price" id="price" th:field="*{price}"/>
+							</li>
+							<li class="elem-3">
+								<label for="qtyInHand" th:text="@{Qty in hand}" class="required">Qty in hand : </label>
+								<input type="text" tabindex="100" autocomplete="on" required="on" name="qtyInHand" id="qtyInHand" th:field="*{qtyInHand}"/>
+							</li>
+							<li class="elem-3">
+								<label for="minLevel" th:text="@{Min Lvl}" class="required">Min Lvl : </label>
+								<input type="text" tabindex="110" autocomplete="on" required="on" name="minLevel" id="minLevel" th:field="*{minLevel}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxLevel" th:text="@{Max Lvl}" class="required">Max Lvl : </label>
+								<input type="text" tabindex="120" autocomplete="on" required="on" name="maxLevel" id="maxLevel" th:field="*{maxLevel}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxSalePrice" th:text="@{Max Sale Price}" class="required">Max Sale Price: </label>
+								<input type="text" tabindex="130" autocomplete="on" required="on" name="maxSalePrice" id="maxSalePrice" th:field="*{maxSalePrice}"/>
+							</li>
+							</ul>
+							</fieldset>
+							
+							<fieldset title="&nbsp;" class="foldedset">
+								<ul>
+							<li class="elem-3">
+								<label for="publMonth" th:text="@{Pub Month}" class="required">Pub Month : </label>
+								<input type="text" tabindex="140" autocomplete="on" required="on" name="publMonth" id="publMonth" th:field="*{publMonth}"/>
+							</li>
+							<li class="elem-3">
+								<label for="publYear" th:text="@{Pub Year}" class="required">Pub Year : </label>
+								<input type="text" tabindex="150" autocomplete="on" required="on" name="publYear" id="publYear" th:field="*{publYear}"/>
+							</li>
+							<li class="elem-3">
+								<label for="isbnno" th:text="@{ISBN No}" class="required">ISBN No : </label>
+								<input type="text" tabindex="160" autocomplete="on" required="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
+							</li>
+							<li class="elem-3">
+								<label for="noOfPages" th:text="@{No of Pages}" class="required">No of Pages : </label>
+								<input type="text" tabindex="160" autocomplete="on" required="on" name="noOfPages" id="noOfPages" th:field="*{noOfPages}"/>
+							</li>
+							
+							<li class="elem-3">
+								<label for="description" th:text="@{Description}" class="required">Description : </label>
+								<textarea type="text" tabindex="160" autocomplete="on" required="on" name="description" id="description" th:field="*{description}"></textarea>
+							</li>
+							
+							<li class="elem-3">
+								<label for="itemCoverImage" th:text="@{Item Cover }" class="required">Item Cover : </label>
+								<input type="file" tabindex="175" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
+								<input tabindex="170" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
+							</li>
+							<li class="elem-3">
+								<label for="ebookFile" th:text="@{E-Book File }" class="required">E-Book File : </label>
+								<input type="file" tabindex="185" autocomplete="on" required="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
+								<input tabindex="180" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
+							</li>
+							<li class="elem-3">
+								<label for="audioBookFile" th:text="@{Audio Book File }" class="required">Audio Book File : </label>
+								<input type="file" tabindex="195" autocomplete="on" required="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
+								<input tabindex="190" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
+							</li>
+							<!--
+										private String printStatus;
+										private Date maxSalePriceEndDate;
+										private Double maxOwDiscountPrecent;
+										private Date maxOwDiscountEndDate;
+										private Double maxInwDiscountPercent;
+										private Date maxInwDiscountEndDate;
+							-->
+							
+							<li class="elem-3">
+								<label for="printStatus" th:text="@{Print Status}" class="required">Print Status: </label>
+								<input type="text" tabindex="200" autocomplete="on" required="on" name="printStatus" id="printStatus" th:field="*{printStatus}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxSalePriceEndDate" th:text="@{Sale End}" class="required">Sale End : </label>
+								<input type="text" tabindex="210" autocomplete="on" required="on" name="maxSalePriceEndDate" id="maxSalePriceEndDate" th:field="*{maxSalePriceEndDate}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxOwDiscountPrecent" th:text="@{Out Disc Percent}" class="required">Out Disc Percent : </label>
+								<input type="text" tabindex="220" autocomplete="on" required="on" name="maxOwDiscountPrecent" id="maxOwDiscountPrecent" th:field="*{maxOwDiscountPrecent}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxOwDiscountEndDate" th:text="@{Out Disc End}" class="required">Out Disc End : </label>
+								<input type="text" tabindex="230" autocomplete="on" required="on" name="maxOwDiscountEndDate" id="maxOwDiscountEndDate" th:field="*{maxOwDiscountEndDate}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxInwDiscountPercent" th:text="@{In Disc Percent}" class="required">In Disc Percent : </label>
+								<input type="text" tabindex="240" autocomplete="on" required="on" name="maxInwDiscountPercent" id="maxInwDiscountPercent" th:field="*{maxInwDiscountPercent}"/>
+							</li>
+							<li class="elem-3">
+								<label for="maxInwDiscountEndDate" th:text="@{In Disc End}" class="required">In Disc End : </label>
+								<input type="text" tabindex="250" autocomplete="on" required="on" name="maxInwDiscountEndDate" id="maxInwDiscountEndDate" th:field="*{maxInwDiscountEndDate}"/>
+							</li>
+							<li class="elem-3">
+								<input tabindex="150" type="reset" value="Reset " id="reset" name="reset"/>
+								<input tabindex="160" type="submit" value="Save" id="submitbtn" name="submitbtn"/>
+							</li>
+							</ul>							
+							</fieldset>
+							
+							<input type="hidden" autocomplete="on" name="itemId" id="itemId" th:field="*{itemId}"/>
+						</form>
+					</div>
+				</article>
+			</div>
+		</div>
+		<div id="float-modal-form" >
+		
+		
+		
+			<form class="clearfix tableDataFields" id="itemTypeForm"  action="message.html" name="itemTypeForm"  method="post">
+				<fieldset title="Add Item Types">
+					<ul>
+						<li>
+							<label for="name" th:text="@{Item Description}" class="required">Item Description : </label>
+							<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="description" id="description" />
+						</li>
+						<li>
+							<label class="required" for="vatPerc">Vat Percentage : </label>
+							<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="vatPerc"/>
+						</li>
+						<li>
+							<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+							<input tabindex="10" type="submit" value="Save" id="submitbtn" name="submitbtn"/>
+						</li>
+					</ul>
+				</fieldset>
+			</form> 
+		</div> 
+		<footer role="contentinfo">
+			<p>
+				<span class="left">CSS Junction &copy; - 2013 | Released under Creative Common License. <a href="#">Goto Top</a></span>
+		
+			</p>
+		</footer>
+
+	</body>
+	
+	<script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../assets/js/itemDataFields.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js"></script>
+
+</html>

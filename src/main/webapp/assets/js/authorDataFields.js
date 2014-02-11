@@ -1,0 +1,121 @@
+/**
+ * @author manasi
+ */
+$("document").ready(function() {
+	$( "#dob" ).datepicker();
+	$( "#doe" ).datepicker();
+    $("#validationFeedback").hide();
+    $("#adminmenu").attr("class","activePage");
+    var queryValidator = $("#authorForm").validate({
+        rules : {
+        	
+        	contact_person : {
+                required : true,
+                maxlength : 24
+            },
+        	
+            cust_type : {
+                required : true,
+                maxlength : 24
+            },
+             cust_en_name : {
+                required : true,
+                maxlength : 24
+            },
+            cust_mr_name: {
+                required : true,
+                maxlength : 24
+            },
+            address1 : {
+                required : true,
+                maxlength : 24
+            },
+            address2 : {
+            	required : true,
+                maxlength : 24
+            },
+            address3 : {
+            	required : true,
+                maxlength : 24
+            },
+        	
+        	pincode : {
+                required : true,
+                number: true
+            },
+            email : {
+                required : true,
+                email : true
+            },
+            city : {
+                required : true
+            },
+            state : {
+                required : true
+            },
+            country : {
+                required : true
+            },
+            phone1 : {
+                required : true
+            },
+            phone2 : {
+                required : true
+            },
+            fax : {
+                required : true
+            },
+            mobile : {
+                required : true
+            }
+        },
+        messages : {
+            cust_type: {
+                required : "Provide customer type"
+            },
+            cust_mr_name: {
+                required : "Provide customer marathi name"
+            },
+            city : {
+                required : "Please provide customer city/town."
+            },
+            state : {
+                required : "Please provide customer state."
+            },
+            country : {
+                required : "Please provide customer country."
+            },
+            email : {
+                required : "Provide customer e-mail ID.",
+                email : "Please enter a valid email address, example: you@yourdomain.com"
+            }
+            
+        },
+       
+        faultPlacement : function(fault, element) {
+           
+                fault.insertAfter(element);
+        },
+        invalidHandler : function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+                $("#validationFeedback span").html(message);
+                $("#validationFeedback").show();
+            } else {
+                $("#validationFeedback").hide();
+            }
+        },
+
+        onkeyup : true,
+        
+    });
+    $("#reset").click(function() {
+        queryValidator.resetForm();
+        $("#validationFeedback span").html("");
+        $("#validationFeedback").hide();
+    });
+
+    
+});
+

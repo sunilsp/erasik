@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)file:///C:/Users/sunilsp/workspace/erasik/src/main/webapp/html/index.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	  
+<head th:substituteby="html/common :: headerFragment1">
+	  
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>	  
+<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+	  
+	 
+</head>
+<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
+<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
+<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
+<!--[if gt IE 8]><!--><body><!--<![endif]-->
+<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header class="clearfix">
+  <div th:include="html/common :: contactMenuFragment">hello</div>	
+  </header>
+   <section role="banner">
+       <hgroup>
+           <h1>Rasik Sahitya</h1>
+           <h2></h2>
+       </hgroup>
+       <article role="main" class="clearfix">
+           <div class="post">
+             <h2>An HTML5/CSS3 Responsive website</h2>
+             <p>Nunc porta, mauris sit amet laoreet vestibulum, elit leo iaculis lorem, mattis euismod eros lorem sed est. Donec porttitor augue vel nisl blandit gravida. Etiam eu purus non enim vehicula ultrices a non neque.</p>
+             <p>Morbi purus odio, faucibus sit amet elementum in:</p>
+              <ul>
+                <li>interdum eu ipsum.</li>
+                <li>Donec cursus pellentesque mauris vitae ultricies.</li>
+                <li>Donec lacinia nunc in nisl hendrerit scelerisque.</li>
+              </ul>
+              <a href="page.html" class="button left">Learn more <span class="icon">:</span></a>
+           </div>
+           <aside role="complementary">
+               <a href="#demo-url"><img src="assets/images/RasikLOGOTiff.jpg" alt="Lorem ipsum dolor..."/></a>
+           </aside>
+       </article>
+   </section> <!-- // banner ends -->
+   <section class="container">
+       <div class="columns">
+           <article>
+             <figure>
+                <img src="" alt="Lorem ipsum dolor..."/>
+                 <figcaption>
+                 <h3>Micro-formatted HTML5</h3>
+                   <p>Pellentesque mi arcu, sollicitudin vel malesu, <a href="#">volutpat vitae nisi.</a> Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                 </figcaption>
+             </figure>
+           </article>
+           <article>
+             <figure>
+                <img src="" alt="Lorem ipsum dolor..." class="alt-col"/>
++                 <figcaption>
+                     <h3>Responsive</h3>
+                   <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                 </figcaption>
+             </figure>
+           </article>
+           <article>
+             <figure>
+                <img src="" alt="Lorem ipsum dolor..."/>
+                 <figcaption>
+                   <h3>Pure CSS3</h3>
+                   <p>Pellentesque mi arcu, sollicitudin vel malesu, <strong>volutpat vitae nisi. Nulla luctus</strong> lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                 </figcaption>
+             </figure>
+           </article>
+           <article>
+             <figure>
+                <img src="" alt="Lorem ipsum dolor..." class="alt-col"/>
+                 <figcaption>
+                    <h3>Browser compatible</h3>
+                   <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                 </figcaption>
+             </figure>
+           </article>
+       </div> <!-- //.columns -->
+ 
+   </section>
+  <footer role="contentinfo">
+      <p>
+        <span class="left">CSS Junction &copy; - 2013 | Released under Creative Common License. <a href="#">Goto Top</a></span>
+        
+      </p>
+  </footer>
+  
+  
+  
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#homemenu").attr("class","activePage");
+});
+</script>
+</html>

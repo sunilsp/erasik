@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:fragment="headerFragment1">
+	<meta charset="utf-8"/>
+	<title>Rasik Sahitya</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:regular" type="text/css" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Junge" type="text/css"/>
+	
+	<link rel="stylesheet" href="../assets/fonts/raphaelicons.css" th:href="@{/assets/fonts/raphaelicons.css}" ></link>
+  	<link rel="stylesheet" href="../assets/css/styles.css" th:href="@{/assets/css/styles.css}"></link>
+  	<link rel="stylesheet" href="../assets/css/intiratstyle.css" th:href="@{/assets/css/intiratstyle.css}"></link>
+  	<link rel="stylesheet" href="../assets/css/custom-grids.css" th:href="@{/assets/css/custom-grids.css}"></link>
+  	<link rel="stylesheet" href="../assets/css/jquery-ui-1.10.4.custom.css" th:href="@{/assets/css/jquery-ui-1.10.4.custom.css}"></link>
+  	
+  	<link rel="stylesheet" href="../assets/css/demo_page.css" th:href="@{/assets/css/demo_page.css}"></link>
+  	<link rel="stylesheet" href="../assets/css/demo_table.css" th:href="@{/assets/css/demo_table.css}"></link>
+  	<script src="http://code.jquery.com/jquery.min.js"></script>
+  	
+  	<script src="../assets/js/libs/modernizr-2.5.2.min.js" th:src="@{/assets/js/libs/modernizr-2.5.2.min.js}"></script>
+  	<script src="../assets/js/script.min.js" th:src="@{/assets/js/script.min.js}"></script>
+  	<script src="../assets/js/jquery.json-2.4.min.js" th:src="@{/assets/js/jquery.json-2.4.min.js}"></script>
+  	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"></link>
+  	
+</head>
+<body>
+ <header class="clearfix" th:fragment="contactMenuFragment">
+      
+        <a id="logo" href="index.html">Rasik Sahitya</a>
+        <ul class="social-icons">
+          <li><a href="http://www.twitter.com" class="icon">^</a></li>
+          <li><a href="#" th:href="@{/index.html?lang=en}" class="icon">En | </a></li>
+          <li><a href="#" th:href="@{/index.html?lang=mr}" class="icon">^</a></li>
+        </ul>
+        <nav class="clearfix">
+          <ul role="navigation">
+            <li>
+              <a href="index.html" th:href="@{/index.html}" id="homemenu" th:text="#{erasik.homeMenu}"><span class="icon">S</span>Home</a>
+            </li>
+            <!-- <li>
+              <a href="portfolio.html" th:href="@{/portfolio.html}"><span class="icon">Û</span>Portfolio</a>
+            </li>
+            <li>
+              <a href="page.html"><span class="icon">E</span>Page</a>
+            </li>
+            <li>
+              <span sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/blog.html}" href="blog.html"><span class="icon">E</span>Blog</a></span>
+            </li>
+            <li>
+              <a href="contact.html"  th:href="@{/contact.html}" class="activePage"><span class="icon">M</span>Contact us</a>
+            </li> -->
+             <li>
+              <a href="admin.html" th:href="@{/admin/showItemTypes.html}" id="adminmenu"><span class="icon">S</span>Database</a>
+            </li>
+           
+          </ul>
+        </nav>
+      
+  </header>
+  
+  <form th:fragment="addItemTypeFragment" class="clearfix tableDataFields" id="itemTypeForm"  th:object="${itemType}"  action="javascript:submitAjax();" name="itemTypeForm"  method="post">
+				<fieldset title="Add Item Types">
+					<ul>
+						<li>
+							<label for="name" th:text="@{Item Description}" class="required">Item Description : </label>
+							<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
+						</li>
+						<li>
+							<label class="required" for="vatPerc">Vat Percentage : </label>
+							<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
+						</li>
+						<li>
+							<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+							<input tabindex="10" type="submit" value="Save" id="addItemTypesubmitbtn" name="addItemTypesubmitbtn"/>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
+
+
+
+</body>
+
+</htmlb>

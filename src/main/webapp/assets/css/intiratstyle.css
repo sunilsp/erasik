@@ -1,0 +1,426 @@
+/*
+ * intirat styles
+ *
+ */
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before, .clearfix:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+	*zoom: 1;
+}
+
+
+.ym-gbox[role="thumb-container"] {
+	border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
+	float:left;
+	clear: left;
+	margin:0.25em 0 ;
+	width:100%;
+}
+
+[role="thumb-container"] .button{
+	min-width: 10em;
+	padding: 0.25em 0;
+}
+
+/* strip off all default styles from form fields*/
+
+form *{
+	background: none;
+	behavior: url(../pie.htc);
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-ms-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	text-align: left;
+	padding:0.5em;
+	
+}
+
+form .elem-3{
+	font-size:85%;
+}
+
+form .elem-3 input[type="button"]:hover{
+	cursor:pointer;
+}
+.tableDataFields{
+	border: 1px solid #999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
+input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=reset], textarea, select, button {
+	margin: 0 0 0.5em 0;
+	padding: 0;
+	outline: none;
+}
+
+input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=reset], textarea, select, button,.elem-3 input[type="button"] {
+	border: 1px solid #999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], textarea, select {
+	display: block;
+	padding: 0.2em;
+	outline: none;
+	float: right;
+	/*
+	 * gradient background:
+	 */
+	background: #ededed; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VkZWRlZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #ededed 0%, #f6f6f6 53%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(53%,#f6f6f6), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ededed 0%,#f6f6f6 53%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ededed 0%,#f6f6f6 53%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ededed 0%,#f6f6f6 53%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(top,  #ededed 0%,#f6f6f6 53%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
+}
+
+
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus, input[type=date]:focus, input[type=datetime]:focus
+select:focus {
+	border: 1px solid #222;
+	background: #cccccc; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NjY2NjYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQlIiBzdG9wLWNvbG9yPSIjZWRlZGVkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNyUiIHN0b3AtY29sb3I9IiNjZWNlY2UiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWVlZWVlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(top,  #cccccc 0%, #ededed 4%, #cecece 7%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cccccc), color-stop(4%,#ededed), color-stop(7%,#cecece), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #cccccc 0%,#ededed 4%,#cecece 7%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #cccccc 0%,#ededed 4%,#cecece 7%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #cccccc 0%,#ededed 4%,#cecece 7%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #cccccc 0%,#ededed 4%,#cecece 7%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#eeeeee',GradientType=0 ); /* IE6-8 */
+}
+
+input[type=checkbox]:focus, input[type=radio]:focus {
+	border: 1px solid red;
+	margin: 0;
+	padding: 0;
+}
+
+input[type=submit], input[type=reset], .button{
+	text-transform: capitalize;
+	text-align: center;
+	font-size: 1.2em;
+	line-height: 1.5em;
+	padding: 0.5em;
+	font-weight: bold;
+	color: white;
+	margin: 0.5em 0.5em 0 0;
+	float: left;
+	display: block;
+	border: none;
+}
+
+.elem-3 input[type="button"]{
+	text-transform: capitalize;
+	text-align: center;
+	line-height: 1.5em;
+	padding: 0.3em;
+	font-weight: bold;
+	color: white;
+	margin: 0 0.5em;
+	float: left;
+	display: block;
+	border: none;
+}
+
+input[disabled], input[disabled] {
+	background: #eee;
+}
+
+input[type=submit], .elem-3 input[type="button"] {
+	background: #555;
+}
+
+input[type=reset] {
+	background: #888;
+}
+
+input[type=submit]:hover, .elem-3 input[type="button"]:hover {
+	background: #01B0EC;
+}
+
+input[type=reset]:hover {
+	background: #555;
+}
+
+form label {
+	display: block;
+	width: 40%;
+	padding: 0.3em;
+	float: left;
+	height:1.2em;
+}
+
+form ul li {
+	display: block;
+	float: left;
+	width: 95%;
+	margin: 0 0.5em;
+	border-top: #fff solid 1px;
+	border-bottom: #aaa solid 1px;
+	padding: 1em 0 0.5em;
+}
+
+form ul li:first-child {
+	border-top: none;
+}
+form ul li:last-child {
+	border-bottom: none;
+}
+form ul li ul {
+	margin: 0 0 0 0.3em;
+	padding-left: 3.3em;
+	float: left;
+}
+.groupLabel {
+	float: left;
+}
+
+form ul li ul li {
+	display: inline;
+	border: none;
+	float: none;
+}
+form ul li ul li label {
+	display: inline;
+	float: none;
+	font-weight: normal;
+	cursor: pointer;
+	cursor: hand;
+}
+
+input[type=checkbox]+ label {
+	display: inline;
+	float: none;
+	font-weight: normal;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+form fieldset legend {
+	display: none;
+}
+
+fieldset:before {
+	content: attr(title);
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: capitalize;
+	border-bottom: #666 2px solid;
+	line-height: 1.8em;
+	padding: 0 ;
+	display: block;
+	width: 98%;
+	margin: 0 auto;
+}
+
+label.error {
+	padding: 0 !important;
+	margin: 0 !important;
+	vertical-align: top;
+	display: inline-block;
+	width: auto;
+	float: right;
+	padding: none;
+	clear: right;
+	background:none;
+	font-size:80%;
+}
+label.required:before {
+	content: "*";
+	color: red;
+}
+.groupLabel label.required {
+	width: 100%;
+}
+em {
+	color: red;
+}
+#validationFeedback {
+	width: 50%;
+	display: block;
+	background: #01B0EC;
+	-webkit-border-radius: 1em 1em 0 0;
+	-moz-border-radius: 0.25em 0.25em 0 0;
+	border-radius: 0.25em 0.25em 0 0;
+	color: white;
+	padding: 0.5em;
+	margin: 1em auto 0;
+	behavior: url(../pie.htc);
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-ms-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	text-align: center;
+	font-weight: none;
+	font-size: 80%;
+	width:80%;
+}
+
+input[type=text].error, input[type=number].error, input[type=password].error, input[type=email].error, input[type=date].error, input[type=datetime].error, textarea.error, select.error {
+	border-color: #01B0EC !important;
+	background: -moz-linear-gradient(center top , #EDEDED 0%, #F6F6F6 53%, #FFFFFF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+@media screen and (min-width: 960px) {
+	form {
+		width: 100%;
+		margin: 0 auto;
+		background: #eee;
+	}
+	fieldset {
+		display: block;
+		margin: 1em 0;
+		border: none;
+		padding: 0;
+		float: left;
+	}
+	fieldset.foldedset {
+		width:50%;
+	}
+	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], option, textarea, button {
+		width: 55%;
+		float:left;
+		height:1.2em;
+	}
+	
+	select{
+		width: 55%;
+		float:left;
+		height:1.8em;
+	}
+	
+	.elem-3	select, .elem-3 input[type="text"]{
+		width: 45%;
+	}
+	
+	form label {
+		width: 35%;
+		text-align:right;
+		line-height: 1.2em;
+	}
+	
+	.elem-3 label{
+		width: 20%;
+	}
+}
+@media screen and (max-width: 959px) and (min-width: 651px) {
+	form {
+		width: 95%;
+		margin: 0 auto;
+		background: #eee;
+	}
+	fieldset {
+		display: block;
+		margin: 1em 0;
+		border: none;
+		padding: 0;
+		float: left;
+	}
+
+	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], option, textarea, button {
+		width: 55%;
+		float: left;
+		height:1.2em;
+	}
+	select{
+		width: 55%;
+		float:left;
+		height:1.8em;
+	}
+	.elem-3	select, .elem-3 input[type="text"]{
+		width: 45%;
+	}
+	form label {
+		width: 35%;
+		text-align:right;
+		line-height: 1.2em;
+	}
+	
+	.elem-3 label{
+		width: 20%;
+	}
+
+}
+
+@media screen and (max-width: 650px) {
+	form {
+		width: 98%;
+		margin: 0 auto;
+		background: #eee;
+	}
+	fieldset {
+		display: block;
+		width: 100%;
+		margin: 1em 0;
+		border: none;
+		padding: 0;
+		float: none;
+	}
+	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], textarea, button {
+		height:1.2em;
+		width: 90%;
+	}
+	select{
+		width: 55%;
+		float:left;
+		height:1.8em;
+	}
+
+	form label {
+		width: 90%;
+		line-height: 1.2em;
+	}
+
+}
+
+/*
+ * intirat styles
+ *
+ */
