@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -23,7 +24,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "bindingtype", catalog = "rasiknew")
-@NamedQuery(name="findAllBindingtypes",query="from Bindingtype ")
+@NamedQueries({
+@NamedQuery(name="findAllBindingtypes",query="from Bindingtype "),
+@NamedQuery(name="findBindingTypeByName",query="from Bindingtype it where it.bindingTypeName = :bindingTypeName")
+})
 public class Bindingtype implements java.io.Serializable {
 
 	private Integer bindingTypeId;

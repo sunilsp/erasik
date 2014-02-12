@@ -226,5 +226,17 @@ public class RasikServiceImpl implements RasikService {
 		return itemsEditionDao.findAllitemseditions();
 	}
 
+	@Override
+	public Bindingtype findBindingTypeByName(Bindingtype bindingType) {
+		return bindingTypeDao.findBindingTypeByName(bindingType.getBindingTypeName());
+		
+	}
+
+	@Override
+	public String saveBindingType(Bindingtype bindingType) {
+		bindingTypeDao.persist(bindingType);
+		return "saved";
+	}
+
 
 }

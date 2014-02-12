@@ -52,14 +52,14 @@ xmlns:th="http://www.thymeleaf.org">
 								<select tabindex="20" id="bindingTypeDropdown" name="bindingTypeDropdown">
 									<option th:each="bindingtype : ${bindingTypeList}" th:value="${bindingtype.bindingTypeId}" th:text="${bindingtype.bindingTypeName}">Wireframe</option>
 								</select>
-								<input type="button" tabindex="25" id="addbindingType" name="addbindingType" value="New binding Type"/>
+								<input type="button" tabindex="25" th:id="addBindingTypeAjax" id="addbindingType" name="addbindingType" value="New binding Type"/>
 							</li>
 							<li class="elem-3">
 								<label for="discountDropdown" th:text="@{Discount}" class="required">Discount: </label>
 								<select tabindex="30" id="discountDropdown" name="discountDropdown">
 									<option th:each="discounts : ${discountsList}" th:value="${discounts.discountId}" th:text="${discounts.description}">Wireframe</option>
 								</select>
-								<input type="button" tabindex="35" id="addDiscount" name="addDiscount" value="New Discout Type"/>
+								<input type="button" tabindex="35"  id="addDiscount" name="addDiscount" value="New Discout Type"/>
 							</li>
 							<li class="elem-3">
 								<label for="languageDropdown" th:text="@{Language}" class="required">Language: </label>

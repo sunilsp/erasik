@@ -79,6 +79,10 @@ public interface RasikService {
 	
 	public List<Itemsedition> findAllitemseditions();
 
+	public Bindingtype findBindingTypeByName(Bindingtype bindingType);
+
+	public String saveBindingType(Bindingtype bindingType);
+
 	
 
 	

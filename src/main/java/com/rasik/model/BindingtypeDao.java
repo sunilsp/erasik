@@ -102,26 +102,22 @@ public class BindingtypeDao extends RasikBaseDao{
 		}
 	}
 
-	public List<Bindingtype> findByExample(Bindingtype instance) {
-		log.debug("finding Bindingtype instance by example");
-		try {
-			List<Bindingtype> results = (List<Bindingtype>) sessionFactory
-					.getCurrentSession()
-					.createCriteria("com.rasik.hibernate.Bindingtype")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
 	
 	public List<Bindingtype> findAllBindingTypes(){
 		Query query=getSession().getNamedQuery("findAllBindingtypes");
 		List<Bindingtype> bindingTypeList=query.list();
 		return bindingTypeList;
+	}
+
+	public Bindingtype findBindingTypeByName(String bindingTypeName) {
+			Query query=getSession().getNamedQuery("findBindingTypeByName").setString("bindingTypeName", bindingTypeName);
+			List<Bindingtype> bindingTypeList=query.list();
+				if(bindingTypeList.size() != 0){
+					return bindingTypeList.get(0);
+				}
+				else{
+					return null;
+				}
 	}
 
 }

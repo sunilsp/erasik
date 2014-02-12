@@ -163,6 +163,8 @@ $("document").ready(function() {
         $("#validationFeedback").hide();
     });
     
+   
+    
     $("#addItemTypeAjax").click(function(){
     	
   
@@ -181,6 +183,22 @@ $("document").ready(function() {
 	};
     
 
+	  $("#addBindingTypeAjax").click(function(){
+	    	
+		  
+	    	$.get( "addBindingTypeAjax.html", function( data ) {
+	  			$( "#float-modal-form" ).dialog( "open" );
+				$( "#float-modal-form" ).html( data );
+
+	    		});
+	    });
+	    
+	  submitBindingTypeAjax = function(){
+			$.post("submitBindingTypes.html",$("#bindingTypeForm").serialize(),function(data){
+				alert(data);+
+				$( "#float-modal-form" ).dialog( "close" );
+			});
+		};
     
 });
 
