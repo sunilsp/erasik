@@ -83,6 +83,14 @@ public interface RasikService {
 
 	public String saveBindingType(Bindingtype bindingType);
 
+	public void deleteAuthor(Authors authorExist);
+
+	public Bindingtype findBindingTypeById(Integer bindingTypeId);
+
+	public String updateBindingTypes(Bindingtype bindingTypeExist);
+
+	public void deleteBindingTypes(Bindingtype bindingTypeExist);
+
 	
 
 	

@@ -74,8 +74,7 @@ public class BindingtypeDao extends RasikBaseDao{
 	public Bindingtype merge(Bindingtype detachedInstance) {
 		log.debug("merging Bindingtype instance");
 		try {
-			Bindingtype result = (Bindingtype) sessionFactory
-					.getCurrentSession().merge(detachedInstance);
+			Bindingtype result = (Bindingtype) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -87,9 +86,7 @@ public class BindingtypeDao extends RasikBaseDao{
 	public Bindingtype findById(java.lang.Integer id) {
 		log.debug("getting Bindingtype instance with id: " + id);
 		try {
-			Bindingtype instance = (Bindingtype) sessionFactory
-					.getCurrentSession().get("com.rasik.hibernate.Bindingtype",
-							id);
+			Bindingtype instance = (Bindingtype) getSession().get("com.rasik.model.Bindingtype",id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

@@ -238,5 +238,28 @@ public class RasikServiceImpl implements RasikService {
 		return "saved";
 	}
 
+	@Override
+	public void deleteAuthor(Authors authorExist) {
+		authorDao.delete(authorExist);
+	}
+
+	@Override
+	public Bindingtype findBindingTypeById(Integer bindingTypeId) {
+		return bindingTypeDao.findById(bindingTypeId);
+	}
+
+	@Override
+	public String updateBindingTypes(Bindingtype bindingTypeExist) {
+		bindingTypeDao.merge(bindingTypeExist);
+		return "saved";
+		
+	}
+
+	@Override
+	public void deleteBindingTypes(Bindingtype bindingTypeExist) {
+		bindingTypeDao.delete(bindingTypeExist);
+		
+	}
+
 
 }

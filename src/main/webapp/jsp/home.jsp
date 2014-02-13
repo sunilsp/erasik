@@ -40,7 +40,7 @@ ${userInfo.name}
           var userId = +$('#personId').val();
           if(!validatePersonId(userId)) 
             return false;
-          $.get('${pageContext.request.contextPath}/user.do/' + userId, function(user) {
+          $.get('${pageContext.request.contextPath}/user.get/' + userId, function(user) {
             $('#personIdResponse').text(user.userId + ':  Name ' + user.name);
           });
           e.preventDefault(); // prevent actual form submit

@@ -57,8 +57,23 @@ class RasikDBController{
 	@Inject
 	RasikService rasikSvc;
 
+
+	@RequestMapping(value =
+		{
+				"index.html"
+		}, method = RequestMethod.GET)
+		public ModelAndView index()
+		{
+			logger.info("Inside index()");
+			ModelAndView mav=new ModelAndView("html/index");
+			return mav;
+		}
+
+
 	
-			
+/*
+ * Start : Itemtype functions			
+ */
 	@RequestMapping(value =
 			{
 					"admin/showItemTypes.html"
@@ -149,15 +164,16 @@ class RasikDBController{
 		ItemtypeList itemTypeList=new ItemtypeList();
 		itemTypeList.setItemTypeList(itemTypeListresult);
 		
+		// Following code shows how to return object as XML
 		/*JAXBContext jaxbContext = JAXBContext.newInstance(ItemtypeList.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
-		
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
-		jaxbMarshaller.marshal(itemTypeList, System.out);
+ 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+ 		jaxbMarshaller.marshal(itemTypeList, System.out);
 		return mav;	
-*/		String json = new Gson().toJson(itemTypeList);
+		 */
+		
+		//Gson used here just to have an example. Used jackson everywhere else
+		String json = new Gson().toJson(itemTypeList);
 		String jsonNew=json.replace("{\"itemTypeList\":", "");
 		String jsonNew1=jsonNew.substring(0, jsonNew.lastIndexOf("}"));
 		mav.addObject("itemTypes", jsonNew1);
@@ -179,23 +195,28 @@ class RasikDBController{
 		
 		}
 	
+
+/*
+ * Start : Customer functions	
+ */
+	
+
 	@RequestMapping(value =
 	{
 				"admin/customer.html"
 	}, method = RequestMethod.GET)
 	public ModelAndView geCustomer(HttpServletRequest request) 
 	{
-			logger.info("Inside getitemListTypeById()");
+			logger.info("Inside geCustomer()");
 			ModelAndView mav=new ModelAndView("html/customer");
 			Customer customer=new Customer();
 			List<Customertype> customerTypeList=rasikSvc.findAllCustomerTypes();
 			
 			mav.addObject("customerTypeList", customerTypeList);
 			mav.addObject("customer", customer);
-			//mav.addObject("itemType", itemType);
 			return mav;
 		
-		}
+	}
 	
 	@RequestMapping(value =
 		{
@@ -203,7 +224,7 @@ class RasikDBController{
 		}, method = RequestMethod.POST)
 		public ModelAndView submitCustomer(@ModelAttribute Customer customer)
 		{
-				logger.info("Inside submitItemTypes()");
+				logger.info("Inside submitCustomer()");
 				ModelAndView mav=new ModelAndView("html/message");
 				rasikSvc.saveCustomer(customer);
 				mav.addObject("message", "Customer saved.");
@@ -219,9 +240,7 @@ class RasikDBController{
 			logger.info("Inside listCustomer()");
 			ModelAndView mav=new ModelAndView("html/customerList");
 			List<Customer> customerList=rasikSvc.findAllCustomers();
-			ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-			String json = ow.writeValueAsString(customerList);
-			mav.addObject("customerList", json);
+			mav.addObject("customerList", returnJson(customerList));
 			return mav;
 		}
 
@@ -269,7 +288,9 @@ class RasikDBController{
 				}
 				return mav;	
 		}
-
+/*
+ * Start : CustomerType functions
+ */
 
 	@RequestMapping(value =
 		{
@@ -277,7 +298,7 @@ class RasikDBController{
 		}, method = RequestMethod.POST)
 		public ModelAndView submitCustomerType(@ModelAttribute Customertype customerType)
 		{
-				logger.info("Inside submitItemTypes()");
+				logger.info("Inside submitCustomerType()");
 				ModelAndView mav=new ModelAndView("html/message");
 				if(	rasikSvc.findCustomerType(customerType) == null){
 					rasikSvc.saveCustomerTypes(customerType);
@@ -295,14 +316,13 @@ class RasikDBController{
 	}, method = RequestMethod.GET)
 	public ModelAndView geCustomerType(HttpServletRequest request) 
 	{
-			logger.info("Inside getitemListTypeById()");
+			logger.info("Inside geCustomerType()");
 			ModelAndView mav=new ModelAndView("html/customer_type");
 			Customertype customerType=new Customertype();
 			mav.addObject("customerType", customerType);
-			//mav.addObject("itemType", itemType);
 			return mav;
 		
-		}
+	}
 	
 	
 	@RequestMapping(value =
@@ -314,9 +334,7 @@ class RasikDBController{
 			logger.info("Inside listCustomertypes()");
 			ModelAndView mav=new ModelAndView("html/customerTypeList");
 			List<Customertype> customerTypeListresult=rasikSvc.findAllCustomerTypes();
-			ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-			String json = ow.writeValueAsString(customerTypeListresult);
-			mav.addObject("customerTypes", json);
+			mav.addObject("customerTypes", returnJson(customerTypeListresult));
 			return mav;
 		}
 	
@@ -363,6 +381,10 @@ class RasikDBController{
 				return mav;	
 		}
 
+/*
+ * Start : Author functions	
+ */
+
 
 	@RequestMapping(value =
 		{
@@ -370,7 +392,7 @@ class RasikDBController{
 		}, method = RequestMethod.POST)
 		public ModelAndView submitAuthor(@ModelAttribute Authors author)
 		{
-				logger.info("Inside submitItemTypes()");
+				logger.info("Inside submitAuthor()");
 				ModelAndView mav=new ModelAndView("html/message");
 				rasikSvc.saveAuthor(author);
 				mav.addObject("message", "Author saved.");
@@ -383,14 +405,13 @@ class RasikDBController{
 	}, method = RequestMethod.GET)
 	public ModelAndView getAuthor(HttpServletRequest request) 
 	{
-			logger.info("Inside getitemListTypeById()");
+			logger.info("Inside getAuthor()");
 			ModelAndView mav=new ModelAndView("html/author");
 			Authors author=new Authors();
 			mav.addObject("author", author);
-			//mav.addObject("itemType", itemType);
 			return mav;
 		
-		}
+	}
 	
 	@RequestMapping(value =
 		{
@@ -401,9 +422,7 @@ class RasikDBController{
 			logger.info("Inside listAuthors()");
 			ModelAndView mav=new ModelAndView("html/authorList");
 			List<Authors> authorsList=rasikSvc.findAllAuthors();
-			ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-			String json = ow.writeValueAsString(authorsList);
-			mav.addObject("authorsList", json);
+			mav.addObject("authorsList", returnJson(authorsList));
 			return mav;
 		}
 	
@@ -420,7 +439,7 @@ class RasikDBController{
 				mav.addObject("author", author);
 				return mav;
 			
-			}
+		}
 
 
 	@RequestMapping(value =
@@ -429,7 +448,7 @@ class RasikDBController{
 		}, method = RequestMethod.POST)
 		public ModelAndView updateAuthor(HttpServletRequest request,@ModelAttribute Authors author)
 		{
-				logger.info("Inside submitItemTypes()");
+				logger.info("Inside updateAuthor()");
 				ModelAndView mav=new ModelAndView("html/message");
 				String actionType=request.getParameter("actionType");
 				Authors authorExist=rasikSvc.findAuthorById(String.valueOf(author.getAuthorId()));
@@ -441,7 +460,7 @@ class RasikDBController{
 						mav.addObject("message", "Author profile updated.");
 					}
 					if(actionType.equals("delete")){
-						//rasikSvc.deleteCustomerTypes(customerTypeExist);
+						rasikSvc.deleteAuthor(authorExist);
 						mav.addObject("message", "Author profile deleted.");
 					}
 				}
@@ -451,6 +470,119 @@ class RasikDBController{
 				return mav;	
 		}
 	
+
+/*
+ * Start : BindingType functions
+ */
+	@RequestMapping(value =
+	{
+					"admin/showbindingType.html"
+			}, method = RequestMethod.GET)
+			public ModelAndView showbindingTypes()
+			{
+				logger.info("Inside showbindingTypes()");
+				ModelAndView mav=new ModelAndView("html/bindingType");
+				Bindingtype bindingType=new Bindingtype();
+				mav.addObject("bindingType", bindingType);
+				return mav;
+	}
+
+	@RequestMapping(value =
+		{
+				"admin/submitBindingTypes.html"
+		}, method = RequestMethod.POST)
+		public String submitBindingTypes(HttpServletResponse response,Model model,@ModelAttribute Bindingtype bindingType,@RequestHeader(value="X-Requested-With",required=false) String requestedWith) throws IOException
+		{
+				logger.info("Inside submitBindingTypes()");
+				
+				if(	rasikSvc.findBindingTypeByName(bindingType) == null){
+					rasikSvc.saveBindingType(bindingType);
+				
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("BindingType saved");
+						response.setStatus(200);
+						return null;
+					}
+					else{
+					   model.addAttribute("message", "BindingType saved.");
+					   return "html/message";
+					}
+				}
+				else{
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("BindingType already exists");
+						response.setStatus(200);
+						return null;
+						
+					}
+					else{
+					model.addAttribute("message", "BindingType already exists");
+					return "html/message";
+				}
+					
+			}
+		}
+		
+		@RequestMapping(value =
+		{
+					"admin/updatebindingType.html"
+		}, method = RequestMethod.POST)
+		public ModelAndView updatebindingTypes(HttpServletRequest request,@ModelAttribute Bindingtype bindingType)
+		{
+				logger.info("Inside updateItemTypes()");
+				ModelAndView mav=new ModelAndView("html/message");
+				String actionType=request.getParameter("actionType");
+				Bindingtype bindingTypeExist =rasikSvc.findBindingTypeById(bindingType.getBindingTypeId());
+				if(	 bindingTypeExist!=null){
+					bindingTypeExist.setBindingTypeName(bindingType.getBindingTypeName());
+					if(actionType.equals("update")){
+						rasikSvc.updateBindingTypes(bindingTypeExist);
+						mav.addObject("message", "Bindingtype updated.");
+					}
+					if(actionType.equals("delete")){
+						rasikSvc.deleteBindingTypes(bindingTypeExist);
+						mav.addObject("message", "Bindingtype deleted.");
+					}
+				}
+				else{
+					mav.addObject("message", "Bindingtype does not exist");
+				}
+				return mav;	
+		}
+	
+		
+	@RequestMapping(value =
+	{
+			"admin/listbindingtypes.html"
+	}, method = RequestMethod.GET)
+	public ModelAndView listbindingtypes() throws JsonGenerationException, JsonMappingException, IOException 
+	{
+		logger.info("Inside listbindingtypes()");
+		ModelAndView mav=new ModelAndView("html/bindingTypeList");
+		List<Bindingtype> bindingTypeListresult=rasikSvc.findAllBindingTypes();
+		mav.addObject("bindingTypeList", returnJson(bindingTypeListresult));
+		return mav;
+	}
+	
+	@RequestMapping(value =
+	{
+				"admin/getbindingTypeById.html"
+	}, method = RequestMethod.GET)
+	public ModelAndView getbindingTypeById(HttpServletRequest request) 
+	{
+			logger.info("Inside getbindingTypeById()");
+			String bindingTypeId=request.getParameter("bindingTypeId");
+			Bindingtype bindingType=rasikSvc.findBindingTypeById(Integer.valueOf(bindingTypeId));
+			ModelAndView mav=new ModelAndView("html/updatebindingTypes");
+			mav.addObject("bindingType", bindingType);
+			return mav;
+		
+	}
+	
+	
+/*
+ * Start : Add Item functions	
+ */
 	
 	@RequestMapping(value =
 	{
@@ -504,127 +636,16 @@ class RasikDBController{
 			return "html/common :: bindingTypeFragment";
 		}
 
+		
+/*
+ * Private Util functions		
+ */
+		
+	private String returnJson(Object obj) throws JsonGenerationException, JsonMappingException, IOException{
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = ow.writeValueAsString(obj);
+		return json;
 
-	
-		@RequestMapping(value =
-				{
-						"admin/showbindingType.html"
-				}, method = RequestMethod.GET)
-				public ModelAndView showbindingTypes()
-				{
-					logger.info("Inside showbindingTypes()");
-					ModelAndView mav=new ModelAndView("html/bindingType");
-					Bindingtype bindingType=new Bindingtype();
-					mav.addObject("bindingType", bindingType);
-					return mav;
-				}
-		
-			@RequestMapping(value =
-			{
-					"admin/submitBindingTypes.html"
-			}, method = RequestMethod.POST)
-			public String submitBindingTypes(HttpServletResponse response,Model model,@ModelAttribute Bindingtype bindingType,@RequestHeader(value="X-Requested-With",required=false) String requestedWith) throws IOException
-			{
-					logger.info("Inside submitBindingTypes()");
-					
-					if(	rasikSvc.findBindingTypeByName(bindingType) == null){
-						rasikSvc.saveBindingType(bindingType);
-					
-						if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
-							response.getOutputStream().print("BindingType saved");
-							response.setStatus(200);
-							return null;
-						}
-						else{
-						   model.addAttribute("message", "BindingType saved.");
-						   return "html/message";
-						}
-					}
-					else{
-						if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
-							response.getOutputStream().print("BindingType already exists");
-							response.setStatus(200);
-							return null;
-							
-						}
-						else{
-						model.addAttribute("message", "BindingType already exists");
-						return "html/message";
-					}
-						
-				}
-			}
+	}
 			
-			@RequestMapping(value =
-			{
-						"admin/updatebindingTypes.html"
-			}, method = RequestMethod.POST)
-			public ModelAndView updatebindingTypes(HttpServletRequest request,@ModelAttribute Itemtype itemType)
-			{
-					logger.info("Inside updateItemTypes()");
-					ModelAndView mav=new ModelAndView("html/message");
-					String actionType=request.getParameter("actionType");
-					Itemtype itemTypeExist=rasikSvc.findItemTypeById(itemType.getItemTypeId());
-					if(	 itemTypeExist!=null){
-						itemTypeExist.setDescription(itemType.getDescription());
-						itemTypeExist.setVatPerc(itemType.getVatPerc());
-						if(actionType.equals("update")){
-							rasikSvc.updateItemTypes(itemTypeExist);
-							mav.addObject("message", "Itemtype updated.");
-						}
-						if(actionType.equals("delete")){
-							rasikSvc.deleteItemTypes(itemTypeExist);
-							mav.addObject("message", "Itemtype deleted.");
-						}
-					}
-					else{
-						mav.addObject("message", "Itemtype does not exist");
-					}
-					return mav;	
-			}
-		
-			
-		@RequestMapping(value =
-		{
-				"admin/listbindingtypes.html"
-		}, method = RequestMethod.GET)
-		public ModelAndView listbindingItemtypes() 
-		{
-			logger.info("Inside listItemtypes()");
-			ModelAndView mav=new ModelAndView("html/itemTypeList");
-			List<Itemtype> itemTypeListresult=rasikSvc.findAllItemTypes();
-			ItemtypeList itemTypeList=new ItemtypeList();
-			itemTypeList.setItemTypeList(itemTypeListresult);
-			
-			/*JAXBContext jaxbContext = JAXBContext.newInstance(ItemtypeList.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		
-			
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		
-			jaxbMarshaller.marshal(itemTypeList, System.out);
-			return mav;	
-		*/		String json = new Gson().toJson(itemTypeList);
-			String jsonNew=json.replace("{\"itemTypeList\":", "");
-			String jsonNew1=jsonNew.substring(0, jsonNew.lastIndexOf("}"));
-			mav.addObject("itemTypes", jsonNew1);
-			return mav;
-		}
-		
-		@RequestMapping(value =
-		{
-					"admin/getbindingTypeById.html"
-		}, method = RequestMethod.GET)
-		public ModelAndView getbindingTypeById(HttpServletRequest request) 
-		{
-				logger.info("Inside getitemListTypeById()");
-				String itemTypeId=request.getParameter("itemTypeId");
-				Itemtype itemType=rasikSvc.findItemByType(itemTypeId);
-				ModelAndView mav=new ModelAndView("html/updateItemTypes");
-				mav.addObject("itemType", itemType);
-				return mav;
-			
-			}
-		
-			
-		}
+}
