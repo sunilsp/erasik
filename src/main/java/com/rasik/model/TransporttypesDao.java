@@ -3,11 +3,14 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,27 +18,15 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Transporttypes
  * @author Hibernate Tools
  */
-public class TransporttypesHome {
+public class TransporttypesDao extends RasikBaseDao {
 
-	private static final Log log = LogFactory.getLog(TransporttypesHome.class);
+	private static final Log log = LogFactory.getLog(TransporttypesDao.class);
 
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Transporttypes transientInstance) {
 		log.debug("persisting Transporttypes instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +37,7 @@ public class TransporttypesHome {
 	public void attachDirty(Transporttypes instance) {
 		log.debug("attaching dirty Transporttypes instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +48,7 @@ public class TransporttypesHome {
 	public void attachClean(Transporttypes instance) {
 		log.debug("attaching clean Transporttypes instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +59,7 @@ public class TransporttypesHome {
 	public void delete(Transporttypes persistentInstance) {
 		log.debug("deleting Transporttypes instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);

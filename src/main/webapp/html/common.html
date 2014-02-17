@@ -3,6 +3,10 @@
           xmlns:th="http://www.thymeleaf.org"
           xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="headerFragment1">
+
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+
 	<meta charset="utf-8"/>
 	<title>Rasik Sahitya</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -78,8 +82,8 @@
 						</li>
 					</ul>
 				</fieldset>
-			</form>
-
+</form>
+<br/>
 	<form  th:fragment="bindingTypeFragment" th:action="@{javascript:submitBindingTypeAjax();}" class="clearfix tableDataFields" id="bindingTypeForm"  th:object="${bindingType}"  action="message.html" name="bindingTypeForm"  method="post">
 
 							<fieldset title="Add bindingTypes">
@@ -96,6 +100,7 @@
 							</fieldset>
 						</form>
 
+	<br/>
 	<form th:fragment="addDiscountFragment" class="clearfix tableDataFields" id="discountForm"  th:object="${discount}"  th:action="@{javascript:submitaddDiscountAjax();}" action="message.html" name="discountForm"  method="post">
 				<fieldset title="Add Discount Types">
 					<ul>
@@ -114,7 +119,74 @@
 					</ul>
 				</fieldset>
 			</form>
+<br/>			
+	<!-- Start : Itemtype List fragment  -->		
+		<div th:fragment="itemTypeListFragment">
+			<table id="example">
+  			<thead title="itemType Table">
+    				<tr><th class="site_name">ItemTypeId</th><th>Description </th><th>vatPerc</th></tr>
+			</thead>
+			<tbody>
+			</tbody>
+			</table>
+				<script type="text/javascript" th:utext="'var data = ' + ${itemTypes}" >
+  var data=[{"itemTypeId":2,"description":"Test1","vatPerc":12.0,"itemses":[]}];
+  </script > 
+  <script type="text/javascript">
+//<![CDATA[
+  var oTable ;
+  $(document).ready(function(){
+	  
+	  oTable = $("#example").dataTable({
+	  "bProcessing": true,
+	  "aaData": data
+	  ,
+	  "aoColumns": [
+	    			{ "mDataProp": "itemTypeId" },
+	    			{ "mDataProp": "description" },
+	    			{ "mDataProp": "vatPerc" }
+	    			
+	    		]
+	});
+	  
+	  
+	 
+	  $("#example tbody").click(function(event) {
+			$(oTable.fnSettings().aoData).each(function (){
+				$(this.nTr).removeClass('row_selected');
+			});
+			$(event.target.parentNode).addClass('row_selected');
+			
+			var anSelected = fnGetSelected( oTable );
+			var itemTypeId_selected=anSelected[0].childNodes[0].innerHTML;
+			document.location ="getitemListTypeById.html?itemTypeId=" + itemTypeId_selected;		
+		});
+	  
+	  
+	  
+  } );
+  
+  /* Get the rows which are currently selected */
+  function fnGetSelected( oTableLocal )
+  {
+  	var aReturn = new Array();
+  	var aTrs = oTableLocal.fnGetNodes();
+  	var aTrsLength=aTrs.length;
+  	for ( var i=0; i < aTrsLength; i++ )
+  	{
+  		if ( $(aTrs[i]).hasClass('row_selected') )
+  		{
+  			aReturn.push( aTrs[i] );
+  		}
+  	}
+  	return aReturn;
+  }
+  
+//]]>
 
+  </script>			
+</div>
+<!-- End: -->
 </body>
 
 </html>

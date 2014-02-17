@@ -15,27 +15,15 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Stockcenter
  * @author Hibernate Tools
  */
-public class StockcenterHome {
+public class StockcenterDao extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(StockcenterHome.class);
+	private static final Log log = LogFactory.getLog(StockcenterDao.class);
 
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
-
+	
 	public void persist(Stockcenter transientInstance) {
 		log.debug("persisting Stockcenter instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +34,7 @@ public class StockcenterHome {
 	public void attachDirty(Stockcenter instance) {
 		log.debug("attaching dirty Stockcenter instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +45,7 @@ public class StockcenterHome {
 	public void attachClean(Stockcenter instance) {
 		log.debug("attaching clean Stockcenter instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +56,7 @@ public class StockcenterHome {
 	public void delete(Stockcenter persistentInstance) {
 		log.debug("deleting Stockcenter instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
