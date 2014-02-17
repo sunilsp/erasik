@@ -15,27 +15,15 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Category
  * @author Hibernate Tools
  */
-public class CategoryHome {
+public class CategoryDao extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(CategoryHome.class);
+	private static final Log log = LogFactory.getLog(CategoryDao.class);
 
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Category transientInstance) {
 		log.debug("persisting Category instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +34,7 @@ public class CategoryHome {
 	public void attachDirty(Category instance) {
 		log.debug("attaching dirty Category instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +45,7 @@ public class CategoryHome {
 	public void attachClean(Category instance) {
 		log.debug("attaching clean Category instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +56,7 @@ public class CategoryHome {
 	public void delete(Category persistentInstance) {
 		log.debug("deleting Category instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -79,7 +67,7 @@ public class CategoryHome {
 	public Category merge(Category detachedInstance) {
 		log.debug("merging Category instance");
 		try {
-			Category result = (Category) sessionFactory.getCurrentSession()
+			Category result = (Category) getSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -92,7 +80,7 @@ public class CategoryHome {
 	public Category findById(java.lang.Integer id) {
 		log.debug("getting Category instance with id: " + id);
 		try {
-			Category instance = (Category) sessionFactory.getCurrentSession()
+			Category instance = (Category) getSession()
 					.get("com.rasik.hibernate.Category", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");

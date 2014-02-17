@@ -70,6 +70,17 @@ class RasikDBController{
 		}
 
 
+	@RequestMapping(value =
+		{
+				"admin/editdatabase.html"
+		}, method = RequestMethod.GET)
+		public ModelAndView editdatabase()
+		{
+			logger.info("Inside editdatabase()");
+			ModelAndView mav=new ModelAndView("html/editdatabase");
+			return mav;
+		}
+
 	
 /*
  * Start : Itemtype functions			
@@ -81,7 +92,7 @@ class RasikDBController{
 			public ModelAndView showItemTypes()
 			{
 				logger.info("Inside showItemTypes()");
-				ModelAndView mav=new ModelAndView("html/admin");
+				ModelAndView mav=new ModelAndView("html/adminNew");
 				Itemtype itemType=new Itemtype();
 				mav.addObject("itemType", itemType);
 				return mav;
@@ -156,10 +167,9 @@ class RasikDBController{
 	{
 			"admin/listItemtypes.html"
 	}, method = RequestMethod.GET)
-	public ModelAndView listItemtypes() 
+	public String listItemtypes(Model model) 
 	{
 		logger.info("Inside listItemtypes()");
-		ModelAndView mav=new ModelAndView("html/itemTypeList");
 		List<Itemtype> itemTypeListresult=rasikSvc.findAllItemTypes();
 		ItemtypeList itemTypeList=new ItemtypeList();
 		itemTypeList.setItemTypeList(itemTypeListresult);
@@ -176,8 +186,11 @@ class RasikDBController{
 		String json = new Gson().toJson(itemTypeList);
 		String jsonNew=json.replace("{\"itemTypeList\":", "");
 		String jsonNew1=jsonNew.substring(0, jsonNew.lastIndexOf("}"));
-		mav.addObject("itemTypes", jsonNew1);
-		return mav;
+		
+		model.addAttribute("itemTypes", jsonNew1);
+		
+		
+		return "html/common :: itemTypeListFragment";
 	}
 	
 	@RequestMapping(value =

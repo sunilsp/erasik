@@ -15,27 +15,14 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Transporter
  * @author Hibernate Tools
  */
-public class TransporterHome {
+public class TransporterDao extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(TransporterHome.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
+	private static final Log log = LogFactory.getLog(TransporterDao.class);
 
 	public void persist(Transporter transientInstance) {
 		log.debug("persisting Transporter instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +33,7 @@ public class TransporterHome {
 	public void attachDirty(Transporter instance) {
 		log.debug("attaching dirty Transporter instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +44,7 @@ public class TransporterHome {
 	public void attachClean(Transporter instance) {
 		log.debug("attaching clean Transporter instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +55,7 @@ public class TransporterHome {
 	public void delete(Transporter persistentInstance) {
 		log.debug("deleting Transporter instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);

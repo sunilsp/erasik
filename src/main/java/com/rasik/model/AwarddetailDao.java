@@ -15,27 +15,14 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Awarddetail
  * @author Hibernate Tools
  */
-public class AwarddetailHome {
+public class AwarddetailDao extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(AwarddetailHome.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
+	private static final Log log = LogFactory.getLog(AwarddetailDao.class);
 
 	public void persist(Awarddetail transientInstance) {
 		log.debug("persisting Awarddetail instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+				getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +33,7 @@ public class AwarddetailHome {
 	public void attachDirty(Awarddetail instance) {
 		log.debug("attaching dirty Awarddetail instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +44,7 @@ public class AwarddetailHome {
 	public void attachClean(Awarddetail instance) {
 		log.debug("attaching clean Awarddetail instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +55,7 @@ public class AwarddetailHome {
 	public void delete(Awarddetail persistentInstance) {
 		log.debug("deleting Awarddetail instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -79,8 +66,7 @@ public class AwarddetailHome {
 	public Awarddetail merge(Awarddetail detachedInstance) {
 		log.debug("merging Awarddetail instance");
 		try {
-			Awarddetail result = (Awarddetail) sessionFactory
-					.getCurrentSession().merge(detachedInstance);
+			Awarddetail result = (Awarddetail) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -92,8 +78,7 @@ public class AwarddetailHome {
 	public Awarddetail findById(java.lang.Integer id) {
 		log.debug("getting Awarddetail instance with id: " + id);
 		try {
-			Awarddetail instance = (Awarddetail) sessionFactory
-					.getCurrentSession().get("com.rasik.hibernate.Awarddetail",
+			Awarddetail instance = (Awarddetail) getSession().get("com.rasik.hibernate.Awarddetail",
 							id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -110,8 +95,7 @@ public class AwarddetailHome {
 	public List<Awarddetail> findByExample(Awarddetail instance) {
 		log.debug("finding Awarddetail instance by example");
 		try {
-			List<Awarddetail> results = (List<Awarddetail>) sessionFactory
-					.getCurrentSession()
+			List<Awarddetail> results = (List<Awarddetail>) getSession()
 					.createCriteria("com.rasik.hibernate.Awarddetail")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "

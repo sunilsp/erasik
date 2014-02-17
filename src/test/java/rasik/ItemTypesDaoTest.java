@@ -28,8 +28,8 @@ import static org.powermock.api.mockito.PowerMockito.mock;
  * @author sunilsp
  *
  */
-//@RunWith(MockitoJUnitRunner.class)
-@RunWith(PowerMockRunner.class) 
+//@RunWith(MockitoJUnitRunner.class) //Use this for plan Mockito
+@RunWith(PowerMockRunner.class) 	 // Use this for PowerMock with Mockito
 @PrepareForTest({Itemtype.class})
 public class ItemTypesDaoTest { //extends RasikDaoTestBase {
 	

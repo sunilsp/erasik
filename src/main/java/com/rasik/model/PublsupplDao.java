@@ -15,9 +15,9 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Publsuppl
  * @author Hibernate Tools
  */
-public class PublsupplHome {
+public class PublsupplDao extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(PublsupplHome.class);
+	private static final Log log = LogFactory.getLog(PublsupplDao.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -35,7 +35,7 @@ public class PublsupplHome {
 	public void persist(Publsuppl transientInstance) {
 		log.debug("persisting Publsuppl instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +46,7 @@ public class PublsupplHome {
 	public void attachDirty(Publsuppl instance) {
 		log.debug("attaching dirty Publsuppl instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +57,7 @@ public class PublsupplHome {
 	public void attachClean(Publsuppl instance) {
 		log.debug("attaching clean Publsuppl instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +68,7 @@ public class PublsupplHome {
 	public void delete(Publsuppl persistentInstance) {
 		log.debug("deleting Publsuppl instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -79,7 +79,7 @@ public class PublsupplHome {
 	public Publsuppl merge(Publsuppl detachedInstance) {
 		log.debug("merging Publsuppl instance");
 		try {
-			Publsuppl result = (Publsuppl) sessionFactory.getCurrentSession()
+			Publsuppl result = (Publsuppl) getSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -92,7 +92,7 @@ public class PublsupplHome {
 	public Publsuppl findById(int id) {
 		log.debug("getting Publsuppl instance with id: " + id);
 		try {
-			Publsuppl instance = (Publsuppl) sessionFactory.getCurrentSession()
+			Publsuppl instance = (Publsuppl) getSession()
 					.get("com.rasik.hibernate.Publsuppl", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");

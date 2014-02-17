@@ -3,11 +3,14 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,28 +18,15 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Itemscustomerrating
  * @author Hibernate Tools
  */
-public class ItemscustomerratingHome {
+public class ItemscustomerratingDao extends RasikBaseDao{
 
 	private static final Log log = LogFactory
-			.getLog(ItemscustomerratingHome.class);
+			.getLog(ItemscustomerratingDao.class);
 
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
-
-	public void persist(Itemscustomerrating transientInstance) {
+		public void persist(Itemscustomerrating transientInstance) {
 		log.debug("persisting Itemscustomerrating instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -47,7 +37,7 @@ public class ItemscustomerratingHome {
 	public void attachDirty(Itemscustomerrating instance) {
 		log.debug("attaching dirty Itemscustomerrating instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -58,7 +48,7 @@ public class ItemscustomerratingHome {
 	public void attachClean(Itemscustomerrating instance) {
 		log.debug("attaching clean Itemscustomerrating instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -69,7 +59,7 @@ public class ItemscustomerratingHome {
 	public void delete(Itemscustomerrating persistentInstance) {
 		log.debug("deleting Itemscustomerrating instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);

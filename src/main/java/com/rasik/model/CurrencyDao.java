@@ -15,9 +15,9 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Currency
  * @author Hibernate Tools
  */
-public class CurrencyHome {
+public class CurrencyDao {
 
-	private static final Log log = LogFactory.getLog(CurrencyHome.class);
+	private static final Log log = LogFactory.getLog(CurrencyDao.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 

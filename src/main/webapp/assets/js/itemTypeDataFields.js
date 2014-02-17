@@ -52,6 +52,25 @@ $("document").ready(function() {
         $("#validationFeedback").hide();
     });
 
+    $('a[href="#listItemtypes.html"]').click(function(){
+    	$.get("listItemtypes.html",function(data){
+			$( "#ajaxForm").html(data);
+    	});
+	});
+    
+    $('a[href="#showItemTypes.html"]').click(function(){
+    	$.get("addItemTypeAjax.html",function(data){
+			$( "#ajaxForm").html(data);
+    	});
+	});
+
+	submitAjax = function(){
+		$.post("submitItemTypes.html",$("#itemTypeForm").serialize(),function(data){
+			alert(data);
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	};
+
     
 
 });

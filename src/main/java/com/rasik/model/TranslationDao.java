@@ -15,9 +15,9 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Translation
  * @author Hibernate Tools
  */
-public class TranslationHome {
+public class TranslationDao {
 
-	private static final Log log = LogFactory.getLog(TranslationHome.class);
+	private static final Log log = LogFactory.getLog(TranslationDao.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
