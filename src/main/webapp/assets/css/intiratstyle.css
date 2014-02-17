@@ -157,9 +157,10 @@ input[type=submit], input[type=reset], .button{
 	font-weight: bold;
 	color: white;
 	margin: 0 0.5em;
-	float: left;
+	float: right;
 	display: block;
 	border: none;
+	font-size:90%;
 }
 
 input[disabled], input[disabled] {
@@ -167,7 +168,7 @@ input[disabled], input[disabled] {
 }
 
 input[type=submit], .elem-3 input[type="button"] {
-	background: #555;
+	background: #aaa;
 }
 
 input[type=reset] {
@@ -337,7 +338,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	}
 	
 	.elem-3	select, .elem-3 input[type="text"]{
-		width: 45%;
+		width: 40%;
 	}
 	
 	form label {
@@ -347,7 +348,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	}
 	
 	.elem-3 label{
-		width: 20%;
+		width: 25%;
 	}
 }
 @media screen and (max-width: 959px) and (min-width: 651px) {
@@ -375,7 +376,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		height:1.8em;
 	}
 	.elem-3	select, .elem-3 input[type="text"]{
-		width: 45%;
+		width: 40%;
 	}
 	form label {
 		width: 35%;
@@ -384,7 +385,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	}
 	
 	.elem-3 label{
-		width: 20%;
+		width: 25%;
 	}
 
 }
