@@ -2,135 +2,115 @@
  * @author manasi
  */
 $("document").ready(function() {
-
-    $("#validationFeedback").hide();
-    /**
-     * 
-     */
-    $( "#maxSalePriceEndDate" ).datepicker();
+	
+	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
 	$( "#maxInwDiscountEndDate" ).datepicker();
-	//$( "#maxOwDiscountEndDate" ).datepicker();
-    $("#float-modal-form").dialog({
-		autoOpen: false,
-		height: 450,
-		width: 600,
-		modal: true, 
-		});
-    
-    $("#addItemType").click(
-    		function(){
-    			/*$( "#float-modal-form" ).dialog( "open" );*/
-    		
-    		
-    			$( "#float-modal-form" ).dialog( "open" );
-    			$( "#float-modal-form" ).html( data );
-    			
-    			
-    		}
-		);
-    $("#addBidingType").click(
-    		function(){
-    			$( "#float-modal-form" ).dialog( "open" );
-    		}
-		);
-    $("#addDiscount").click(
-    		function(){
-    			$( "#float-modal-form" ).dialog( "open" );
-    		}
-		);
-    $("#addEdtion").click(
-    		function(){
-    			$( "#float-modal-form" ).dialog( "open" );
-    		}
-		);
-     
-     /*
-     */
-    $("#adminmenu").attr("class","activePage");
-    var queryValidator = $("#customerForm").validate({
+	
+	$( "#validationFeedback").hide();
+	
+	/*
+	 * start of validation settings
+	 */
+	var queryValidator = $("#addItemForm").validate({
         rules : {
         	
-        	contact_person : {
+        	itemTypeDropdown : {
+                required : true
+            },        	
+            bindingTypeDropdown : {
+                required : true
+            },
+            languageDropdown : {
+                required : true
+            },
+            editionDropdown: {
+                required : true
+            },
+            stockCenterDD:{
+            	required : true
+            },
+            authorDD:{required : true},
+            PublSupplDD:{required : true},
+            TranslationsDD:{required : true},
+            CategoriesDD:{required : true},
+            userBookCode : {
+                required : true
+            },
+            englishName: {
+                required : true
+            },
+            marathiName : {
+                required : true
+            },
+            publisherCode : {
+                required : true
+            },
+            price : {
+                required : true,
+                number:true
+            },
+            qtyInHand : {
+                required : true,
+                number:true
+            },
+            minLvl : {
+                required : true,
+                number:true
+            },
+            maxLvl : {
+                required : true,
+                number:true
+            },
+            
+            maxSalePrice : {
+                required : true,
+                number:true
+            },
+            publMonth : {
+                required : true
+            },
+            publYear : {
+                required : true,
+                number:true
+            },
+            isbnno : {
+                required : true,
+                number:true
+            },            
+            noOfPages : {
+                required : true,
+                number:true
+            },
+            
+            description : {
                 required : true,
                 maxlength : 24
             },
-        	
-            cust_type : {
-                required : true,
-                maxlength : 24
+            printStatus : {
+            	required : true
             },
-             cust_en_name : {
-                required : true,
-                maxlength : 24
-            },
-            cust_mr_name: {
-                required : true,
-                maxlength : 24
-            },
-            address1 : {
-                required : true,
-                maxlength : 24
-            },
-            address2 : {
+            maxSalePriceEndDate : {
             	required : true,
-                maxlength : 24
-            },
-            address3 : {
-            	required : true,
-                maxlength : 24
-            },
-        	
-        	pincode : {
+                date : true
+            },        	
+            maxOwDiscountPrecent : {
                 required : true,
                 number: true
             },
-            email : {
+            maxOwDiscountEndDate : {
                 required : true,
-                email : true
+                date : true
             },
-            city : {
-                required : true
+            maxInwDiscountPercent : {
+                required : true,
+                number: true
             },
-            state : {
-                required : true
-            },
-            country : {
-                required : true
-            },
-            phone1 : {
-                required : true
-            },
-            phone2 : {
-                required : true
-            },
-            fax : {
-                required : true
-            },
-            mobile : {
+            maxInwDiscountEndDate : {
                 required : true
             }
         },
         messages : {
-            cust_type: {
-                required : "Provide customer type"
-            },
-            cust_mr_name: {
-                required : "Provide customer marathi name"
-            },
-            city : {
-                required : "Please provide customer city/town."
-            },
-            state : {
-                required : "Please provide customer state."
-            },
-            country : {
-                required : "Please provide customer country."
-            },
-            email : {
-                required : "Provide customer e-mail ID.",
-                email : "Please enter a valid email address, example: you@yourdomain.com"
-            }
             
         },
        
@@ -152,53 +132,55 @@ $("document").ready(function() {
         onkeyup : true,
         
     });
-    
-    $("#custTypedropdown").change( function() {
-     $("#cust_type").val(this.value);	
-    });
-    
-    $("#reset").click(function() {
+	/*
+	 * end of validation settings
+	 */
+    $( "#reset").click(function() {
         queryValidator.resetForm();
         $("#validationFeedback span").html("");
         $("#validationFeedback").hide();
-    });
+    });  
     
-   
+    /**
+     * 
+     */
+    $("#float-modal-form").dialog({
+		autoOpen: false,
+		height: 450,
+		width: 600,
+		modal: true, 
+		});
     
     $("#addItemTypeAjax").click(function(){
-    	
-  
     	$.get( "addItemTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
 
     		});
     });
-    
-	submitAjax = function(){
+    submitItemTypeAjax = function(){
 		$.post("submitItemTypes.html",$("#itemTypeForm").serialize(),function(data){
 			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
+	};  
+
+	$("#addBindingTypeAjax").click(function(){		  
+    	$.get( "addBindingTypeAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });	    
+	submitBindingTypeAjax = function(){
+		$.post("submitBindingTypes.html",$("#bindingTypeForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
 	};
     
+     /*
+     */
 
-	  $("#addBindingTypeAjax").click(function(){
-	    	
-		  
-	    	$.get( "addBindingTypeAjax.html", function( data ) {
-	  			$( "#float-modal-form" ).dialog( "open" );
-				$( "#float-modal-form" ).html( data );
-
-	    		});
-	    });
-	    
-	  submitBindingTypeAjax = function(){
-			$.post("submitBindingTypes.html",$("#bindingTypeForm").serialize(),function(data){
-				alert(data);+
-				$( "#float-modal-form" ).dialog( "close" );
-			});
-		};
-    
 });
 

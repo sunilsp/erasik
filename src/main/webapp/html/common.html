@@ -84,21 +84,62 @@
 				</fieldset>
 </form>
 <br/>
-	<form  th:fragment="bindingTypeFragment" th:action="@{javascript:submitBindingTypeAjax();}" class="clearfix tableDataFields" id="bindingTypeForm"  th:object="${bindingType}"  action="message.html" name="bindingTypeForm"  method="post">
+	<form  th:fragment="bindingTypeFragment" th:action="@{javascript:submitBindingTypeAjax();}" 
+	class="clearfix tableDataFields" id="bindingTypeForm"  
+	th:object="${bindingType}"  action="message.html" name="bindingTypeForm"  method="post">
+		<fieldset title="Add bindingTypes">
+			<ul>
+			<li>
+				<label class="required" for="cust_type_desc" th:text="@{Binding Type Description}">Binding Type Description : </label>
+				<input type="text" tabindex="" autocomplete="on" required="on" name="bindingTypeName" id="bindingTypeName" th:field="*{bindingTypeName}"/>
+			</li>
+			<li>
+				<input tabindex="" type="reset" value="Reset " id="reset" name="reset"/>
+				<input tabindex="" type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
+			</li>
+			</ul>
+		</fieldset>
+	</form>
 
-							<fieldset title="Add bindingTypes">
-							<ul>
-							<li>
-								<label class="required" for="cust_type_desc" th:text="@{Binding Type Description}">Binding Type Description : </label>
-								<input type="text" tabindex="20" autocomplete="on" required="on" name="bindingTypeName" id="bindingTypeName" th:field="*{bindingTypeName}"/>
-							</li>
-							<li>
-								<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
-								<input tabindex="10" type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
-							</li>
-							</ul>
-							</fieldset>
-						</form>
+	<form th:fragment="addDiscountFragment" class="clearfix tableDataFields" 
+	id="discountForm"  th:object="${discount}"  
+	th:action="@{javascript:submitaddDiscountAjax();}" action="message.html" name="discountForm"  method="post">
+		<fieldset title="Add Discount Types">
+			<ul>
+				<li>
+					<label for="name" th:text="@{Discount Description}" class="required">Discount Description : </label>
+					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
+				</li>
+				<li>
+					<label class="required" for="vatPerc">Vat Percentage : </label>
+					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
+				</li>
+				<li>
+					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+					<input tabindex="10" type="submit" value="Save" id="adddiscountsubmitbtn" name="adddiscountsubmitbtn"/>
+				</li>
+			</ul>
+		</fieldset>
+	</form>
+			
+			<!-- Form for adding new Language-->
+			
+	<form  th:fragment="languageFragment" th:action="@{javascript:submitLanguageAjax();}" 
+	class="clearfix tableDataFields" id="languageForm"  
+	th:object="${language}"  action="message.html" name="languageForm" method="post">
+		<fieldset title="Add Language">
+			<ul>
+			<li>
+				<label class="required" for="cust_type_desc" th:text="@{Binding Type Description}">Language Name : </label>
+				<input type="text" tabindex="" autocomplete="on" required="on" name="languageTypeName" id="languageTypeName" th:field="*{languageTypeName}"/>
+			</li>
+			<li>
+				<input tabindex="" type="reset" value="Reset " id="reset" name="reset"/>
+				<input tabindex="" type="submit" value="Save" id="submitLanguageTypebtn" name="submitLanguageTypebtn"/>
+			</li>
+			</ul>
+		</fieldset>
+	</form>
 
 	<br/>
 	<form th:fragment="addDiscountFragment" class="clearfix tableDataFields" id="discountForm"  th:object="${discount}"  th:action="@{javascript:submitaddDiscountAjax();}" action="message.html" name="discountForm"  method="post">
