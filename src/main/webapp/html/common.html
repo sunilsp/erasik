@@ -127,13 +127,13 @@
 			<!-- Form for adding new Language-->
 			
 	<form  th:fragment="languageFragment" th:action="@{javascript:submitLanguageAjax();}" 
-	class="clearfix tableDataFields" id="languageForm"  
+	class="clearfix tableDataFields" id="itemlanguageForm"  
 	th:object="${language}"  action="message.html" name="languageForm" method="post">
 		<fieldset title="Add Language">
 			<ul>
 			<li>
-				<label class="required" for="cust_type_desc" th:text="@{Binding Type Description}">Language Name : </label>
-				<input type="text" tabindex="" autocomplete="on" required="on" name="languageTypeName" id="languageTypeName" th:field="*{languageTypeName}"/>
+				<label class="required" for="cust_type_desc" th:text="@{Language Name :}">Language Name : </label>
+				<input type="text" tabindex="" autocomplete="on" required="on" name="languageName" id="languageName" th:field="*{languageName}"/>
 			</li>
 			<li>
 				<input tabindex="" type="reset" value="Reset " id="reset" name="reset"/>
@@ -178,6 +178,26 @@
 							</fieldset>
 						</form>
 
+	<br/>
+
+	<form th:fragment="itemEditionFragment" class="clearfix tableDataFields" id="itemsEditionForm"  th:object="${itemsedition}"  th:action="@{javascript:submitadditemeditionAjax();}" action="message.html" name="discountForm"  method="post">
+				<fieldset title="Add Item Edition">
+					<ul>
+						<li>
+							<label for="name" th:text="@{Item Edition }" class="required">Item Edition : </label>
+							<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsedition" id="itemsedition" th:field="*{itemsedition}"/>
+						</li>
+						<li>
+							<label class="required" for="vatPerc">Description : </label>
+							<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="itemseditiondesc" th:field="*{itemseditiondesc}"/>
+						</li>
+						<li>
+							<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+							<input tabindex="10" type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
 	<br/>
 	<form th:fragment="addDiscountFragment" class="clearfix tableDataFields" id="discountForm"  th:object="${discount}"  th:action="@{javascript:submitaddDiscountAjax();}" action="message.html" name="discountForm"  method="post">
 				<fieldset title="Add Discount Types">

@@ -73,8 +73,7 @@ public class ItemseditionDao extends RasikBaseDao {
 	public Itemsedition merge(Itemsedition detachedInstance) {
 		log.debug("merging Itemsedition instance");
 		try {
-			Itemsedition result = (Itemsedition) sessionFactory
-					.getCurrentSession().merge(detachedInstance);
+			Itemsedition result = (Itemsedition) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -86,9 +85,8 @@ public class ItemseditionDao extends RasikBaseDao {
 	public Itemsedition findById(int id) {
 		log.debug("getting Itemsedition instance with id: " + id);
 		try {
-			Itemsedition instance = (Itemsedition) sessionFactory
-					.getCurrentSession().get(
-							"com.rasik.hibernate.Itemsedition", id);
+			Itemsedition instance = (Itemsedition) getSession().get(
+							"com.rasik.model.Itemsedition", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -104,8 +102,7 @@ public class ItemseditionDao extends RasikBaseDao {
 	public List<Itemsedition> findByExample(Itemsedition instance) {
 		log.debug("finding Itemsedition instance by example");
 		try {
-			List<Itemsedition> results = (List<Itemsedition>) sessionFactory
-					.getCurrentSession()
+			List<Itemsedition> results = (List<Itemsedition>) getSession()
 					.createCriteria("com.rasik.hibernate.Itemsedition")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
@@ -121,6 +118,18 @@ public class ItemseditionDao extends RasikBaseDao {
 		Query query=getSession().getNamedQuery("findAllItemseditions");
 		List<Itemsedition> itemseditionList=query.list();
 		return itemseditionList;
+
+	}
+
+	public Itemsedition findItemseditionByDesc(String itemsedition) {
+		Query query=getSession().getNamedQuery("findItemseditionsByDesc").setString("itemsedition", itemsedition);
+		List<Itemsedition> itemseditionList=query.list();
+			if(itemseditionList.size() != 0){
+				return itemseditionList.get(0);
+			}
+			else{
+				return null;
+			}
 
 	}
 }

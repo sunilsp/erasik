@@ -73,7 +73,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<select tabindex="50" id="editionDropdown" name="editionDropdown">
 									<option th:each="itemsEdition : ${itemsEditionList}" th:value="${itemsEdition.itemsEditionid}" th:text="${itemsEdition.itemsedition}">Wireframe</option>
 								</select>
-								<input type="button" tabindex="55" id="addEdtion" name="addEdition" value="New Edition"/>
+								<input type="button" tabindex="55" th:id="addItemsEdtionAjax" id="addItemsEdtionAjax" name="addEdition" value="New Edition"/>
 							</li>
 							<li class="elem-3">
 								<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>

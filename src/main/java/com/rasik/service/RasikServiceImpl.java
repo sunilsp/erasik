@@ -261,5 +261,29 @@ public class RasikServiceImpl implements RasikService {
 		
 	}
 
+	@Override
+	public Itemlanguage findItemlanguageByName(Itemlanguage itemlanguage) {
+		return itemLanguageDao.findItemlanguageByName(itemlanguage.getLanguageName());
+		
+	}
+
+	@Override
+	public String saveItemlanguage(Itemlanguage itemlanguage) {
+		itemLanguageDao.persist(itemlanguage);
+		return "saved";
+	}
+
+	@Override
+	public String saveItemsedition(Itemsedition itemsedition) {
+		itemsEditionDao.persist(itemsedition);
+		return "saved";
+	}
+
+	@Override
+	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition) {
+		return itemsEditionDao.findItemseditionByDesc(itemsedition.getItemsedition());
+		
+	}
+
 
 }
