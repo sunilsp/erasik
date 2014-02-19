@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -19,7 +20,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "itemsedition", catalog = "rasiknew")
-@NamedQuery(name="findAllItemseditions",query="from Itemsedition ")
+@NamedQueries({
+@NamedQuery(name="findAllItemseditions",query="from Itemsedition "),
+@NamedQuery(name="findItemseditionsByDesc",query="from Itemsedition it where it.itemsedition = :itemsedition")
+})
 public class Itemsedition implements java.io.Serializable {
 
 	private int itemsEditionid;

@@ -592,7 +592,84 @@ class RasikDBController{
 		
 	}
 	
+/*
+ *  Start : Itemlanguage functions
+ *  
+ */
 	
+	@RequestMapping(value =
+		{
+				"admin/submitItemlanguage.html"
+		}, method = RequestMethod.POST)
+		public String submitItemlanguage(HttpServletResponse response,Model model,@ModelAttribute Itemlanguage itemlanguage,@RequestHeader(value="X-Requested-With",required=false) String requestedWith) throws IOException
+		{
+				logger.info("Inside submitBindingTypes()");
+				
+				if(	rasikSvc.findItemlanguageByName(itemlanguage) == null){
+					rasikSvc.saveItemlanguage(itemlanguage);
+				
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Language saved");
+						response.setStatus(200);
+						return null;
+					}
+					else{
+					   model.addAttribute("message", "Language saved.");
+					   return "html/message";
+					}
+				}
+				else{
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Language already exists");
+						response.setStatus(200);
+						return null;
+						
+					}
+					else{
+					model.addAttribute("message", "Language already exists");
+					return "html/message";
+				}
+					
+			}
+		}
+
+
+	@RequestMapping(value =
+		{
+				"admin/submitItemseditions.html"
+		}, method = RequestMethod.POST)
+		public String submitItemseditions(HttpServletResponse response,Model model,@ModelAttribute Itemsedition itemsedition,@RequestHeader(value="X-Requested-With",required=false) String requestedWith) throws IOException
+		{
+				logger.info("Inside submitItemseditions()");
+				
+				if(	rasikSvc.findItemseditionByDesc(itemsedition) == null){
+					rasikSvc.saveItemsedition(itemsedition);
+				
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Language saved");
+						response.setStatus(200);
+						return null;
+					}
+					else{
+					   model.addAttribute("message", "Language saved.");
+					   return "html/message";
+					}
+				}
+				else{
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Language already exists");
+						response.setStatus(200);
+						return null;
+						
+					}
+					else{
+					model.addAttribute("message", "Language already exists");
+					return "html/message";
+				}
+					
+			}
+		}
+
 /*
  * Start : Add Item functions	
  */
@@ -647,6 +724,32 @@ class RasikDBController{
 			model.addAttribute("bindingType",bindingType);
 			
 			return "html/common :: bindingTypeFragment";
+		}
+	
+	@RequestMapping(value =
+		{
+				"admin/addLanguageAjax.html"
+		}, method = RequestMethod.GET)
+		public String addLanguageAjax(Model model)
+		{
+			logger.info("Inside addLanguageAjax()");
+			Itemlanguage itemLanguage=new Itemlanguage();
+			model.addAttribute("language",itemLanguage);
+			
+			return "html/common :: languageFragment";
+		}
+
+	@RequestMapping(value =
+		{
+				"admin/addItemsEdtionAjax.html"
+		}, method = RequestMethod.GET)
+		public String addItemsEdtionAjax(Model model)
+		{
+			logger.info("Inside addItemsEdtionAjax()");
+			Itemsedition itemsedition=new Itemsedition();
+			model.addAttribute("itemsedition",itemsedition);
+			
+			return "html/common :: itemEditionFragment";
 		}
 
 		

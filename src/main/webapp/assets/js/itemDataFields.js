@@ -178,7 +178,37 @@ $("document").ready(function() {
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	};
-    
+	
+	$("#addLanguageAjax").click(function(){		  
+    	$.get( "addLanguageAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });	    
+
+	submitLanguageAjax=function(){
+		$.post("submitItemlanguage.html",$("#itemlanguageForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
+	$("#addItemsEdtionAjax").click(function(){		  
+    	$.get( "addItemsEdtionAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });	   
+	
+	submitadditemeditionAjax=function(){
+		$.post("submitItemseditions.html",$("#itemsEditionForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
      /*
      */
 

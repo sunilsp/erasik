@@ -123,4 +123,16 @@ public class ItemlanguageDao extends RasikBaseDao{
 		return languagesList;
 
 	}
+
+	public  Itemlanguage findItemlanguageByName(String languageName) {
+		Query query=getSession().getNamedQuery("findLanguageByName").setString("languageName", languageName);
+		List<Itemlanguage> languagesList=query.list();
+		
+		if(languagesList.size() != 0){
+			return languagesList.get(0);
+		}
+		else{
+			return null;
+		}
+	}
 }

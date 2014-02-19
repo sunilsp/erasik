@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+	<head th:substituteby="html/common :: headerFragment1">
+
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+
+	</head>
+	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
+	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
+	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
+	<!--[if gt IE 8]><!-->
+	<body>
+		<!--<![endif]-->
+		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
+		<header class="clearfix">
+			<div class="container" th:include="html/common :: contactMenuFragment"></div>
+		</header>
+
+		<section role="banner">
+			<hgroup>
+				<h1>Edit Database</h1>
+				<h2>Rasik Database</h2>
+			</hgroup>
+		</section>
+		<!-- // banner ends -->
+		<div class="ym-wrapper">
+			<div class="ym-grid">
+				<aside class="ym-g960-3 ym-gl">
+					<div class="ym-gbox" role="thumb-container">
+						<a id="listItemtypes" th:href="@{#listItemtypes.html}" href="itemTypeList.html" class="button green">Itemtypes List</a>
+					</div>
+					<div class="ym-gbox" role="thumb-container">
+						<a id="showItemTypes" th:href="@{#showItemTypes.html}" href="showItemTypes.html" class="button green">Add Itemtypes</a>
+					</div>
+					<div class="ym-gbox" role="thumb-container">
+						<a href="customer.html" th:href="@{/admin/customer.html}" class="button green">Customers</a>
+					</div>
+					
+					<div class="ym-gbox" role="thumb-container">
+						<a href="customer.html" th:href="@{/admin/listCustomer.html}" class="button green">Customer List</a>
+					</div>
+					
+					<div class="ym-gbox" role="thumb-container">
+						<a href="customer_type.html" th:href="@{/admin/customerType.html}" class="button green">Customer Type</a>
+					</div>
+					<div class="ym-gbox" role="thumb-container">
+						<a href="listCustomertypes.html" th:href="@{/admin/listCustomertypes.html}" class="button green">Customer Type List</a>
+					</div>
+					
+					<div class="ym-gbox" role="thumb-container">
+						<a href="author.html" th:href="@{/admin/author.html}" class="button green">Authors</a>
+					</div>
+									
+					<div class="ym-gbox" role="thumb-container">
+						<a href="authorList.html" th:href="@{/admin/listAuthors.html}" class="button green">Authors List</a>
+					</div>
+				</aside>
+				<article class="ym-g960-9 ym-gl">
+					<div class="ym-gbox" id="ajaxForm">
+					
+					</div>
+				</article>
+			</div>
+		</div>
+		<br/>
+		<footer role="contentinfo">
+			<p>
+				<span class="left">CSS Junction &copy; - 2013 | Released under Creative Common License. <a href="#">Goto Top</a></span>
+		
+			</p>
+		</footer>
+
+	</body>
+	
+	<script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../assets/js/itemTypeDataFields.js"></script>
+	
+</html>

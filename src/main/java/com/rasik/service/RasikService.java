@@ -91,6 +91,13 @@ public interface RasikService {
 
 	public void deleteBindingTypes(Bindingtype bindingTypeExist);
 
+	public Itemlanguage findItemlanguageByName(Itemlanguage itemlanguage);
+
+	public String saveItemsedition(Itemsedition itemsedition);
+
+	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition);
+
+	public String saveItemlanguage(Itemlanguage itemlanguage);
 	
 
 	

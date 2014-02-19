@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -23,7 +24,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "itemlanguage", catalog = "rasiknew")
-@NamedQuery(name="findAllItemlanguages",query="from Itemlanguage ")
+@NamedQueries({
+@NamedQuery(name="findAllItemlanguages",query="from Itemlanguage "),
+@NamedQuery(name="findLanguageByName",query="from Itemlanguage it where it.languageName = :languageName")
+})
 public class Itemlanguage implements java.io.Serializable {
 
 	private Integer languageId;
