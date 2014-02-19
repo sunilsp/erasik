@@ -646,24 +646,24 @@ class RasikDBController{
 					rasikSvc.saveItemsedition(itemsedition);
 				
 					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
-						response.getOutputStream().print("Language saved");
+						response.getOutputStream().print("Edition saved");
 						response.setStatus(200);
 						return null;
 					}
 					else{
-					   model.addAttribute("message", "Language saved.");
+					   model.addAttribute("message", "Edition saved.");
 					   return "html/message";
 					}
 				}
 				else{
 					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
-						response.getOutputStream().print("Language already exists");
+						response.getOutputStream().print("Edition already exists");
 						response.setStatus(200);
 						return null;
 						
 					}
 					else{
-					model.addAttribute("message", "Language already exists");
+					model.addAttribute("message", "Edition already exists");
 					return "html/message";
 				}
 					
