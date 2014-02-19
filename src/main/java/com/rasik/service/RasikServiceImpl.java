@@ -24,6 +24,8 @@ import com.rasik.model.Itemsedition;
 import com.rasik.model.ItemseditionDao;
 import com.rasik.model.Itemtype;
 import com.rasik.model.ItemtypeDao;
+import com.rasik.model.Translation;
+import com.rasik.model.TranslationDao;
 import com.rasik.model.UserInfo;
 import com.rasik.model.UserInfoDao;
 
@@ -49,7 +51,8 @@ public class RasikServiceImpl implements RasikService {
 	ItemseditionDao itemsEditionDao;
 	@Inject
 	ItemlanguageDao itemLanguageDao;
-
+	@Inject
+	TranslationDao translationDao;
 	
 	@Override
 	public UserInfo getUserInfo(Long l) {
@@ -283,6 +286,22 @@ public class RasikServiceImpl implements RasikService {
 	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition) {
 		return itemsEditionDao.findItemseditionByDesc(itemsedition.getItemsedition());
 		
+	}
+
+	@Override
+	public Translation findTranslationByName(Translation translation) {
+		return translationDao.findTranslationByName(translation.getOriginalname());
+	}
+
+	@Override
+	public String saveTranslation(Translation translation) {
+		translationDao.persist(translation);
+		return "saved";
+	}
+
+	@Override
+	public List<Translation> findAllTranslations() {
+		return translationDao.findAllTranslations();
 	}
 
 

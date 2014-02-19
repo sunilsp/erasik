@@ -179,13 +179,21 @@ $("document").ready(function() {
 		});
 	};
 	
-	$("#addLanguageAjax").click(function(){		  
-    	$.get( "addLanguageAjax.html", function( data ) {
+	$("#addTranslationsAjax").click(function(){		  
+    	$.get( "addTranslationsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
 
     		});
-    });	    
+    });
+	
+	submitTranslationsAjax=function(){
+		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+
 
 	submitLanguageAjax=function(){
 		$.post("submitItemlanguage.html",$("#itemlanguageForm").serialize(),function(data){
@@ -208,7 +216,16 @@ $("document").ready(function() {
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
+
 	
+	$("#addItemsEdtionAjax").click(function(){		  
+    	$.get( "addItemsEdtionAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });	   
+
      /*
      */
 

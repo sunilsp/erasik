@@ -100,9 +100,9 @@ xmlns:th="http://www.thymeleaf.org">
 							<li class="elem-3">
 								<label for="Translations" th:text="@{Translations : }" class="required">Translations : </label>
 								<select tabindex="290" id="TranslationsDD" name="TranslationslDD">
-									<option th:each="itemsTranslations : ${itemTranslations}" th:value="${itemsTranslations.itemsTranslationsid}" th:text="${itemsTranslations.itemsTranslationsid}">Wireframe</option>
+									<option th:each="itemsTranslations : ${translationList}" th:value="${itemsTranslations.translationId}" th:text="${itemsTranslations.originalname}">Wireframe</option>
 								</select>
-								<input type="button" tabindex="295" id="addTranslations" name="addTranslations" value="New Translation"/>
+								<input type="button" tabindex="295" th:id="addTranslationsAjax" id="addTranslationsAjax" name="addTranslationsAjax" value="New Translation"/>
 							</li>
 							
 							<li class="elem-3">

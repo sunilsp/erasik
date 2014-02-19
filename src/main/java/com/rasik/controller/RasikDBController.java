@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.google.gson.Gson;
 import com.rasik.beans.ItemtypeList;
 import com.rasik.model.Authors;
@@ -45,6 +46,7 @@ import com.rasik.model.Itemlanguage;
 import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemtype;
+import com.rasik.model.Translation;
 import com.rasik.service.RasikService;
 
 import org.slf4j.Logger;
@@ -670,7 +672,44 @@ class RasikDBController{
 			}
 		}
 
-/*
+
+	@RequestMapping(value =
+		{
+				"admin/submitTranslations.html"
+		}, method = RequestMethod.POST)
+		public String submitTranslations(HttpServletResponse response,Model model,@ModelAttribute Translation translation,@RequestHeader(value="X-Requested-With",required=false) String requestedWith) throws IOException
+		{
+				logger.info("Inside submitTranslations()");
+				
+				if(	rasikSvc.findTranslationByName(translation) == null){
+					rasikSvc.saveTranslation(translation);
+				
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Translation saved");
+						response.setStatus(200);
+						return null;
+					}
+					else{
+					   model.addAttribute("message", "Translation saved.");
+					   return "html/message";
+					}
+				}
+				else{
+					if (requestedWith != null && "XMLHttpRequest".equals(requestedWith) ) {
+						response.getOutputStream().print("Translation already exists");
+						response.setStatus(200);
+						return null;
+						
+					}
+					else{
+					model.addAttribute("message", "Edition already exists");
+					return "html/message";
+				}
+					
+			}
+		}
+
+	/*
  * Start : Add Item functions	
  */
 	
@@ -694,6 +733,8 @@ class RasikDBController{
 			mav.addObject("itemsEditionList", itemsEditionList);
 			List<Itemlanguage> itemLanguagesList=rasikSvc.findAllLanguages();
 			mav.addObject("itemLanguagesList", itemLanguagesList);
+			List<Translation> translationList=rasikSvc.findAllTranslations();
+			mav.addObject("translationList", translationList);
 			return mav;
 		
 		}
@@ -752,7 +793,20 @@ class RasikDBController{
 			return "html/common :: itemEditionFragment";
 		}
 
-		
+
+	@RequestMapping(value =
+		{
+				"admin/addTranslationsAjax.html"
+		}, method = RequestMethod.GET)
+		public String addTranslationsAjax(Model model)
+		{
+			logger.info("Inside addTranslationsAjax()");
+			Translation translation=new Translation();
+			model.addAttribute("translation",translation);
+			
+			return "html/common :: addTranslationFragment";
+		}
+
 /*
  * Private Util functions		
  */

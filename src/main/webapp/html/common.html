@@ -202,6 +202,31 @@
 				</fieldset>
 			</form>
 <br/>			
+
+<form th:fragment="addTranslationFragment" class="clearfix tableDataFields" id="itemTranslationForm"  th:object="${translation}"  th:action="@{javascript:submitTranslationsAjax();}" action="message.html" name="itemTranslationForm"  method="post">
+				<fieldset title="Add Translation">
+					<ul>
+						<li>
+							<label for="name" th:text="@{Translated  From}" class="required">Translated From: </label>
+							<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="translatedfrom" id="translatedfrom" th:field="*{translatedfrom}"/>
+						</li>
+						<li>
+							<label class="required" for="originalname" th:text="@{Original Name}">Original Name: </label>
+							<input type="text" tabindex="20" autocomplete="on" required="on" name="originalname" id="originalname" th:field="*{originalname}"/>
+						</li>
+						<li>
+							<label class="required" for="originalauthor" th:text="@{Original Author}">Original Author: </label>
+							<input type="text" tabindex="20" autocomplete="on" required="on" name="originalauthor" id="originalauthor" th:field="*{originalauthor}"/>
+						</li>
+						<li>
+							<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+							<input tabindex="10" type="submit" value="Save" id="addtranslationsubmitbtn" name="addtranslationsubmitbtn"/>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
+
+<br/>
 	<!-- Start : Itemtype List fragment  -->		
 		<div th:fragment="itemTypeListFragment">
 			<table id="example">

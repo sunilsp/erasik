@@ -10,6 +10,7 @@ import com.rasik.model.Discounts;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemtype;
+import com.rasik.model.Translation;
 import com.rasik.model.UserInfo;
 
 
@@ -98,6 +99,12 @@ public interface RasikService {
 	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition);
 
 	public String saveItemlanguage(Itemlanguage itemlanguage);
+
+	public Translation findTranslationByName(Translation translation);
+
+	public String saveTranslation(Translation translation);
+
+	public List<Translation> findAllTranslations();
 	
 
 	
