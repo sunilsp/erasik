@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.google.gson.Gson;
 import com.rasik.beans.ItemtypeList;
 import com.rasik.model.Authors;
@@ -46,6 +47,7 @@ import com.rasik.model.Itemlanguage;
 import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemtype;
+import com.rasik.model.Stockcenter;
 import com.rasik.model.Translation;
 import com.rasik.service.RasikService;
 
@@ -806,6 +808,34 @@ class RasikDBController{
 			
 			return "html/common :: addTranslationFragment";
 		}
+	
+	
+	@RequestMapping(value =
+		{
+				"admin/addAuthorAjax.html"
+		}, method = RequestMethod.GET)
+		public String addAuthorAjax(Model model)
+		{
+			logger.info("Inside addAuthorAjax()");
+			Authors author=new Authors();
+			model.addAttribute("itemsauthor",author);
+			
+			return "html/common :: additemAuthorFragment";
+		}
+	
+	@RequestMapping(value =
+		{
+				"admin/addStockCenterAjax.html"
+		}, method = RequestMethod.GET)
+		public String addStockCenterAjax(Model model)
+		{
+			logger.info("Inside addStockCenterAjax()");
+			Stockcenter stockcenter=new Stockcenter();
+			model.addAttribute("itemstockcenter",stockcenter);
+			
+			return "html/common :: additemStockCenterFragment";
+		}
+	
 
 /*
  * Private Util functions		

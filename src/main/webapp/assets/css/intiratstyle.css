@@ -322,7 +322,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		padding: 0;
 		float: left;
 	}
-	fieldset.foldedset {
+	.foldedset {
 		width:50%;
 	}
 	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], option, textarea, button {
@@ -364,6 +364,9 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		padding: 0;
 		float: left;
 	}
+	.foldedset {
+		width:50%;
+	}
 
 	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], option, textarea, button {
 		width: 55%;
@@ -398,11 +401,13 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	}
 	fieldset {
 		display: block;
-		width: 100%;
 		margin: 1em 0;
 		border: none;
 		padding: 0;
 		float: none;
+	}
+	.foldedset {
+		width:100%;
 	}
 	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], textarea, button {
 		height:1.2em;

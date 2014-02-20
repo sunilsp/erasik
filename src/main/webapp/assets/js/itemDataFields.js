@@ -151,6 +151,7 @@ $("document").ready(function() {
 		modal: true, 
 		});
     
+    /*Add Item Type*/
     $("#addItemTypeAjax").click(function(){
     	$.get( "addItemTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
@@ -164,7 +165,8 @@ $("document").ready(function() {
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	};  
-
+	
+	/*Add Item Binding Type*/
 	$("#addBindingTypeAjax").click(function(){		  
     	$.get( "addBindingTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
@@ -179,22 +181,29 @@ $("document").ready(function() {
 		});
 	};
 	
-	$("#addTranslationsAjax").click(function(){		  
-    	$.get( "addTranslationsAjax.html", function( data ) {
+	/*Add Item Discount*/
+	$("#addDiscountAjax").click(function(){		  
+    	$.get( "addDiscountAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
 
     		});
     });
-	
-	submitTranslationsAjax=function(){
-		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
+	submitDiscountAjax=function(){
+		$.post("submitItemDiscount.html",$("#itemDidcountForm").serialize(),function(data){
 			alert(data);+
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
+	
+	/*Add Item language*/
+	$("#addLanguageAjax").click(function(){		  
+    	$.get( "addLanguageAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
 
-
+    		});
+    });
 	submitLanguageAjax=function(){
 		$.post("submitItemlanguage.html",$("#itemlanguageForm").serialize(),function(data){
 			alert(data);+
@@ -202,6 +211,8 @@ $("document").ready(function() {
 		});
 	}
 	
+		
+	/*Add Item Edition*/
 	$("#addItemsEdtionAjax").click(function(){		  
     	$.get( "addItemsEdtionAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
@@ -216,15 +227,69 @@ $("document").ready(function() {
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
-
 	
-	$("#addItemsEdtionAjax").click(function(){		  
-    	$.get( "addItemsEdtionAjax.html", function( data ) {
+	/*Add Item Stock Center*/
+	$("#addStockCenterAjax").click(function(){		  
+    	$.get( "addStockCenterAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
 
     		});
-    });	   
+    });
+	
+	submitStockCenterAjax=function(){
+		$.post("submitStockCenter.html",$("#itemStockCenterForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
+	/*Add Item Author*/
+	$("#addAuthorAjax").click(function(){		  
+    	$.get( "addAuthorAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });
+	
+	submitAuthorAjax=function(){
+		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
+	/*Add Item Publish Supplier*/
+	$("#addPublSupplAjax").click(function(){		  
+    	$.get( "addPublSupplAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$l( "#float-modal-form" ).html( data );
+
+    		});
+    });
+	
+	submitPublSupplAjax=function(){
+		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
+	/*Add Item Translation*/
+	$("#addTranslationsAjax").click(function(){		  
+    	$.get( "addTranslationsAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });
+	submitTranslationsAjax=function(){
+		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
 
      /*
      */
