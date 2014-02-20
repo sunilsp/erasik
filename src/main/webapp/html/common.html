@@ -545,7 +545,7 @@
 	</form>	
 	
 	<!-- Form for adding new Publish Supplier-->
-	<form th:fragment="itemPubSuppl" class="clearfix tableDataFields" id="itemsEditionForm"  th:object="${itemsedition}"  th:action="@{javascript:submitadditemeditionAjax();}" action="message.html" name="discountForm"  method="post">
+	<form th:fragment="itemPubSupplFragment" class="clearfix tableDataFields" id="itemsPublSupplForm"  th:object="${itemspublsuppl}"  th:action="@{javascript:submitpublsupplAjax();}" action="message.html" name="discountForm"  method="post">
 		<fieldset title="Add Publish Supplier">
 			<ul>
 				<li>
