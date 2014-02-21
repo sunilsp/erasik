@@ -183,18 +183,23 @@ xmlns:th="http://www.thymeleaf.org">
 
 									<li class="elem-3">
 										<label for="itemCoverImage" th:text="@{Item Cover : }" class="required">Item Cover : </label>
-										<input type="file" tabindex="360" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
-										<input tabindex="370" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
+										<label id="itemCoverImageFileName" th:text="@{Select a File to upload}" >Select a File to upload </label> 
+										<input type="hidden" tabindex="360" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
+										<input tabindex="370" type="button" value="Upload" id="uploadItemCoverbtn" name="uploadItemCoverbtn"/>
 									</li>
 									<li class="elem-3">
 										<label for="ebookFile" th:text="@{E-Book File : }" class="required">E-Book File : </label>
-										<input type="file" tabindex="380" autocomplete="on" required="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
-										<input tabindex="390" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
-									</li>
+										<label id="ebookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
+								
+										<input type="hidden" tabindex="380" autocomplete="on" required="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
+										<input tabindex="390" type="button" value="Upload" id="uploadebookFilebtn" name="uploadebookFilebtn"/>									</li>
 									<li class="elem-3">
 										<label for="audioBookFile" th:text="@{Audio Book File : }" class="required">Audio Book File : </label>
-										<input type="file" tabindex="400" autocomplete="on" required="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
-										<input tabindex="410" type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
+											<label id="audioBookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
+								
+											<input type="hidden" tabindex="400" autocomplete="on" required="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
+											<input tabindex="410" type="button" value="Upload" id="uploadaudioBookbtn" name="uploadaudioBookbtn"/>
+
 									</li>
 
 									<li class="elem-3">

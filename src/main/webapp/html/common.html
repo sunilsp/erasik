@@ -914,6 +914,100 @@
 	
 	
 	
+	<div th:fragment="uploadItemCoverFragment">
+<form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
+ <h4>Upload a book image</h4>
+ <p>Maximum size of file that can be uploaded is 5MB</p>
+  <fieldset title="Add Item Cover">
+	<ul>
+       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+        <li> <input id="uploadItemCoverSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadItemCoverFile(event);"/> </li>
+         <li>   <input id="uploadItemCoverCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
+          </ul>
+             
+             <input th:id="@{picture}" type="hidden" name="picture"/>
+            
+	</fieldset>
+ </form>
+ 
+ <div id="dialog" title="Upload Error" style="display: none;">
+  <p>Please select a file to upload</p>
+</div>
+
+</div>
+
+<div th:fragment="ebookFileFragment">
+<form  id="uploadebookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadebookFile.html}" method="post" enctype="multipart/form-data" >
+ <h4>Upload an Ebook file</h4>
+ <p>Maximum size of file that can be uploaded is 5MB</p>
+  <fieldset title="Add Ebook">
+	<ul>
+       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+        <li> <input id="uploadebookFileSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadebookFile(event);"/> </li>
+         <li>   <input id="uploadebookFileCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
+          </ul>
+             
+             <input th:id="@{picture}" type="hidden" name="picture"/>
+            
+	</fieldset>
+ </form>
+ 
+ <div id="dialog" title="Upload Error" style="display: none;">
+  <p>Please select a file to upload</p>
+</div>
+
+</div>
+
+<div th:fragment="uploadItemCoverFragment">
+<form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
+ <h4>Upload a book image</h4>
+ <p>Maximum size of file that can be uploaded is 5MB</p>
+  <fieldset title="Add Translation">
+	<ul>
+       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+        <li> <input id="uploadItemCoverSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadItemCoverFile(event);"/> </li>
+         <li>   <input id="uploadItemCoverCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
+          </ul>
+             
+             <input th:id="@{picture}" type="hidden" name="picture"/>
+            
+	</fieldset>
+ </form>
+ 
+ <div id="dialog" title="Upload Error" style="display: none;">
+  <p>Please select a file to upload</p>
+</div>
+
+</div>
+
+<div th:fragment="audiobookFileFragment">
+<form  id="uploadaudiobookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadaudiobookFileSubmit.html}" method="post" enctype="multipart/form-data" >
+ <h4>Upload an Audiobook file</h4>
+ <p>Maximum size of file that can be uploaded is 5MB</p>
+  <fieldset title="Add Audio book">
+	<ul>
+       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+        <li> <input id="uploadaudiobookFileSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadaudiobookFile(event);"/> </li>
+         <li>   <input id="uploadaudiobookFileCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
+          </ul>
+             
+             <input th:id="@{picture}" type="hidden" name="picture"/>
+            
+	</fieldset>
+ </form>
+ 
+ <div id="dialog" title="Upload Error" style="display: none;">
+  <p>Please select a file to upload</p>
+</div>
+
+</div>
+
+
+<br/>
+	
+	
+	
+	
 	<!-- Start : Itemtype List fragment  -->		
 		<div th:fragment="itemTypeListFragment">
 			<table id="example">

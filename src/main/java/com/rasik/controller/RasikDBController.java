@@ -42,6 +42,22 @@ import com.rasik.service.RasikService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.ParseException;
+
+ 
+import javax.servlet.http.HttpSession;
+ 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.rasik.service.UploadedFile;
+
+
 @Controller
 class RasikDBController {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
@@ -698,6 +714,163 @@ class RasikDBController {
 		return "html/common :: addCategoryFragment";
 	}
 	
+
+		@RequestMapping(value =
+					{
+							"admin/uploadItemCover.html"
+					}, method = RequestMethod.GET)
+					public String uploadItemCover(Model model)
+					{
+						logger.info("Inside uploadItemCoverbtn()");
+						UploadedFile uploadedFile=new UploadedFile();
+						model.addAttribute("uploadedFile",uploadedFile);
+						
+						return "html/common :: uploadItemCoverFragment";
+					}
+			
+			
+				@RequestMapping(value =
+					{
+							"admin/uploadebookFile.html"
+					}, method = RequestMethod.GET)
+					public String uploadebookFile(Model model)
+					{
+						logger.info("Inside uploadItemCoverbtn()");
+						UploadedFile uploadedFile=new UploadedFile();
+						model.addAttribute("uploadedFile",uploadedFile);
+						
+						return "html/common :: ebookFileFragment";
+					}
+			
+				@RequestMapping(value =
+					{
+							"admin/uploadaudioBookFile.html"
+					}, method = RequestMethod.GET)
+					public String uploadaudioBookFile(Model model)
+					{
+						logger.info("Inside uploadaudioBookFile()");
+						UploadedFile uploadedFile=new UploadedFile();
+						model.addAttribute("uploadedFile",uploadedFile);
+						
+						return "html/common :: audiobookFileFragment";
+					}
+			
+				@RequestMapping(value="admin/uploadItemCoverFile.html",method=RequestMethod.POST)
+				
+				public @ResponseBody String fileUploaded(
+						@ModelAttribute UploadedFile uploadedFile,
+						BindingResult result,HttpSession session) throws IOException, ParseException {
+					InputStream inputStream = null;	
+					OutputStream outputStream = null;
+			
+					try{
+					inputStream = uploadedFile.getFile().getInputStream();
+			
+					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Test"+ ".jpg");
+					if (!newFile.exists()) {
+						newFile.createNewFile();
+					}
+					else{
+						if(newFile.delete()){
+							newFile.createNewFile();
+					}
+					}
+					outputStream = new FileOutputStream(newFile);
+					int read = 0;
+					byte[] bytes = new byte[1024];
+			
+					while ((read = inputStream.read(bytes)) != -1) {
+						outputStream.write(bytes, 0, read);
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finally{
+					outputStream.close();
+					inputStream.close();
+				}
+					return "File uploaded";
+			}
+				
+				
+				
+			@RequestMapping(value="admin/uploadebookFileSubmit.html",method=RequestMethod.POST)
+				
+				public @ResponseBody String uploadebookFileSubmit(
+						@ModelAttribute UploadedFile uploadedFile,
+						BindingResult result,HttpSession session) throws IOException, ParseException {
+					InputStream inputStream = null;	
+					OutputStream outputStream = null;
+			
+					try{
+					inputStream = uploadedFile.getFile().getInputStream();
+			
+					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Ebook" + ".epub");
+					if (!newFile.exists()) {
+						newFile.createNewFile();
+					}
+					else{
+						if(newFile.delete()){
+							newFile.createNewFile();
+					}
+					}
+					outputStream = new FileOutputStream(newFile);
+					int read = 0;
+					byte[] bytes = new byte[1024];
+			
+					while ((read = inputStream.read(bytes)) != -1) {
+						outputStream.write(bytes, 0, read);
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finally{
+					outputStream.close();
+					inputStream.close();
+				}
+					return "Ebook File uploaded";
+			}
+			
+			@RequestMapping(value="admin/uploadAudioFileSubmit.html",method=RequestMethod.POST)
+			
+			public @ResponseBody String uploadAudioFileSubmit(
+					@ModelAttribute UploadedFile uploadedFile,
+					BindingResult result,HttpSession session) throws IOException, ParseException {
+				InputStream inputStream = null;	
+				OutputStream outputStream = null;
+			
+				try{
+				inputStream = uploadedFile.getFile().getInputStream();
+			
+				File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Audio" + ".mp3");
+				if (!newFile.exists()) {
+					newFile.createNewFile();
+				}
+				else{
+					if(newFile.delete()){
+						newFile.createNewFile();
+				}
+				}
+				outputStream = new FileOutputStream(newFile);
+				int read = 0;
+				byte[] bytes = new byte[1024];
+			
+				while ((read = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally{
+				outputStream.close();
+				inputStream.close();
+			}
+				return "File uploaded";
+			}
+
 
 	/*
 	 * Private Util functions

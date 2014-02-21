@@ -177,7 +177,7 @@ $("document").ready(function() {
     });	    
 	submitBindingTypeAjax = function(){
 		$.post("submitBindingTypes.html",$("#bindingTypeForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	};
@@ -192,7 +192,7 @@ $("document").ready(function() {
     });
 	submitDiscountAjax=function(){
 		$.post("submitItemDiscount.html",$("#itemDidcountForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -207,7 +207,7 @@ $("document").ready(function() {
     });
 	submitLanguageAjax=function(){
 		$.post("submitItemlanguage.html",$("#itemlanguageForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -224,7 +224,7 @@ $("document").ready(function() {
 	
 	submitadditemeditionAjax=function(){
 		$.post("submitItemseditions.html",$("#itemsEditionForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -240,7 +240,7 @@ $("document").ready(function() {
 	
 	submitStockCenterAjax=function(){
 		$.post("submitStockCenter.html",$("#itemStockCenterForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -256,7 +256,7 @@ $("document").ready(function() {
 	
 	submitAuthorAjax=function(){
 		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -272,7 +272,7 @@ $("document").ready(function() {
 	
 	submitPublSupplAjax=function(){
 		$.post("submitPublSuppl.html",$("#itemAuthorForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -287,7 +287,7 @@ $("document").ready(function() {
     });
 	submitTranslationsAjax=function(){
 		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
@@ -302,12 +302,135 @@ $("document").ready(function() {
     });
 	submitTranslationsAjax=function(){
 		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
-			alert(data);+
+			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
 
-     /*
+		$("#uploadItemCoverbtn").click(function(){		  
+		    	$.get( "uploadItemCover.html", function( data ) {
+		  			$( "#float-modal-form" ).dialog( "open" );
+					$( "#float-modal-form" ).html( data );
+		
+		    		});
+		    });
+			
+			
+			
+			$("#uploadebookFilebtn").click(function(){		  
+		    	$.get( "uploadebookFile.html", function( data ) {
+		  			$( "#float-modal-form" ).dialog( "open" );
+					$( "#float-modal-form" ).html( data );
+		
+		    		});
+		    });
+			
+			
+			$("#uploadaudioBookbtn").click(function(){		  
+		    	$.get( "uploadaudioBookFile.html", function( data ) {
+		  			$( "#float-modal-form" ).dialog( "open" );
+					$( "#float-modal-form" ).html( data );
+		
+		    		});
+		    });
+		//	$("#uploadItemCoverCancel").click(function(){
+			closeDialog=function(event){
+			$("#picture").val(false);
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+			}
+			
+			// Multipart File upload
+			uploadebookFile=function(event){
+				event.preventDefault();
+				if($("#file").val() == null || $("#file").val() == ""){
+					
+					$("#dialog").dialog();
+					return false;
+				}
+				data = new FormData();
+			    data.append( 'file', $( '#file' )[0].files[0] );
+			    
+				$.ajax({
+				    url: "uploadebookFileSubmit.html",
+				    type: "POST",
+				    data: data,
+				   
+				    contentType: false,
+				    cache: false,
+				    processData: false,
+				    dataType: "text",
+				    success: function(data){
+				    	 alert(data);
+				    	 $("#ebookFileName").text(data);
+						$( "#float-modal-form" ).dialog( "close" );
+						
+				    }
+					});		
+				
+			}
+		
+			
+			uploadItemCoverFile=function(event){
+				event.preventDefault();
+				if($("#file").val() == null || $("#file").val() == ""){
+					
+					$("#dialog").dialog();
+					return false;
+				}
+				data = new FormData();
+			    data.append( 'file', $( '#file' )[0].files[0] );
+			    
+				$.ajax({
+				    url: "uploadItemCoverFile.html",
+				    type: "POST",
+				    data: data,
+				   
+				    contentType: false,
+				    cache: false,
+				    processData: false,
+				    dataType: "text",
+				    success: function(data){
+				    	 alert(data);
+				    	 $("#itemCoverImageFileName").text(data);
+						$( "#float-modal-form" ).dialog( "close" );
+						
+				    }
+					});		
+				
+			}
+			
+			uploadaudiobookFile=function(event){
+				event.preventDefault();
+				if($("#file").val() == null || $("#file").val() == ""){
+					
+					$("#dialog").dialog();
+					return false;
+				}
+				data = new FormData();
+			    data.append( 'file', $( '#file' )[0].files[0] );
+			    
+				$.ajax({
+				    url: "uploadAudioFileSubmit.html",
+				    type: "POST",
+				    data: data,
+				   
+				    contentType: false,
+				    cache: false,
+				    processData: false,
+				    dataType: "text",
+				    success: function(data){
+				    	 alert(data);
+				    	 $("#audioBookFileName").text(data);
+						$( "#float-modal-form" ).dialog( "close" );
+						
+				    }
+					});		
+				
+			}
+
+	
+	/*
      */
 
 });
