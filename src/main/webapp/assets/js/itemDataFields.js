@@ -153,6 +153,7 @@ $("document").ready(function() {
     
     /*Add Item Type*/
     $("#addItemTypeAjax").click(function(){
+    	$("#float-modal-form").attr("title","Add New Item Types");
     	$.get( "addItemTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
@@ -264,13 +265,28 @@ $("document").ready(function() {
 	$("#addPublSupplAjax").click(function(){		  
     	$.get( "addPublSupplAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-			$l( "#float-modal-form" ).html( data );
+			$( "#float-modal-form" ).html( data );
 
     		});
     });
 	
 	submitPublSupplAjax=function(){
-		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
+		$.post("submitPublSuppl.html",$("#itemAuthorForm").serialize(),function(data){
+			alert(data);+
+			$( "#float-modal-form" ).dialog( "close" );
+		});
+	}
+	
+	/*Add Item Category*/
+	$("#addCategoriesAjax").click(function(){		  
+    	$.get( "addCategoriesAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });
+	submitTranslationsAjax=function(){
+		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
 			alert(data);+
 			$( "#float-modal-form" ).dialog( "close" );
 		});

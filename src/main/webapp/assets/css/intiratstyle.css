@@ -167,8 +167,12 @@ input[disabled], input[disabled] {
 	background: #eee;
 }
 
-input[type=submit], .elem-3 input[type="button"] {
+.elem-3 input[type="button"] {
 	background: #aaa;
+}
+
+input[type=submit]{
+	background: #8BC804;
 }
 
 input[type=reset] {
