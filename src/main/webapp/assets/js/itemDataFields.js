@@ -126,7 +126,23 @@ $("document").ready(function() {
                 $("#validationFeedback").show();
             } else {
                 $("#validationFeedback").hide();
+           
             }
+        },
+        submitHandler : function(form){
+        	$("#hbindingtype").val(($("#bindingTypeDropdown").val()));
+			$("#hitemtype").val(($("#itemTypeDropdown").val()));
+			$("#hitemlanguage").val(($("#languageDropdown").val()));
+			$("#hitemsedition").val(($("#editionDropdown").val()));
+			$("#hitemsstockcenters").val(($("#stockCenterDD").val()));
+			$("#hitemsauthorses").val(($("#authorDD").val()));
+			$("#hitemspublsuppls").val(($("#PublSupplDD").val()));
+			$("#htranslations").val(($("#TranslationslDD").val()));
+			$("#hitemscategories").val(($("#CategoriesDD").val()));
+			$("#hawarddetails").val(($("#AwarddetailsDD").val()));
+			$("#marathiName").val(HTMLEncode($("#marathiName").val()));
+			form.submit();
+            
         },
 
         onkeyup : true,
@@ -160,11 +176,28 @@ $("document").ready(function() {
 
     		});
     });
+    
     submitItemTypeAjax = function(){
-		$.post("submitItemTypes.html",$("#itemTypeForm").serialize(),function(data){
-			alert(data);
+		$.ajax({
+			type: "POST",
+			url: "submitItemTypes.html",
+			data:$("#itemTypeForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "success" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#itemTypeDropdown").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#itemTypeDropdown").append(
+	                        "<option value=" + val.itemTypeId + ">" + val.description+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+    	
+    
 	};  
 	
 	/*Add Item Binding Type*/
@@ -176,10 +209,26 @@ $("document").ready(function() {
     		});
     });	    
 	submitBindingTypeAjax = function(){
-		$.post("submitBindingTypes.html",$("#bindingTypeForm").serialize(),function(data){
-			alert(data);
+
+		$.ajax({
+			type: "POST",
+			url: "submitBindingTypes.html",
+			data:$("#bindingTypeForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Binding Type Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#bindingTypeDropdown").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#bindingTypeDropdown").append(
+	                        "<option value=" + val.bindingTypeId + ">" + val.bindingTypeName+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+
 	};
 	
 	/*Add Item Discount*/
@@ -206,10 +255,27 @@ $("document").ready(function() {
     		});
     });
 	submitLanguageAjax=function(){
-		$.post("submitItemlanguage.html",$("#itemlanguageForm").serialize(),function(data){
-			alert(data);
+
+		
+		$.ajax({
+			type: "POST",
+			url: "submitItemlanguage.html",
+			data:$("#itemlanguageForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Language Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#languageDropdown").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#languageDropdown").append(
+	                        "<option value=" + val.languageId + ">" + val.languageName+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+
 	}
 	
 		
@@ -223,10 +289,26 @@ $("document").ready(function() {
     });	   
 	
 	submitadditemeditionAjax=function(){
-		$.post("submitItemseditions.html",$("#itemsEditionForm").serialize(),function(data){
-			alert(data);
+
+		$.ajax({
+			type: "POST",
+			url: "submitItemseditions.html",
+			data:$("#itemsEditionForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Edition Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#editionDropdown").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#editionDropdown").append(
+	                        "<option value=" + val.itemsEditionId + ">" + val.itemsedition+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+
 	}
 	
 	/*Add Item Stock Center*/
@@ -239,10 +321,26 @@ $("document").ready(function() {
     });
 	
 	submitStockCenterAjax=function(){
-		$.post("submitStockCenter.html",$("#itemStockCenterForm").serialize(),function(data){
-			alert(data);
+		
+		$.ajax({
+			type: "POST",
+			url: "submitStockCenterAjax.html",
+			data:$("#itemStockCenterForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Stock Center Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#stockCenterDD").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#stockCenterDD").append(
+	                        "<option value=" + val.stockCenterId + ">" + val.stockCenterId+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+
 	}
 	
 	/*Add Item Author*/
@@ -300,11 +398,64 @@ $("document").ready(function() {
 
     		});
     });
+	
+	$("#addAwarddetailsAjax").click(function(){		  
+    	$.get( "addAwarddetailsAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });
+
 	submitTranslationsAjax=function(){
-		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
-			alert(data);
+	
+		
+		$.ajax({
+			type: "POST",
+			url: "submitTranslations.html",
+			data:$("#itemTranslationForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Translation Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-		});
+			$("#TranslationsDD").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#TranslationsDD").append(
+	                        "<option value=" + val.translaionId + ">" + val.originalname+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+
+	}
+
+	submitadditemAwardAjax=function(){
+
+
+		
+		$("#awardDetailsMarathi").val(HTMLEncode($("#awardDetailsMarathi").val()));
+		
+		$.ajax({
+			type: "POST",
+			url: "submitaddAwardAjax.html",
+			data:$("#itemAwardForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Award Details Saved" );
+			$( "#float-modal-form" ).dialog( "close" );
+			$("#AwarddetailsDD").empty();
+			 $.each(data, function(i, val) {
+				 
+	                $("#AwarddetailsDD").append(
+	                        "<option value=" + val.awardDetailId + ">" + val.awardDetailsEnglish+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });
+		
 	}
 
 		$("#uploadItemCoverbtn").click(function(){		  
@@ -333,6 +484,8 @@ $("document").ready(function() {
 		
 		    		});
 		    });
+			
+			
 		//	$("#uploadItemCoverCancel").click(function(){
 			closeDialog=function(event){
 			$("#picture").val(false);
@@ -363,6 +516,7 @@ $("document").ready(function() {
 				    success: function(data){
 				    	 alert(data);
 				    	 $("#ebookFileName").text(data);
+				    	 $("#ebookFile").val(data);
 						$( "#float-modal-form" ).dialog( "close" );
 						
 				    }
@@ -393,6 +547,7 @@ $("document").ready(function() {
 				    success: function(data){
 				    	 alert(data);
 				    	 $("#itemCoverImageFileName").text(data);
+				    	 $("#itemCoverImage").val(data);
 						$( "#float-modal-form" ).dialog( "close" );
 						
 				    }
@@ -422,6 +577,7 @@ $("document").ready(function() {
 				    success: function(data){
 				    	 alert(data);
 				    	 $("#audioBookFileName").text(data);
+				    	 $("#audioBookFile").val(data);
 						$( "#float-modal-form" ).dialog( "close" );
 						
 				    }
@@ -429,7 +585,112 @@ $("document").ready(function() {
 				
 			}
 
+						
+			submitadditemcategoryAjax=function(){
+				
+				$("#categoryHeadMarathi").val(HTMLEncode($("#categoryHeadMarathi").val()));
+			
+				$.ajax({
+					type: "POST",
+					url: "submitadditemcategoryAjax.html",
+					data:$("#itemCategoryForm").serialize(),
+					dataType:"json"
+				}).done(function(data) {
+				    alert( "Category Saved" );
+					$( "#float-modal-form" ).dialog( "close" );
+					$("#CategoriesDD").empty();
+					 $.each(data, function(i, val) {
+						 
+			                $("#CategoriesDD").append(
+			                        "<option value=" + val.categoryId + ">" + val.categoryHeadEnglish+ "</option>");
+			            });
+				  })
+				  .fail(function(faildata) {
+				    alert(faildata.responseText);
+				  });
+
+				
+			}
+			
+			submitaddauthorAjax=function(){
+				
+				$("#auth_mr_name").val(HTMLEncode($("#auth_mr_name").val()));
+				
+				
+				$.ajax({
+					type: "POST",
+					url: "submitaddAuthorAjax.html",
+					data:$("#itemAuthorForm").serialize(),
+					dataType:"json"
+				}).done(function(data) {
+				    alert( "Author Saved" );
+					$( "#float-modal-form" ).dialog( "close" );
+					$("#authorDD").empty();
+					 $.each(data, function(i, val) {
+						 
+			                $("#authorDD").append(
+			                        "<option value=" + val.authorId + ">" + val.englishName+ "</option>");
+			            });
+				  })
+				  .fail(function(faildata) {
+				    alert(faildata.responseText);
+				  });
+
+				
+				
+			}
+			
+			submitpublsupplAjax=function(){
+				$("#pubsupplmarathiName").val(HTMLEncode($("#pubsupplmarathiName").val()));
+				
+				$.ajax({
+					type: "POST",
+					url: "submitpublsupplAjax.html",
+					data:$("#itemsPublSupplForm").serialize(),
+					dataType:"json"
+				}).done(function(data) {
+				    alert( "Publisher/Supplier Saved" );
+					$( "#float-modal-form" ).dialog( "close" );
+					$("#PublSupplDD").empty();
+					 $.each(data, function(i, val) {
+						 
+			                $("#PublSupplDD").append(
+			                        "<option value=" + val.pubSupId + ">" + val.englishName+ "</option>");
+			            });
+				  })
+				  .fail(function(faildata) {
+				    alert(faildata.responseText);
+				  });
+
+
+			}
+			
 	
+			
+		   $("#itemsPublSupplForm").submit(function(){
+			   var marathiConvert=HTMLEncode($("#marathiName").val());
+					$("#pubsupplmarathiName").val(marathiConvert);
+					$.post("submitpublsupplAjax.html",$("#itemsPublSupplForm").serialize(),function(data){
+						alert(data);
+						$( "#float-modal-form" ).dialog( "close" );
+					});
+		
+		        });
+			
+			function HTMLEncode(str){
+				  var i = str.length,
+				      aRet = [];
+
+				  while (i--) {
+				    var iC = str[i].charCodeAt();
+				    if (iC < 65 || iC > 127 || (iC>90 && iC<97)) {
+				      aRet[i] = '&#'+iC+';';
+				    } else {
+				      aRet[i] = str[i];
+				    }
+				   }
+				  return aRet.join('');    
+				}		
 	/*
      */
 

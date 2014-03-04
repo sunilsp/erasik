@@ -3,11 +3,16 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,6 +20,7 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Category
  * @author Hibernate Tools
  */
+@Repository
 public class CategoryDao extends RasikBaseDao{
 
 	private static final Log log = LogFactory.getLog(CategoryDao.class);
@@ -81,7 +87,7 @@ public class CategoryDao extends RasikBaseDao{
 		log.debug("getting Category instance with id: " + id);
 		try {
 			Category instance = (Category) getSession()
-					.get("com.rasik.hibernate.Category", id);
+					.get("com.rasik.model.Category", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -97,9 +103,8 @@ public class CategoryDao extends RasikBaseDao{
 	public List<Category> findByExample(Category instance) {
 		log.debug("finding Category instance by example");
 		try {
-			List<Category> results = (List<Category>) sessionFactory
-					.getCurrentSession()
-					.createCriteria("com.rasik.hibernate.Category")
+			List<Category> results = (List<Category>) getSession()
+					.createCriteria("com.rasik.model.Category")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -109,4 +114,23 @@ public class CategoryDao extends RasikBaseDao{
 			throw re;
 		}
 	}
-}
+
+	public List<Category> findAllCategories() {
+		Query query=getSession().getNamedQuery("findAllCategories");
+		List<Category> categoryList=query.list();
+		return categoryList;
+	}
+	
+	public  Category findCategoryByName(String categoryHeadEnglish) {
+		Query query=getSession().getNamedQuery("findCategoryByName").setString("categoryHeadEnglish", categoryHeadEnglish);
+		List<Category> categoryList=query.list();
+		
+		if(categoryList.size() != 0){
+			return categoryList.get(0);
+		}
+		else{
+			return null;
+		}
+	}
+	
+	}

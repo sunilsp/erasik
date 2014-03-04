@@ -13,10 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -44,7 +46,8 @@ public class Customer implements java.io.Serializable {
 	private String fax;
 	private String mobile;
 	private String contactPerson;
-	private Set<Itemscustomerrating> itemscustomerratings = new HashSet<Itemscustomerrating>(
+	@JsonBackReference
+	private Set<Items> items = new HashSet<Items>(
 			0);
 
 	public Customer() {
@@ -59,7 +62,7 @@ public class Customer implements java.io.Serializable {
 			String address2, String address3, String pincode, String city,String state,
 			String country, String email, String phone1, String phone2,
 			String fax, String mobile, String contactPerson,
-			Set<Itemscustomerrating> itemscustomerratings) {
+			Set<Items> items) {
 		this.customerId = customerId;
 		this.customertype = customertype;
 		this.englishName = englishName;
@@ -77,7 +80,7 @@ public class Customer implements java.io.Serializable {
 		this.fax = fax;
 		this.mobile = mobile;
 		this.contactPerson = contactPerson;
-		this.itemscustomerratings = itemscustomerratings;
+		this.items = items;
 	}
 
 	@Id
@@ -91,7 +94,7 @@ public class Customer implements java.io.Serializable {
 		this.customerId = customerId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "customerTypeId")
 	public Customertype getCustomertype() {
 		return this.customertype;
@@ -227,14 +230,14 @@ public class Customer implements java.io.Serializable {
 		this.contactPerson = contactPerson;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
-	public Set<Itemscustomerrating> getItemscustomerratings() {
-		return this.itemscustomerratings;
+	@ManyToMany(mappedBy = "customers")
+	public Set<Items> getItems() {
+		return this.items;
 	}
 
-	public void setItemscustomerratings(
-			Set<Itemscustomerrating> itemscustomerratings) {
-		this.itemscustomerratings = itemscustomerratings;
+	public void setItems(
+			Set<Items> items) {
+		this.items = items;
 	}
 
 	/**

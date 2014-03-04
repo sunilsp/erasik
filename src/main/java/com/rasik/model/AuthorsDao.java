@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import static org.hibernate.criterion.Example.create;
@@ -124,6 +125,18 @@ public class AuthorsDao extends RasikBaseDao{
 		} catch (RuntimeException re) {
 			log.error("find all authors failed", re);
 			throw re;
+		}
+	}
+	
+	public  Authors findAuthorByName(String authorName) {
+		Query query=getSession().getNamedQuery("findAuthoryByName").setString("englishName", authorName);
+		List<Authors> authorsList=query.list();
+		
+		if(authorsList.size() != 0){
+			return authorsList.get(0);
+		}
+		else{
+			return null;
 		}
 	}
 }

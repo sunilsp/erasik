@@ -62,7 +62,7 @@ public class Itemlanguage implements java.io.Serializable {
 		this.languageName = languageName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "itemlanguage")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "itemlanguage")
 	public Set<Items> getItemses() {
 		return this.itemses;
 	}

@@ -3,11 +3,15 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,27 +19,16 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Items
  * @author Hibernate Tools
  */
-public class ItemsHome {
+@Repository
+public class ItemsDao  extends RasikBaseDao{
 
-	private static final Log log = LogFactory.getLog(ItemsHome.class);
+	private static final Log log = LogFactory.getLog(ItemsDao.class);
 
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
-
+	
 	public void persist(Items transientInstance) {
 		log.debug("persisting Items instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -46,7 +39,7 @@ public class ItemsHome {
 	public void attachDirty(Items instance) {
 		log.debug("attaching dirty Items instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -57,7 +50,7 @@ public class ItemsHome {
 	public void attachClean(Items instance) {
 		log.debug("attaching clean Items instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -68,7 +61,7 @@ public class ItemsHome {
 	public void delete(Items persistentInstance) {
 		log.debug("deleting Items instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -79,7 +72,7 @@ public class ItemsHome {
 	public Items merge(Items detachedInstance) {
 		log.debug("merging Items instance");
 		try {
-			Items result = (Items) sessionFactory.getCurrentSession().merge(
+			Items result = (Items) getSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -92,7 +85,7 @@ public class ItemsHome {
 	public Items findById(java.lang.Integer id) {
 		log.debug("getting Items instance with id: " + id);
 		try {
-			Items instance = (Items) sessionFactory.getCurrentSession().get(
+			Items instance = (Items) getSession().get(
 					"com.rasik.hibernate.Items", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -106,19 +99,20 @@ public class ItemsHome {
 		}
 	}
 
-	public List<Items> findByExample(Items instance) {
-		log.debug("finding Items instance by example");
+	public List<Items> findAllItems() {
+		log.debug("finding all Items ");
 		try {
-			List<Items> results = (List<Items>) sessionFactory
-					.getCurrentSession()
-					.createCriteria("com.rasik.hibernate.Items")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
+			List<Items> results = (List<Items>) getSession()
+					.createCriteria("com.rasik.model.Items")
+					.list();
+			log.debug("find all items successful, result size: "
 					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
+			log.error("find all items failed", re);
 			throw re;
 		}
 	}
+
+
 }

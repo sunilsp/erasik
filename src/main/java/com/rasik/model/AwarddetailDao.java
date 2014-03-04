@@ -3,11 +3,16 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,6 +20,7 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Awarddetail
  * @author Hibernate Tools
  */
+@Repository
 public class AwarddetailDao extends RasikBaseDao{
 
 	private static final Log log = LogFactory.getLog(AwarddetailDao.class);
@@ -78,7 +84,7 @@ public class AwarddetailDao extends RasikBaseDao{
 	public Awarddetail findById(java.lang.Integer id) {
 		log.debug("getting Awarddetail instance with id: " + id);
 		try {
-			Awarddetail instance = (Awarddetail) getSession().get("com.rasik.hibernate.Awarddetail",
+			Awarddetail instance = (Awarddetail) getSession().get("com.rasik.model.Awarddetail",
 							id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -96,7 +102,7 @@ public class AwarddetailDao extends RasikBaseDao{
 		log.debug("finding Awarddetail instance by example");
 		try {
 			List<Awarddetail> results = (List<Awarddetail>) getSession()
-					.createCriteria("com.rasik.hibernate.Awarddetail")
+					.createCriteria("com.rasik.model.Awarddetail")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -106,4 +112,23 @@ public class AwarddetailDao extends RasikBaseDao{
 			throw re;
 		}
 	}
+	
+	public List<Awarddetail> findAllAwarddetails() {
+		Query query=getSession().getNamedQuery("findAllAwardDetails");
+		List<Awarddetail> awarddetailList=query.list();
+		return awarddetailList;
+	}
+	
+	public  Awarddetail findAwarddetailByName(String awardDetailsEnglish) {
+		Query query=getSession().getNamedQuery("findAwardByName").setString("awardDetailsEnglish", awardDetailsEnglish);
+		List<Awarddetail> awarddetailList=query.list();
+		
+		if(awarddetailList.size() != 0){
+			return awarddetailList.get(0);
+		}
+		else{
+			return null;
+		}
+	}
+
 }

@@ -203,14 +203,14 @@
 			</li>
 			<li>
 				<input tabindex="150" type="reset" value="Reset " id="reset" name="reset"/>
-				<input tabindex="160" type="submit" value="Save" id="submitbtn" name="submitbtn"/>
+				<input tabindex="160" type="submit" value="Save" id="addStockCentersubmitbtn" name="addStockCentersubmitbtn"/>
 			</li>
 			</ul>							
 		</fieldset>					
 	</form>
 	
 	<!-- Form for adding new Author-->
-	<form th:fragment="additemAuthorFragment" class="clearfix tableDataFields" id="itemAuthorForm"  th:object="${itemsauthor}"  th:action="@{javascript:submitAuthorAjax();}" action="message.html" name="discountForm"  method="post">
+	<form th:fragment="additemAuthorFragment" class="clearfix tableDataFields" id="itemAuthorForm"  th:object="${itemsauthor}"  th:action="@{javascript:submitaddauthorAjax();}" action="message.html" name="discountForm"  method="post">
 		<fieldset title="Add New Author" class="foldedset">
 			<ul>
 			
@@ -555,11 +555,11 @@
 				-->
 				<li>
 					<label for="name" th:text="@{English Name : }" class="required">English Name : </label>
-					<input type="text" autocomplete="on" required="on"  maxlength="500" name="englishName" id="englishName" th:field="*{englishName}"/>
+					<input type="text" autocomplete="on"  maxlength="500" name="englishName" id="englishName" th:field="*{englishName}"/>
 				</li>
 				<li>
 					<label class="required" for="vatPerc" th:text="@{Marathi Name : }">Marathi Name : </label>
-					<input type="text"  autocomplete="on" required="on" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
+					<input type="text"  autocomplete="on" required="on" name="pubsupplmarathiName" id="pubsupplmarathiName" th:field="*{marathiName}"/>
 				</li>
 				<li>
 				<label for="cust_mr_name" th:text="@{Address Line 1 : }" class="required">Address Line 1 : </label>
@@ -893,7 +893,7 @@
 	</form>
 
 	<!-- Form for adding new Categories -->
-	<form th:fragment="addCategoryFragment" class="clearfix tableDataFields" id="itemsCategoryForm"  th:object="${itemscategory}"  th:action="@{javascript:submitadditemcategoryAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
+	<form th:fragment="addCategoryFragment" class="clearfix tableDataFields" id="itemCategoryForm"  th:object="${itemscategory}"  th:action="@{javascript:submitadditemcategoryAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
 		<fieldset title="Add Categories">
 			<ul>
 				<li>
@@ -906,12 +906,35 @@
 				</li>
 				<li>
 					<input type="reset" value="Reset " id="reset" name="reset"/>
-					<input type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>
+					<input type="submit" value="Save" id="addCategorysubmitbtn" name="addCategorysubmitbtn"/>
 				</li>
 			</ul>
 		</fieldset>
 	</form>
 	
+	<!-- Form for adding new Awards -->
+	<form th:fragment="addAwardFragment" class="clearfix tableDataFields" id="itemAwardForm"  th:object="${itemsAward}"  th:action="@{javascript:submitadditemAwardAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
+		<fieldset title="Add Categories">
+			<ul>
+				<li>
+					<label for="awardDetailsEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>
+					<input type="text" autocomplete="on" required="on"  maxlength="500" name="awardDetailsEnglish" id="awardDetailsEnglish" th:field="*{awardDetailsEnglish}"/>
+				</li>
+				<li>
+					<label class="required" for="awardDetailsMarathi" th:text="@{Marathi Heading : }" >Marathi Heading : </label>
+					<input type="text" autocomplete="on" required="on" name="awardDetailsMarathi" id="awardDetailsMarathi" th:field="*{awardDetailsMarathi}"/>
+				</li>
+				<li>
+					<label for="dateOfAward" th:text="@{Award Date : }" class="required">Date Of Award : </label>
+					<input type="text" tabindex="430" autocomplete="on" required="on" name="dateOfAward" id="dateOfAward" th:field="*{dateOfAward}"/>
+				</li>
+				<li>
+					<input type="reset" value="Reset " id="reset" name="reset"/>
+					<input type="submit" value="Save" id="addAwardsubmitbtn" name="addAwardsubmitbtn"/>
+				</li>
+			</ul>
+		</fieldset>
+	</form>
 	
 	
 	<div th:fragment="uploadItemCoverFragment">
@@ -958,27 +981,6 @@
 
 </div>
 
-<div th:fragment="uploadItemCoverFragment">
-<form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
- <h4>Upload a book image</h4>
- <p>Maximum size of file that can be uploaded is 5MB</p>
-  <fieldset title="Add Translation">
-	<ul>
-       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
-        <li> <input id="uploadItemCoverSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadItemCoverFile(event);"/> </li>
-         <li>   <input id="uploadItemCoverCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
-          </ul>
-             
-             <input th:id="@{picture}" type="hidden" name="picture"/>
-            
-	</fieldset>
- </form>
- 
- <div id="dialog" title="Upload Error" style="display: none;">
-  <p>Please select a file to upload</p>
-</div>
-
-</div>
 
 <div th:fragment="audiobookFileFragment">
 <form  id="uploadaudiobookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadaudiobookFileSubmit.html}" method="post" enctype="multipart/form-data" >

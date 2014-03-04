@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:substituteby="html/common :: headerFragment1">
+	  
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>	  
+<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+	  
+	 
+</head>
+<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
+<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
+<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
+<!--[if gt IE 8]><!--><body><!--<![endif]-->
+<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+<!-- <header th:include="html/common :: contactMenuFragment" /> -->
+<header class="clearfix">
+      <div class="container" th:include="html/common :: contactMenuFragment"></div>
+          </header>
+
+   <section role="banner">
+       <hgroup>
+           <h1>Edit Database</h1>
+           <h2>Rasik Database</h2>
+       </hgroup>
+   </section> <!-- // banner ends -->
+   
+   <section class="container">
+       <footer class="foo-slogan">
+       <table id="example">
+  <thead title="itemType Table">
+    <tr>
+    	<th class="site_name">ItemId</th>
+    	<th>English Name</th>
+    	<th>Marathi Name</th>
+    	<th>Price</th>
+    	<th>noOfPages</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<a th:href="@{/admin/listItemtypes.html}" href="admin.html" class="button green">Back</a>
+
+       </footer>
+       
+          </section>
+  <footer role="contentinfo">
+      <p>
+        <span class="left">CSS Junction &copy; - 2013 | Released under Creative Common License. <a href="#">Goto Top</a></span>
+        <a href="index.html">HOME</a> | <a href="portfolio.html">PORTFOLIO</a> | <a href="page.html">PAGE</a> |  <a href="blog.html">BLOG</a> | <a href="contact.html">CONTACT US</a>
+      </p>
+  </footer>
+  
+  <script type="text/javascript" th:utext="'var data = ' + ${itemList}" >
+  var data=[{"itemTypeId":2,"description":"Test1","vatPerc":12.0,"itemses":[]}];
+  </script > 
+  <script type="text/javascript">
+//<![CDATA[
+  var oTable ;
+  $(document).ready(function(){
+	  
+	  oTable = $("#example").dataTable({
+	  "bProcessing": true,
+	  "aaData": data
+	  ,
+	  "aoColumns": [
+	    			{ "mDataProp": "itemId" },
+	    			{ "mDataProp": "englishName" },
+	    			{ "mDataProp": "marathiName" },
+	    			{ "mDataProp": "price" },
+	    			{ "mDataProp": "noOfPages" }
+	    			
+	    		]
+	});
+	  
+	  
+	 
+	  $("#example tbody").click(function(event) {
+			$(oTable.fnSettings().aoData).each(function (){
+				$(this.nTr).removeClass('row_selected');
+			});
+			$(event.target.parentNode).addClass('row_selected');
+			
+			var anSelected = fnGetSelected( oTable );
+			var itemTypeId_selected=anSelected[0].childNodes[0].innerHTML;
+			document.location ="getitemListTypeById.html?itemTypeId=" + itemTypeId_selected;		
+		});
+	  
+	  
+	  
+  } );
+  
+  /* Get the rows which are currently selected */
+  function fnGetSelected( oTableLocal )
+  {
+  	var aReturn = new Array();
+  	var aTrs = oTableLocal.fnGetNodes();
+  	var aTrsLength=aTrs.length;
+  	for ( var i=0; i < aTrsLength; i++ )
+  	{
+  		if ( $(aTrs[i]).hasClass('row_selected') )
+  		{
+  			aReturn.push( aTrs[i] );
+  		}
+  	}
+  	return aReturn;
+  }
+  
+//]]>
+
+  </script>
+</body>
+</html>

@@ -77,7 +77,7 @@ public class Itemsedition implements java.io.Serializable {
 		this.itemseditiondesc = itemseditiondesc;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "itemsedition")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "itemsedition")
 	public Set<Items> getItemses() {
 		return this.itemses;
 	}

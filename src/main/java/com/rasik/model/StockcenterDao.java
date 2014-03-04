@@ -3,11 +3,16 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,6 +20,7 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Stockcenter
  * @author Hibernate Tools
  */
+@Repository
 public class StockcenterDao extends RasikBaseDao{
 
 	private static final Log log = LogFactory.getLog(StockcenterDao.class);
@@ -81,7 +87,7 @@ public class StockcenterDao extends RasikBaseDao{
 		log.debug("getting Stockcenter instance with id: " + id);
 		try {
 			Stockcenter instance = (Stockcenter) sessionFactory
-					.getCurrentSession().get("com.rasik.hibernate.Stockcenter",
+					.getCurrentSession().get("com.rasik.model.Stockcenter",
 							id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -100,7 +106,7 @@ public class StockcenterDao extends RasikBaseDao{
 		try {
 			List<Stockcenter> results = (List<Stockcenter>) sessionFactory
 					.getCurrentSession()
-					.createCriteria("com.rasik.hibernate.Stockcenter")
+					.createCriteria("com.rasik.model.Stockcenter")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -109,5 +115,11 @@ public class StockcenterDao extends RasikBaseDao{
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	public List<Stockcenter> findAllStockCenters() {
+		Query query=getSession().getNamedQuery("findAllStockcenters");
+		List<Stockcenter> stockCenterList=query.list();
+		return stockCenterList;
 	}
 }

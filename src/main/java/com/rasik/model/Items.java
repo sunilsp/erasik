@@ -5,13 +5,19 @@ package com.rasik.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -54,14 +60,14 @@ public class Items implements java.io.Serializable {
 	private Date maxOwDiscountEndDate;
 	private Double maxInwDiscountPercent;
 	private Date maxInwDiscountEndDate;
-	private Set<Itemsstockcenter> itemsstockcenters = new HashSet<Itemsstockcenter>(
+	private Set<Stockcenter> stockcenters = new HashSet<Stockcenter>(
 			0);
-	private Set<Itemsauthors> itemsauthorses = new HashSet<Itemsauthors>(0);
-	private Set<Itemspublsuppl> itemspublsuppls = new HashSet<Itemspublsuppl>(0);
-	private Set<Itemscustomerrating> itemscustomerratings = new HashSet<Itemscustomerrating>(
+	private Set<Authors> authors = new HashSet<Authors>(0);
+	private Set<Publsuppl> publsuppls = new HashSet<Publsuppl>(0);
+	private Set<Customer> customers = new HashSet<Customer>(
 			0);
 	private Set<Translation> translations = new HashSet<Translation>(0);
-	private Set<Itemscategory> itemscategories = new HashSet<Itemscategory>(0);
+	private Set<Category> categories = new HashSet<Category>(0);
 	private Set<Awarddetail> awarddetails = new HashSet<Awarddetail>(0);
 
 	public Items() {
@@ -78,11 +84,11 @@ public class Items implements java.io.Serializable {
 			String printStatus, Date maxSalePriceEndDate,
 			Double maxOwDiscountPrecent, Date maxOwDiscountEndDate,
 			Double maxInwDiscountPercent, Date maxInwDiscountEndDate,
-			Set<Itemsstockcenter> itemsstockcenters,
-			Set<Itemsauthors> itemsauthorses,
-			Set<Itemspublsuppl> itemspublsuppls,
-			Set<Itemscustomerrating> itemscustomerratings,
-			Set<Translation> translations, Set<Itemscategory> itemscategories,
+			Set<Stockcenter> stockcenters,
+			Set<Authors> authors,
+			Set<Publsuppl> publsuppls,
+			Set<Customer> customers,
+			Set<Translation> translations, Set<Category> categories,
 			Set<Awarddetail> awarddetails) {
 		this.bindingtype = bindingtype;
 		this.itemtype = itemtype;
@@ -112,12 +118,12 @@ public class Items implements java.io.Serializable {
 		this.maxOwDiscountEndDate = maxOwDiscountEndDate;
 		this.maxInwDiscountPercent = maxInwDiscountPercent;
 		this.maxInwDiscountEndDate = maxInwDiscountEndDate;
-		this.itemsstockcenters = itemsstockcenters;
-		this.itemsauthorses = itemsauthorses;
-		this.itemspublsuppls = itemspublsuppls;
-		this.itemscustomerratings = itemscustomerratings;
+		this.stockcenters = stockcenters;
+		this.authors = authors;
+		this.publsuppls = publsuppls;
+		this.customers = customers;
 		this.translations = translations;
-		this.itemscategories = itemscategories;
+		this.categories = categories;
 		this.awarddetails = awarddetails;
 	}
 
@@ -392,44 +398,59 @@ public class Items implements java.io.Serializable {
 		this.maxInwDiscountEndDate = maxInwDiscountEndDate;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
-	public Set<Itemsstockcenter> getItemsstockcenters() {
-		return this.itemsstockcenters;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemsstockcenter", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="StockCenterId")})
+	public Set<Stockcenter> getStockcenters() {
+		return this.stockcenters;
 	}
 
-	public void setItemsstockcenters(Set<Itemsstockcenter> itemsstockcenters) {
-		this.itemsstockcenters = itemsstockcenters;
+	public void setStockcenters(Set<Stockcenter> stockcenters) {
+		this.stockcenters = stockcenters;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
-	public Set<Itemsauthors> getItemsauthorses() {
-		return this.itemsauthorses;
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemsauthors", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="AuthorId")})
+
+	public Set<Authors> getAuthors() {
+		return this.authors;
 	}
 
-	public void setItemsauthorses(Set<Itemsauthors> itemsauthorses) {
-		this.itemsauthorses = itemsauthorses;
+	public void setAuthors(Set<Authors> authors) {
+		this.authors = authors;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
-	public Set<Itemspublsuppl> getItemspublsuppls() {
-		return this.itemspublsuppls;
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemspublsuppl", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="PubSupId")})
+
+	public Set<Publsuppl> getPublsuppls() {
+		return this.publsuppls;
 	}
 
-	public void setItemspublsuppls(Set<Itemspublsuppl> itemspublsuppls) {
-		this.itemspublsuppls = itemspublsuppls;
+	public void setPublsuppls(Set<Publsuppl> publsuppls) {
+		this.publsuppls = publsuppls;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
-	public Set<Itemscustomerrating> getItemscustomerratings() {
-		return this.itemscustomerratings;
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemscustomerrating", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="CustomerId")})
+	public Set<Customer> getCustomers() {
+		return this.customers;
 	}
 
-	public void setItemscustomerratings(
-			Set<Itemscustomerrating> itemscustomerratings) {
-		this.itemscustomerratings = itemscustomerratings;
+	public void setCustomers(
+			Set<Customer> customers) {
+		this.customers = customers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "items")
 	public Set<Translation> getTranslations() {
 		return this.translations;
 	}
@@ -438,16 +459,24 @@ public class Items implements java.io.Serializable {
 		this.translations = translations;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
-	public Set<Itemscategory> getItemscategories() {
-		return this.itemscategories;
+
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemscategory", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="CategoryId")})
+
+	public Set<Category> getCategories() {
+		return this.categories;
 	}
 
-	public void setItemscategories(Set<Itemscategory> itemscategories) {
-		this.itemscategories = itemscategories;
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="Itemsawarddetail", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="AwarddetailId")})
 	public Set<Awarddetail> getAwarddetails() {
 		return this.awarddetails;
 	}

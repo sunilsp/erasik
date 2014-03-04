@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.rasik.beans.ItemtypeList;
 import com.rasik.model.Authors;
+import com.rasik.model.Awarddetail;
 import com.rasik.model.Bindingtype;
 import com.rasik.model.Category;
 import com.rasik.model.Customer;
@@ -33,6 +34,7 @@ import com.rasik.model.Discounts;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
+import com.rasik.model.Itemsstockcenter;
 import com.rasik.model.Itemtype;
 import com.rasik.model.Publsuppl;
 import com.rasik.model.Stockcenter;
@@ -44,17 +46,21 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 
  
+
+
 import javax.servlet.http.HttpSession;
  
+
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.rasik.service.UploadedFile;
 
 
@@ -104,9 +110,10 @@ class RasikDBController {
 			rasikSvc.saveItemTypes(itemType);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print("Itemtype saved");
+				response.getOutputStream().print(returnJson(rasikSvc.findAllItemTypes()));
 				response.setStatus(200);
 				return null;
+				
 			} else {
 				model.addAttribute("message", "Itemtype saved.");
 				return "html/message";
@@ -114,7 +121,7 @@ class RasikDBController {
 		} else {
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
 				response.getOutputStream().print("Itemtype already exists");
-				response.setStatus(200);
+				response.setStatus(404);
 				return null;
 
 			} else {
@@ -220,6 +227,16 @@ class RasikDBController {
 		ModelAndView mav = new ModelAndView("html/customerList");
 		List<Customer> customerList = rasikSvc.findAllCustomers();
 		mav.addObject("customerList", returnJson(customerList));
+		return mav;
+	}
+	
+	@RequestMapping(value = { "admin/listItems.html" }, method = RequestMethod.GET)
+	public ModelAndView listItems() throws JsonGenerationException,
+			JsonMappingException, IOException {
+		logger.info("Inside listItems()");
+		ModelAndView mav = new ModelAndView("html/itemList");
+		List<Items> itemList = rasikSvc.findAllItems();
+		mav.addObject("itemList", returnJson(itemList));
 		return mav;
 	}
 
@@ -432,7 +449,7 @@ class RasikDBController {
 			rasikSvc.saveBindingType(bindingType);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print("BindingType saved");
+				response.getOutputStream().print(returnJson(rasikSvc.findAllBindingTypes()));
 				response.setStatus(200);
 				return null;
 			} else {
@@ -442,7 +459,7 @@ class RasikDBController {
 		} else {
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
 				response.getOutputStream().print("BindingType already exists");
-				response.setStatus(200);
+				response.setStatus(400);
 				return null;
 
 			} else {
@@ -518,7 +535,7 @@ class RasikDBController {
 			rasikSvc.saveItemlanguage(itemlanguage);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print("Language saved");
+				response.getOutputStream().print(returnJson(rasikSvc.findAllLanguages()));
 				response.setStatus(200);
 				return null;
 			} else {
@@ -528,7 +545,7 @@ class RasikDBController {
 		} else {
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
 				response.getOutputStream().print("Language already exists");
-				response.setStatus(200);
+				response.setStatus(400);
 				return null;
 
 			} else {
@@ -552,7 +569,7 @@ class RasikDBController {
 			rasikSvc.saveItemsedition(itemsedition);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print("Edition saved");
+				response.getOutputStream().print(returnJson(rasikSvc.findAllitemseditions()));
 				response.setStatus(200);
 				return null;
 			} else {
@@ -562,7 +579,7 @@ class RasikDBController {
 		} else {
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
 				response.getOutputStream().print("Edition already exists");
-				response.setStatus(200);
+				response.setStatus(400);
 				return null;
 
 			} else {
@@ -586,7 +603,7 @@ class RasikDBController {
 			rasikSvc.saveTranslation(translation);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print("Translation saved");
+				response.getOutputStream().print(returnJson(rasikSvc.findAllTranslations()));
 				response.setStatus(200);
 				return null;
 			} else {
@@ -596,11 +613,184 @@ class RasikDBController {
 		} else {
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
 				response.getOutputStream().print("Translation already exists");
+				response.setStatus(400);
+				return null;
+
+			} else {
+				model.addAttribute("message", "Translation already exists");
+				return "html/message";
+			}
+
+		}
+	}
+
+	@RequestMapping(value = { "admin/submitStockCenterAjax.html" }, method = RequestMethod.POST)
+	public String addStockCentersubmit(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Stockcenter stockCenter,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside addStockCentersubmit()");
+
+//		if (rasikSvc.findStockCenterByName(stockCenter) == null) {
+			rasikSvc.saveStockCenter(stockCenter);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllStockCenters()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Stock Center saved.");
+				return "html/message";
+			}
+	/*	} else {
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print("Translation already exists");
 				response.setStatus(200);
 				return null;
 
 			} else {
 				model.addAttribute("message", "Edition already exists");
+				return "html/message";
+			}
+
+		}*/
+	}
+
+	@RequestMapping(value = { "admin/submitadditemcategoryAjax.html" }, method = RequestMethod.POST)
+	public String submitadditemcategoryAjax(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Category category,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside submitadditemcategoryAjax()");
+
+		if (rasikSvc.findCategoryByName(category) == null) {
+			rasikSvc.saveCategory(category);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllCategories()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Category saved.");
+				return "html/message";
+			}
+		} else {
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print("Category already exists");
+				response.setStatus(400);
+				return null;
+
+			} else {
+				model.addAttribute("message", "Category already exists");
+				return "html/message";
+			}
+
+		}
+	}
+
+
+	@RequestMapping(value = { "admin/submitaddAuthorAjax.html" }, method = RequestMethod.POST)
+	public String submitaddAuthorAjax(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Authors author,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside submitadditemcategoryAjax()");
+
+		if (rasikSvc.findAuthorByName(author) == null) {
+			rasikSvc.saveAuthor(author);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllAuthors()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Author saved.");
+				return "html/message";
+			}
+		} else {
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print("Author already exists");
+				response.setStatus(400);
+				return null;
+
+			} else {
+				model.addAttribute("message", "Author already exists");
+				return "html/message";
+			}
+
+		}
+	}
+
+
+	@RequestMapping(value = { "admin/submitpublsupplAjax.html" }, method = RequestMethod.POST)
+	public String submitpublsupplAjax(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Publsuppl publsuppl,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside submitpublsupplAjax()");
+
+		if (rasikSvc.findPublsupplByName(publsuppl) == null) {
+			rasikSvc.savePublsuppl(publsuppl);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllPublsuppl()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Publisher/Supplier saved.");
+				return "html/message";
+			}
+		} else {
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print("Publisher/Supplier already exists");
+				response.setStatus(400);
+				return null;
+
+			} else {
+				model.addAttribute("message", "Publisher/Supplier already exists");
+				return "html/message";
+			}
+
+		}
+	}
+
+	
+	@RequestMapping(value = { "admin/submitaddAwardAjax.html" }, method = RequestMethod.POST)
+	public String submitaddAwardAjax(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Awarddetail awardDetail,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside submitaddAwardAjax()");
+
+		if (rasikSvc.findAwardDetailsByName(awardDetail) == null) {
+			rasikSvc.saveAwardDetails(awardDetail);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllAwarddetails()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Award details saved.");
+				return "html/message";
+			}
+		} else {
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print("Award details already exists");
+				response.setStatus(400);
+				return null;
+
+			} else {
+				model.addAttribute("message", "Award details already exists");
 				return "html/message";
 			}
 
@@ -629,6 +819,20 @@ class RasikDBController {
 		mav.addObject("itemLanguagesList", itemLanguagesList);
 		List<Translation> translationList = rasikSvc.findAllTranslations();
 		mav.addObject("translationList", translationList);
+		List<Stockcenter> stockCenterList = rasikSvc.findAllStockCenters();
+		mav.addObject("itemStockCenterList", stockCenterList);
+		List<Category> categoryList = rasikSvc.findAllCategories();
+		mav.addObject("categoryList", categoryList);
+
+		List<Authors> authorList = rasikSvc.findAllAuthors();
+		mav.addObject("authorList", authorList);
+		
+		List<Publsuppl> publsupplList = rasikSvc.findAllPublsuppl();
+		mav.addObject("publsupplList", publsupplList);
+
+		List<Awarddetail> awarddetailsList = rasikSvc.findAllAwarddetails();
+		mav.addObject("awarddetailsList", awarddetailsList);
+		
 		return mav;
 
 	}
@@ -714,6 +918,17 @@ class RasikDBController {
 		return "html/common :: addCategoryFragment";
 	}
 	
+	@RequestMapping(value = { "admin/addAwarddetailsAjax.html" }, method = RequestMethod.GET)
+	public String addAwarddetailsAjax(Model model) {
+		logger.info("Inside addAwarddetailsAjax()");
+		Awarddetail itemsAward = new Awarddetail();
+		model.addAttribute("itemsAward", itemsAward);
+
+		return "html/common :: addAwardFragment";
+	}
+
+
+	
 
 		@RequestMapping(value =
 					{
@@ -790,7 +1005,7 @@ class RasikDBController {
 					outputStream.close();
 					inputStream.close();
 				}
-					return "File uploaded";
+					return "Test.jpg";
 			}
 				
 				
@@ -830,7 +1045,7 @@ class RasikDBController {
 					outputStream.close();
 					inputStream.close();
 				}
-					return "Ebook File uploaded";
+					return "Ebook.epub";
 			}
 			
 			@RequestMapping(value="admin/uploadAudioFileSubmit.html",method=RequestMethod.POST)
@@ -868,10 +1083,33 @@ class RasikDBController {
 				outputStream.close();
 				inputStream.close();
 			}
-				return "File uploaded";
+				return "Audio.mp3";
 			}
 
 
+			@RequestMapping(value = { "admin/submitaddItem.html" }, method = RequestMethod.POST)
+			public String submitaddItem(HttpServletRequest request,
+					HttpServletResponse response,
+					Model model,
+					@ModelAttribute Items item
+					)
+					throws IOException {
+				String marathi= request.getParameter("marathiName");
+			    rasikSvc.prepareItemObject(item,request.getParameter("hbindingtype"),request.getParameter("hitemtype"),request.getParameter("hitemlanguage"),
+			    		request.getParameter("hitemsedition"),request.getParameter("hitemsstockcenters"),request.getParameter("hitemsauthorses"),request.getParameter("hitemspublsuppls"),
+			    		request.getParameter("htranslations"),request.getParameter("hitemscategories"),request.getParameter("hawarddetails"));
+			    
+				logger.info("Inside submitaddItem()");
+				
+				rasikSvc.saveItem(item);
+				model.addAttribute("message", "Item saved.");
+				return "html/message";
+			}
+			
+			
+			
+
+			
 	/*
 	 * Private Util functions
 	 */

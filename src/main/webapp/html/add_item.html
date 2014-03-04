@@ -35,7 +35,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div id="validationFeedback">
 							<span></span>
 						</div>
-						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{/admin/submitItem.html}"  th:object="${item}"  action="message.html" name="itemForm"  method="post">
+						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{submitaddItem.html}"  th:object="${item}"  action="message.html" name="itemForm"  method="post">
 
 							<fieldset title="Add New Item" class="foldedset">
 								<ul>
@@ -78,7 +78,7 @@ xmlns:th="http://www.thymeleaf.org">
 									<li class="elem-3">
 										<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>
 										<select tabindex="110" id="stockCenterDD" name="stockCenterDD">
-											<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.itemsStockCenterid}" th:text="${itemsStockCenter.itemsStockCenterid}">Wireframe</option>
+											<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterId}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="120" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
 									</li>
@@ -86,14 +86,14 @@ xmlns:th="http://www.thymeleaf.org">
 									<li class="elem-3">
 										<label for="Author" th:text="@{Author : }" class="required">Author : </label>
 										<select tabindex="130" id="authorDD" name="authorDD">
-											<option th:each="itemsAuthor : ${itemAuthorList}" th:value="${itemsAuthor.itemsAuthorid}" th:text="${itemsAuthor.itemsAuthorid}">Wireframe</option>
+											<option th:each="itemsAuthor : ${authorList}" th:value="${itemsAuthor.authorId}" th:text="${itemsAuthor.englishName}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="140" id="addAuthor" th:id="addAuthorAjax" name="addAuthor" value="New Author"/>
 									</li>
 									<li class="elem-3">
 										<label for="PublSuppl" th:text="@{Publish Supplier : }" class="required">Publish Supplier : </label>
 										<select tabindex="150" id="PublSupplDD" name="PublSupplDD">
-											<option th:each="itemsPublSuppl : ${itemPublSuppl}" th:value="${itemsPublSuppl.itemsPublSupplid}" th:text="${itemsPublSuppl.itemsPublSupplid}">Wireframe</option>
+											<option th:each="itemsPublSuppl : ${publsupplList}" th:value="${itemsPublSuppl.pubSupId}" th:text="${itemsPublSuppl.englishName}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="160" th:id="addPublSupplAjax" id="addPublSuppl" name="addPublSuppl" value="New Publ Suppl"/>
 									</li>
@@ -108,14 +108,16 @@ xmlns:th="http://www.thymeleaf.org">
 									<li class="elem-3">
 										<label for="Categories" th:text="@{Categories : }" class="required">Categories : </label>
 										<select tabindex="190" id="CategoriesDD" name="CategorieslDD">
-											<option th:each="itemsCategories : ${itemCategories}" th:value="${itemsCategories.itemsCategoriesid}" th:text="${itemsCategories.itemsCategoriesid}">Wireframe</option>
+											<option th:each="itemsCategories : ${categoryList}" th:value="${itemsCategories.categoryId}" th:text="${itemsCategories.categoryHeadEnglish}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="200" id="addCategories" th:id="addCategoriesAjax" name="addCategories" value="New Category"/>
 									</li>
 									<li class="elem-3">
-										<label for="awarddetails" th:text="@{Award Detail : }" class="required">Award Details : </label>
-										<textarea tabindex="210" autocomplete="on" required="on" name="awarddetails" id="awarddetails" th:field="*{awarddetails}" style="min-height:5em; max-height:10em"></textarea>
-									</li>
+										<label for="addawarddetails" th:text="@{Award Detail : }" class="required">Award Details : </label>
+										<select tabindex="190" id="AwarddetailsDD" name="AwarddetailsDD">
+											<option th:each="awardDetails : ${awarddetailsList}" th:value="${awardDetails.awardDetailId}" th:text="${awardDetails.awardDetailsEnglish}">Wireframe</option>
+										</select>
+										<input type="button" tabindex="200" id="addAwarddetails" th:id="addAwarddetailsAjax" name="addAwarddetails" value="New Award"/>									</li>
 
 									<li class="elem-3">
 										<label for="userBookCode" th:text="@{Book Code : }" class="required">Book Code : </label>
@@ -229,12 +231,29 @@ xmlns:th="http://www.thymeleaf.org">
 
 									<li class="elem-3">
 										<input tabindex="480" type="reset" value="Reset " id="reset" name="reset"/>
-										<input tabindex="490" type="submit" value="Save" id="submitbtn" name="submitbtn"/>
+										<input tabindex="490" type="submit" value="Save" id="addItemsubmitbtn" name="addItemsubmitbtn"/>
 									</li>
 								</ul>
 							</fieldset>
 
-							<input type="hidden" autocomplete="on" name="itemId" id="itemId" th:field="*{itemId}"/>
+							<!-- <input type="hidden" autocomplete="on" name="hitemId" id="hitemId" th /> -->
+							<input type="hidden" autocomplete="on" name="hbindingtype" id="hbindingtype" />
+							<input type="hidden" autocomplete="on" name="hitemtype" id="hitemtype" />
+							<input type="hidden" autocomplete="on" name="hitemlanguage" id="hitemlanguage" />
+							<input type="hidden" autocomplete="on" name="hitemsedition" id="hitemsedition" />
+							
+							<input type="hidden" autocomplete="on" name="hitemCoverImage" id="hitemCoverImage" th:field="*{itemCoverImage}"/>
+							<input type="hidden" autocomplete="on" name="hebookFile" id="hebookFile" th:field="*{ebookFile}"/>
+							<input type="hidden" autocomplete="on" name="haudioBookFile" id="haudioBookFile" th:field="*{audioBookFile}"/>
+
+							<input type="hidden" autocomplete="on" name="hitemsstockcenters" id="hitemsstockcenters"/>
+							<input type="hidden" autocomplete="on" name="hitemsauthorses" id="hitemsauthorses"/>
+							<input type="hidden" autocomplete="on" name="hitemspublsuppls" id="hitemspublsuppls"/>
+						
+							<input type="hidden" autocomplete="on" name="htranslations" id="htranslations"/>
+							<input type="hidden" autocomplete="on" name="hitemscategories" id="hitemscategories"/>
+							<input type="hidden" autocomplete="on" name="hawarddetails" id="hawarddetails"/>
+							
 						</form>
 					</div>
 				</article>

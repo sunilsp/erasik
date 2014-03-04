@@ -3,11 +3,13 @@ package com.rasik.model;
 // Generated Jan 20, 2014 10:30:55 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
-import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
+import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
+
 import static org.hibernate.criterion.Example.create;
 
 /**
@@ -15,22 +17,10 @@ import static org.hibernate.criterion.Example.create;
  * @see com.rasik.model.Publsuppl
  * @author Hibernate Tools
  */
+@Repository
 public class PublsupplDao extends RasikBaseDao{
 
 	private static final Log log = LogFactory.getLog(PublsupplDao.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Publsuppl transientInstance) {
 		log.debug("persisting Publsuppl instance");
@@ -93,7 +83,7 @@ public class PublsupplDao extends RasikBaseDao{
 		log.debug("getting Publsuppl instance with id: " + id);
 		try {
 			Publsuppl instance = (Publsuppl) getSession()
-					.get("com.rasik.hibernate.Publsuppl", id);
+					.get("com.rasik.model.Publsuppl", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -109,9 +99,8 @@ public class PublsupplDao extends RasikBaseDao{
 	public List<Publsuppl> findByExample(Publsuppl instance) {
 		log.debug("finding Publsuppl instance by example");
 		try {
-			List<Publsuppl> results = (List<Publsuppl>) sessionFactory
-					.getCurrentSession()
-					.createCriteria("com.rasik.hibernate.Publsuppl")
+			List<Publsuppl> results = (List<Publsuppl>) getSession()
+					.createCriteria("com.rasik.model.Publsuppl")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -119,6 +108,24 @@ public class PublsupplDao extends RasikBaseDao{
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
+		}
+	}
+
+	public List<Publsuppl> findAllPublsuppl() {
+		Query query=getSession().getNamedQuery("findAllpublsuppl");
+		List<Publsuppl> publsupplList=query.list();
+		return publsupplList;
+	}
+	
+	public  Publsuppl findPublsupplByName(String pubblsupplName) {
+		Query query=getSession().getNamedQuery("findPublsupplByName").setString("englishName", pubblsupplName);
+		List<Publsuppl> publsupplList=query.list();
+		
+		if(publsupplList.size() != 0){
+			return publsupplList.get(0);
+		}
+		else{
+			return null;
 		}
 	}
 }

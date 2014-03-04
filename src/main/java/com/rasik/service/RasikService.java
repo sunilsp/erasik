@@ -3,13 +3,18 @@ package com.rasik.service;
 import java.util.List;
 
 import com.rasik.model.Authors;
+import com.rasik.model.Awarddetail;
 import com.rasik.model.Bindingtype;
+import com.rasik.model.Category;
 import com.rasik.model.Customer;
 import com.rasik.model.Customertype;
 import com.rasik.model.Discounts;
 import com.rasik.model.Itemlanguage;
+import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemtype;
+import com.rasik.model.Publsuppl;
+import com.rasik.model.Stockcenter;
 import com.rasik.model.Translation;
 import com.rasik.model.UserInfo;
 
@@ -105,6 +110,41 @@ public interface RasikService {
 	public String saveTranslation(Translation translation);
 
 	public List<Translation> findAllTranslations();
+
+	public Stockcenter findStockCenterByName(Stockcenter stockCenter);
+
+	public String saveStockCenter(Stockcenter stockCenter);
+
+	public List<Stockcenter> findAllStockCenters();
+
+	public Category findCategoryByName(Category category);
+	
+	public List<Category> findAllCategories();
+
+	public String saveCategory(Category category);
+
+	public Authors findAuthorByName(Authors author);
+
+	public List<Publsuppl> findAllPublsuppl();
+
+	public Publsuppl findPublsupplByName(Publsuppl publsuppl);
+
+	public String savePublsuppl(Publsuppl publsuppl);
+
+	public void prepareItemObject(Items item,  String bindingtype,String itemtype,
+			String itemlanguage, String itemsedition, String itemsstockcenters,
+			String itemsauthorses, String itemspublsuppls, String translations,
+			String itemscategories, String awarddetails);
+
+	public String saveItem(Items item);
+
+	public List<Items> findAllItems();
+
+	public List<Awarddetail> findAllAwarddetails();
+
+	public Awarddetail findAwardDetailsByName(Awarddetail awardDetail);
+
+	public String saveAwardDetails(Awarddetail awardDetail);
 	
 
 	

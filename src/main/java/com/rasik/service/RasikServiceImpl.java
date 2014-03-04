@@ -1,5 +1,6 @@
 package com.rasik.service;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,8 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rasik.model.Authors;
 import com.rasik.model.AuthorsDao;
+import com.rasik.model.Awarddetail;
+import com.rasik.model.AwarddetailDao;
 import com.rasik.model.Bindingtype;
 import com.rasik.model.BindingtypeDao;
+import com.rasik.model.Category;
+import com.rasik.model.CategoryDao;
 import com.rasik.model.Customer;
 import com.rasik.model.CustomerDao;
 import com.rasik.model.Customertype;
@@ -20,10 +25,17 @@ import com.rasik.model.Discounts;
 import com.rasik.model.DiscountsDao;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.ItemlanguageDao;
+import com.rasik.model.Items;
+import com.rasik.model.ItemsDao;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.ItemseditionDao;
+import com.rasik.model.Itemsstockcenter;
 import com.rasik.model.Itemtype;
 import com.rasik.model.ItemtypeDao;
+import com.rasik.model.Publsuppl;
+import com.rasik.model.PublsupplDao;
+import com.rasik.model.Stockcenter;
+import com.rasik.model.StockcenterDao;
 import com.rasik.model.Translation;
 import com.rasik.model.TranslationDao;
 import com.rasik.model.UserInfo;
@@ -53,7 +65,17 @@ public class RasikServiceImpl implements RasikService {
 	ItemlanguageDao itemLanguageDao;
 	@Inject
 	TranslationDao translationDao;
-	
+	@Inject
+	StockcenterDao stockCenterDao;
+	@Inject	
+	CategoryDao categoryDao;
+	@Inject
+	PublsupplDao publsupplDao;
+	@Inject
+	ItemsDao itemsDao;
+	@Inject
+	AwarddetailDao awardDetailDao;
+
 	@Override
 	public UserInfo getUserInfo(Long l) {
 		return userInfoDao.findById(l);
@@ -302,6 +324,120 @@ public class RasikServiceImpl implements RasikService {
 	@Override
 	public List<Translation> findAllTranslations() {
 		return translationDao.findAllTranslations();
+	}
+
+	@Override
+	public Stockcenter findStockCenterByName(Stockcenter stockCenter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String saveStockCenter(Stockcenter stockCenter) {
+		stockCenterDao.persist(stockCenter);
+		return "saved";
+	}
+
+	@Override
+	public List<Stockcenter> findAllStockCenters() {
+		return stockCenterDao.findAllStockCenters();
+		
+	}
+
+	@Override
+	public Category findCategoryByName(Category category) {
+		categoryDao.findCategoryByName(category.getCategoryHeadEnglish());
+		return null;
+	}
+
+	@Override
+	public String saveCategory(Category category) {
+	categoryDao.persist(category);
+		return null;
+	}
+
+	@Override
+	public List<Category> findAllCategories() {
+		return categoryDao.findAllCategories();
+		
+	}
+
+	@Override
+	public Authors findAuthorByName(Authors author) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Publsuppl> findAllPublsuppl() {
+		return publsupplDao.findAllPublsuppl();
+	}
+	
+	@Override
+	public Publsuppl findPublsupplByName(Publsuppl publsuppl) {
+		return publsupplDao.findPublsupplByName(publsuppl.getEnglishName());
+	}
+	
+	@Override
+	public String savePublsuppl(Publsuppl publsuppl) {
+		publsupplDao.persist(publsuppl);
+		return "saved";
+	}
+
+	@Override
+	public void prepareItemObject(Items item, String bindingtype,
+			String itemtype, String itemlanguage, String itemsedition,
+			String stockcenters, String authors,
+			String publsuppls, String translations,
+			String category, String awarddetails) {
+		
+		HashSet<Stockcenter>stockCenterSet= new HashSet<Stockcenter>(0);
+		stockCenterSet.add(stockCenterDao.findById(Integer.valueOf(stockcenters)));
+		item.setStockcenters(stockCenterSet);
+		
+		HashSet<Publsuppl> publsupplSet= new HashSet<Publsuppl>(0);
+		publsupplSet.add(publsupplDao.findById(Integer.valueOf(publsuppls)));
+		item.setPublsuppls(publsupplSet);
+		
+		HashSet<Authors> authorsSet= new HashSet<Authors>(0);
+		authorsSet.add(authorDao.findById(Integer.valueOf(authors)));
+		item.setAuthors(authorsSet);
+		
+		HashSet<Category> categorySet= new HashSet<Category>(0);
+		categorySet.add(categoryDao.findById(Integer.valueOf(category)));
+		item.setCategories(categorySet);
+		
+		HashSet<Awarddetail> awardDetailSet= new HashSet<Awarddetail>(0);
+		awardDetailSet.add(awardDetailDao.findById(Integer.valueOf(awarddetails)));
+		item.setAwarddetails(awardDetailSet);
+
+	}
+
+	@Override
+	public String saveItem(Items item) {
+		itemsDao.merge(item);
+		return "Saved";
+	}
+
+	@Override
+	public List<Items> findAllItems() {
+	  return itemsDao.findAllItems();
+	}
+
+	@Override
+	public List<Awarddetail> findAllAwarddetails() {
+		return awardDetailDao.findAllAwarddetails();
+	}
+
+	@Override
+	public Awarddetail findAwardDetailsByName(Awarddetail awardDetail) {
+		return awardDetailDao.findAwarddetailByName(awardDetail.getAwardDetailsEnglish());
+	}
+
+	@Override
+	public String saveAwardDetails(Awarddetail awardDetail) {
+		awardDetailDao.persist(awardDetail);
+		return "saved";
 	}
 
 
