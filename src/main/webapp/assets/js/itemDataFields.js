@@ -3,6 +3,17 @@
  */
 $("document").ready(function() {
 	
+	   $("#selectStockCenter").dialog({
+			autoOpen: false,
+			height: 200,
+			width: 600,
+			modal: true, 
+			closeOnEscape: false,
+			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+			});
+	
+	$("#selectStockCenter").dialog("open");
+		
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
 	$( "#maxInwDiscountEndDate" ).datepicker();
@@ -166,6 +177,9 @@ $("document").ready(function() {
 		width: 600,
 		modal: true, 
 		});
+
+ 
+
     
     /*Add Item Type*/
     $("#addItemTypeAjax").click(function(){
@@ -187,6 +201,8 @@ $("document").ready(function() {
 		    alert( "success" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#itemTypeDropdown").empty();
+			$("#itemTypeDropdown").append(
+                    "<option value='' >" + "Select" + "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#itemTypeDropdown").append(
@@ -219,6 +235,9 @@ $("document").ready(function() {
 		    alert( "Binding Type Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#bindingTypeDropdown").empty();
+			  $("#bindingTypeDropdown").append(
+                      "<option value='' >" + "Select" + "</option>");
+          
 			 $.each(data, function(i, val) {
 				 
 	                $("#bindingTypeDropdown").append(
@@ -266,6 +285,8 @@ $("document").ready(function() {
 		    alert( "Language Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#languageDropdown").empty();
+			 $("#languageDropdown").append(
+                     "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#languageDropdown").append(
@@ -299,6 +320,8 @@ $("document").ready(function() {
 		    alert( "Edition Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#editionDropdown").empty();
+			$("#editionDropdown").append(
+                    "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#editionDropdown").append(
@@ -331,6 +354,8 @@ $("document").ready(function() {
 		    alert( "Stock Center Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#stockCenterDD").empty();
+			$("#stockCenterDD").append(
+                    "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#stockCenterDD").append(
@@ -419,6 +444,8 @@ $("document").ready(function() {
 		    alert( "Translation Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#TranslationsDD").empty();
+			$("#TranslationsDD").append(
+                    "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#TranslationsDD").append(
@@ -446,6 +473,8 @@ $("document").ready(function() {
 		    alert( "Award Details Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
 			$("#AwarddetailsDD").empty();
+			$("#AwarddetailsDD").append(
+                    "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
 	                $("#AwarddetailsDD").append(
@@ -599,6 +628,8 @@ $("document").ready(function() {
 				    alert( "Category Saved" );
 					$( "#float-modal-form" ).dialog( "close" );
 					$("#CategoriesDD").empty();
+					$("#CategoriesDD").append(
+		                     "<option value='' >" + "Select"+ "</option>");
 					 $.each(data, function(i, val) {
 						 
 			                $("#CategoriesDD").append(
@@ -626,6 +657,8 @@ $("document").ready(function() {
 				    alert( "Author Saved" );
 					$( "#float-modal-form" ).dialog( "close" );
 					$("#authorDD").empty();
+					$("#authorDD").append(
+		                     "<option value='' >" + "Select"+ "</option>");
 					 $.each(data, function(i, val) {
 						 
 			                $("#authorDD").append(
@@ -652,6 +685,8 @@ $("document").ready(function() {
 				    alert( "Publisher/Supplier Saved" );
 					$( "#float-modal-form" ).dialog( "close" );
 					$("#PublSupplDD").empty();
+					$("#PublSupplDD").append(
+		                     "<option value='' >" + "Select"+ "</option>");
 					 $.each(data, function(i, val) {
 						 
 			                $("#PublSupplDD").append(
@@ -676,7 +711,16 @@ $("document").ready(function() {
 					});
 		
 		        });
-			
+
+		   $("#exitAddItem").click(function(){
+			   window.location="showItemTypes.html";
+		   });
+		   
+		   $("#selectStockCenterSubmit").click(function(){
+			  
+			   $("#selectStockCenter").dialog("close");
+		   });
+		   
 			function HTMLEncode(str){
 				  var i = str.length,
 				      aRet = [];

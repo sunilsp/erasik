@@ -45,7 +45,7 @@ public class Items implements java.io.Serializable {
 	private Integer qtyInHand;
 	private Integer minLevel;
 	private Integer maxLevel;
-	private Double maxSalePrice;
+	private Double maxSaleDiscountPrice;
 	private Byte publMonth;
 	private Integer publYear;
 	private String isbnno;
@@ -56,10 +56,14 @@ public class Items implements java.io.Serializable {
 	private String audioBookFile;
 	private String printStatus;
 	private Date maxSalePriceEndDate;
-	private Double maxOwDiscountPrecent;
+	private Double maxSaleDiscountPrecent;
 	private Date maxOwDiscountEndDate;
-	private Double maxInwDiscountPercent;
+	private Double purchaseDiscountPercent;
 	private Date maxInwDiscountEndDate;
+	private Double discountedPrice;
+	private Date discountedPriceEndDate;
+	private Double purchasePrice;
+	
 	private Set<Stockcenter> stockcenters = new HashSet<Stockcenter>(
 			0);
 	private Set<Authors> authors = new HashSet<Authors>(0);
@@ -103,7 +107,7 @@ public class Items implements java.io.Serializable {
 		this.qtyInHand = qtyInHand;
 		this.minLevel = minLevel;
 		this.maxLevel = maxLevel;
-		this.maxSalePrice = maxSalePrice;
+		this.maxSaleDiscountPrice = maxSalePrice;
 		this.publMonth = publMonth;
 		this.publYear = publYear;
 		this.isbnno = isbnno;
@@ -114,9 +118,9 @@ public class Items implements java.io.Serializable {
 		this.audioBookFile = audioBookFile;
 		this.printStatus = printStatus;
 		this.maxSalePriceEndDate = maxSalePriceEndDate;
-		this.maxOwDiscountPrecent = maxOwDiscountPrecent;
+		this.maxSaleDiscountPrecent = maxOwDiscountPrecent;
 		this.maxOwDiscountEndDate = maxOwDiscountEndDate;
-		this.maxInwDiscountPercent = maxInwDiscountPercent;
+		this.purchaseDiscountPercent = maxInwDiscountPercent;
 		this.maxInwDiscountEndDate = maxInwDiscountEndDate;
 		this.stockcenters = stockcenters;
 		this.authors = authors;
@@ -261,12 +265,12 @@ public class Items implements java.io.Serializable {
 	}
 
 	@Column(name = "MaxSalePrice", precision = 22, scale = 0)
-	public Double getMaxSalePrice() {
-		return this.maxSalePrice;
+	public Double getMaxSaleDiscountPrice() {
+		return this.maxSaleDiscountPrice;
 	}
 
-	public void setMaxSalePrice(Double maxSalePrice) {
-		this.maxSalePrice = maxSalePrice;
+	public void setMaxSaleDiscountPrice(Double maxSalePrice) {
+		this.maxSaleDiscountPrice = maxSalePrice;
 	}
 
 	@Column(name = "PublMonth")
@@ -361,12 +365,12 @@ public class Items implements java.io.Serializable {
 	}
 
 	@Column(name = "MaxOwDiscountPrecent", precision = 22, scale = 0)
-	public Double getMaxOwDiscountPrecent() {
-		return this.maxOwDiscountPrecent;
+	public Double getMaxSaleDiscountPrecent() {
+		return this.maxSaleDiscountPrecent;
 	}
 
-	public void setMaxOwDiscountPrecent(Double maxOwDiscountPrecent) {
-		this.maxOwDiscountPrecent = maxOwDiscountPrecent;
+	public void setMaxSaleDiscountPrecent(Double maxOwDiscountPrecent) {
+		this.maxSaleDiscountPrecent = maxOwDiscountPrecent;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -379,13 +383,13 @@ public class Items implements java.io.Serializable {
 		this.maxOwDiscountEndDate = maxOwDiscountEndDate;
 	}
 
-	@Column(name = "MaxInwDiscountPercent", precision = 22, scale = 0)
-	public Double getMaxInwDiscountPercent() {
-		return this.maxInwDiscountPercent;
+	@Column(name = "PurchaseDiscountPercent", precision = 22, scale = 0)
+	public Double getPurchaseDiscountPercent() {
+		return this.purchaseDiscountPercent;
 	}
 
-	public void setMaxInwDiscountPercent(Double maxInwDiscountPercent) {
-		this.maxInwDiscountPercent = maxInwDiscountPercent;
+	public void setPurchaseDiscountPercent(Double maxInwDiscountPercent) {
+		this.purchaseDiscountPercent = maxInwDiscountPercent;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -483,6 +487,54 @@ public class Items implements java.io.Serializable {
 
 	public void setAwarddetails(Set<Awarddetail> awarddetails) {
 		this.awarddetails = awarddetails;
+	}
+
+	/**
+	 * @return the discountedPrice
+	 */
+	
+	public Double getDiscountedPrice() {
+		return discountedPrice;
+	}
+
+	/**
+	 * @param discountedPrice the discountedPrice to set
+	 */
+	@Column(name = "DiscountedPrice", precision = 22, scale = 0)
+	public void setDiscountedPrice(Double discountedPrice) {
+		this.discountedPrice = discountedPrice;
+	}
+
+	/**
+	 * @return the discountedPriceEndDate
+	 */
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DiscountedPriceEndDate", length = 10)
+
+	public Date getDiscountedPriceEndDate() {
+		return discountedPriceEndDate;
+	}
+
+	/**
+	 * @param discountedPriceEndDate the discountedPriceEndDate to set
+	 */
+	public void setDiscountedPriceEndDate(Date discountedPriceEndDate) {
+		this.discountedPriceEndDate = discountedPriceEndDate;
+	}
+
+	/**
+	 * @return the purchasePrice
+	 */
+	@Column(name = "PurchasePrice", precision = 22, scale = 0)
+	public Double getPurchasePrice() {
+		return purchasePrice;
+	}
+
+	/**
+	 * @param purchasePrice the purchasePrice to set
+	 */
+	public void setPurchasePrice(Double purchasePrice) {
+		this.purchasePrice = purchasePrice;
 	}
 
 }
