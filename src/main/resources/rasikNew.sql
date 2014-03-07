@@ -45,7 +45,7 @@ CREATE TABLE `authors` (
   `Photo` varchar(55) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`authorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,14 +57,11 @@ DROP TABLE IF EXISTS `awarddetail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `awarddetail` (
   `AwardDetailId` int(11) NOT NULL AUTO_INCREMENT,
-  `ItemId` int(11) NOT NULL,
   `AwardDetailsEnglish` varchar(240) DEFAULT NULL,
   `DateOfAward` date DEFAULT NULL,
   `AwardDetailsMarathi` varchar(345) DEFAULT NULL,
-  PRIMARY KEY (`AwardDetailId`),
-  KEY `fk_AwarditemCode` (`ItemId`),
-  CONSTRAINT `fk_AwarditemCode` FOREIGN KEY (`ItemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`AwardDetailId`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +75,7 @@ CREATE TABLE `bindingtype` (
   `BindingTypeId` int(11) NOT NULL AUTO_INCREMENT,
   `BindingTypeName` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`BindingTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +90,7 @@ CREATE TABLE `category` (
   `CategoryHeadEnglish` varchar(50) DEFAULT NULL,
   `CategoryHeadMarathi` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`CategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +139,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`CustomerId`),
   KEY `fk_customercustomerTypeId` (`customerTypeId`),
   CONSTRAINT `fk_customercustomerType` FOREIGN KEY (`customerTypeId`) REFERENCES `customertype` (`customertypeId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +157,7 @@ CREATE TABLE `customer_roles` (
   KEY `fk_customer_roles_idx` (`Authority`),
   KEY `fk_customer_roles_idx1` (`CustomerId`),
   CONSTRAINT `fk_customer_roles` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +172,7 @@ CREATE TABLE `customertype` (
   `customerType` varchar(45) DEFAULT NULL,
   `customertypeDesc` varchar(245) DEFAULT NULL,
   PRIMARY KEY (`customertypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +204,7 @@ CREATE TABLE `itemlanguage` (
   `LanguageId` int(11) NOT NULL AUTO_INCREMENT,
   `LanguageName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`LanguageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,23 +239,28 @@ CREATE TABLE `items` (
   `AudioBookFile` varchar(145) DEFAULT NULL,
   `printStatus` varchar(45) DEFAULT NULL,
   `MaxSalePriceEndDate` date DEFAULT NULL,
-  `MaxOwDiscountPrecent` double DEFAULT NULL,
+  `MaxSaleDiscountPrecent` double DEFAULT NULL,
   `MaxOwDiscountEndDate` date DEFAULT NULL,
-  `MaxInwDiscountPercent` double DEFAULT NULL,
+  `PurchaseDiscountPercent` double DEFAULT NULL,
   `MaxInwDiscountEndDate` date DEFAULT NULL,
   `itemseditionId` int(11) DEFAULT NULL,
+  `DiscountedPrice` double DEFAULT NULL,
+  `DiscountedPriceEndDate` date DEFAULT NULL,
+  `PurchasePrice` double DEFAULT NULL,
+  `MaxSaleDiscountPrice` double DEFAULT NULL,
+  `MaxOwDiscountPrecent` double DEFAULT NULL,
   PRIMARY KEY (`ItemId`),
   KEY `fk_itemItemTypeCode` (`ItemTypeId`),
   KEY `fk_itemBindingTypeId` (`BindingTypeId`),
   KEY `fk_itemLanguageId` (`LanguageId`),
   KEY `fk_itemDiscountId` (`DiscountId`),
   KEY `fk_itemsitemsEditionId_idx` (`itemseditionId`),
-  CONSTRAINT `fk_itemsitemsEditionId` FOREIGN KEY (`itemseditionId`) REFERENCES `itemsedition` (`itemsEditionid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemBindingTypeId` FOREIGN KEY (`BindingTypeId`) REFERENCES `bindingtype` (`BindingTypeId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemDiscountId` FOREIGN KEY (`DiscountId`) REFERENCES `discounts` (`DiscountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemItemTypeCode` FOREIGN KEY (`ItemTypeId`) REFERENCES `itemtype` (`ItemTypeId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_itemLanguageId` FOREIGN KEY (`LanguageId`) REFERENCES `itemlanguage` (`LanguageId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_itemLanguageId` FOREIGN KEY (`LanguageId`) REFERENCES `itemlanguage` (`LanguageId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_itemsitemsEditionId` FOREIGN KEY (`itemseditionId`) REFERENCES `itemsedition` (`itemsEditionid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +279,26 @@ CREATE TABLE `itemsauthors` (
   KEY `fk_itemAuthoritemId` (`itemId`),
   CONSTRAINT `fk_itemAuthorAuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `authors` (`authorId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemAuthoritemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `itemsawarddetail`
+--
+
+DROP TABLE IF EXISTS `itemsawarddetail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itemsawarddetail` (
+  `itemsAwarddetailId` int(11) NOT NULL AUTO_INCREMENT,
+  `itemId` int(11) NOT NULL,
+  `AwarddetailId` int(11) NOT NULL,
+  PRIMARY KEY (`itemsAwarddetailId`),
+  KEY `fk_itemAwarddetailAwarddetailId` (`AwarddetailId`),
+  KEY `fk_itemAwarddetailitemId` (`itemId`),
+  CONSTRAINT `fk_itemAwarddetailAwarddetailId` FOREIGN KEY (`AwarddetailId`) REFERENCES `awarddetail` (`AwardDetailId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_itemAwarddetailitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +317,7 @@ CREATE TABLE `itemscategory` (
   KEY `fk_itemCategoryitemId` (`itemId`),
   CONSTRAINT `fk_itemCategoryCategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`CategoryId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemCategoryitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +353,7 @@ CREATE TABLE `itemsedition` (
   `itemsedition` varchar(45) DEFAULT NULL,
   `itemseditiondesc` varchar(145) DEFAULT NULL,
   PRIMARY KEY (`itemsEditionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +372,7 @@ CREATE TABLE `itemspublsuppl` (
   KEY `fk_itemspublsupplpublsupplId` (`PubSupId`),
   CONSTRAINT `fk_itemspublsupplitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemspublsupplpublsupplId` FOREIGN KEY (`PubSupId`) REFERENCES `publsuppl` (`PubSupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +393,7 @@ CREATE TABLE `itemsstockcenter` (
   KEY `fk_itemsStockCenterStockCenterId` (`StockCenterId`),
   CONSTRAINT `fk_itemsStockCenteritemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemsStockCenterStockCenterId` FOREIGN KEY (`StockCenterId`) REFERENCES `stockcenter` (`StockCenterId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -387,7 +408,7 @@ CREATE TABLE `itemtype` (
   `Description` varchar(50) DEFAULT NULL,
   `VatPerc` double DEFAULT NULL,
   PRIMARY KEY (`ItemTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +419,7 @@ DROP TABLE IF EXISTS `publsuppl`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `publsuppl` (
-  `PubSupId` int(11) NOT NULL DEFAULT '0',
+  `PubSupId` int(11) NOT NULL AUTO_INCREMENT,
   `EnglishName` varchar(120) DEFAULT NULL,
   `MarathiName` varchar(350) DEFAULT NULL,
   `Address1` varchar(135) DEFAULT NULL,
@@ -415,7 +436,7 @@ CREATE TABLE `publsuppl` (
   `Website` varchar(115) DEFAULT NULL,
   `ContactPerson` varchar(130) DEFAULT NULL,
   PRIMARY KEY (`PubSupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +458,7 @@ CREATE TABLE `stockcenter` (
   `CenterCount` int(11) DEFAULT NULL,
   `CanCreateInvoice` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`StockCenterId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -456,7 +477,7 @@ CREATE TABLE `translation` (
   PRIMARY KEY (`translationId`),
   KEY `fk_itemsTranslationId` (`itemsId`),
   CONSTRAINT `fk_itemsTranslationId` FOREIGN KEY (`itemsId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -510,23 +531,7 @@ CREATE TABLE `userinfo` (
   `CREATED_DATE` datetime NOT NULL,
   `NAME` varchar(45) NOT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `itemsawarddetail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `itemsawarddetail` (
-  `itemsAwarddetailId` int(11) NOT NULL AUTO_INCREMENT,
-  `itemId` int(11) NOT NULL,
-  `AwarddetailId` int(11) NOT NULL,
-  PRIMARY KEY (`itemsAwarddetailId`),
-  KEY `fk_itemAwarddetailAwarddetailId` (`AwarddetailId`),
-  KEY `fk_itemAwarddetailitemId` (`itemId`),
-  CONSTRAINT `fk_itemAwarddetailAwarddetailId` FOREIGN KEY (`AwarddetailId`) REFERENCES `awarddetail` (`AwardDetailId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_itemAwarddetailitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -538,4 +543,4 @@ CREATE TABLE `itemsawarddetail` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-26 13:07:00
+-- Dump completed on 2014-03-07 10:16:43
