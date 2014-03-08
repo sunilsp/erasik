@@ -63,7 +63,8 @@ public class Items implements java.io.Serializable {
 	private Double discountedPrice;
 	private Date discountedPriceEndDate;
 	private Double purchasePrice;
-	
+	private Integer stock;
+	private String location;
 	private Set<Stockcenter> stockcenters = new HashSet<Stockcenter>(
 			0);
 	private Set<Authors> authors = new HashSet<Authors>(0);
@@ -73,7 +74,11 @@ public class Items implements java.io.Serializable {
 	private Set<Translation> translations = new HashSet<Translation>(0);
 	private Set<Category> categories = new HashSet<Category>(0);
 	private Set<Awarddetail> awarddetails = new HashSet<Awarddetail>(0);
-
+	private Set<Edition> editions = new HashSet<Edition>(
+			0);
+	private Set<Reprint> reprints = new HashSet<Reprint>(
+			0);
+	
 	public Items() {
 	}
 
@@ -535,6 +540,74 @@ public class Items implements java.io.Serializable {
 	 */
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
+	}
+
+	/**
+	 * @return the editions
+	 */
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="itemsedition", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="editionId")})
+
+	public Set<Edition> getEditions() {
+		return editions;
+	}
+
+	/**
+	 * @param editions the editions to set
+	 */
+	public void setEditions(Set<Edition> editions) {
+		this.editions = editions;
+	}
+
+	/**
+	 * @return the reprints
+	 */
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="itemsreprint", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="reprintId")})
+
+	public Set<Reprint> getReprints() {
+		return reprints;
+	}
+
+	/**
+	 * @param reprints the reprints to set
+	 */
+	public void setReprints(Set<Reprint> reprints) {
+		this.reprints = reprints;
+	}
+
+	/**
+	 * @return the stock
+	 */
+	@Column(name = "stock")
+	public Integer getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	/**
+	 * @return the location
+	 */
+	@Column(name = "location", precision = 25, scale = 0)
+	public String getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }
