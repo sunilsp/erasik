@@ -8,10 +8,10 @@ $("document").ready(function() {
 			height: 200,
 			width: 600,
 			modal: true, 
-			closeOnEscape: false,
+			closeOnEscape: true,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 			});
-	
+	$("hasLanguage").click(function(){$("#languageDetails").toggle();});
 	$("#selectStockCenter").dialog("open");
 		
 	$( "#maxSalePriceEndDate" ).datepicker();
