@@ -2,15 +2,18 @@
  * @author manasi
  */
 $("document").ready(function() {
+	//var accordion = $("#addItemForm").accordion();
 	
-	   /*$("#selectStockCenter").dialog({
+	   $("#selectStockCenter").dialog({
 			autoOpen: false,
-			height: 200,
+			height: 300,
 			width: 600,
 			modal: true, 
 			closeOnEscape: true,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-			});*/
+			});
+		
+	//$("#selectStockCenter").dialog("open");
 	$("#languageRadioYAjax").change(function(){
 		if ( $( this ).is( ":checked" ) )
 		{
@@ -59,7 +62,29 @@ $("document").ready(function() {
 		}
 	});
 	
-	//$("#selectStockCenter").dialog("open");
+	$("#awardRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#awardDetails").show();
+			$("#AwarddetailsDD").attr("required","on");
+			$("#AwarddetailsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#awardRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#awardDetails").hide();
+			$("#AwarddetailsDD").removeAttr( "required" );
+			$("#AwarddetailsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
 		
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
@@ -73,44 +98,95 @@ $("document").ready(function() {
 	var queryValidator = $("#addItemForm").validate({
         rules : {
         	
-        	itemTypeDropdown : {
-                required : true
-            },        	
-            bindingTypeDropdown : {
+        	userBookCode: {
                 required : true
             },
+            isbnno: {
+                required : true
+            },
+        	itemTypeDropdown : {
+                required : true
+            }, 
             languageDropdown : {
                 required : true
             },
-            editionDropdown: {
-                required : true
-            },
-            stockCenterDD:{
-            	required : true
-            },
-            authorDD:{required : true},
-            PublSupplDD:{required : true},
-            TranslationsDD:{required : true},
-            CategoriesDD:{required : true},
-            userBookCode : {
-                required : true
-            },
+            translationsDD:
+            {required : true},
             englishName: {
                 required : true
             },
             marathiName : {
                 required : true
             },
-            publisherCode : {
-                required : true
-            },
+            authorDD:{required : true},
+            PublSupplDD:{required : true},
             price : {
                 required : true,
                 number:true
             },
+            discountedprice : {
+                required : true,
+                number:true
+            },
+            discountedpriceEndDate: {
+                required : true
+            },
+            purchasePrice: {
+                required : true
+            },
+            purchaseDiscountPercent: {
+                required : true
+            },
+            
+            maxSaleDiscountPrecent:{
+            	reuired:true
+            },
+            
+            maxSaleDiscountPrice:{
+            	required:true
+            },
+            editionDropdown: {
+                required : true
+            },
+            CategoriesDD:{required : true},       
+            AwarddetailsDD : {
+                required : true
+            },
+            awardRadio:{
+            	required:true
+            },
             qtyInHand : {
                 required : true,
                 number:true
+            },
+            publMonth:{
+            	required:true
+            },
+            publYear:{
+            	required:true
+            },
+            reprintMonth:{
+            	required:true
+            },
+            reprintYear:{
+            	required:true
+            },
+            noOfPages:{
+            	required:true,
+            	number:true
+            },
+            duration:{
+            	required:true,
+            	number:true
+            },
+            bindingTypeDropdown : {
+                required : true
+            },
+            stockAmount:{
+            	required:true
+            },
+            location:{
+            	required:true
             },
             minLvl : {
                 required : true,
@@ -120,7 +196,20 @@ $("document").ready(function() {
                 required : true,
                 number:true
             },
-            
+            itemCoverImageFileName:{
+            	required:true
+            },
+            printStatus:{
+            	required:true
+            },
+            maxSalePriceEndDate:{
+            	required:true,
+            	date:true
+            },
+            maxOwDiscountEndDate:{
+            	required:true,
+            	date:true
+            },
             maxSalePrice : {
                 required : true,
                 number:true
@@ -142,7 +231,6 @@ $("document").ready(function() {
             },
             
             description : {
-                required : true,
                 maxlength : 24
             },
             printStatus : {
@@ -166,7 +254,8 @@ $("document").ready(function() {
             },
             maxInwDiscountEndDate : {
                 required : true
-            }
+            },
+            
         },
         messages : {
             
