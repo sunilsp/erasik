@@ -56,21 +56,27 @@ xmlns:th="http://www.thymeleaf.org">
 											<option th:each="itemtype : ${itemTypeList}" th:value="${itemtype.itemTypeId}" th:text="${itemtype.description}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="20" th:id="addItemTypeAjax" id="addItemType" name="addItemType" value="New Item Type"/>
-
+										
 									</li>
 									<li class="elem-3">
 										<label for="languageCheck" th:text="@{Has Language : }" class="required">Has Language: </label>
-										<input type="checkbox" tabindex="" th:id="languageCheckAjax" id="languageCheck" name="languageCheck" required="on" checked="true"/>
+										<input type="radio" name="languageRadio" value="Yes" tabindex="" th:id="languageRadioYAjax" id="languageRadioY" required="on" checked="true"/> Yes
+										<input type="radio" name="languageRadio" value="No" tabindex="" th:id="languageRadioNAjax" id="languageRadioN" required="on" /> No
 									</li>
 									<li class="elem-3" id="languageDetails">
 										<label for="languageDropdown" th:text="@{Language : }" class="required">Language: </label>
-										<select tabindex="70" id="languageDropdown" name="languageDropdown">
-										<option value="" th:text="Select ">Select</option>
+										<select tabindex="70" id="languageDropdown" name="languageDropdown" required="on">
+											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemLanguage : ${itemLanguagesList}" th:value="${itemLanguage.languageId}" th:text="${itemLanguage.languageName}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="80" th:id="addLanguageAjax" id="addLanguage" name="addLanguage" value="New Language"/>
 									</li>
 									<li class="elem-3">
+										<label for="translationCheck" th:text="@{Has Translation : }" class="required">Has Translation: </label>
+										<input type="radio" name="translationRadio" value="Yes" tabindex="" th:id="translationRadioYAjax" id="translationRadioY" required="on" checked="true"/> Yes
+										<input type="radio" name="translationRadio" value="No" tabindex="" th:id="translationRadioNAjax" id="translationRadioN" required="on" /> No
+									</li>
+									<li class="elem-3" id="translationDetails">
 										<label for="Translations" th:text="@{Translations : }" class="required">Translations : </label>
 										<select tabindex="170" id="TranslationsDD" name="TranslationslDD" required="required">
 											<option value="" th:text="Select ">Select</option>

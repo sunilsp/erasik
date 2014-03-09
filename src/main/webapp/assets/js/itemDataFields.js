@@ -3,16 +3,63 @@
  */
 $("document").ready(function() {
 	
-	   $("#selectStockCenter").dialog({
+	   /*$("#selectStockCenter").dialog({
 			autoOpen: false,
 			height: 200,
 			width: 600,
 			modal: true, 
 			closeOnEscape: true,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+			});*/
+	$("#languageRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#languageDetails").show();
+			$("#languageDropdown").attr("required","on");
+			$("#languageDropdown").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
 			});
-	$("hasLanguage").click(function(){$("#languageDetails").toggle();});
-	$("#selectStockCenter").dialog("open");
+		}
+	});
+	$("#languageRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#languageDetails").hide();
+			$("#languageDropdown").removeAttr( "required" );
+			$("#languageDropdown").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#translationRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#translationDetails").show();
+			$("#TranslationsDD").attr("required","on");
+			$("#TranslationsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#translationRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#translationDetails").hide();
+			$("#TranslationsDD").removeAttr( "required" );
+			$("#TranslationsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	//$("#selectStockCenter").dialog("open");
 		
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();

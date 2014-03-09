@@ -354,6 +354,10 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	.elem-3 label{
 		width: 25%;
 	}
+	
+	.elem-3 label+label{
+		width: 40%;
+	}
 }
 @media screen and (max-width: 959px) and (min-width: 651px) {
 	form {
@@ -393,6 +397,9 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	
 	.elem-3 label{
 		width: 25%;
+	}
+	.elem-3 label+label{
+		width: 40%;
 	}
 
 }
