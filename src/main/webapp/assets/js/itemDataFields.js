@@ -11,7 +11,10 @@ $("document").ready(function() {
 			closeOnEscape: false,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 			});
-	
+	 
+	   
+	   $("#tempFileId").val(tempId);
+	   
 	$("#selectStockCenter").dialog("open");
 		
 	$( "#maxSalePriceEndDate" ).datepicker();
@@ -36,7 +39,7 @@ $("document").ready(function() {
                 required : true
             },
             editionDropdown: {
-                required : true
+                required : false
             },
             stockCenterDD:{
             	required : true
@@ -152,6 +155,8 @@ $("document").ready(function() {
 			$("#hitemscategories").val(($("#CategoriesDD").val()));
 			$("#hawarddetails").val(($("#AwarddetailsDD").val()));
 			$("#marathiName").val(HTMLEncode($("#marathiName").val()));
+			
+			
 			form.submit();
             
         },
@@ -593,6 +598,7 @@ $("document").ready(function() {
 				}
 				data = new FormData();
 			    data.append( 'file', $( '#file' )[0].files[0] );
+			    data.append( 'tempFileId', $( '#tempFileId').val() );
 			    
 				$.ajax({
 				    url: "uploadAudioFileSubmit.html",

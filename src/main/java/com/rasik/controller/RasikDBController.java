@@ -2,6 +2,7 @@ package com.rasik.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ import com.rasik.model.Customer;
 import com.rasik.model.Customertype;
 import com.rasik.model.CustomertypeDao;
 import com.rasik.model.Discounts;
+import com.rasik.model.Edition;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
@@ -53,8 +55,12 @@ import java.text.ParseException;
  
 
 
+
+
 import javax.servlet.http.HttpSession;
  
+
+
 
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -813,8 +819,8 @@ class RasikDBController {
 		mav.addObject("bindingTypeList", bindingTypeList);
 		List<Discounts> discountsList = rasikSvc.findAllDiscounts();
 		mav.addObject("discountsList", discountsList);
-		List<Itemsedition> itemsEditionList = rasikSvc.findAllitemseditions();
-		mav.addObject("itemsEditionList", itemsEditionList);
+		List<Edition> editionList = rasikSvc.findAllEditions();
+		mav.addObject("editionList", editionList);
 		List<Itemlanguage> itemLanguagesList = rasikSvc.findAllLanguages();
 		mav.addObject("itemLanguagesList", itemLanguagesList);
 		List<Translation> translationList = rasikSvc.findAllTranslations();
@@ -832,7 +838,7 @@ class RasikDBController {
 
 		List<Awarddetail> awarddetailsList = rasikSvc.findAllAwarddetails();
 		mav.addObject("awarddetailsList", awarddetailsList);
-		
+		mav.addObject("tempFileId", "'"+UUID.randomUUID()+"'");
 		return mav;
 
 	}
@@ -1050,7 +1056,7 @@ class RasikDBController {
 			
 			@RequestMapping(value="admin/uploadAudioFileSubmit.html",method=RequestMethod.POST)
 			
-			public @ResponseBody String uploadAudioFileSubmit(
+			public @ResponseBody String uploadAudioFileSubmit(HttpServletRequest request,
 					@ModelAttribute UploadedFile uploadedFile,
 					BindingResult result,HttpSession session) throws IOException, ParseException {
 				InputStream inputStream = null;	
@@ -1058,8 +1064,8 @@ class RasikDBController {
 			
 				try{
 				inputStream = uploadedFile.getFile().getInputStream();
-			
-				File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Audio" + ".mp3");
+				String tempFileId=request.getParameter("tempFileId");
+				File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + tempFileId + ".mp3");
 				if (!newFile.exists()) {
 					newFile.createNewFile();
 				}
@@ -1101,7 +1107,8 @@ class RasikDBController {
 			    
 				logger.info("Inside submitaddItem()");
 				
-				rasikSvc.saveItem(item);
+				String rowId=rasikSvc.saveItem(item);
+				rasikSvc.renameUploadedFiles(request.getParameter("tempFileId"),rowId);
 				model.addAttribute("message", "Item saved.");
 				return "html/message";
 			}

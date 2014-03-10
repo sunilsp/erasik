@@ -1,5 +1,10 @@
 package com.rasik.service;
 
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,6 +28,8 @@ import com.rasik.model.Customertype;
 import com.rasik.model.CustomertypeDao;
 import com.rasik.model.Discounts;
 import com.rasik.model.DiscountsDao;
+import com.rasik.model.Edition;
+import com.rasik.model.EditionDao;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.ItemlanguageDao;
 import com.rasik.model.Items;
@@ -75,7 +82,10 @@ public class RasikServiceImpl implements RasikService {
 	ItemsDao itemsDao;
 	@Inject
 	AwarddetailDao awardDetailDao;
-
+	@Inject
+	EditionDao editionDao;
+	
+	
 	@Override
 	public UserInfo getUserInfo(Long l) {
 		return userInfoDao.findById(l);
@@ -415,8 +425,8 @@ public class RasikServiceImpl implements RasikService {
 
 	@Override
 	public String saveItem(Items item) {
-		itemsDao.merge(item);
-		return "Saved";
+		return itemsDao.merge(item).getItemId().toString();
+		
 	}
 
 	@Override
@@ -438,6 +448,24 @@ public class RasikServiceImpl implements RasikService {
 	public String saveAwardDetails(Awarddetail awardDetail) {
 		awardDetailDao.persist(awardDetail);
 		return "saved";
+	}
+
+	@Override
+	public void renameUploadedFiles(String tempFileId, String rowId) throws IOException {
+		Path filePathAudio=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
+		Files.move(filePathAudio, filePathAudio.resolveSibling(rowId+".mp3"));
+		
+		Path filePathImage=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
+		Files.move(filePathImage, filePathImage.resolveSibling(rowId+".jpg"));
+		
+		Path filePathEbook=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
+		Files.move(filePathEbook, filePathEbook.resolveSibling(rowId+".ebook"));
+		
+	}
+
+	@Override
+	public List<Edition> findAllEditions() {
+		return editionDao.findAllEditions();
 	}
 
 

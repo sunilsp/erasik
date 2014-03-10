@@ -1,5 +1,6 @@
 package com.rasik.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.rasik.model.Authors;
@@ -9,6 +10,7 @@ import com.rasik.model.Category;
 import com.rasik.model.Customer;
 import com.rasik.model.Customertype;
 import com.rasik.model.Discounts;
+import com.rasik.model.Edition;
 import com.rasik.model.Itemlanguage;
 import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
@@ -145,6 +147,10 @@ public interface RasikService {
 	public Awarddetail findAwardDetailsByName(Awarddetail awardDetail);
 
 	public String saveAwardDetails(Awarddetail awardDetail);
+
+	public void renameUploadedFiles(String parameter, String rowId) throws IOException;
+
+	public List<Edition> findAllEditions();
 	
 
 	
