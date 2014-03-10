@@ -2,20 +2,93 @@
  * @author manasi
  */
 $("document").ready(function() {
+	//var accordion = $("#addItemForm").accordion();
 	
 	   $("#selectStockCenter").dialog({
 			autoOpen: false,
-			height: 200,
+			height: 300,
 			width: 600,
 			modal: true, 
-			closeOnEscape: false,
+			closeOnEscape: true,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 			});
 	 
 	   
 	   $("#tempFileId").val(tempId);
 	   
-	$("#selectStockCenter").dialog("open");
+		
+	//$("#selectStockCenter").dialog("open");
+	$("#languageRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#languageDetails").show();
+			$("#languageDropdown").attr("required","on");
+			$("#languageDropdown").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#languageRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#languageDetails").hide();
+			$("#languageDropdown").removeAttr( "required" );
+			$("#languageDropdown").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#translationRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#translationDetails").show();
+			$("#TranslationsDD").attr("required","on");
+			$("#TranslationsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#translationRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#translationDetails").hide();
+			$("#TranslationsDD").removeAttr( "required" );
+			$("#TranslationsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#awardRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#awardDetails").show();
+			$("#AwarddetailsDD").attr("required","on");
+			$("#AwarddetailsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#awardRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#awardDetails").hide();
+			$("#AwarddetailsDD").removeAttr( "required" );
+			$("#AwarddetailsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
 		
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
@@ -29,44 +102,95 @@ $("document").ready(function() {
 	var queryValidator = $("#addItemForm").validate({
         rules : {
         	
-        	itemTypeDropdown : {
-                required : true
-            },        	
-            bindingTypeDropdown : {
+        	userBookCode: {
                 required : true
             },
+            isbnno: {
+                required : true
+            },
+        	itemTypeDropdown : {
+                required : true
+            }, 
             languageDropdown : {
                 required : true
             },
-            editionDropdown: {
-                required : false
-            },
-            stockCenterDD:{
-            	required : true
-            },
-            authorDD:{required : true},
-            PublSupplDD:{required : true},
-            TranslationsDD:{required : true},
-            CategoriesDD:{required : true},
-            userBookCode : {
-                required : true
-            },
+            translationsDD:
+            {required : true},
             englishName: {
-                required : true
+                required : false
             },
             marathiName : {
                 required : true
             },
-            publisherCode : {
-                required : true
-            },
+            authorDD:{required : true},
+            PublSupplDD:{required : true},
             price : {
                 required : true,
                 number:true
             },
+            discountedprice : {
+                required : true,
+                number:true
+            },
+            discountedpriceEndDate: {
+                required : true
+            },
+            purchasePrice: {
+                required : true
+            },
+            purchaseDiscountPercent: {
+                required : true
+            },
+            
+            maxSaleDiscountPrecent:{
+            	reuired:true
+            },
+            
+            maxSaleDiscountPrice:{
+            	required:true
+            },
+            editionDropdown: {
+                required : true
+            },
+            CategoriesDD:{required : true},       
+            AwarddetailsDD : {
+                required : true
+            },
+            awardRadio:{
+            	required:true
+            },
             qtyInHand : {
                 required : true,
                 number:true
+            },
+            publMonth:{
+            	required:true
+            },
+            publYear:{
+            	required:true
+            },
+            reprintMonth:{
+            	required:true
+            },
+            reprintYear:{
+            	required:true
+            },
+            noOfPages:{
+            	required:true,
+            	number:true
+            },
+            duration:{
+            	required:true,
+            	number:true
+            },
+            bindingTypeDropdown : {
+                required : true
+            },
+            stockAmount:{
+            	required:true
+            },
+            location:{
+            	required:true
             },
             minLvl : {
                 required : true,
@@ -76,7 +200,20 @@ $("document").ready(function() {
                 required : true,
                 number:true
             },
-            
+            itemCoverImageFileName:{
+            	required:true
+            },
+            printStatus:{
+            	required:true
+            },
+            maxSalePriceEndDate:{
+            	required:true,
+            	date:true
+            },
+            maxOwDiscountEndDate:{
+            	required:true,
+            	date:true
+            },
             maxSalePrice : {
                 required : true,
                 number:true
@@ -98,7 +235,6 @@ $("document").ready(function() {
             },
             
             description : {
-                required : true,
                 maxlength : 24
             },
             printStatus : {
@@ -122,7 +258,8 @@ $("document").ready(function() {
             },
             maxInwDiscountEndDate : {
                 required : true
-            }
+            },
+            
         },
         messages : {
             
