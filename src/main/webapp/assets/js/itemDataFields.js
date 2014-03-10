@@ -89,6 +89,7 @@ $("document").ready(function() {
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
 	$( "#maxInwDiscountEndDate" ).datepicker();
+	$( "#discountedpriceEndDate" ).datepicker();
 	
 	$( "#validationFeedback").hide();
 	
@@ -175,10 +176,6 @@ $("document").ready(function() {
             	required:true,
             	number:true
             },
-            duration:{
-            	required:true,
-            	number:true
-            },
             bindingTypeDropdown : {
                 required : true
             },
@@ -199,28 +196,11 @@ $("document").ready(function() {
             itemCoverImageFileName:{
             	required:true
             },
-            printStatus:{
-            	required:true
-            },
-            maxSalePriceEndDate:{
-            	required:true,
-            	date:true
-            },
-            maxOwDiscountEndDate:{
-            	required:true,
-            	date:true
-            },
             maxSalePrice : {
                 required : true,
                 number:true
             },
-            publMonth : {
-                required : true
-            },
-            publYear : {
-                required : true,
-                number:true
-            },
+            
             isbnno : {
                 required : true,
                 number:true
@@ -233,9 +213,7 @@ $("document").ready(function() {
             description : {
                 maxlength : 24
             },
-            printStatus : {
-            	required : true
-            },
+            
             maxSalePriceEndDate : {
             	required : true,
                 date : true
@@ -243,19 +221,7 @@ $("document").ready(function() {
             maxOwDiscountPrecent : {
                 required : true,
                 number: true
-            },
-            maxOwDiscountEndDate : {
-                required : true,
-                date : true
-            },
-            maxInwDiscountPercent : {
-                required : true,
-                number: true
-            },
-            maxInwDiscountEndDate : {
-                required : true
-            },
-            
+            }
         },
         messages : {
             
@@ -277,6 +243,7 @@ $("document").ready(function() {
             }
         },
         submitHandler : function(form){
+        	alert("check");
         	$("#hbindingtype").val(($("#bindingTypeDropdown").val()));
 			$("#hitemtype").val(($("#itemTypeDropdown").val()));
 			$("#hitemlanguage").val(($("#languageDropdown").val()));
