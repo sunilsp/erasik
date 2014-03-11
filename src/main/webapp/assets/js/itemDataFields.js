@@ -301,6 +301,22 @@ $("document").ready(function() {
         onkeyup : true,
         
     });
+	
+	$("#addItemsubmitbtn").click(function(){
+		$("#hbindingtype").val(($("#bindingTypeDropdown").val()));
+		$("#hitemtype").val(($("#itemTypeDropdown").val()));
+		$("#hitemlanguage").val(($("#languageDropdown").val()));
+		$("#hitemsedition").val(($("#editionDropdown").val()));
+		$("#hitemsstockcenters").val(($("#stockCenterDD").val()));
+		$("#hitemsauthorses").val(($("#authorDD").val()));
+		$("#hitemspublsuppls").val(($("#PublSupplDD").val()));
+		$("#htranslations").val(($("#TranslationslDD").val()));
+		$("#hitemscategories").val(($("#CategoriesDD").val()));
+		$("#hawarddetails").val(($("#AwarddetailsDD").val()));
+		$("#marathiName").val(HTMLEncode($("#marathiName").val()));
+	
+		
+	});
 	/*
 	 * end of validation settings
 	 */
@@ -674,6 +690,7 @@ $("document").ready(function() {
 				}
 				data = new FormData();
 			    data.append( 'file', $( '#file' )[0].files[0] );
+			    data.append( 'tempFileId', $( '#tempFileId').val() );
 			    
 				$.ajax({
 				    url: "uploadebookFileSubmit.html",
@@ -705,6 +722,7 @@ $("document").ready(function() {
 				}
 				data = new FormData();
 			    data.append( 'file', $( '#file' )[0].files[0] );
+			    data.append( 'tempFileId', $( '#tempFileId').val() );
 			    
 				$.ajax({
 				    url: "uploadItemCoverFile.html",

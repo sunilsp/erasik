@@ -978,7 +978,7 @@ class RasikDBController {
 			
 				@RequestMapping(value="admin/uploadItemCoverFile.html",method=RequestMethod.POST)
 				
-				public @ResponseBody String fileUploaded(
+				public @ResponseBody String fileUploaded(HttpServletRequest request,
 						@ModelAttribute UploadedFile uploadedFile,
 						BindingResult result,HttpSession session) throws IOException, ParseException {
 					InputStream inputStream = null;	
@@ -986,8 +986,8 @@ class RasikDBController {
 			
 					try{
 					inputStream = uploadedFile.getFile().getInputStream();
-			
-					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Test"+ ".jpg");
+					String tempFileId=request.getParameter("tempFileId");
+					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + tempFileId+ ".jpg");
 					if (!newFile.exists()) {
 						newFile.createNewFile();
 					}
@@ -1018,7 +1018,7 @@ class RasikDBController {
 				
 			@RequestMapping(value="admin/uploadebookFileSubmit.html",method=RequestMethod.POST)
 				
-				public @ResponseBody String uploadebookFileSubmit(
+				public @ResponseBody String uploadebookFileSubmit(HttpServletRequest request,
 						@ModelAttribute UploadedFile uploadedFile,
 						BindingResult result,HttpSession session) throws IOException, ParseException {
 					InputStream inputStream = null;	
@@ -1026,8 +1026,8 @@ class RasikDBController {
 			
 					try{
 					inputStream = uploadedFile.getFile().getInputStream();
-			
-					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + "Ebook" + ".epub");
+					String tempFileId=request.getParameter("tempFileId");
+					File newFile = new File("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\" + tempFileId + ".epub");
 					if (!newFile.exists()) {
 						newFile.createNewFile();
 					}

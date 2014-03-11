@@ -417,9 +417,24 @@ public class RasikServiceImpl implements RasikService {
 		categorySet.add(categoryDao.findById(Integer.valueOf(category)));
 		item.setCategories(categorySet);
 		
-		HashSet<Awarddetail> awardDetailSet= new HashSet<Awarddetail>(0);
-		awardDetailSet.add(awardDetailDao.findById(Integer.valueOf(awarddetails)));
-		item.setAwarddetails(awardDetailSet);
+		if(!awarddetails.isEmpty()){
+			HashSet<Awarddetail> awardDetailSet= new HashSet<Awarddetail>(0);
+			awardDetailSet.add(awardDetailDao.findById(Integer.valueOf(awarddetails)));
+			item.setAwarddetails(awardDetailSet);
+		}
+		
+		if(!itemlanguage.isEmpty()){
+			
+			item.setItemlanguage(itemLanguageDao.findById(Integer.valueOf(itemlanguage)));
+		}
+		
+		if(!translations.isEmpty()){
+			HashSet<Translation> translationSet= new HashSet<Translation>(0);
+			translationSet.add(translationDao.findById(Integer.valueOf(translations)));
+			item.setTranslations(translationSet);
+		}
+
+
 
 	}
 
@@ -453,14 +468,20 @@ public class RasikServiceImpl implements RasikService {
 	@Override
 	public void renameUploadedFiles(String tempFileId, String rowId) throws IOException {
 		Path filePathAudio=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
-		Files.move(filePathAudio, filePathAudio.resolveSibling(rowId+".mp3"));
+		if(Files.exists(filePathAudio)){
+			Files.move(filePathAudio, filePathAudio.resolveSibling(rowId+".mp3"));
+		}
+	
 		
-		Path filePathImage=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
-		Files.move(filePathImage, filePathImage.resolveSibling(rowId+".jpg"));
+		Path filePathImage=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".jpg");
+		if(Files.exists(filePathImage)){
+			Files.move(filePathImage, filePathImage.resolveSibling(rowId+".jpg"));
+		}
 		
-		Path filePathEbook=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".mp3");
-		Files.move(filePathEbook, filePathEbook.resolveSibling(rowId+".ebook"));
-		
+		Path filePathEbook=FileSystems.getDefault().getPath("C:\\Users\\sunilsp\\apache-tomcat-7.0.30\\webapps\\erasik\\assets\\images\\",tempFileId+".epub");
+		if(Files.exists(filePathEbook)){
+			Files.move(filePathEbook, filePathEbook.resolveSibling(rowId+".epub"));
+		}
 	}
 
 	@Override

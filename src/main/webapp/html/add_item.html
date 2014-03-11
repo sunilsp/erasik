@@ -38,15 +38,11 @@ xmlns:th="http://www.thymeleaf.org">
 						<div id="validationFeedback">
 							<span></span>
 						</div>
-						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{submitaddItem.html}"  th:object="${item}"  action="message.html" name="itemForm"  method="post">
+						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{submitaddItem.html}"  th:object="${item}"  action="message.html" name="addItemForm"  method="post">
 
 							<fieldset title="Add New Item" class="foldedset">
 								<ul>
 								
-									<li class="elem-3">
-										<label for="userBookCode" th:text="@{Item Code : }" class="required">Item Code : </label>
-										<input type="text" tabindex="220" autocomplete="on" required="on" name="userBookCode" id="userBookCode" th:field="*{userBookCode}"/>
-									</li>
 									<li class="elem-3">
 										<label for="isbnno" th:text="@{ISBN No : }" class="required">ISBN No : </label>
 										<input type="text" tabindex="330" autocomplete="on" required="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>

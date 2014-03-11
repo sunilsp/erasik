@@ -86,9 +86,8 @@ public class ItemlanguageDao extends RasikBaseDao{
 	public Itemlanguage findById(java.lang.Integer id) {
 		log.debug("getting Itemlanguage instance with id: " + id);
 		try {
-			Itemlanguage instance = (Itemlanguage) sessionFactory
-					.getCurrentSession().get(
-							"com.rasik.hibernate.Itemlanguage", id);
+			Itemlanguage instance =(Itemlanguage) getSession().get(
+							"com.rasik.model.Itemlanguage", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
