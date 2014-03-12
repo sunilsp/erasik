@@ -177,7 +177,7 @@ public class Items implements java.io.Serializable {
 		this.discounts = discounts;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "LanguageId")
 	public Itemlanguage getItemlanguage() {
 		return this.itemlanguage;

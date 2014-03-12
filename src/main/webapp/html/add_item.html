@@ -45,22 +45,22 @@ xmlns:th="http://www.thymeleaf.org">
 								
 									<li class="elem-3">
 										<label for="isbnno" th:text="@{ISBN No : }" class="required">ISBN No : </label>
-										<input type="text" tabindex="330" autocomplete="on" required="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
+										<input type="text" tabindex="20" autocomplete="on" required="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
 									</li>
 								
 									<li class="elem-3">
 										<label for="itemTypeDropdown" th:text="@{Item Type : }" class="required">Item Type : </label>
-										<select tabindex="10" id="itemTypeDropdown" name="itemTypeDropdown">
+										<select tabindex="30" id="itemTypeDropdown" name="itemTypeDropdown">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemtype : ${itemTypeList}" th:value="${itemtype.itemTypeId}" th:text="${itemtype.description}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="20" th:id="addItemTypeAjax" id="addItemType" name="addItemType" value="New Item Type"/>
+										<input type="button" tabindex="40" th:id="addItemTypeAjax" id="addItemType" name="addItemType" value="New Item Type"/>
 										
 									</li>
 									<li class="elem-3">
 										<label for="languageCheck" th:text="@{Has Language : }" class="required">Has Language: </label>
-										<input type="radio" name="languageRadio" value="Yes" tabindex="" th:id="languageRadioYAjax" id="languageRadioY" required="on" checked="true"/> Yes
-										<input type="radio" name="languageRadio" value="No" tabindex="" th:id="languageRadioNAjax" id="languageRadioN" required="on" /> No
+										<input type="radio" tabindex="50" name="languageRadio" value="Yes" th:id="languageRadioYAjax" id="languageRadioY" required="on" checked="true"/> Yes
+										<input type="radio" tabindex="60" name="languageRadio" value="No" th:id="languageRadioNAjax" id="languageRadioN" required="on" /> No
 									</li>
 									<li class="elem-3" id="languageDetails">
 										<label for="languageDropdown" th:text="@{Language : }" class="required">Language: </label>
@@ -72,122 +72,78 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="translationCheck" th:text="@{Has Translation : }" class="required">Has Translation: </label>
-										<input type="radio" name="translationRadio" value="Yes" tabindex="" th:id="translationRadioYAjax" id="translationRadioY" required="on" checked="true"/> Yes
-										<input type="radio" name="translationRadio" value="No" tabindex="" th:id="translationRadioNAjax" id="translationRadioN" required="on" /> No
+										<input type="radio" tabindex="90" name="translationRadio" value="Yes" th:id="translationRadioYAjax" id="translationRadioY" required="on" checked="true"/> Yes
+										<input type="radio" tabindex="100" name="translationRadio" value="No" th:id="translationRadioNAjax" id="translationRadioN" required="on" /> No
 									</li>
 									<li class="elem-3" id="translationDetails">
 										<label for="Translations" th:text="@{Translations : }" class="required">Translations : </label>
-										<select tabindex="170" id="translationsDD" name="translationslDD" required="required">
+										<select tabindex="110" id="translationsDD" name="translationslDD" required="required">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemsTranslations : ${translationList}" th:value="${itemsTranslations.translationId}" th:text="${itemsTranslations.originalname}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="180" th:id="addTranslationsAjax" id="addTranslationsAjax" name="addTranslationsAjax" value="New Translation"/>
+										<input type="button" tabindex="120" th:id="addTranslationsAjax" id="addTranslationsAjax" name="addTranslationsAjax" value="New Translation"/>
 									</li>
 								
 								 <li class="elem-3">
 										<label for="marathiName" th:text="@{Item printed Name : }" class="required">Item printed Name : </label>
-										<input type="text" tabindex="240" autocomplete="on" required="on" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
+										<input type="text" tabindex="130" autocomplete="on" required="on" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
 									</li>
 									
 									<li class="elem-3">
 										<label for="englishName" th:text="@{English Name : }" class="required">Item Name (English) : </label>
-										<input type="text" tabindex="230" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
+										<input type="text" tabindex="140" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
 									</li>
 									<li class="elem-3">
 										<label for="Author" th:text="@{Author : }" class="required">Author : </label>
-										<select tabindex="130" id="authorDD" name="authorDD">
+										<select tabindex="150" id="authorDD" name="authorDD">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemsAuthor : ${authorList}" th:value="${itemsAuthor.authorId}" th:text="${itemsAuthor.englishName}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="140" id="addAuthor" th:id="addAuthorAjax" name="addAuthor" value="New Author"/>
+										<input type="button" tabindex="160" id="addAuthor" th:id="addAuthorAjax" name="addAuthor" value="New Author"/>
 									</li>
 									<li class="elem-3">
 										<label for="PublSuppl" th:text="@{Publish Supplier : }" class="required">Publish Supplier : </label>
-										<select tabindex="150" id="PublSupplDD" name="PublSupplDD">
+										<select tabindex="170" id="PublSupplDD" name="PublSupplDD">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemsPublSuppl : ${publsupplList}" th:value="${itemsPublSuppl.pubSupId}" th:text="${itemsPublSuppl.englishName}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="160" th:id="addPublSupplAjax" id="addPublSuppl" name="addPublSuppl" value="New Publ Suppl"/>
+										<input type="button" tabindex="180" th:id="addPublSupplAjax" id="addPublSuppl" name="addPublSuppl" value="New Publ Suppl"/>
 									</li>
 									<li class="elem-3">
 										<label for="price" th:text="@{Printed Price : }" class="required">Printed Price : </label>
-										<input type="text" tabindex="260" autocomplete="on" required="on" name="price" id="price" th:field="*{price}"/>
+										<input type="text" tabindex="190" autocomplete="on" required="on" name="price" id="price" th:field="*{price}"/>
 									</li>
 									
 									<li class="elem-3">
 										<label for="discountedprice" th:text="@{Discounted Price : }" class="required">Discounted Price : </label>
-										<input type="text" tabindex="260" autocomplete="on" required="on" name="discountedprice" id="discountedprice" th:field="*{discountedPrice}"/>
+										<input type="text" tabindex="200" autocomplete="on" required="on" name="discountedprice" id="discountedprice" th:field="*{discountedPrice}"/>
 									</li>
 								
 									<li class="elem-3">
 										<label for="discountedpriceEndDate" th:text="@{Discount End Date : }" class="required">Discount End Date : </label>
-										<input type="text" tabindex="430" autocomplete="on" required="on" name="discountedpriceEndDate" id="discountedpriceEndDate" th:field="*{discountedPriceEndDate}"/>
+										<input type="text" tabindex="210" autocomplete="on" required="on" name="discountedpriceEndDate" id="discountedpriceEndDate" th:field="*{discountedPriceEndDate}"/>
 									</li>
 									
 									<li class="elem-3">
 										<label for="purchaseprice" th:text="@{Purchase Price : }" class="required">Purchase Price : </label>
-										<input type="text" tabindex="260" autocomplete="on" required="on" name="purchasePrice" id="purchasePrice" th:field="*{purchasePrice}"/>
+										<input type="text" tabindex="220" autocomplete="on" required="on" name="purchasePrice" id="purchasePrice" th:field="*{purchasePrice}"/>
 									</li>
 									<li class="elem-3">
 										<label for="purchaseDiscountPercent" th:text="@{Purchase Discount(%) : }" class="required">Purchase Discount(%) : </label>
-										<input type="text" tabindex="460" autocomplete="on" required="on" name="purchaseDiscountPercent" id="purchaseDiscountPercent" th:field="*{purchaseDiscountPercent}"/>
+										<input type="text" tabindex="230" autocomplete="on" required="on" name="purchaseDiscountPercent" id="purchaseDiscountPercent" th:field="*{purchaseDiscountPercent}"/>
 									</li>
 									<li class="elem-3">
 										<label for="maxSaleDiscountPrecent" th:text="@{Maximum sale discount(%) : }" class="required">Maximum sale discount(%) : </label>
-										<input type="text" tabindex="460" autocomplete="on" required="on" name="maxSaleDiscountPrecent" id="maxSaleDiscountPrecent" th:field="*{maxSaleDiscountPrecent}"/>
+										<input type="text" tabindex="240" autocomplete="on" required="on" name="maxSaleDiscountPrecent" id="maxSaleDiscountPrecent" th:field="*{maxSaleDiscountPrecent}"/>
 									</li>
 									
 									<li class="elem-3">
 										<label for="maxSaleDiscountPrice" th:text="@{Maximum Sale Discount Price : }" class="required">Maximum Sale Discount Price : </label>
-										<input type="text" tabindex="260" autocomplete="on" required="on" name="maxSaleDiscountPrice" id="maxSaleDiscountPrice" th:field="*{maxSaleDiscountPrice}"/>
+										<input type="text" tabindex="250" autocomplete="on" required="on" name="maxSaleDiscountPrice" id="maxSaleDiscountPrice" th:field="*{maxSaleDiscountPrice}"/>
 									</li>
-									
-									
-									<!--<li class="elem-3">
-									<label for="discountDropdown" th:text="@{Discount : }" class="required">Discount: </label>
-									<select tabindex="50" id="discountDropdown" name="discountDropdown">
-									<option th:each="discounts : ${discountsList}" th:value="${discounts.discountId}" th:text="${discounts.description}">Wireframe</option>
-									</select>
-									<input type="button" tabindex="60"  th:id="addDiscountAjax" id="addDiscount" name="addDiscount" value="New Discout Type"/>
-									</li>-->
-									
-									<li class="elem-3">
-										<label for="edition" th:text="@{Edition : }" class="required">Edition : </label>
-										<select tabindex="90" id="editionDropdown" name="editionDropdown">
-											<option value="" th:text="Select ">Select</option>
-											<option th:each="itemsEdition : ${editionList}" th:value="${itemsEdition.editionId}" th:text="${itemsEdition.edition}">Wireframe</option>
-										</select>
-										<input type="button" tabindex="100" th:id="addItemsEdtionAjax" id="addItemsEdtionAjax" name="addEdition" value="New Edition"/>
-									</li>
-									
-
-									
-									
-									<li class="elem-3">
-										<label for="Categories" th:text="@{Categories : }" class="required">Categories : </label>
-										<select tabindex="190" id="CategoriesDD" name="CategorieslDD" required="required">
-											<option value="" th:text="Select ">Select</option>
-											<option th:each="itemsCategories : ${categoryList}" th:value="${itemsCategories.categoryId}" th:text="${itemsCategories.categoryHeadEnglish}">Wireframe</option>
-										</select>
-										<input type="button" tabindex="200" id="addCategories" th:id="addCategoriesAjax" name="addCategories" value="New Category"/>
-									</li>
-									<li class="elem-3">
-										<label for="awardsCheck" th:text="@{Won Awards : }" class="required">Wn Awards: </label>
-										<input type="radio" name="awardRadio" value="Yes" tabindex="" th:id="awardRadioYAjax" id="awardRadioY" required="on" checked="true"/> Yes
-										<input type="radio" name="awardRadio" value="No" tabindex="" th:id="awardRadioNAjax" id="awardRadioN" required="on" /> No
-									</li>
-									<li class="elem-3" id="awardDetails">
-										<label for="addawarddetails" th:text="@{Award Detail : }" class="required">Award Details : </label>
-										<select tabindex="190" id="AwarddetailsDD" name="AwarddetailsDD" required="required">
-											<option value="" th:text="Select ">Select</option>
-											<option th:each="awardDetails : ${awarddetailsList}" th:value="${awardDetails.awardDetailId}" th:text="${awardDetails.awardDetailsEnglish}">Wireframe</option>
-										</select>
-										<input type="button" tabindex="200" id="addAwarddetails" th:id="addAwarddetailsAjax" name="addAwarddetails" value="New Award"/>									</li>
-
-									
 									<li class="elem-3">
 										<label for="qtyInHand" th:text="@{Qty in hand : }" class="required">Qty in hand : </label>
-										<input type="text" tabindex="270" autocomplete="on" required="on" name="qtyInHand" id="qtyInHand" th:field="*{qtyInHand}"/>
+										<input type="text" tabindex="260" autocomplete="on" required="on" name="qtyInHand" id="qtyInHand" th:field="*{qtyInHand}"/>
 									</li>
 									
 
@@ -197,41 +153,33 @@ xmlns:th="http://www.thymeleaf.org">
 							<fieldset title="&nbsp;" class="foldedset">
 								<ul>
 									
-									<!-- <li class="elem-3">
-										<label for="maxSalePrice" th:text="@{Max Sale Price : }" class="required">Max Sale Price: </label>
-										<input type="text" tabindex="300" autocomplete="on" required="on" name="maxSalePrice" id="maxSalePrice" th:field="*{maxSalePrice}"/>
-									</li> -->
 									<li class="elem-3">
-										<label for="publMonth" th:text="@{Pub Month : }" class="required">Pub Month : </label>
-										<input type="text" tabindex="310" autocomplete="on" required="on" name="publMonth" id="publMonth" th:field="*{publMonth}"/>
+										<label for="edition" th:text="@{Edition : }" class="required">Edition : </label>
+										<select tabindex="270" id="editionDropdown" name="editionDropdown">
+											<option value="" th:text="Select ">Select</option>
+											<option th:each="itemsEdition : ${itemsEditionList}" th:value="${itemsEdition.itemsEditionid}" th:text="${itemsEdition.itemsedition}">Wireframe</option>
+										</select>
+										<input type="button" tabindex="280" th:id="addItemsEdtionAjax" id="addItemsEdtionAjax" name="addEdition" value="New Edition"/>
 									</li>
 									<li class="elem-3">
-										<label for="publYear" th:text="@{Pub Year : }" class="required">Pub Year : </label>
-										<input type="text" tabindex="320" autocomplete="on" required="on" name="publYear" id="publYear" th:field="*{publYear}"/>
-										</li>
-										<li class="elem-3">
 										<label for="reprintMonth" th:text="@{Reprint Month : }" class="required">Reprint Month : </label>
-										<input type="text" tabindex="310" autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" />
+										<input type="text" tabindex="290" autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" />
 									</li>
 									<li class="elem-3">
 										<label for="reprintYear" th:text="@{Reprint Year : }" class="required">Reprint Year : </label>
-										<input type="text" tabindex="320" autocomplete="on" required="on" name="reprintYear" id="reprintYear" />
+										<input type="text" tabindex="300" autocomplete="on" required="on" name="reprintYear" id="reprintYear" />
 									</li>
 									<li class="elem-3">
-										<label for="noOfPages" th:text="@{No of Pages : }" class="required">No of Pages : </label>
-										<input type="text" tabindex="340" autocomplete="on" required="on" name="noOfPages" id="noOfPages" th:field="*{noOfPages}"/>
-									</li>
-									<li class="elem-3">
-										<label for="duration" th:text="@{Duration : }" class="required">Duration : </label>
-										<input type="text" tabindex="340" autocomplete="on" required="on" name="duration" id="duration"/>
-									</li>
+										<label for="noOfPages" th:text="@{No of Pages / Duration : }" class="required">No of Pages : </label>
+										<input type="text" tabindex="310" autocomplete="on" required="on" name="noOfPages" id="noOfPages" th:field="*{noOfPages}"/>
+									</li>									
 									<li class="elem-3">
 										<label for="bindingTypeDropdown" th:text="@{Binding Type : }" class="required">Binding Type : </label>
-										<select tabindex="30" id="bindingTypeDropdown" name="bindingTypeDropdown">
+										<select tabindex="320" id="bindingTypeDropdown" name="bindingTypeDropdown">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="bindingtype : ${bindingTypeList}" th:value="${bindingtype.bindingTypeId}" th:text="${bindingtype.bindingTypeName}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="40" th:id="addBindingTypeAjax" id="addbindingType" name="addbindingType" value="New binding Type"/>
+										<input type="button" tabindex="330" th:id="addBindingTypeAjax" id="addbindingType" name="addbindingType" value="New binding Type"/>
 									</li>
 									<li class="elem-3">
 										<label for="stockAmounts" th:text="@{Stock Amount : }" class="required">Stock Amount : </label>
@@ -239,67 +187,64 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="rackLocation" th:text="@{Rack Location : }" class="required">Rack Location : </label>
-										<input type="text" tabindex="340" autocomplete="on" required="on" name="location" id="location" th:field="*{location}"/>
+										<input type="text" tabindex="350" autocomplete="on" required="on" name="location" id="location" th:field="*{location}"/>
 									</li>
 									<li class="elem-3">
 										<label for="maxLevel" th:text="@{Max Lvl : }" class="required">Max Lvl : </label>
-										<input type="text" tabindex="290" autocomplete="on" required="on" name="maxLevel" id="maxLevel" th:field="*{maxLevel}"/>
+										<input type="text" tabindex="360" autocomplete="on" required="on" name="maxLevel" id="maxLevel" th:field="*{maxLevel}"/>
 									</li>
 									<li class="elem-3">
 										<label for="minLevel" th:text="@{Min Lvl : }" class="required">Min Lvl : </label>
-										<input type="text" tabindex="280" autocomplete="on" required="on" name="minLevel" id="minLevel" th:field="*{minLevel}"/>
+										<input type="text" tabindex="370" autocomplete="on" required="on" name="minLevel" id="minLevel" th:field="*{minLevel}"/>
 									</li>
 									<li class="elem-3">
-										<label for="description" th:text="@{Description : }" class="required">Description : </label>
-										<textarea tabindex="350" autocomplete="on" name="description" id="description" th:field="*{description}" style="min-height:5em; max-height:10em"></textarea>
+										<label for="Categories" th:text="@{Categories : }" class="required">Categories : </label>
+										<select tabindex="380" id="CategoriesDD" name="CategorieslDD" required="required">
+											<option value="" th:text="Select ">Select</option>
+											<option th:each="itemsCategories : ${categoryList}" th:value="${itemsCategories.categoryId}" th:text="${itemsCategories.categoryHeadEnglish}">Wireframe</option>
+										</select>
+										<input type="button" tabindex="390" id="addCategories" th:id="addCategoriesAjax" name="addCategories" value="New Category"/>
+									</li>	
+									<li class="elem-3">
+										<label for="description" th:text="@{Description : }">Description : </label>
+										<textarea tabindex="400" autocomplete="on" name="description" id="description" th:field="*{description}" style="min-height:5em; max-height:10em"></textarea>
 									</li>
-									
+									<li class="elem-3">
+										<label for="awardsCheck" th:text="@{Won Awards : }" class="required">Wn Awards: </label>
+										<input type="radio" tabindex="400" name="awardRadio" value="Yes" th:id="awardRadioYAjax" id="awardRadioY" required="on" checked="true"/> Yes
+										<input type="radio" tabindex="410" name="awardRadio" value="No" th:id="awardRadioNAjax" id="awardRadioN" required="on" /> No
+									</li>
+									<li class="elem-3" id="awardDetails">
+										<label for="addawarddetails" th:text="@{Award Detail : }" class="required">Award Details : </label>
+										<select tabindex="420" id="AwarddetailsDD" name="AwarddetailsDD" required="required">
+											<option value="" th:text="Select ">Select</option>
+											<option th:each="awardDetails : ${awarddetailsList}" th:value="${awardDetails.awardDetailId}" th:text="${awardDetails.awardDetailsEnglish}">Wireframe</option>
+										</select>
+										<input type="button" tabindex="430" id="addAwarddetails" th:id="addAwarddetailsAjax" name="addAwarddetails" value="New Award"/>									
+									</li>
 									<li class="elem-3">
 										<label for="itemCoverImage" th:text="@{Item Cover : }" class="required">Item Cover : </label>
 										<label id="itemCoverImageFileName" th:text="@{Select a File to upload}" >Select a File to upload </label> 
-										<input type="hidden" tabindex="360" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
-										<input tabindex="370" type="button" value="Upload" id="uploadItemCoverbtn" name="uploadItemCoverbtn"/>
+										<input type="hidden" tabindex="440" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
+										<input tabindex="450" type="button" value="Upload" id="uploadItemCoverbtn" name="uploadItemCoverbtn"/>
 									</li>
 									<li class="elem-3">
-										<label for="ebookFile" th:text="@{E-Book File : }" class="required">E-Book File : </label>
+										<label for="ebookFile" th:text="@{E-Book File : }">E-Book File : </label>
 										<label id="ebookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
 								
-										<input type="hidden" tabindex="380" autocomplete="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
-										<input tabindex="390" type="button" value="Upload" id="uploadebookFilebtn" name="uploadebookFilebtn"/>									</li>
+										<input type="hidden" tabindex="460" autocomplete="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
+										<input tabindex="470" type="button" value="Upload" id="uploadebookFilebtn" name="uploadebookFilebtn"/>									</li>
 									<li class="elem-3">
-										<label for="audioBookFile" th:text="@{Audio Book File : }" class="required">Audio Book File : </label>
+										<label for="audioBookFile" th:text="@{Audio Book File : }">Audio Book File : </label>
 											<label id="audioBookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
 								
-											<input type="hidden" tabindex="400" autocomplete="on" required="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
-											<input tabindex="410" type="button" value="Upload" id="uploadaudioBookbtn" name="uploadaudioBookbtn"/>
+											<input type="hidden" tabindex="480" autocomplete="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
+											<input tabindex="490" type="button" value="Upload" id="uploadaudioBookbtn" name="uploadaudioBookbtn"/>
 
 									</li>
-
 									<li class="elem-3">
-										<label for="printStatus" th:text="@{Print Status : }" class="required">Print Status: </label>
-										<input type="text" tabindex="420" autocomplete="on" required="on" name="printStatus" id="printStatus" th:field="*{printStatus}"/>
-									</li>
-									<li class="elem-3">
-										<label for="maxSalePriceEndDate" th:text="@{Sale End : }" class="required">Sale End : </label>
-										<input type="text" tabindex="430" autocomplete="on" required="on" name="maxSalePriceEndDate" id="maxSalePriceEndDate" th:field="*{maxSalePriceEndDate}"/>
-									</li>
-									<!-- <li class="elem-3">
-										<label for="maxOwDiscountPrecent" th:text="@{Out Disc Percent : }" class="required">Out Disc Percent : </label>
-										<input type="text" tabindex="440" autocomplete="on" required="on" name="maxOwDiscountPrecent" id="maxOwDiscountPrecent" th:field="*{maxOwDiscountPrecent}"/>
-									</li> -->
-									<li class="elem-3">
-										<label for="maxOwDiscountEndDate" th:text="@{Out Disc End : }" class="required">Out Disc End : </label>
-										<input type="text" tabindex="450" autocomplete="on" required="on" name="maxOwDiscountEndDate" id="maxOwDiscountEndDate" th:field="*{maxOwDiscountEndDate}"/>
-									</li>
-									
-									<li class="elem-3">
-										<label for="maxInwDiscountEndDate" th:text="@{In Disc End : }" class="required">In Disc End : </label>
-										<input type="text" tabindex="470" autocomplete="on" required="on" name="maxInwDiscountEndDate" id="maxInwDiscountEndDate" th:field="*{maxInwDiscountEndDate}"/>
-									</li>
-
-									<li class="elem-3">
-										<input tabindex="480" type="reset" value="Reset " id="reset" name="reset"/>
-										<input tabindex="490" type="submit" value="Save" id="addItemsubmitbtn" name="addItemsubmitbtn"/>
+										<input tabindex="500" type="reset" value="Reset " id="reset" name="reset"/>
+										<input tabindex="510" type="submit" value="Save" id="addItemsubmitbtn" name="addItemsubmitbtn"/>
 									</li>
 								</ul>
 							</fieldset>
@@ -330,7 +275,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div id="selectStockCenter">
 		
-			<form><fieldset title="Select Stock Center">
+			<fieldset title="Select Stock Center">
 			<ul>
 				<li class="elem-3">
 					<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>
@@ -341,11 +286,11 @@ xmlns:th="http://www.thymeleaf.org">
 					<input type="button" tabindex="120" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
 				</li>
 				<li>
-					<input tabindex="" type="submit" value="Cancel " id="exitAddItem" name="exitAddItem"/>
-					<input tabindex="" type="submit" value="Proceed" id="selectStockCenterSubmit" name="selectStockCenterSubmit"/>
+					<input type="submit" value="Cancel " id="exitAddItem" name="exitAddItem"/>
+					<input type="submit" value="Proceed" id="selectStockCenterSubmit" name="selectStockCenterSubmit"/>
 				</li>
 			 </ul>
-			</fieldset></form>
+			</fieldset>
 		</div>
 		
 		<div id="float-modal-form" title="Add new information">

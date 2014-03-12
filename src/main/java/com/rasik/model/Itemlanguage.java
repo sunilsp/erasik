@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -32,6 +33,7 @@ public class Itemlanguage implements java.io.Serializable {
 
 	private Integer languageId;
 	private String languageName;
+	@JsonBackReference
 	private Set<Items> itemses = new HashSet<Items>(0);
 
 	public Itemlanguage() {

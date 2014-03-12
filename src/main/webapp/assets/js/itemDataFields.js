@@ -9,7 +9,7 @@ $("document").ready(function() {
 			height: 300,
 			width: 600,
 			modal: true, 
-			closeOnEscape: true,
+			closeOnEscape: false,
 			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 			});
 	 
@@ -17,7 +17,7 @@ $("document").ready(function() {
 	   $("#tempFileId").val(tempId);
 	   
 		
-	//$("#selectStockCenter").dialog("open");
+	$("#selectStockCenter").dialog("open");
 	$("#languageRadioYAjax").change(function(){
 		if ( $( this ).is( ":checked" ) )
 		{
@@ -93,6 +93,7 @@ $("document").ready(function() {
 	$( "#maxSalePriceEndDate" ).datepicker();
 	$( "#maxOwDiscountEndDate" ).datepicker();
 	$( "#maxInwDiscountEndDate" ).datepicker();
+	$( "#discountedpriceEndDate" ).datepicker();
 	
 	$( "#validationFeedback").hide();
 	
@@ -179,10 +180,6 @@ $("document").ready(function() {
             	required:true,
             	number:true
             },
-            duration:{
-            	required:true,
-            	number:true
-            },
             bindingTypeDropdown : {
                 required : true
             },
@@ -203,28 +200,11 @@ $("document").ready(function() {
             itemCoverImageFileName:{
             	required:true
             },
-            printStatus:{
-            	required:true
-            },
-            maxSalePriceEndDate:{
-            	required:true,
-            	date:true
-            },
-            maxOwDiscountEndDate:{
-            	required:true,
-            	date:true
-            },
             maxSalePrice : {
                 required : true,
                 number:true
             },
-            publMonth : {
-                required : true
-            },
-            publYear : {
-                required : true,
-                number:true
-            },
+            
             isbnno : {
                 required : true,
                 number:true
@@ -237,9 +217,7 @@ $("document").ready(function() {
             description : {
                 maxlength : 24
             },
-            printStatus : {
-            	required : true
-            },
+            
             maxSalePriceEndDate : {
             	required : true,
                 date : true
@@ -247,19 +225,7 @@ $("document").ready(function() {
             maxOwDiscountPrecent : {
                 required : true,
                 number: true
-            },
-            maxOwDiscountEndDate : {
-                required : true,
-                date : true
-            },
-            maxInwDiscountPercent : {
-                required : true,
-                number: true
-            },
-            maxInwDiscountEndDate : {
-                required : true
-            },
-            
+            }
         },
         messages : {
             
@@ -281,6 +247,7 @@ $("document").ready(function() {
             }
         },
         submitHandler : function(form){
+        	alert("check");
         	$("#hbindingtype").val(($("#bindingTypeDropdown").val()));
 			$("#hitemtype").val(($("#itemTypeDropdown").val()));
 			$("#hitemlanguage").val(($("#languageDropdown").val()));
@@ -874,12 +841,15 @@ $("document").ready(function() {
 		        });
 
 		   $("#exitAddItem").click(function(){
-			   window.location="showItemTypes.html";
+			   window.location="http://localhost/erasik/admin/showItemTypes.html";
 		   });
 		   
 		   $("#selectStockCenterSubmit").click(function(){
-			  
-			   $("#selectStockCenter").dialog("close");
+			   if($("#stockCenterDD").val() == ""){
+				   alert("Please select a stock Center");
+			   }
+			   else
+				   $("#selectStockCenter").dialog("close");
 		   });
 		   
 			function HTMLEncode(str){
