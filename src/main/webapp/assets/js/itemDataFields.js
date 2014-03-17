@@ -2,101 +2,13 @@
  * @author manasi
  */
 $("document").ready(function() {
-	//var accordion = $("#addItemForm").accordion();
 	
-	   $("#selectStockCenter").dialog({
-			autoOpen: false,
-			height: 300,
-			width: 600,
-			modal: true, 
-			closeOnEscape: false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-			});
-	 
-	   
-	   $("#tempFileId").val(tempId);
-	   
-		
-	$("#selectStockCenter").dialog("open");
-	$("#languageRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#languageDetails").show();
-			$("#languageDropdown").attr("required","on");
-			$("#languageDropdown").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#languageRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#languageDetails").hide();
-			$("#languageDropdown").removeAttr( "required" );
-			$("#languageDropdown").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
 	
-	$("#translationRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#translationDetails").show();
-			$("#TranslationsDD").attr("required","on");
-			$("#TranslationsDD").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#translationRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#translationDetails").hide();
-			$("#TranslationsDD").removeAttr( "required" );
-			$("#TranslationsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	
-	$("#awardRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#awardDetails").show();
-			$("#AwarddetailsDD").attr("required","on");
-			$("#AwarddetailsDD").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#awardRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#awardDetails").hide();
-			$("#AwarddetailsDD").removeAttr( "required" );
-			$("#AwarddetailsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-		
-	$( "#maxSalePriceEndDate" ).datepicker();
-	$( "#maxOwDiscountEndDate" ).datepicker();
-	$( "#maxInwDiscountEndDate" ).datepicker();
-	$( "#discountedpriceEndDate" ).datepicker();
+	/*
+	 * Start of Add Item Form validations 
+	 */
 	
 	$( "#validationFeedback").hide();
-	
 	/*
 	 * start of validation settings
 	 */
@@ -259,8 +171,6 @@ $("document").ready(function() {
 			$("#hitemscategories").val(($("#CategoriesDD").val()));
 			$("#hawarddetails").val(($("#AwarddetailsDD").val()));
 			$("#marathiName").val(HTMLEncode($("#marathiName").val()));
-			
-			
 			form.submit();
             
         },
@@ -287,11 +197,116 @@ $("document").ready(function() {
 	/*
 	 * end of validation settings
 	 */
-    $( "#reset").click(function() {
+	$( "#reset").click(function() {
         queryValidator.resetForm();
         $("#validationFeedback span").html("");
         $("#validationFeedback").hide();
     });  
+	
+	/*
+	 * End of Add Item Form validations 
+	 */
+	
+	//var accordion = $("#addItemForm").accordion();
+	
+	   $("#selectStockCenter").dialog({
+			autoOpen: false,
+			height: 300,
+			width: 600,
+			modal: true, 
+			closeOnEscape: false,
+			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+			});
+	 
+	  $("#tempFileId").val(tempId);
+	   
+		
+	$("#selectStockCenter").dialog("open");
+	
+	/*
+	 * Make fields optional on radio click
+	 */
+	$("#languageRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#languageDetails").show();
+			$("#languageDropdown").attr("required","on");
+			$("#languageDropdown").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#languageRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#languageDetails").hide();
+			$("#languageDropdown").removeAttr( "required" );
+			$("#languageDropdown").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#translationRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#translationDetails").show();
+			$("#TranslationsDD").attr("required","on");
+			$("#TranslationsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#translationRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#translationDetails").hide();
+			$("#TranslationsDD").removeAttr( "required" );
+			$("#TranslationsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#awardRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#awardDetails").show();
+			$("#AwarddetailsDD").attr("required","on");
+			$("#AwarddetailsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#awardRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#awardDetails").hide();
+			$("#AwarddetailsDD").removeAttr( "required" );
+			$("#AwarddetailsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	
+	/*
+	 * Make fields optional on radio click
+	 */
+		
+	$( "#maxSalePriceEndDate" ).datepicker();
+	$( "#maxOwDiscountEndDate" ).datepicker();
+	$( "#maxInwDiscountEndDate" ).datepicker();
+	$( "#discountedpriceEndDate" ).datepicker();
     
     /**
      * 
@@ -308,14 +323,51 @@ $("document").ready(function() {
     
     /*Add Item Type*/
     $("#addItemTypeAjax").click(function(){
-    	$("#float-modal-form").attr("title","Add New Item Types");
-    	$.get( "addItemTypeAjax.html", function( data ) {
-  			$( "#float-modal-form" ).dialog( "open" );
-			$( "#float-modal-form" ).html( data );
-
-    		});
+    	$.get( "addItemTypeAjax.html", function( data ) 
+    			{
+		  			$( "#float-modal-form" ).dialog( "open" );
+		  			$( "#float-modal-form" ).dialog( "option", "height", 350 );
+		  			$( "#float-modal-form" ).dialog( "option", "title", "Add Item Types" );
+					$( "#float-modal-form" ).html( data );
+					$( "#typeValidationFeedback").hide();
+					var typeValidator = $("#itemTypeForm").validate
+					({
+				        rules : {
+				        	description: {
+				                required : true
+				            },
+				            vatPerc: {
+				                required : true
+				            }
+				        },
+				        faultPlacement : function(fault, element) {
+				            
+				            fault.insertAfter(element);
+				        },
+				        invalidHandler : function(form, validator) {
+					        var errors = validator.numberOfInvalids();
+					        if (errors) {
+					            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+					            $("#typeValidationFeedback span").html(message);
+					            $("#typeValidationFeedback").show();
+					        } else {
+					            $("#typeValidationFeedback").hide();
+					       
+					        }
+				        },
+				        submitHandler : function(form){
+				        	form.submit();
+				        
+				        },
+				        onkeyup : true,
+				    });
+					$( "#typeReset").click(function() {
+						typeValidator.resetForm();
+				        $("#typeValidationFeedback span").html("");
+				        $("#typeValidationFeedback").hide();
+				    });			
+    		});   	
     });
-    
     submitItemTypeAjax = function(){
 		$.ajax({
 			type: "POST",
@@ -345,9 +397,44 @@ $("document").ready(function() {
 	$("#addBindingTypeAjax").click(function(){		  
     	$.get( "addBindingTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 280 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add Binding Types" );
 			$( "#float-modal-form" ).html( data );
-
-    		});
+			$( "#bindingValidationFeedback").hide();
+			var typeValidator = $("#bindingTypeForm").validate
+			({
+		        rules : {
+		        	bindingTypeName: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#bindingValidationFeedback span").html(message);
+			            $("#bindingValidationFeedback").show();
+			        } else {
+			            $("#bindingValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#bindingReset").click(function() {
+				typeValidator.resetForm();
+		        $("#bindingValidationFeedback span").html("");
+		        $("#bindingValidationFeedback").hide();
+		    });			
+    	}); 
     });	    
 	submitBindingTypeAjax = function(){
 
@@ -394,7 +481,43 @@ $("document").ready(function() {
 	$("#addLanguageAjax").click(function(){		  
     	$.get( "addLanguageAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 280 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add Language" );
 			$( "#float-modal-form" ).html( data );
+			$( "#languageValidationFeedback").hide();
+			var typeValidator = $("#itemlanguageForm").validate
+			({
+		        rules : {
+		        	languageName: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#languageValidationFeedback span").html(message);
+			            $("#languageValidationFeedback").show();
+			        } else {
+			            $("#languageValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#languageReset").click(function() {
+				typeValidator.resetForm();
+		        $("#languageValidationFeedback span").html("");
+		        $("#languageValidationFeedback").hide();
+		    });
 
     		});
     });
@@ -497,7 +620,118 @@ $("document").ready(function() {
 	$("#addAuthorAjax").click(function(){		  
     	$.get( "addAuthorAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "width", 800 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 500 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Author" );
 			$( "#float-modal-form" ).html( data );
+			$( "#authorValidationFeedback").hide();
+			/*
+			 * custom validation
+			 */
+			jQuery.validator.addMethod("greaterThan", 
+					function(value, element, params) {
+
+					    if (!isNaN(new Date(value))) {
+					        return new Date(value) > new Date($(params).val());
+					    }
+
+					    return isNaN(value) && isNaN($(params).val()) 
+					        || (Number(value) > Number($(params).val())); 
+					},'Must be greater than {0}.');
+
+			
+			/*
+			 * custom validation
+			 */
+			var typeValidator = $("#itemAuthorForm").validate
+			({
+		        rules : {
+		        	auth_en_name: {
+		                required : true
+		            },
+		            auth_mr_name: {
+		                required : true
+		            },
+		            address1: {
+		                required : true
+		            },
+		            address2: {
+		                required : true
+		            },
+		            address3: {
+		                required : true
+		            },
+		            pincode: {
+		                required : true
+		            },
+		            city: {
+		                required : true
+		            },
+		            state: {
+		                required : true
+		            },
+		            country: {
+		                required : true
+		            },
+		            email: {
+		                required : true,
+		                email:true
+		            },
+		            phone1: {
+		                required : true
+		            },
+		            phone2: {
+		                required : true
+		            },
+		            fax: {
+		                required : true
+		            },
+		            mobile: {
+		                required : true
+		            },
+		            prefix: {
+		                required : true
+		            },
+		            dateOfBirth: {
+		                required : true,
+		                date:true
+		            },
+		            expiredDate: {
+		                date:true,
+		                greaterThan: "#dateOfBirth"
+		            },
+		            photo: {
+		                required : true
+		            },
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#authorValidationFeedback span").html(message);
+			            $("#authorValidationFeedback").show();
+			        } else {
+			            $("#authorValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#authorReset").click(function() {
+				typeValidator.resetForm();
+		        $("#authorValidationFeedback span").html("");
+		        $("#authorValidationFeedback").hide();
+		    });
+			$( "#expiredDate" ).datepicker();
+			$( "#dateOfBirth" ).datepicker();
 
     		});
     });
@@ -533,7 +767,7 @@ $("document").ready(function() {
 
     		});
     });
-	submitTranslationsAjax=function(){
+	submitCategoriesAjax=function(){
 		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
 			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
@@ -544,21 +778,55 @@ $("document").ready(function() {
 	$("#addTranslationsAjax").click(function(){		  
     	$.get( "addTranslationsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add Translation" );
 			$( "#float-modal-form" ).html( data );
+			$( "#translationValidationFeedback").hide();
+			var typeValidator = $("#itemTranslationForm").validate
+			({
+		        rules : {
+		        	translatedfrom: {
+		                required : true
+		            },
+		            originalname: {
+		                required : true
+		            }
+		            ,
+		            originalauthor: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#translationValidationFeedback span").html(message);
+			            $("#translationValidationFeedback").show();
+			        } else {
+			            $("#translationValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#translationReset").click(function() {
+				typeValidator.resetForm();
+		        $("#translationValidationFeedback span").html("");
+		        $("#translationValidationFeedback").hide();
+		    });
 
     		});
     });
 	
-	$("#addAwarddetailsAjax").click(function(){		  
-    	$.get( "addAwarddetailsAjax.html", function( data ) {
-  			$( "#float-modal-form" ).dialog( "open" );
-			$( "#float-modal-form" ).html( data );
-
-    		});
-    });
-
-	submitTranslationsAjax=function(){
-	
+		submitTranslationsAjax=function(){
 		
 		$.ajax({
 			type: "POST",
@@ -581,7 +849,21 @@ $("document").ready(function() {
 		    alert(faildata.responseText);
 		  });
 
-	}
+		}
+		
+	/*
+	 * 
+	 */
+		
+	$("#addAwarddetailsAjax").click(function(){		  
+    	$.get( "addAwarddetailsAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+    });
+
+	
 
 	submitadditemAwardAjax=function(){
 
