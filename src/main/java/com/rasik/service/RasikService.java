@@ -2,6 +2,7 @@ package com.rasik.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import com.rasik.model.Authors;
 import com.rasik.model.Awarddetail;
@@ -16,6 +17,7 @@ import com.rasik.model.Items;
 import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemtype;
 import com.rasik.model.Publsuppl;
+import com.rasik.model.Reprint;
 import com.rasik.model.Stockcenter;
 import com.rasik.model.Translation;
 import com.rasik.model.UserInfo;
@@ -101,9 +103,9 @@ public interface RasikService {
 
 	public Itemlanguage findItemlanguageByName(Itemlanguage itemlanguage);
 
-	public String saveItemsedition(Itemsedition itemsedition);
+	public String saveItemsedition(Edition itemsedition);
 
-	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition);
+	public Itemsedition findItemseditionByDesc(Edition itemsedition);
 
 	public String saveItemlanguage(Itemlanguage itemlanguage);
 
@@ -151,6 +153,10 @@ public interface RasikService {
 	public void renameUploadedFiles(String parameter, String rowId) throws IOException;
 
 	public List<Edition> findAllEditions();
+
+	public List<Customer> findCustomerByUserName(String username);
+
+	public List<Reprint> findAllReprints();
 	
 
 	

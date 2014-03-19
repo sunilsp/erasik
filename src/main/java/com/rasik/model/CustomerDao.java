@@ -121,4 +121,11 @@ public class CustomerDao extends RasikBaseDao{
 		List<Customer> customerList=query.list();
 		return customerList;
 	}
+	
+	public List<Customer> findCustomerByUserName(String username){
+		Query query=getSession().getNamedQuery("findCustomerByUserName").setString("username", username);
+		
+		List<Customer> customerList=query.list();
+		return customerList;
+	}
 }

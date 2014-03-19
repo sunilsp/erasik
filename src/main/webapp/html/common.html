@@ -146,11 +146,15 @@
 			<ul>
 				<li>
 					<label for="name" th:text="@{Item Edition }" class="required">Item Edition : </label>
-					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsedition" id="itemsedition" th:field="*{itemsedition}"/>
+					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsedition" id="itemsedition" th:field="*{edition}"/>
 				</li>
 				<li>
-					<label class="required" for="vatPerc">Description : </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="itemseditiondesc" th:field="*{itemseditiondesc}"/>
+					<label class="required" for="editionMonth">Edition Month: </label>
+					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="editionMonth" th:field="*{editionMonth}"/>
+				</li>
+				<li>
+					<label class="required" for="editionYear">Edition Year: </label>
+					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="editionYear" th:field="*{editionYear}"/>
 				</li>
 				<li>
 					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
@@ -160,6 +164,30 @@
 		</fieldset>
 	</form>
 	
+<!-- Form for adding new Reprint-->
+	<form th:fragment="itemReprintFragment" class="clearfix tableDataFields" id="itemsReprintForm"  th:object="${itemsReprint}"  th:action="@{javascript:submitadditemReprintAjax();}" action="message.html" name="reprintForm"  method="post">
+		<fieldset title="Add Item Reprint">
+			<ul>
+				<li>
+					<label for="name" th:text="@{Item Reprint}" class="required">Item Reprint : </label>
+					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsreprint" id="itemsreprint" th:field="*{reprint}"/>
+				</li>
+				<li>
+					<label class="required" for="reprintMonth">Reprint Month: </label>
+					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" th:field="*{reprintMonth}"/>
+				</li>
+				<li>
+					<label class="required" for="editionYear">Edition Year: </label>
+					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintYear" id="reprintYear" th:field="*{reprintYear}"/>
+				</li>
+				<li>
+					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
+					<input tabindex="10" type="submit" value="Save" id="additemsreprintsubmitbtn" name="additemsreprintsubmitbtn"/>
+				</li>
+			</ul>
+		</fieldset>
+	</form>
+
 	<!-- Form for adding new Stock Center-->
 	<form th:fragment="additemStockCenterFragment" class="clearfix tableDataFields" id="itemStockCenterForm"  th:object="${itemstockcenter}"  th:action="@{javascript:submitStockCenterAjax();}" action="message.html" name="discountForm"  method="post">
 		<fieldset title="Add Stock Center" >

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -41,6 +42,8 @@ import com.rasik.model.Itemtype;
 import com.rasik.model.ItemtypeDao;
 import com.rasik.model.Publsuppl;
 import com.rasik.model.PublsupplDao;
+import com.rasik.model.Reprint;
+import com.rasik.model.ReprintDao;
 import com.rasik.model.Stockcenter;
 import com.rasik.model.StockcenterDao;
 import com.rasik.model.Translation;
@@ -84,7 +87,8 @@ public class RasikServiceImpl implements RasikService {
 	AwarddetailDao awardDetailDao;
 	@Inject
 	EditionDao editionDao;
-	
+	@Inject
+	ReprintDao reprintDao;
 	
 	@Override
 	public UserInfo getUserInfo(Long l) {
@@ -309,14 +313,14 @@ public class RasikServiceImpl implements RasikService {
 	}
 
 	@Override
-	public String saveItemsedition(Itemsedition itemsedition) {
-		itemsEditionDao.persist(itemsedition);
+	public String saveItemsedition(Edition itemsedition) {
+		editionDao.persist(itemsedition);
 		return "saved";
 	}
 
 	@Override
-	public Itemsedition findItemseditionByDesc(Itemsedition itemsedition) {
-		return itemsEditionDao.findItemseditionByDesc(itemsedition.getItemsedition());
+	public Itemsedition findItemseditionByDesc(Edition edition) {
+		return itemsEditionDao.findItemseditionByDesc(edition.getEdition());
 		
 	}
 
@@ -487,6 +491,16 @@ public class RasikServiceImpl implements RasikService {
 	@Override
 	public List<Edition> findAllEditions() {
 		return editionDao.findAllEditions();
+	}
+
+	@Override
+	public List<Customer> findCustomerByUserName(String username) {
+		return customerDao.findCustomerByUserName(username);
+	}
+
+	@Override
+	public List<Reprint> findAllReprints() {
+		return reprintDao.findAllReprints();
 	}
 
 

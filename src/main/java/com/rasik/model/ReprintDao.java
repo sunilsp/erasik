@@ -2,12 +2,15 @@ package com.rasik.model;
 // default package
 // Generated Mar 7, 2014 4:42:36 PM by Hibernate Tools 4.0.0
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -70,5 +73,11 @@ public class ReprintDao extends RasikBaseDao{
 			log.error("get failed", re);
 			throw re;
 		}
+	}
+	
+	public List<Reprint> findAllReprints(){
+		Query query=getSession().getNamedQuery("findAllReprints");
+		List<Reprint> reprintList=query.list();
+		return reprintList;
 	}
 }

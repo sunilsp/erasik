@@ -78,6 +78,9 @@ public class Items implements java.io.Serializable {
 			0);
 	private Set<Reprint> reprints = new HashSet<Reprint>(
 			0);
+	private Set<Customer> itemCustomerslog = new HashSet<Customer>(
+			0);
+
 	
 	public Items() {
 	}
@@ -608,6 +611,25 @@ public class Items implements java.io.Serializable {
 	 */
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	/**
+	 * @return the itemCustomerslog
+	 */
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+    @JoinTable(name="itemscustomer", 
+                joinColumns={@JoinColumn(name="itemId")}, 
+                inverseJoinColumns={@JoinColumn(name="customerId")})
+
+	public Set<Customer> getItemCustomerslog() {
+		return itemCustomerslog;
+	}
+
+	/**
+	 * @param itemCustomerslog the itemCustomerslog to set
+	 */
+	public void setItemCustomerslog(Set<Customer> itemCustomerslog) {
+		this.itemCustomerslog = itemCustomerslog;
 	}
 
 }

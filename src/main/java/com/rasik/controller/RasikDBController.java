@@ -1,6 +1,7 @@
 package com.rasik.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +40,7 @@ import com.rasik.model.Itemsedition;
 import com.rasik.model.Itemsstockcenter;
 import com.rasik.model.Itemtype;
 import com.rasik.model.Publsuppl;
+import com.rasik.model.Reprint;
 import com.rasik.model.Stockcenter;
 import com.rasik.model.Translation;
 import com.rasik.service.RasikService;
@@ -57,13 +59,23 @@ import java.text.ParseException;
 
 
 
+
+
+
+
 import javax.servlet.http.HttpSession;
  
 
 
 
 
+
+
+
+
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -566,7 +578,7 @@ class RasikDBController {
 	public String submitItemseditions(
 			HttpServletResponse response,
 			Model model,
-			@ModelAttribute Itemsedition itemsedition,
+			@ModelAttribute Edition itemsedition,
 			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
 			throws IOException {
 		logger.info("Inside submitItemseditions()");
@@ -575,7 +587,7 @@ class RasikDBController {
 			rasikSvc.saveItemsedition(itemsedition);
 
 			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
-				response.getOutputStream().print(returnJson(rasikSvc.findAllitemseditions()));
+				response.getOutputStream().print(returnJson(rasikSvc.findAllEditions()));
 				response.setStatus(200);
 				return null;
 			} else {
@@ -838,6 +850,9 @@ class RasikDBController {
 
 		List<Awarddetail> awarddetailsList = rasikSvc.findAllAwarddetails();
 		mav.addObject("awarddetailsList", awarddetailsList);
+		List<Reprint> reprintList = rasikSvc.findAllReprints();
+		mav.addObject("reprintList", reprintList);
+
 		mav.addObject("tempFileId", "'"+UUID.randomUUID()+"'");
 		return mav;
 
@@ -852,6 +867,15 @@ class RasikDBController {
 		return "html/common :: addItemTypeFragment";
 	}
 
+	@RequestMapping(value = { "admin/addItemReprintAjax.html" }, method = RequestMethod.GET)
+	public String addItemReprintAjax(Model model) {
+		logger.info("Inside addItemReprintAjax()");
+		Reprint reprint = new Reprint();
+		model.addAttribute("itemsReprint", reprint);
+
+		return "html/common :: itemReprintFragment";
+	}
+	
 	@RequestMapping(value = { "admin/addBindingTypeAjax.html" }, method = RequestMethod.GET)
 	public String addBindingTypeAjax(Model model) {
 		logger.info("Inside addBindingTypeAjax()");
@@ -873,8 +897,8 @@ class RasikDBController {
 	@RequestMapping(value = { "admin/addItemsEdtionAjax.html" }, method = RequestMethod.GET)
 	public String addItemsEdtionAjax(Model model) {
 		logger.info("Inside addItemsEdtionAjax()");
-		Itemsedition itemsedition = new Itemsedition();
-		model.addAttribute("itemsedition", itemsedition);
+		Edition edition = new Edition();
+		model.addAttribute("itemsedition", edition);
 
 		return "html/common :: itemEditionFragment";
 	}
@@ -1106,6 +1130,8 @@ class RasikDBController {
 			    		request.getParameter("htranslations"),request.getParameter("hitemscategories"),request.getParameter("hawarddetails"));
 			    
 				logger.info("Inside submitaddItem()");
+				User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				item.setItemCustomerslog(new HashSet<Customer>(rasikSvc.findCustomerByUserName(user.getUsername())));
 				
 				String rowId=rasikSvc.saveItem(item);
 				rasikSvc.renameUploadedFiles(request.getParameter("tempFileId"),rowId);

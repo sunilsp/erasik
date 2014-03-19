@@ -194,6 +194,22 @@ CREATE TABLE `discounts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `edition`
+--
+
+DROP TABLE IF EXISTS `edition`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edition` (
+  `editionId` int(11) NOT NULL,
+  `editionMonth` int(11) DEFAULT NULL,
+  `editionYear` int(11) DEFAULT NULL,
+  `edition` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`editionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `itemlanguage`
 --
 
@@ -204,7 +220,7 @@ CREATE TABLE `itemlanguage` (
   `LanguageId` int(11) NOT NULL AUTO_INCREMENT,
   `LanguageName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`LanguageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,24 +259,26 @@ CREATE TABLE `items` (
   `MaxOwDiscountEndDate` date DEFAULT NULL,
   `PurchaseDiscountPercent` double DEFAULT NULL,
   `MaxInwDiscountEndDate` date DEFAULT NULL,
-  `itemseditionId` int(11) DEFAULT NULL,
   `DiscountedPrice` double DEFAULT NULL,
   `DiscountedPriceEndDate` date DEFAULT NULL,
   `PurchasePrice` double DEFAULT NULL,
   `MaxSaleDiscountPrice` double DEFAULT NULL,
   `MaxOwDiscountPrecent` double DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `location` varchar(25) DEFAULT NULL,
+  `itemseditionId` int(11) DEFAULT NULL,
   PRIMARY KEY (`ItemId`),
   KEY `fk_itemItemTypeCode` (`ItemTypeId`),
   KEY `fk_itemBindingTypeId` (`BindingTypeId`),
   KEY `fk_itemLanguageId` (`LanguageId`),
   KEY `fk_itemDiscountId` (`DiscountId`),
-  KEY `fk_itemsitemsEditionId_idx` (`itemseditionId`),
+  KEY `FK_k6xj7rducrxjm7arq6wffq70j` (`itemseditionId`),
   CONSTRAINT `fk_itemBindingTypeId` FOREIGN KEY (`BindingTypeId`) REFERENCES `bindingtype` (`BindingTypeId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemDiscountId` FOREIGN KEY (`DiscountId`) REFERENCES `discounts` (`DiscountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemItemTypeCode` FOREIGN KEY (`ItemTypeId`) REFERENCES `itemtype` (`ItemTypeId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemLanguageId` FOREIGN KEY (`LanguageId`) REFERENCES `itemlanguage` (`LanguageId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_itemsitemsEditionId` FOREIGN KEY (`itemseditionId`) REFERENCES `itemsedition` (`itemsEditionid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_k6xj7rducrxjm7arq6wffq70j` FOREIGN KEY (`itemseditionId`) REFERENCES `itemsedition` (`itemsEditionid`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +297,7 @@ CREATE TABLE `itemsauthors` (
   KEY `fk_itemAuthoritemId` (`itemId`),
   CONSTRAINT `fk_itemAuthorAuthorId` FOREIGN KEY (`AuthorId`) REFERENCES `authors` (`authorId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemAuthoritemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +335,7 @@ CREATE TABLE `itemscategory` (
   KEY `fk_itemCategoryitemId` (`itemId`),
   CONSTRAINT `fk_itemCategoryCategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`CategoryId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemCategoryitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,9 +368,16 @@ DROP TABLE IF EXISTS `itemsedition`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `itemsedition` (
   `itemsEditionid` int(11) NOT NULL AUTO_INCREMENT,
+  `itemsId` int(11) DEFAULT NULL,
+  `editionId` int(11) DEFAULT NULL,
+  `itemId` int(11) NOT NULL,
   `itemsedition` varchar(45) DEFAULT NULL,
   `itemseditiondesc` varchar(145) DEFAULT NULL,
-  PRIMARY KEY (`itemsEditionid`)
+  PRIMARY KEY (`itemsEditionid`),
+  KEY `fk_itemseditionItemId_idx` (`itemsId`),
+  KEY `fk_itemseditioneditionId_idx` (`editionId`),
+  CONSTRAINT `fk_itemseditioneditionId` FOREIGN KEY (`editionId`) REFERENCES `edition` (`editionId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_itemseditionItemId` FOREIGN KEY (`itemsId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -372,7 +397,29 @@ CREATE TABLE `itemspublsuppl` (
   KEY `fk_itemspublsupplpublsupplId` (`PubSupId`),
   CONSTRAINT `fk_itemspublsupplitemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemspublsupplpublsupplId` FOREIGN KEY (`PubSupId`) REFERENCES `publsuppl` (`PubSupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `itemsreprint`
+--
+
+DROP TABLE IF EXISTS `itemsreprint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itemsreprint` (
+  `itemsReprintid` int(11) NOT NULL AUTO_INCREMENT,
+  `itemsId` int(11) DEFAULT NULL,
+  `reprintId` int(11) DEFAULT NULL,
+  `itemId` int(11) NOT NULL,
+  PRIMARY KEY (`itemsReprintid`),
+  KEY `fk_itemsreprintItemId_idx` (`itemsId`),
+  KEY `fk_itemsreprintreprintId_idx` (`reprintId`),
+  KEY `FK_abgkjxjf5und4b86pdaqsdv50` (`itemId`),
+  CONSTRAINT `FK_abgkjxjf5und4b86pdaqsdv50` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`),
+  CONSTRAINT `fk_itemsreprintItemId` FOREIGN KEY (`itemsId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_itemsreprintreprintId` FOREIGN KEY (`reprintId`) REFERENCES `reprint` (`reprintId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,7 +440,7 @@ CREATE TABLE `itemsstockcenter` (
   KEY `fk_itemsStockCenterStockCenterId` (`StockCenterId`),
   CONSTRAINT `fk_itemsStockCenteritemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_itemsStockCenterStockCenterId` FOREIGN KEY (`StockCenterId`) REFERENCES `stockcenter` (`StockCenterId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,7 +455,7 @@ CREATE TABLE `itemtype` (
   `Description` varchar(50) DEFAULT NULL,
   `VatPerc` double DEFAULT NULL,
   PRIMARY KEY (`ItemTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,6 +487,23 @@ CREATE TABLE `publsuppl` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `reprint`
+--
+
+DROP TABLE IF EXISTS `reprint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reprint` (
+  `reprintId` int(11) NOT NULL,
+  `reprintMonth` int(11) DEFAULT NULL,
+  `reprintYear` int(11) DEFAULT NULL,
+  PRIMARY KEY (`reprintId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+--
 -- Table structure for table `stockcenter`
 --
 
@@ -458,7 +522,7 @@ CREATE TABLE `stockcenter` (
   `CenterCount` int(11) DEFAULT NULL,
   `CanCreateInvoice` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`StockCenterId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -532,6 +596,21 @@ CREATE TABLE `userinfo` (
   `NAME` varchar(45) NOT NULL,
   PRIMARY KEY (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `itemsstockcenter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itemscustomer` (
+  `itemsCustomerId` int(11) NOT NULL AUTO_INCREMENT,
+  `itemId` int(11) NOT NULL,
+  `customerId` int(11) NOT NULL,
+  PRIMARY KEY (`itemsCustomerId`),
+  KEY `fk_itemsCustomeritemId` (`itemId`),
+  KEY `fk_itemsCustomerCustomerId` (`customerId`),
+  CONSTRAINT `fk_itemsCustomeritemId` FOREIGN KEY (`itemId`) REFERENCES `items` (`ItemId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_itemsCustomerCustomerId` FOREIGN KEY (`customerId`) REFERENCES `customer` (`CustomerId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -543,4 +622,4 @@ CREATE TABLE `userinfo` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-07 10:16:43
+-- Dump completed on 2014-03-12 14:25:52

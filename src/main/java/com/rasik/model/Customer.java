@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -26,7 +27,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "customer", catalog = "rasiknew")
-@NamedQuery(name="findAllCustomers",query="from Customer ")
+@NamedQueries({
+@NamedQuery(name="findAllCustomers",query="from Customer "),
+@NamedQuery(name="findCustomerByUserName",query="from Customer cust where cust.username = :username ")
+})
 public class Customer implements java.io.Serializable {
 
 	private int customerId;
@@ -46,14 +50,18 @@ public class Customer implements java.io.Serializable {
 	private String fax;
 	private String mobile;
 	private String contactPerson;
+	private String username;
 	@JsonBackReference
 	private Set<Items> items = new HashSet<Items>(
 			0);
 
+
 	public Customer() {
 	}
 
-	public Customer(int customerId) {
+	
+	
+		public Customer(int customerId) {
 		this.customerId = customerId;
 	}
 
@@ -94,6 +102,22 @@ public class Customer implements java.io.Serializable {
 		this.customerId = customerId;
 	}
 
+	@JsonBackReference
+	private Set<Items> itemsCreatedByCustomer = new HashSet<Items>(
+			0);
+
+
+	@ManyToMany(mappedBy = "itemCustomerslog")
+	public Set<Items> getItemsCreatedByCustomer() {
+		return itemsCreatedByCustomer;
+	}
+
+	public void setItemsCreatedByCustomer(Set<Items> itemsCreatedByCustomer) {
+		this.itemsCreatedByCustomer = itemsCreatedByCustomer;
+	}
+
+
+	
 	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "customerTypeId")
 	public Customertype getCustomertype() {
@@ -253,6 +277,25 @@ public class Customer implements java.io.Serializable {
 	 */
 	public void setState(String state) {
 		this.state = state;
+	}
+
+
+
+	/**
+	 * @return the username
+	 */
+	@Column(name = "username", length = 45)
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

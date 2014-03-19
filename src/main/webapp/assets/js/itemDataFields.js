@@ -15,32 +15,9 @@ $("document").ready(function() {
 	 
 	   
 	   $("#tempFileId").val(tempId);
-	   
+	   $("#isbnno").focus();
 		
 	$("#selectStockCenter").dialog("open");
-	$("#languageRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#languageDetails").show();
-			$("#languageDropdown").attr("required","on");
-			$("#languageDropdown").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#languageRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#languageDetails").hide();
-			$("#languageDropdown").removeAttr( "required" );
-			$("#languageDropdown").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
 	
 	$("#translationRadioYAjax").change(function(){
 		if ( $( this ).is( ":checked" ) )
@@ -54,6 +31,7 @@ $("document").ready(function() {
 			});
 		}
 	});
+	
 	$("#translationRadioNAjax").change(function(){
 		if ( $( this ).is( ":checked" ) ){
 			$("#translationDetails").hide();
@@ -422,7 +400,7 @@ $("document").ready(function() {
 		    alert(faildata.responseText);
 		  });
 
-	}
+	};
 	
 		
 	/*Add Item Edition*/
@@ -450,7 +428,7 @@ $("document").ready(function() {
 			 $.each(data, function(i, val) {
 				 
 	                $("#editionDropdown").append(
-	                        "<option value=" + val.itemsEditionId + ">" + val.itemsedition+ "</option>");
+	                        "<option value=" + val.editionId + ">" + val.edition+ "</option>");
 	            });
 		  })
 		  .fail(function(faildata) {
@@ -508,6 +486,16 @@ $("document").ready(function() {
 			$( "#float-modal-form" ).dialog( "close" );
 		});
 	}
+	
+	$("#addItemsReprintAjax").click(function(){
+		$.get( "addItemReprintAjax.html", function( data ) {
+  			$( "#float-modal-form" ).dialog( "open" );
+			$( "#float-modal-form" ).html( data );
+
+    		});
+		
+			
+	})
 	
 	/*Add Item Publish Supplier*/
 	$("#addPublSupplAjax").click(function(){		  
@@ -826,6 +814,10 @@ $("document").ready(function() {
 				  });
 
 
+			}
+			
+			submitadditemReprintAjax=function(){
+				
 			}
 			
 	

@@ -81,4 +81,17 @@ public class EditionDao extends RasikBaseDao{
 		return editionList;
 
 	}
+	
+	public Edition findItemseditionByDesc(String itemsedition) {
+		Query query=getSession().getNamedQuery("findEditionByName").setString("edition", itemsedition);
+		List<Edition> itemseditionList=query.list();
+			if(itemseditionList.size() != 0){
+				return itemseditionList.get(0);
+			}
+			else{
+				return null;
+			}
+
+	}
+
 }
