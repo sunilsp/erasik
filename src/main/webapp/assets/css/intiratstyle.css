@@ -288,7 +288,7 @@ em {
 	color: red;
 }
 #validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
-#authorValidationFeedback{
+#authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;

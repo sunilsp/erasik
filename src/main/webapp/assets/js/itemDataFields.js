@@ -552,7 +552,46 @@ $("document").ready(function() {
 	$("#addItemsEdtionAjax").click(function(){		  
     	$.get( "addItemsEdtionAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 350 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Edition" );
 			$( "#float-modal-form" ).html( data );
+			$( "#editionValidationFeedback").hide();
+			var typeValidator = $("#itemsEditionForm").validate
+			({
+		        rules : {
+		        	itemsedition: {
+		                required : true
+		            },
+		            itemseditiondesc: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#editionValidationFeedback span").html(message);
+			            $("#editionValidationFeedback").show();
+			        } else {
+			            $("#editionValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#edtionReset").click(function() {
+				typeValidator.resetForm();
+		        $("#editionValidationFeedback span").html("");
+		        $("#editionValidationFeedback").hide();
+		    });
 
     		});
     });	   
@@ -631,7 +670,7 @@ $("document").ready(function() {
 			jQuery.validator.addMethod("greaterThan", 
 					function(value, element, params) {
 
-					    if (!isNaN(new Date(value))) {
+					    if (!/Invalid|NaN/.test(new Date(value))) {
 					        return new Date(value) > new Date($(params).val());
 					    }
 
@@ -747,7 +786,92 @@ $("document").ready(function() {
 	$("#addPublSupplAjax").click(function(){		  
     	$.get( "addPublSupplAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "width", 800 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 500 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Publish Supplier" );
 			$( "#float-modal-form" ).html( data );
+			$( "#pubSupplValidationFeedback").hide();
+			
+			var typeValidator = $("#itemsPublSupplForm").validate
+			({
+		        rules : {
+		        	englishName: {
+		                required : true
+		            },
+		            pubsupplmarathiName: {
+		                required : true
+		            },
+		            address1: {
+		                required : true
+		            },
+		            address2: {
+		                required : true
+		            },
+		            address3: {
+		                required : true
+		            },
+		            pincode: {
+		                required : true
+		            },
+		            city: {
+		                required : true
+		            },
+		            state: {
+		                required : true
+		            },
+		            country: {
+		                required : true
+		            },
+		            email: {
+		                required : true,
+		                email:true
+		            },
+		            phone1: {
+		                required : true
+		            },
+		            phone2: {
+		                required : true
+		            },
+		            fax: {
+		                required : true
+		            },
+		            mobile: {
+		                required : true
+		            },
+		            website: {
+		                required : true,
+		                url:true
+		            },
+		            contactPerson: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#pubSupplValidationFeedback span").html(message);
+			            $("#pubSupplValidationFeedback").show();
+			        } else {
+			            $("#pubSupplValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#publishReset").click(function() {
+				typeValidator.resetForm();
+		        $("#pubSupplValidationFeedback span").html("");
+		        $("#pubSupplValidationFeedback").hide();
+		    });
 
     		});
     });
