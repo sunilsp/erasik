@@ -887,7 +887,46 @@ $("document").ready(function() {
 	$("#addCategoriesAjax").click(function(){		  
     	$.get( "addCategoriesAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 280 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Category" );
 			$( "#float-modal-form" ).html( data );
+			$( "#categoryValidationFeedback").hide();
+			var typeValidator = $("#itemCategoryForm").validate
+			({
+		        rules : {
+		        	categoryHeadEnglish: {
+		                required : true
+		            },
+		            categoryHeadMarathi: {
+		                required : true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#categoryValidationFeedback span").html(message);
+			            $("#categoryValidationFeedback").show();
+			        } else {
+			            $("#categoryValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#categoryReset").click(function() {
+				typeValidator.resetForm();
+		        $("#categoryValidationFeedback span").html("");
+		        $("#categoryValidationFeedback").hide();
+		    });		
 
     		});
     });
@@ -982,7 +1021,52 @@ $("document").ready(function() {
 	$("#addAwarddetailsAjax").click(function(){		  
     	$.get( "addAwarddetailsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add Translation" );
 			$( "#float-modal-form" ).html( data );
+			$( "#awardValidationFeedback").hide();
+			var typeValidator = $("#itemAwardForm").validate
+			({
+		        rules : {
+		        	awardDetailsEnglish: {
+		                required : true
+		            },
+		            awardDetailsMarathi: {
+		                required : true
+		            }
+		            ,
+		            dateOfAward: {
+		                required : true,
+		                date:true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#awardValidationFeedback span").html(message);
+			            $("#awardValidationFeedback").show();
+			        } else {
+			            $("#awardValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#awardReset").click(function() {
+				typeValidator.resetForm();
+		        $("#awardValidationFeedback span").html("");
+		        $("#awardValidationFeedback").hide();
+		    });
+			$( "#dateOfAward" ).datepicker();
 
     		});
     });

@@ -901,8 +901,8 @@
 	<!-- Form for adding new Translation-->
 	<div th:fragment="addTranslationFragment" >
 		<div id="translationValidationFeedback">
-		<span></span>
-	</div>
+			<span></span>
+		</div>
 	<form class="clearfix tableDataFields" id="itemTranslationForm"  th:object="${translation}"  th:action="@{javascript:submitTranslationsAjax();}" action="message.html" name="itemTranslationForm"  method="post">
 		
 			<ul>
@@ -927,7 +927,11 @@
 	</form>
 	</div>
 	<!-- Form for adding new Categories -->
-	<form th:fragment="addCategoryFragment" class="clearfix tableDataFields" id="itemCategoryForm"  th:object="${itemscategory}"  th:action="@{javascript:submitadditemcategoryAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
+	<div th:fragment="addCategoryFragment">
+		<div id="categoryValidationFeedback">
+			<span></span>
+		</div>
+	<form  class="clearfix tableDataFields" id="itemCategoryForm"  th:object="${itemscategory}"  th:action="@{javascript:submitadditemcategoryAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
 		<fieldset title="Add Categories">
 			<ul>
 				<li>
@@ -939,37 +943,41 @@
 					<input type="text" autocomplete="on" required="on" name="categoryHeadMarathi" id="categoryHeadMarathi" th:field="*{categoryHeadMarathi}"/>
 				</li>
 				<li>
-					<input type="reset" value="Reset " id="reset" name="reset"/>
+					<input type="reset" value="Reset " id="categoryReset" name="categoryReset"/>
 					<input type="submit" value="Save" id="addCategorysubmitbtn" name="addCategorysubmitbtn"/>
 				</li>
 			</ul>
 		</fieldset>
 	</form>
-	
+	</div>
 	<!-- Form for adding new Awards -->
-	<form th:fragment="addAwardFragment" class="clearfix tableDataFields" id="itemAwardForm"  th:object="${itemsAward}"  th:action="@{javascript:submitadditemAwardAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
-		<fieldset title="Add Categories">
-			<ul>
-				<li>
-					<label for="awardDetailsEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>
-					<input type="text" autocomplete="on" required="on"  maxlength="500" name="awardDetailsEnglish" id="awardDetailsEnglish" th:field="*{awardDetailsEnglish}"/>
-				</li>
-				<li>
-					<label class="required" for="awardDetailsMarathi" th:text="@{Marathi Heading : }" >Marathi Heading : </label>
-					<input type="text" autocomplete="on" required="on" name="awardDetailsMarathi" id="awardDetailsMarathi" th:field="*{awardDetailsMarathi}"/>
-				</li>
-				<li>
-					<label for="dateOfAward" th:text="@{Award Date : }" class="required">Date Of Award : </label>
-					<input type="text" tabindex="430" autocomplete="on" required="on" name="dateOfAward" id="dateOfAward" th:field="*{dateOfAward}"/>
-				</li>
-				<li>
-					<input type="reset" value="Reset " id="reset" name="reset"/>
-					<input type="submit" value="Save" id="addAwardsubmitbtn" name="addAwardsubmitbtn"/>
-				</li>
-			</ul>
-		</fieldset>
-	</form>
-	
+	<div th:fragment="addAwardFragment">
+		<div id="awardValidationFeedback">
+			<span></span>
+		</div>
+		<form  class="clearfix tableDataFields" id="itemAwardForm"  th:object="${itemsAward}"  th:action="@{javascript:submitadditemAwardAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
+			<fieldset title="Add Categories">
+				<ul>
+					<li>
+						<label for="awardDetailsEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>
+						<input type="text" autocomplete="on" required="on"  maxlength="500" name="awardDetailsEnglish" id="awardDetailsEnglish" th:field="*{awardDetailsEnglish}"/>
+					</li>
+					<li>
+						<label class="required" for="awardDetailsMarathi" th:text="@{Marathi Heading : }" >Marathi Heading : </label>
+						<input type="text" autocomplete="on" required="on" name="awardDetailsMarathi" id="awardDetailsMarathi" th:field="*{awardDetailsMarathi}"/>
+					</li>
+					<li>
+						<label for="dateOfAward" th:text="@{Award Date : }" class="required">Date Of Award : </label>
+						<input type="text" tabindex="430" autocomplete="on" required="on" name="dateOfAward" id="dateOfAward" th:field="*{dateOfAward}"/>
+					</li>
+					<li>
+						<input type="reset" value="Reset " id="awardReset" name="awardReset"/>
+						<input type="submit" value="Save" id="addAwardsubmitbtn" name="addAwardsubmitbtn"/>
+					</li>
+				</ul>
+			</fieldset>
+		</form>
+	</div>
 	
 	<div th:fragment="uploadItemCoverFragment">
 <form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
