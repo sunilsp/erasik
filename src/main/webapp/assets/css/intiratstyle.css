@@ -287,7 +287,8 @@ label.required:before {
 em {
 	color: red;
 }
-#validationFeedback {
+#validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
+#authorValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;
@@ -303,7 +304,7 @@ em {
 	-ms-transition: all 0.2s ease;
 	-o-transition: all 0.2s ease;
 	transition: all 0.2s ease;
-	text-align: center;
+	text-align: center;	
 	font-weight: none;
 	font-size: 80%;
 	width:80%;
