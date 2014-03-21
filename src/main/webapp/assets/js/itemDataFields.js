@@ -887,7 +887,7 @@ $("document").ready(function() {
 	$("#addCategoriesAjax").click(function(){		  
     	$.get( "addCategoriesAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 280 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add New Category" );
 			$( "#float-modal-form" ).html( data );
 			$( "#categoryValidationFeedback").hide();
@@ -1021,7 +1021,7 @@ $("document").ready(function() {
 	$("#addAwarddetailsAjax").click(function(){		  
     	$.get( "addAwarddetailsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 480 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add Translation" );
 			$( "#float-modal-form" ).html( data );
 			$( "#awardValidationFeedback").hide();
