@@ -175,9 +175,9 @@
 					<input tabindex="10" type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>
 				</li>
 			</ul>
-		</fieldset>
+		
 	</form>
-	
+	</div>
 <!-- Form for adding new Reprint-->
 	<form th:fragment="itemReprintFragment" class="clearfix tableDataFields" id="itemsReprintForm"  th:object="${itemsReprint}"  th:action="@{javascript:submitadditemReprintAjax();}" action="message.html" name="reprintForm"  method="post">
 		<fieldset title="Add Item Reprint">
