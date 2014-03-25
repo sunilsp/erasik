@@ -157,6 +157,8 @@ public interface RasikService {
 	public List<Customer> findCustomerByUserName(String username);
 
 	public List<Reprint> findAllReprints();
+
+	public void saveitemReprint(Reprint reprint);
 	
 
 	

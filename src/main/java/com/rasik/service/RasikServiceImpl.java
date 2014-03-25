@@ -503,5 +503,10 @@ public class RasikServiceImpl implements RasikService {
 		return reprintDao.findAllReprints();
 	}
 
+	@Override
+	public void saveitemReprint(Reprint reprint) {
+		reprintDao.persist(reprint);		
+	}
+
 
 }

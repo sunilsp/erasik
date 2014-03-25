@@ -42,6 +42,31 @@ $("document").ready(function() {
 			});
 		}
 	});
+	
+	$("#reprintRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#reprintDetails").show();
+			$("#reprintDropdown").attr("required","on");
+			$("#reprintDropdown").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	
+	$("#reprintRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#reprintDetails").hide();
+			$("#reprintDropdown").removeAttr( "required" );
+			$("#reprintDropdown").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
 	/*
 	 * Start of Add Item Form validations 
 	 */
@@ -1367,6 +1392,29 @@ $("document").ready(function() {
 			}
 			
 			submitadditemReprintAjax=function(){
+				$.ajax({
+					type: "POST",
+					url: "submitadditemReprintAjax.html",
+					data:$("#itemsReprintForm").serialize(),
+					dataType:"json"
+				}).done(function(data) {
+				    alert( "Item reprint Saved" );
+					$( "#float-modal-form" ).dialog( "close" );
+					$("#reprintDropdown").empty();
+					$("#reprintDropdown").append(
+		                     "<option value='' >" + "Select"+ "</option>");
+					 $.each(data, function(i, val) {
+						 
+			                $("#reprintDropdown").append(
+			                        "<option value=" + val.reprintId + ">" + val.reprint+ "</option>");
+			            });
+				  })
+				  .fail(function(faildata) {
+				    alert(faildata.responseText);
+				  });
+
+
+
 				
 			}
 			
@@ -1392,6 +1440,57 @@ $("document").ready(function() {
 			   }
 			   else
 				   $("#selectStockCenter").dialog("close");
+		   });
+		
+		   var englishNameofBook="";
+		  /* $("#marathiName").keypress(function(event){
+			   englishNameofBook.concat(String.fromCharCode(event.which));
+			  });
+		   */
+		  /* $("#marathiName").blur(function(){
+			   $("#englishName").val($("#marathiName").val());
+			});
+		  */ 
+		   
+		   $("#purchasePrice").blur(function(){
+			   if($("#price").val() != ""){
+				   if($("#purchasePrice").val() != ""){
+					   
+					   $("#purchaseDiscountPercent").val((($("#price").val()-$("#purchasePrice").val())/$("#price").val()) * 100);
+				   
+				   }
+			   }
+		   });
+		   
+		   
+		   $("#purchaseDiscountPercent").blur(function(){
+			   if($("#price").val() != ""){
+				   if($("#purchaseDiscountPercent").val() != ""){
+					   
+					   $("#purchasePrice").val($("#price").val()-($("#price").val()*$("#purchaseDiscountPercent").val() /100));
+				   
+				   }
+			   }
+		   });
+		   
+		   $("#maxSaleDiscountPrecent").blur(function(){
+			   if($("#price").val() != ""){
+				   if($("#maxSaleDiscountPrecent").val() != ""){
+					   
+					   $("#maxSaleDiscountPrice").val($("#price").val()-($("#price").val()*$("#maxSaleDiscountPrecent").val() /100));
+				   
+				   }
+			   }
+		   });
+		   
+		   $("#maxSaleDiscountPrice").blur(function(){
+			   if($("#price").val() != ""){
+				   if($("#maxSaleDiscountPrice").val() != ""){
+					   
+					   $("#maxSaleDiscountPrecent").val((($("#price").val()-$("#maxSaleDiscountPrice").val())/$("#price").val()) * 100);
+				   
+				   }
+			   }
 		   });
 		   
 			function HTMLEncode(str){

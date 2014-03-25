@@ -815,6 +815,29 @@ class RasikDBController {
 		}
 	}
 
+	
+	@RequestMapping(value = { "admin/submitadditemReprintAjax.html" }, method = RequestMethod.POST)
+	public String submitadditemReprintAjax(
+			HttpServletResponse response,
+			Model model,
+			@ModelAttribute Reprint reprint,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith)
+			throws IOException {
+		logger.info("Inside submitadditemReprintAjax()");
+
+		//if (rasikSvc.findItemReprint(reprint) == null) {
+			rasikSvc.saveitemReprint(reprint);
+
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				response.getOutputStream().print(returnJson(rasikSvc.findAllReprints()));
+				response.setStatus(200);
+				return null;
+			} else {
+				model.addAttribute("message", "Publisher/Supplier saved.");
+				return "html/message";
+			}
+		}
+
 	/*
 	 * Start : Add Item functions
 	 */
