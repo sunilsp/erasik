@@ -366,10 +366,10 @@ $("document").ready(function() {
 	 * Make fields optional on radio click
 	 */
 		
-	$( "#maxSalePriceEndDate" ).datepicker();
-	$( "#maxOwDiscountEndDate" ).datepicker();
-	$( "#maxInwDiscountEndDate" ).datepicker();
-	$( "#discountedpriceEndDate" ).datepicker();
+	$( "#maxSalePriceEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
+	$( "#maxOwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
+	$( "#maxInwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
+	$( "#discountedpriceEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
     
     /**
      * 
@@ -400,7 +400,7 @@ $("document").ready(function() {
 				                required : true
 				            },
 				            vatPerc: {
-				                required : true
+				                required : false
 				            }
 				        },
 				        faultPlacement : function(fault, element) {
@@ -755,13 +755,13 @@ $("document").ready(function() {
 		                required : true
 		            },
 		            address1: {
-		                required : true
+		                required : false
 		            },
 		            address2: {
-		                required : true
+		                required : false
 		            },
 		            address3: {
-		                required : true
+		                required : false
 		            },
 		            pincode: {
 		                required : true
@@ -776,34 +776,37 @@ $("document").ready(function() {
 		                required : true
 		            },
 		            email: {
-		                required : true,
+		                required : false,
 		                email:true
 		            },
 		            phone1: {
-		                required : true
+		                required : false
 		            },
 		            phone2: {
-		                required : true
+		                required : false
 		            },
 		            fax: {
-		                required : true
+		                required : false
 		            },
 		            mobile: {
-		                required : true
+		                required : false
 		            },
 		            prefix: {
 		                required : true
 		            },
 		            dateOfBirth: {
-		                required : true,
+		                required : false,
+		                dateFormat: 'dd-mm-yyyy',
 		                date:true
 		            },
 		            expiredDate: {
+		            	required : false,
 		                date:true,
+		                dateFormat: 'dd-mm-yyyy',
 		                greaterThan: "#dateOfBirth"
 		            },
 		            photo: {
-		                required : true
+		                required : false
 		            },
 		        },
 		        faultPlacement : function(fault, element) {
@@ -832,8 +835,8 @@ $("document").ready(function() {
 		        $("#authorValidationFeedback span").html("");
 		        $("#authorValidationFeedback").hide();
 		    });
-			$( "#expiredDate" ).datepicker();
-			$( "#dateOfBirth" ).datepicker();
+			$( "#expiredDate" ).datepicker({ dateFormat: "dd/mm/yy" });
+			$( "#dateOfBirth" ).datepicker({ dateFormat: "dd/mm/yy" });
 
     		});
     });
@@ -849,7 +852,7 @@ $("document").ready(function() {
 		$.get( "addItemReprintAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
 			$( "#float-modal-form" ).html( data );
-
+			$( "#float-modal-form" ).dialog( "option", "title", "Add New Reprint" );
     		});
 		
 			
@@ -875,13 +878,13 @@ $("document").ready(function() {
 		                required : true
 		            },
 		            address1: {
-		                required : true
+		                required : false
 		            },
 		            address2: {
-		                required : true
+		                required : false
 		            },
 		            address3: {
-		                required : true
+		                required : false
 		            },
 		            pincode: {
 		                required : true
@@ -900,19 +903,19 @@ $("document").ready(function() {
 		                email:true
 		            },
 		            phone1: {
-		                required : true
+		                required : false
 		            },
 		            phone2: {
-		                required : true
+		                required : false
 		            },
 		            fax: {
-		                required : true
+		                required : false
 		            },
 		            mobile: {
-		                required : true
+		                required : false
 		            },
 		            website: {
-		                required : true,
+		                required : false,
 		                url:true
 		            },
 		            contactPerson: {
@@ -1072,12 +1075,12 @@ $("document").ready(function() {
 		}).done(function(data) {
 		    alert( "Translation Saved" );
 			$( "#float-modal-form" ).dialog( "close" );
-			$("#TranslationsDD").empty();
-			$("#TranslationsDD").append(
+			$("#translationsDD").empty();
+			$("#translationsDD").append(
                     "<option value='' >" + "Select"+ "</option>");
 			 $.each(data, function(i, val) {
 				 
-	                $("#TranslationsDD").append(
+	                $("#translationsDD").append(
 	                        "<option value=" + val.translaionId + ">" + val.originalname+ "</option>");
 	            });
 		  })
@@ -1095,7 +1098,7 @@ $("document").ready(function() {
     	$.get( "addAwarddetailsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
   			$( "#float-modal-form" ).dialog( "option", "height", 480 );
-  			$( "#float-modal-form" ).dialog( "option", "title", "Add Translation" );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add Award Details" );
 			$( "#float-modal-form" ).html( data );
 			$( "#awardValidationFeedback").hide();
 			var typeValidator = $("#itemAwardForm").validate
@@ -1110,6 +1113,7 @@ $("document").ready(function() {
 		            ,
 		            dateOfAward: {
 		                required : true,
+		                dateFormat: 'dd-mm-yy',
 		                date:true
 		            }
 		        },
@@ -1139,7 +1143,7 @@ $("document").ready(function() {
 		        $("#awardValidationFeedback span").html("");
 		        $("#awardValidationFeedback").hide();
 		    });
-			$( "#dateOfAward" ).datepicker();
+			$( "#dateOfAward" ).datepicker({ dateFormat: "dd/mm/yy" });
 
     		});
     });
@@ -1431,7 +1435,7 @@ $("document").ready(function() {
 		        });
 
 		   $("#exitAddItem").click(function(){
-			   window.location="http://localhost/erasik/admin/showItemTypes.html";
+			   window.location="showItemTypes.html";
 		   });
 		   
 		   $("#selectStockCenterSubmit").click(function(){

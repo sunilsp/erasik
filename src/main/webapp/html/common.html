@@ -78,7 +78,7 @@
 					<input type="text" tabindex="" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
 				</li>
 				<li>
-					<label class="required" for="vatPerc">Vat Percentage : </label>
+					<label for="vatPerc">Vat Percentage : </label>
 					<input type="text" tabindex="" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
 				</li>
 				<li>
@@ -97,7 +97,7 @@
 					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
 				</li>
 				<li>
-					<label class="required" for="vatPerc">Vat Percentage : </label>
+					<label  for="vatPerc">Vat Percentage : </label>
 					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
 				</li>
 				<li>
@@ -191,7 +191,7 @@
 					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" th:field="*{reprintMonth}"/>
 				</li>
 				<li>
-					<label class="required" for="editionYear">Edition Year: </label>
+					<label class="required" for="editionYear">Reprint Year: </label>
 					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintYear" id="reprintYear" th:field="*{reprintYear}"/>
 				</li>
 				<li>
@@ -207,7 +207,7 @@
 		<fieldset title="Add Stock Center" >
 			<ul>
 			<li>
-				<label for="cust_en_name" th:text="@{Stock Center Head : }" class="required">Stock Center Head : </label>
+				<label for="cust_en_name" th:text="@{Stock Center Name : }" class="required">Stock Center Name : </label>
 				<input type="text" tabindex="20" autocomplete="on" required="on" name="stockCenterHead" id="stockCenterHead" th:field="*{stockCenterHead}"/>
 			</li>
 			<li>
@@ -241,7 +241,11 @@
 			</li>
 			<li>
 				<label for="canCreateInvoice" th:text="@{Can Create Invoice : }" class="required">Can Create Invoice : </label>
-				<input type="text" tabindex="170" autocomplete="on" required="on" name="canCreateInvoice" id="canCreateInvoice" th:field="*{canCreateInvoice}"/>
+				<select autocomplete="on" required="on" name="canCreateInvoice" id="canCreateInvoice" th:field="*{canCreateInvoice}">
+				<option value="Y">Yes</option>
+				<option value="N">No</option>
+				</select>
+				
 			</li>
 			<li>
 				<input tabindex="150" type="reset" value="Reset " id="reset" name="reset"/>
@@ -269,15 +273,15 @@
 					<input type="text" autocomplete="on" required="on" name="auth_mr_name" id="auth_mr_name" th:field="*{marathiName}"/>
 				</li>
 				<li class="elem-3">
-					<label for="address1" th:text="@{Addresse Line 1 }" class="required">Addresse Line 1 : </label>
+					<label for="address1" th:text="@{Addresse Line 1 }" >Addresse Line 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
 				</li>
 				<li class="elem-3">
-					<label for="address2" th:text="@{Addresse Line 2 }" class="required">Addresse Line 2 : </label>
+					<label for="address2" th:text="@{Addresse Line 2 }" >Addresse Line 2 : </label>
 					<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
 				</li>
 				<li class="elem-3">
-					<label for="address3" th:text="@{Addresse Line 3 }" class="required">Addresse Line 3 : </label>
+					<label for="address3" th:text="@{Addresse Line 3 }" >Addresse Line 3 : </label>
 					<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
 				</li>
 				<li class="elem-3">
@@ -541,7 +545,7 @@
 					</select>
 				</li>
 				<li class="elem-3">
-					<label for="email" th:text="@{E-mail }" class="required">E-mail : </label>
+					<label for="email" th:text="@{E-mail }" >E-mail : </label>
 					<input type="email" autocomplete="on" required="on" name="email" id="email" th:field="*{email}"/>
 				</li>
 				</ul>
@@ -550,36 +554,36 @@
 					<ul>
 				
 				<li class="elem-3">
-					<label for="phone1" th:text="@{Phone No 1 }" class="required">Phone No 1 : </label>
+					<label for="phone1" th:text="@{Phone No 1 }" >Phone No 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
 				</li>
 				<li class="elem-3">
-					<label for="phone2" th:text="@{Phone No 2 }" class="required">Phone No 2 : </label>
+					<label for="phone2" th:text="@{Phone No 2 }" >Phone No 2 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
 				</li>
 				<li class="elem-3">
-					<label for="fax" th:text="@{Fax }" class="required">Fax : </label>
+					<label for="fax" th:text="@{Fax }" >Fax : </label>
 					<input type="text" autocomplete="on" required="on" name="fax" id="fax" th:field="*{fax}"/>
 				</li>
 				<li class="elem-3">
-					<label for="mobile" th:text="@{Mobile }" class="required">Mobile : </label>
+					<label for="mobile" th:text="@{Mobile }" >Mobile : </label>
 					<input type="text" autocomplete="on" required="on" name="mobile" id="mobile" th:field="*{mobile}"/>
 				</li>
 				<li class="elem-3">
-					<label for="prefix" th:text="@{Prefix }" class="required">Prefix : </label>
+					<label for="prefix" th:text="@{Prefix }" >Prefix : </label>
 					<input type="text" autocomplete="on" required="on" name="prefix" id="prefix" th:field="*{prefix}"/>
 				</li>
 				<li class="elem-3">
-					<label for="photo" th:text="@{Picture }" class="required">Picture : </label>
+					<label for="photo" th:text="@{Picture }" >Picture : </label>
 					<input type="file" autocomplete="on" required="on" name="photo" id="photo" th:field="*{photo}"/>
 					<input type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
 				</li>
 				<li class="elem-3">
-					<label for="dob" th:text="@{Date of Birth}" class="required">Date of Birth : </label>
+					<label for="dob" th:text="@{Date of Birth}" >Date of Birth : </label>
 					<input type="text" autocomplete="on" required="on" name="dateOfBirth" id="dateOfBirth" th:field="*{dateOfBirth}"/>
 				</li>
 				<li class="elem-3">
-					<label for="doe" th:text="@{Died on Date }" class="required">Died on Date : </label>
+					<label for="doe" th:text="@{Died on Date }">Died on Date : </label>
 					<input type="text" autocomplete="on" required="on" name="expiredDate" id="expiredDate" th:field="*{expiredDate}"/>
 				</li>
 				<li class="elem-3">
@@ -607,15 +611,15 @@
 						<input type="text"  autocomplete="on" required="on" name="pubsupplmarathiName" id="pubsupplmarathiName" th:field="*{marathiName}"/>
 					</li>
 					<li class="elem-3">
-					<label for="cust_mr_name" th:text="@{Address Line 1 : }" class="required">Address Line 1 : </label>
+					<label for="cust_mr_name" th:text="@{Address Line 1 : }" >Address Line 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
 					</li>
 					<li class="elem-3">
-						<label for="address1" th:text="@{Addresse Line 2 : }" class="required">Addresse Line 2 : </label>
+						<label for="address1" th:text="@{Addresse Line 2 : }" >Addresse Line 2 : </label>
 						<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
 					</li>
 					<li class="elem-3">
-						<label for="address2" th:text="@{Addresse Line 3 : }" class="required">Addresse Line 3 : </label>
+						<label for="address2" th:text="@{Addresse Line 3 : }" >Addresse Line 3 : </label>
 						<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
 					</li>
 					<li class="elem-3">
@@ -882,7 +886,7 @@
 					</select>
 					</li>
 					<li class="elem-3">
-					<label for="email" th:text="@{E-mail }" class="required">E-mail : </label>
+					<label for="email" th:text="@{E-mail }" >E-mail : </label>
 					<input type="email" autocomplete="on" required="on" name="email" id="email" th:field="*{email}"/>
 					</li>
 				</ul>
@@ -890,29 +894,26 @@
 				<fieldset title="&nbsp;" class="foldedset">
 				<ul>
 					<li class="elem-3">
-					<label for="phone1" th:text="@{Phone No 1 : }" class="required">Phone No 1 : </label>
+					<label for="phone1" th:text="@{Phone No 1 : }" >Phone No 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
 					</li>
 					<li class="elem-3">
-						<label for="phone2" th:text="@{Phone No 2 : }" class="required">Phone No 2 : </label>
+						<label for="phone2" th:text="@{Phone No 2 : }" >Phone No 2 : </label>
 						<input type="text" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
 					</li>
 					<li class="elem-3">
-						<label for="fax" th:text="@{Fax : }" class="required">Fax : </label>
+						<label for="fax" th:text="@{Fax : }" >Fax : </label>
 						<input type="text" autocomplete="on" required="on" name="fax" id="fax" th:field="*{fax}"/>
 					</li>
 					<li class="elem-3">
-						<label for="mobile" th:text="@{Mobile : }" class="required">Mobile : </label>
+						<label for="mobile" th:text="@{Mobile :}">Mobile : </label>
 						<input type="text" autocomplete="on" required="on" name="mobile" id="mobile" th:field="*{mobile}"/>
 					</li>
 					<li class="elem-3">
-						<label for="website" th:text="@{Website : }" class="required">Website : </label>
+						<label for="website" th:text="@{Website : }" >Website : </label>
 						<input type="text" autocomplete="on" required="on" name="website" id="website" th:field="*{website}"/>
 					</li>
-					<li class="elem-3">
-						<label for="fax" th:text="@{Fax : }" class="required">Fax : </label>
-						<input type="text" autocomplete="on" required="on" name="fax" id="fax" th:field="*{fax}"/>
-					</li>
+					
 					<li class="elem-3">
 					<label for="contactPerson" th:text="@{Contact Person : }" class="required">Contact Person : </label>
 					<input type="text" autocomplete="on" required="on" name="contactPerson" id="contactPerson" th:field="*{contactPerson}"/>
@@ -984,7 +985,7 @@
 			<span></span>
 		</div>
 		<form  class="clearfix tableDataFields" id="itemAwardForm"  th:object="${itemsAward}"  th:action="@{javascript:submitadditemAwardAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
-			<fieldset title="Add Categories">
+			<fieldset title="Add Award Details">
 				<ul>
 					<li>
 						<label for="awardDetailsEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>

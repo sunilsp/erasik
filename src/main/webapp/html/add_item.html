@@ -75,7 +75,7 @@ xmlns:th="http://www.thymeleaf.org">
 										<label for="Translations" th:text="@{Translations : }" class="required">Translations : </label>
 										<select tabindex="110" id="translationsDD" name="translationslDD" required="required">
 											<option value="" th:text="Select ">Select</option>
-											<option th:each="itemsTranslations : ${translationList}" th:value="${itemsTranslations.translationId}" th:text="${itemsTranslations.originalname}">Wireframe</option>
+											<option th:each="itemsTranslations : ${translationList}" th:value="${itemsTranslations.translationId}" th:text="${itemsTranslations.translatedfrom}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="120" th:id="addTranslationsAjax" id="addTranslationsAjax" name="addTranslationsAjax" value="New Translation"/>
 									</li>
@@ -87,7 +87,7 @@ xmlns:th="http://www.thymeleaf.org">
 									
 									<li class="elem-3">
 										<label for="englishName" th:text="@{English Name : }" class="required">Item Name (English) : </label>
-										<input readonly="readonly" type="text" tabindex="140" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
+										<input type="text" tabindex="140" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
 									</li>
 									<li class="elem-3">
 										<label for="Author" th:text="@{Author : }" class="required">Author : </label>
@@ -274,7 +274,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>
 					<select tabindex="110" id="stockCenterDD" name="stockCenterDD">
 					<option value="" th:text="Select ">Select</option>
-					<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterId}">Wireframe</option>
+					<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterHead}">Wireframe</option>
 					</select>
 					<input type="button" tabindex="120" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
 				</li>
