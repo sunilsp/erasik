@@ -3,27 +3,28 @@
  */
 $("document").ready(function() {
 	
-	   $("#selectStockCenter").dialog({
-			autoOpen: false,
-			height: 300,
-			width: 600,
-			modal: true, 
-			closeOnEscape: false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-			});
-	 
-	   
-	   $("#tempFileId").val(tempId);
-	   $("#isbnno").focus();
-		
-	$("#selectStockCenter").dialog("open");
-	
+	$("#selectStockCenter").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 600,
+		modal: true, 
+		closeOnEscape: false,
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+		});
+	$("#tempFileId").val(tempId);
+	$("#isbnno").focus();
+	$( "#selectStockCenter" ).dialog( "option", "height", 250 );
+	$( "#selectStockCenter" ).dialog( "option", "title", "Select Stock Center" );
+	$( "#selectStockCenter").dialog("open");
+	/*
+	 * Make fields optional on radio click
+	 */
 	$("#translationRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#translationDetails").show();
-			$("#TranslationsDD").attr("required","on");
-			$("#TranslationsDD").rules('add', {
+	if ( $( this ).is( ":checked" ) )
+	{
+		$("#translationDetails").show();
+		$("#TranslationsDD").attr("required","on");
+		$("#TranslationsDD").rules('add', {
 				languageDropdown : {
 	                required : true
 	            }
@@ -67,6 +68,57 @@ $("document").ready(function() {
 			});
 		}
 	});
+	
+	$("#awardRadioYAjax").change(function(){
+		if ( $( this ).is( ":checked" ) )
+		{
+			$("#awardDetails").show();
+			$("#AwarddetailsDD").attr("required","on");
+			$("#AwarddetailsDD").rules('add', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	$("#awardRadioNAjax").change(function(){
+		if ( $( this ).is( ":checked" ) ){
+			$("#awardDetails").hide();
+			$("#AwarddetailsDD").removeAttr( "required" );
+			$("#AwarddetailsDD").rules('remove', {
+				languageDropdown : {
+	                required : true
+	            }
+			});
+		}
+	});
+	/*
+	 * custom validation
+	 */
+	jQuery.validator.addMethod("numberGreaterThan", 
+			function(value, element, params) {
+
+			    if (!/Invalid|NaN/.test(value)) {
+			        return (Number(value) >= Number($(params).val()));
+			    }
+
+			    return isNaN(value) && isNaN($(params).val()) 
+			        || (Number(value) >= Number($(params).val())); 
+			},'Must be greater than {0}.');
+
+	jQuery.validator.addMethod("numberLessThan", 
+			function(value, element, params) {
+
+		if (!/Invalid|NaN/.test(value)) {
+	        return (Number(value) <=	Number($(params).val()));
+	    }
+
+	    return isNaN(value) && isNaN($(params).val()) 
+	        || (Number(value) <=	Number($(params).val())); 
+			},'Must be less than {0}.');
+	/*
+	 * custom validation
+	 */
 	/*
 	 * Start of Add Item Form validations 
 	 */
@@ -76,8 +128,7 @@ $("document").ready(function() {
 	 * start of validation settings
 	 */
 	var queryValidator = $("#addItemForm").validate({
-        rules : {
-        	
+        rules : {        	
         	userBookCode: {
                 required : true
             },
@@ -90,45 +141,64 @@ $("document").ready(function() {
             languageDropdown : {
                 required : true
             },
-            translationsDD:
-            {required : true},
+            translationsDD : {
+            	required : true
+            },
+            reprintDropdown : {
+            	required : true
+            },
             englishName: {
                 required : false
             },
             marathiName : {
                 required : true
             },
-            authorDD:{required : true},
-            PublSupplDD:{required : true},
+            authorDD : {
+            	required : true
+            },
+            PublSupplDD : {
+            	required : true
+            },
             price : {
                 required : true,
-                number:true
+                number:true,
+                min:0
             },
             discountedprice : {
-                required : true,
+                required : false ,
                 number:true
             },
             discountedpriceEndDate: {
-                required : true
+                required : true,
+                date:true
             },
             purchasePrice: {
-                required : true
+                required : true,
+                number:true,
+                numberLessThan:"#price",
+                min:0
             },
             purchaseDiscountPercent: {
-                required : true
+                required : false ,
+                number:true,
+                min:0
             },
             
             maxSaleDiscountPrecent:{
-            	reuired:true
+            	reuired:true,
+                number:true
             },
             
             maxSaleDiscountPrice:{
-            	required:true
+            	required:true,
+                number:true
             },
             editionDropdown: {
                 required : true
             },
-            CategoriesDD:{required : true},       
+            CategoriesDD : {
+            	required : true
+            },       
             AwarddetailsDD : {
                 required : true
             },
@@ -139,18 +209,6 @@ $("document").ready(function() {
                 required : true,
                 number:true
             },
-            publMonth:{
-            	required:true
-            },
-            publYear:{
-            	required:true
-            },
-            reprintMonth:{
-            	required:true
-            },
-            reprintYear:{
-            	required:true
-            },
             noOfPages:{
             	required:true,
             	number:true
@@ -159,18 +217,21 @@ $("document").ready(function() {
                 required : true
             },
             stockAmount:{
-            	required:true
+            	required:true,
+                number:true
             },
             location:{
             	required:true
             },
-            minLvl : {
+            minLevel : {
                 required : true,
-                number:true
+                number:true,
+                min:0
             },
-            maxLvl : {
+            maxLevel : {
                 required : true,
-                number:true
+                number:true,
+                min:0
             },
             itemCoverImageFileName:{
             	required:true
@@ -178,21 +239,10 @@ $("document").ready(function() {
             maxSalePrice : {
                 required : true,
                 number:true
-            },
-            
-            isbnno : {
-                required : true,
-                number:true
             },            
-            noOfPages : {
-                required : true,
-                number:true
-            },
-            
             description : {
                 maxlength : 24
-            },
-            
+            },            
             maxSalePriceEndDate : {
             	required : true,
                 date : true
@@ -270,102 +320,9 @@ $("document").ready(function() {
 	 * End of Add Item Form validations 
 	 */
 	
-	//var accordion = $("#addItemForm").accordion();
-	
-	   $("#selectStockCenter").dialog({
-			autoOpen: false,
-			height: 300,
-			width: 600,
-			modal: true, 
-			closeOnEscape: false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-			});
-	 
-	  $("#tempFileId").val(tempId);
-	   
-		
-	$("#selectStockCenter").dialog("open");
-	
-	/*
-	 * Make fields optional on radio click
-	 */
-	$("#languageRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#languageDetails").show();
-			$("#languageDropdown").attr("required","on");
-			$("#languageDropdown").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#languageRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#languageDetails").hide();
-			$("#languageDropdown").removeAttr( "required" );
-			$("#languageDropdown").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	
-	$("#translationRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#translationDetails").show();
-			$("#TranslationsDD").attr("required","on");
-			$("#TranslationsDD").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#translationRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#translationDetails").hide();
-			$("#TranslationsDD").removeAttr( "required" );
-			$("#TranslationsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	
-	$("#awardRadioYAjax").change(function(){
-		if ( $( this ).is( ":checked" ) )
-		{
-			$("#awardDetails").show();
-			$("#AwarddetailsDD").attr("required","on");
-			$("#AwarddetailsDD").rules('add', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
-	$("#awardRadioNAjax").change(function(){
-		if ( $( this ).is( ":checked" ) ){
-			$("#awardDetails").hide();
-			$("#AwarddetailsDD").removeAttr( "required" );
-			$("#AwarddetailsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
-		}
-	});
 	
 	
-	/*
-	 * Make fields optional on radio click
-	 */
-		
+	
 	$( "#maxSalePriceEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
 	$( "#maxOwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
 	$( "#maxInwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
@@ -400,8 +357,17 @@ $("document").ready(function() {
 				                required : true
 				            },
 				            vatPerc: {
-				                required : false
+				                number:true,
+				                required:false,
+				                min:0,
+				                max:100
 				            }
+				        },
+				        
+				        messages : {
+				        	description: {
+				                required : "Provide item description."
+				            }				           
 				        },
 				        faultPlacement : function(fault, element) {
 				            
@@ -428,7 +394,14 @@ $("document").ready(function() {
 						typeValidator.resetForm();
 				        $("#typeValidationFeedback span").html("");
 				        $("#typeValidationFeedback").hide();
-				    });			
+				    });
+					
+					$( "#itemTypeCancel").click(function() {
+						$( "#float-modal-form" ).dialog( "close" );
+						event.preventDefault();
+				    });
+					
+					
     		});   	
     });
     submitItemTypeAjax = function(){
@@ -460,7 +433,7 @@ $("document").ready(function() {
 	$("#addBindingTypeAjax").click(function(){		  
     	$.get( "addBindingTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 280 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 420 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add Binding Types" );
 			$( "#float-modal-form" ).html( data );
 			$( "#bindingValidationFeedback").hide();
@@ -469,6 +442,18 @@ $("document").ready(function() {
 		        rules : {
 		        	bindingTypeName: {
 		                required : true
+		            },
+		            height: {
+		                required : true,
+		                number:true
+		            },
+		            width: {
+		                required : true,
+		                number:true
+		            },
+		            length: {
+		                required : true,
+		                number:true
 		            }
 		        },
 		        faultPlacement : function(fault, element) {
@@ -496,7 +481,13 @@ $("document").ready(function() {
 				typeValidator.resetForm();
 		        $("#bindingValidationFeedback span").html("");
 		        $("#bindingValidationFeedback").hide();
-		    });			
+		    });	
+			$( "#bindingTypeCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });	
+			
+			
     	}); 
     });	    
 	submitBindingTypeAjax = function(){
@@ -555,6 +546,11 @@ $("document").ready(function() {
 		                required : true
 		            }
 		        },
+		        messages : {
+		        	languageName: {
+		                required : "Provide language name."
+		            }
+		        },
 		        faultPlacement : function(fault, element) {
 		            
 		            fault.insertAfter(element);
@@ -580,6 +576,11 @@ $("document").ready(function() {
 				typeValidator.resetForm();
 		        $("#languageValidationFeedback span").html("");
 		        $("#languageValidationFeedback").hide();
+		    });
+			
+			$( "#languageCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
 		    });
 
     		});
@@ -615,18 +616,23 @@ $("document").ready(function() {
 	$("#addItemsEdtionAjax").click(function(){		  
     	$.get( "addItemsEdtionAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 350 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add New Edition" );
 			$( "#float-modal-form" ).html( data );
 			$( "#editionValidationFeedback").hide();
+			var nowYear = new Date().getFullYear();
 			var typeValidator = $("#itemsEditionForm").validate
 			({
 		        rules : {
 		        	itemsedition: {
 		                required : true
 		            },
-		            itemseditiondesc: {
+		            editionMonth: {
 		                required : true
+		            },
+		            editionYear : {
+		            	required : true,
+		            	max:nowYear
 		            }
 		        },
 		        faultPlacement : function(fault, element) {
@@ -654,6 +660,11 @@ $("document").ready(function() {
 				typeValidator.resetForm();
 		        $("#editionValidationFeedback span").html("");
 		        $("#editionValidationFeedback").hide();
+		    });
+			
+			$( "#edtionCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
 		    });
 
     		});
@@ -688,7 +699,74 @@ $("document").ready(function() {
 	$("#addStockCenterAjax").click(function(){		  
     	$.get( "addStockCenterAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 550 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Stock Center" );
 			$( "#float-modal-form" ).html( data );
+			$( "#addStockCenterValidationFeedback").hide();
+			var typeValidator = $("#itemStockCenterForm").validate
+			({
+		        rules : {
+		        	stockCenterHead: {
+		                required : true
+		            },
+		            address1: {
+		                required : true
+		            },
+		            address2: {
+		                required : true
+		            },
+		            address3: {
+		                required : false
+		            },
+		            phone1: {
+		                required : true,
+		                number:true
+		            },
+		            phone2: {
+		                required : false,
+		                number:true
+		            },
+		            contactPerson:{
+		            	required : true
+		            },
+		            centerCount:{
+		            	required:true,
+		            	number:true
+		            },
+		            canCreateInvoice:{
+		            	required:true
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#addStockCenterValidationFeedback span").html(message);
+			            $("#addStockCenterValidationFeedback").show();
+			        } else {
+			            $("#addStockCenterValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#addStockCenterReset").click(function() {
+				typeValidator.resetForm();
+		        $("#addStockCenterValidationFeedback span").html("");
+		        $("#addStockCenterValidationFeedback").hide();
+		    });
+			$( "#addStockCenterCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });
 
     		});
     });
@@ -730,7 +808,7 @@ $("document").ready(function() {
 			/*
 			 * custom validation
 			 */
-			jQuery.validator.addMethod("greaterThan", 
+			jQuery.validator.addMethod("dateGreaterThan", 
 					function(value, element, params) {
 
 					    if (!/Invalid|NaN/.test(new Date(value))) {
@@ -741,7 +819,16 @@ $("document").ready(function() {
 					        || (Number(value) > Number($(params).val())); 
 					},'Must be greater than {0}.');
 
-			
+			jQuery.validator.addMethod("dateLessThan", 
+					function(value, element, params) {
+
+					    if (!/Invalid|NaN/.test(new Date(value))) {
+					        return new Date(value) < new Date($(params).val());
+					    }
+
+					    return isNaN(value) && isNaN($(params).val()) 
+					        || (Number(value) < Number($(params).val())); 
+					},'Must be less than {0}.');
 			/*
 			 * custom validation
 			 */
@@ -764,7 +851,10 @@ $("document").ready(function() {
 		                required : false
 		            },
 		            pincode: {
-		                required : true
+		                required : true,
+		                number:true,
+		                minlength:6,
+		                maxlength:6
 		            },
 		            city: {
 		                required : true
@@ -780,16 +870,20 @@ $("document").ready(function() {
 		                email:true
 		            },
 		            phone1: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            phone2: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            fax: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            mobile: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            prefix: {
 		                required : true
@@ -797,13 +891,14 @@ $("document").ready(function() {
 		            dateOfBirth: {
 		                required : false,
 		                dateFormat: 'dd-mm-yyyy',
-		                date:true
+		                date:true,
+		                dateLessThan: "#expiredDate"
 		            },
 		            expiredDate: {
 		            	required : false,
 		                date:true,
 		                dateFormat: 'dd-mm-yyyy',
-		                greaterThan: "#dateOfBirth"
+		                dateGreaterThan: "#dateOfBirth"
 		            },
 		            photo: {
 		                required : false
@@ -828,6 +923,7 @@ $("document").ready(function() {
 		        	form.submit();
 		        
 		        },
+		        
 		        onkeyup : true,
 		    });
 			$( "#authorReset").click(function() {
@@ -835,12 +931,56 @@ $("document").ready(function() {
 		        $("#authorValidationFeedback span").html("");
 		        $("#authorValidationFeedback").hide();
 		    });
-			$( "#expiredDate" ).datepicker({ dateFormat: "dd/mm/yy" });
-			$( "#dateOfBirth" ).datepicker({ dateFormat: "dd/mm/yy" });
-
-    		});
+			
+			/**
+			 * 
+			 */
+			var today = new Date();
+			var dateOptions = {
+			    maxDate: today,
+			    dateFormat: "dd/mm/yy"
+			};
+			/*
+			 * 
+			 */
+			
+			$( "#expiredDate" ).datepicker(dateOptions);
+			$( "#dateOfBirth" ).datepicker(dateOptions);
+			
+			$( "#authorCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+	    	});
+    	});
     });
 	
+	submitaddauthorAjax=function(){
+		
+		$("#auth_mr_name").val(HTMLEncode($("#auth_mr_name").val()));
+		
+		
+		$.ajax({
+			type: "POST",
+			url: "submitaddAuthorAjax.html",
+			data:$("#itemAuthorForm").serialize(),
+			dataType:"json"
+		}).done(function(data) {
+		    alert( "Author Saved" );
+			$( "#float-modal-form" ).dialog( "close" );
+			$("#authorDD").empty();
+			$("#authorDD").append(
+                     "<option value='' >" + "Select"+ "</option>");
+			 $.each(data, function(i, val) {
+				 
+	                $("#authorDD").append(
+	                        "<option value=" + val.authorId + ">" + val.englishName+ "</option>");
+	            });
+		  })
+		  .fail(function(faildata) {
+		    alert(faildata.responseText);
+		  });	
+		
+	}
 	submitAuthorAjax=function(){
 		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
 			alert(data);
@@ -851,8 +991,57 @@ $("document").ready(function() {
 	$("#addItemsReprintAjax").click(function(){
 		$.get( "addItemReprintAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
+  			$( "#float-modal-form" ).dialog( "option", "title", "Add New Reprint" );
 			$( "#float-modal-form" ).html( data );
-			$( "#float-modal-form" ).dialog( "option", "title", "Add New Reprint" );
+			$( "#reprintValidationFeedback").hide();
+			var nowYear = new Date().getFullYear();
+			var typeValidator = $("#itemsReprintForm").validate
+			({
+		        rules : {
+		        	itemsreprint: {
+		                required : true
+		            },
+		            reprintMonth: {
+		                required : true
+		            },
+		            reprintYear : {
+		            	required : true,
+		            	max:nowYear
+		            }
+		        },
+		        faultPlacement : function(fault, element) {
+		            
+		            fault.insertAfter(element);
+		        },
+		        invalidHandler : function(form, validator) {
+			        var errors = validator.numberOfInvalids();
+			        if (errors) {
+			            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+			            $("#reprintValidationFeedback span").html(message);
+			            $("#reprintValidationFeedback").show();
+			        } else {
+			            $("#reprintValidationFeedback").hide();
+			       
+			        }
+		        },
+		        submitHandler : function(form){
+		        	form.submit();
+		        
+		        },
+		        onkeyup : true,
+		    });
+			$( "#additemsreprintReset").click(function() {
+				typeValidator.resetForm();
+		        $("#reprintValidationFeedback span").html("");
+		        $("#reprintValidationFeedback").hide();
+		    });
+			
+			$( "#additemsreprintCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });
+
     		});
 		
 			
@@ -887,7 +1076,8 @@ $("document").ready(function() {
 		                required : false
 		            },
 		            pincode: {
-		                required : true
+		                required : true,
+		                number:true
 		            },
 		            city: {
 		                required : true
@@ -903,16 +1093,19 @@ $("document").ready(function() {
 		                email:true
 		            },
 		            phone1: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            phone2: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            fax: {
 		                required : false
 		            },
 		            mobile: {
-		                required : false
+		                required : false,
+		                number:true
 		            },
 		            website: {
 		                required : false,
@@ -948,12 +1141,16 @@ $("document").ready(function() {
 		        $("#pubSupplValidationFeedback span").html("");
 		        $("#pubSupplValidationFeedback").hide();
 		    });
+			
+			$( "#addpublsupplCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+		    });
 
     		});
     });
 	
 	submitPublSupplAjax=function(){
-		$.post("submitPublSuppl.html",$("#itemAuthorForm").serialize(),function(data){
+		$.post("submitPublSuppl.html",$("#itemsPublSupplForm").serialize(),function(data){
 			alert(data);
 			$( "#float-modal-form" ).dialog( "close" );
 		});
@@ -963,7 +1160,7 @@ $("document").ready(function() {
 	$("#addCategoriesAjax").click(function(){		  
     	$.get( "addCategoriesAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 350 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add New Category" );
 			$( "#float-modal-form" ).html( data );
 			$( "#categoryValidationFeedback").hide();
@@ -1002,17 +1199,15 @@ $("document").ready(function() {
 				typeValidator.resetForm();
 		        $("#categoryValidationFeedback span").html("");
 		        $("#categoryValidationFeedback").hide();
-		    });		
+		    });
+			$( "#categoryCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });	
 
     		});
     });
-	submitCategoriesAjax=function(){
-		$.post("submitTranslations.html",$("#itemTranslationForm").serialize(),function(data){
-			alert(data);
-			$( "#float-modal-form" ).dialog( "close" );
-		});
-	}
-	
+
 	/*Add Item Translation*/
 	$("#addTranslationsAjax").click(function(){		  
     	$.get( "addTranslationsAjax.html", function( data ) {
@@ -1061,6 +1256,11 @@ $("document").ready(function() {
 		        $("#translationValidationFeedback span").html("");
 		        $("#translationValidationFeedback").hide();
 		    });
+			
+			$( "#translationCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });
 
     		});
     });
@@ -1097,7 +1297,7 @@ $("document").ready(function() {
 	$("#addAwarddetailsAjax").click(function(){		  
     	$.get( "addAwarddetailsAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 480 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 400 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add Award Details" );
 			$( "#float-modal-form" ).html( data );
 			$( "#awardValidationFeedback").hide();
@@ -1143,17 +1343,30 @@ $("document").ready(function() {
 		        $("#awardValidationFeedback span").html("");
 		        $("#awardValidationFeedback").hide();
 		    });
-			$( "#dateOfAward" ).datepicker({ dateFormat: "dd/mm/yy" });
+			
+			$( "#awardCancel").click(function() {
+				$( "#float-modal-form" ).dialog( "close" );
+				event.preventDefault();
+		    });
+			/**
+			 * 
+			 */
+			var today = new Date();
+			var dateOptions = {
+			    maxDate: today,
+			    dateFormat: "dd/mm/yy"
+			};
+			/*
+			 * 
+			 */
+			$( "#dateOfAward" ).datepicker(dateOptions);
 
     		});
     });
 
 	
 
-	submitadditemAwardAjax=function(){
-
-
-		
+	submitadditemAwardAjax=function(){		
 		$("#awardDetailsMarathi").val(HTMLEncode($("#awardDetailsMarathi").val()));
 		
 		$.ajax({
@@ -1182,8 +1395,70 @@ $("document").ready(function() {
 		$("#uploadItemCoverbtn").click(function(){		  
 		    	$.get( "uploadItemCover.html", function( data ) {
 		  			$( "#float-modal-form" ).dialog( "open" );
+		  			$( "#float-modal-form" ).dialog( "option", "height", 300 );
+		  			$( "#float-modal-form" ).dialog( "option", "width", 480 );
+		  			$( "#float-modal-form" ).dialog( "option", "title", "Upload Item Cover" );
 					$( "#float-modal-form" ).html( data );
-		
+					$( "#itemCoverValidationFeedback").hide();
+					var typeValidator = $("#uploadItemCover").validate
+					({
+				        rules : {
+				        	file: {
+				                required : true
+				            }
+				        },
+				        faultPlacement : function(fault, element) {
+				            
+				            fault.insertAfter(element);
+				        },
+				        invalidHandler : function(form, validator) {
+					        var errors = validator.numberOfInvalids();
+					        if (errors) {
+					            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+					            $("#itemCoverValidationFeedback span").html(message);
+					            $("#itemCoverValidationFeedback").show();
+					        } else {
+					            $("#itemCoverValidationFeedback").hide();
+					       
+					        }
+				        },
+				        submitHandler : function(form){
+				        	event.preventDefault();
+							data = new FormData();
+						    data.append( 'file', $( '#file' )[0].files[0] );
+						    data.append( 'tempFileId', $( '#tempFileId').val() );
+						    
+							$.ajax({
+							    url: "uploadItemCoverFile.html",
+							    type: "POST",
+							    data: data,							   
+							    contentType: false,
+							    cache: false,
+							    processData: false,
+							    dataType: "text",
+							    success: function(data){
+							    	 $("#itemCoverImageFileName").text(data);
+							    	 $("#itemCoverImage").val(data);
+									$( "#float-modal-form" ).dialog( "close" );
+									
+							    }
+								});	
+				        
+				        },
+				        onkeyup : true,
+				    });
+					$( "#itemCoverReset").click(function() {
+						typeValidator.resetForm();
+				        $("#itemCoverValidationFeedback span").html("");
+				        $("#itemCoverValidationFeedback").hide();
+				    });
+					
+					$( "#uploadItemCoverCancel").click(function() {
+						$("#picture").val(false);
+						$( "#float-modal-form" ).dialog( "close" );
+						event.preventDefault();
+				    	});
+					
 		    		});
 		    });
 			
@@ -1192,7 +1467,49 @@ $("document").ready(function() {
 			$("#uploadebookFilebtn").click(function(){		  
 		    	$.get( "uploadebookFile.html", function( data ) {
 		  			$( "#float-modal-form" ).dialog( "open" );
+		  			$( "#float-modal-form" ).dialog( "option", "height", 300 );
+		  			$( "#float-modal-form" ).dialog( "option", "width", 480 );
+		  			$( "#float-modal-form" ).dialog( "option", "title", "Upload Ebook File" );
 					$( "#float-modal-form" ).html( data );
+					$( "#ebookValidationFeedback").hide();
+					var typeValidator = $("#uploadebookFile").validate
+					({
+				        rules : {
+				        	file: {
+				                required : true
+				            }
+				        },
+				        faultPlacement : function(fault, element) {
+				            
+				            fault.insertAfter(element);
+				        },
+				        invalidHandler : function(form, validator) {
+					        var errors = validator.numberOfInvalids();
+					        if (errors) {
+					            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+					            $("#ebookValidationFeedback span").html(message);
+					            $("#ebookValidationFeedback").show();
+					        } else {
+					            $("#ebookValidationFeedback").hide();
+					       
+					        }
+				        },
+				        submitHandler : function(form){
+				        	
+				        },
+				        onkeyup : true,
+				    });
+					$( "#itemCoverReset").click(function() {
+						typeValidator.resetForm();
+				        $("#ebookValidationFeedback span").html("");
+				        $("#ebookValidationFeedback").hide();
+				    });
+					
+					$( "#uploadebookFileCancel").click(function() {
+						$("#ebook").val(false);
+						$( "#float-modal-form" ).dialog( "close" );
+						event.preventDefault();
+				    	});
 		
 		    		});
 		    });
@@ -1201,7 +1518,49 @@ $("document").ready(function() {
 			$("#uploadaudioBookbtn").click(function(){		  
 		    	$.get( "uploadaudioBookFile.html", function( data ) {
 		  			$( "#float-modal-form" ).dialog( "open" );
+		  			$( "#float-modal-form" ).dialog( "option", "height", 300 );
+		  			$( "#float-modal-form" ).dialog( "option", "width", 480 );
+		  			$( "#float-modal-form" ).dialog( "option", "title", "Upload Ebook File" );
 					$( "#float-modal-form" ).html( data );
+					$( "#audiobookValidationFeedback").hide();
+					var typeValidator = $("#uploadaudiobookFile").validate
+					({
+				        rules : {
+				        	file: {
+				                required : true
+				            }
+				        },
+				        faultPlacement : function(fault, element) {
+				            
+				            fault.insertAfter(element);
+				        },
+				        invalidHandler : function(form, validator) {
+					        var errors = validator.numberOfInvalids();
+					        if (errors) {
+					            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+					            $("#audiobookValidationFeedback span").html(message);
+					            $("#audiobookValidationFeedback").show();
+					        } else {
+					            $("#audiobookValidationFeedback").hide();
+					       
+					        }
+				        },
+				        submitHandler : function(form){
+				        	
+				        },
+				        onkeyup : true,
+				    });
+					$( "#audiobookReset").click(function() {
+						typeValidator.resetForm();
+				        $("#audiobookValidationFeedback span").html("");
+				        $("#audiobookValidationFeedback").hide();
+				    });
+					
+					$( "#uploadaudiobookFileCancel").click(function() {
+						$("#audiobook").val(false);
+						$( "#float-modal-form" ).dialog( "close" );
+						event.preventDefault();
+				    	});
 		
 		    		});
 		    });
@@ -1262,7 +1621,6 @@ $("document").ready(function() {
 				    url: "uploadItemCoverFile.html",
 				    type: "POST",
 				    data: data,
-				   
 				    contentType: false,
 				    cache: false,
 				    processData: false,
@@ -1338,35 +1696,7 @@ $("document").ready(function() {
 				
 			}
 			
-			submitaddauthorAjax=function(){
-				
-				$("#auth_mr_name").val(HTMLEncode($("#auth_mr_name").val()));
-				
-				
-				$.ajax({
-					type: "POST",
-					url: "submitaddAuthorAjax.html",
-					data:$("#itemAuthorForm").serialize(),
-					dataType:"json"
-				}).done(function(data) {
-				    alert( "Author Saved" );
-					$( "#float-modal-form" ).dialog( "close" );
-					$("#authorDD").empty();
-					$("#authorDD").append(
-		                     "<option value='' >" + "Select"+ "</option>");
-					 $.each(data, function(i, val) {
-						 
-			                $("#authorDD").append(
-			                        "<option value=" + val.authorId + ">" + val.englishName+ "</option>");
-			            });
-				  })
-				  .fail(function(faildata) {
-				    alert(faildata.responseText);
-				  });
-
-				
-				
-			}
+			
 			
 			submitpublsupplAjax=function(){
 				$("#pubsupplmarathiName").val(HTMLEncode($("#pubsupplmarathiName").val()));
@@ -1459,9 +1789,10 @@ $("document").ready(function() {
 		   $("#purchasePrice").blur(function(){
 			   if($("#price").val() != ""){
 				   if($("#purchasePrice").val() != ""){
-					   
-					   $("#purchaseDiscountPercent").val((($("#price").val()-$("#purchasePrice").val())/$("#price").val()) * 100);
-				   
+					   var p_val=Math.round((($("#price").val()-$("#purchasePrice").val())/$("#price").val()) * 100);
+					   if(!isNaN(p_val)){
+						   $("#purchaseDiscountPercent").val(p_val);
+					   }			   
 				   }
 			   }
 		   });
@@ -1470,9 +1801,10 @@ $("document").ready(function() {
 		   $("#purchaseDiscountPercent").blur(function(){
 			   if($("#price").val() != ""){
 				   if($("#purchaseDiscountPercent").val() != ""){
-					   
-					   $("#purchasePrice").val($("#price").val()-($("#price").val()*$("#purchaseDiscountPercent").val() /100));
-				   
+					   var p_val=$("#price").val()-($("#price").val()*$("#purchaseDiscountPercent").val() /100);
+					   if(!isNaN(p_val)){
+					   $("#purchasePrice").val(p_val);
+					   }
 				   }
 			   }
 		   });
@@ -1480,9 +1812,10 @@ $("document").ready(function() {
 		   $("#maxSaleDiscountPrecent").blur(function(){
 			   if($("#price").val() != ""){
 				   if($("#maxSaleDiscountPrecent").val() != ""){
-					   
-					   $("#maxSaleDiscountPrice").val($("#price").val()-($("#price").val()*$("#maxSaleDiscountPrecent").val() /100));
-				   
+					   var p_val=$("#price").val()-($("#price").val()*$("#maxSaleDiscountPrecent").val() /100);
+					   if(!isNaN(p_val)){
+					   $("#maxSaleDiscountPrice").val(p_val);
+					   }
 				   }
 			   }
 		   });
@@ -1490,9 +1823,10 @@ $("document").ready(function() {
 		   $("#maxSaleDiscountPrice").blur(function(){
 			   if($("#price").val() != ""){
 				   if($("#maxSaleDiscountPrice").val() != ""){
-					   
-					   $("#maxSaleDiscountPrecent").val((($("#price").val()-$("#maxSaleDiscountPrice").val())/$("#price").val()) * 100);
-				   
+					   var p_val= (($("#price").val()-$("#maxSaleDiscountPrice").val())/$("#price").val()) * 100;
+						   if(!isNaN(p_val)){
+					   $("#maxSaleDiscountPrecent").val(p_val);
+						   }
 				   }
 			   }
 		   });

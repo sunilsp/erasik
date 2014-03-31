@@ -78,13 +78,13 @@ form .elem-3 input[type="button"]:hover{
 }
 
 
-input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=reset], textarea, select, button {
+input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=button], input[type=reset], textarea, select, button {
 	margin: 0 0 0.5em 0;
 	padding: 0;
 	outline: none;
 }
 
-input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=reset], textarea, select, button,.elem-3 input[type="button"] {
+input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], input[type=submit], input[type=button], input[type=reset], textarea, select, button,.elem-3 input[type="button"] {
 	border: 1px solid #999;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -135,7 +135,7 @@ input[type=checkbox]:focus, input[type=radio]:focus {
 	padding: 0;
 }
 
-input[type=submit], input[type=reset], .button{
+input[type=submit], input[type=button], input[type=reset], .button{
 	text-transform: capitalize;
 	text-align: center;
 	font-size: 1.2em;
@@ -175,7 +175,7 @@ input[type=submit]{
 	background: #8BC804;
 }
 
-input[type=reset] {
+input[type=reset], input[type=button] {
 	background: #888;
 }
 
@@ -183,11 +183,11 @@ input[type=submit]:hover, .elem-3 input[type="button"]:hover {
 	background: #01B0EC;
 }
 
-input[type=reset]:hover {
+input[type=reset]:hover, input[type=button]:hover {
 	background: #555;
 }
 
-form label {
+form label, .formDiv label {
 	display: block;
 	width: 40%;
 	padding: 0.3em;
@@ -195,7 +195,7 @@ form label {
 	height:1.2em;
 }
 
-form ul li {
+form ul li, .formDiv ul li {
 	display: block;
 	float: left;
 	width: 95%;
@@ -205,13 +205,13 @@ form ul li {
 	padding: 1em 0 0.5em;
 }
 
-form ul li:first-child {
+form ul li:first-child, .formDiv ul li:first-child {
 	border-top: none;
 }
-form ul li:last-child {
+form ul li:last-child, .formDiv ul li:last-child {
 	border-bottom: none;
 }
-form ul li ul {
+form ul li ul, .formDiv ul li ul  {
 	margin: 0 0 0 0.3em;
 	padding-left: 3.3em;
 	float: left;
@@ -220,12 +220,12 @@ form ul li ul {
 	float: left;
 }
 
-form ul li ul li {
+form ul li ul li, .formDiv ul li ul li {
 	display: inline;
 	border: none;
 	float: none;
 }
-form ul li ul li label {
+form ul li ul li label, .formDiv ul li ul li label {
 	display: inline;
 	float: none;
 	font-weight: normal;
@@ -248,7 +248,11 @@ input[type=checkbox]+ label {
 	float: right;
 }
 
-form fieldset legend {
+.fieldsetDiv{
+	font-size:80%;
+}
+
+form fieldset legend, .formDiv fieldset legend, .fieldsetDiv legend {
 	display: none;
 }
 
@@ -288,7 +292,8 @@ em {
 	color: red;
 }
 #validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
-#authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, #categoryValidationFeedback, #awardValidationFeedback{
+#authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, #categoryValidationFeedback, #awardValidationFeedback, #addStockCenterValidationFeedback
+,#reprintValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;
@@ -310,17 +315,22 @@ em {
 	width:80%;
 }
 
+#CategoriesDD{
+	min-height:8em;
+	height: 8em;
+}
+
 input[type=text].error, input[type=number].error, input[type=password].error, input[type=email].error, input[type=date].error, input[type=datetime].error, textarea.error, select.error {
 	border-color: #01B0EC !important;
 	background: -moz-linear-gradient(center top , #EDEDED 0%, #F6F6F6 53%, #FFFFFF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 @media screen and (min-width: 960px) {
-	form {
+	form,.formDiv {
 		width: 100%;
 		margin: 0 auto;
 		background: #eee;
 	}
-	fieldset {
+	fieldset, .fieldsetDiv {
 		display: block;
 		margin: 1em 0;
 		border: none;
@@ -330,8 +340,12 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	.foldedset {
 		width:50%;
 	}
-	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], option, textarea, button {
+	input[type=text], input[type=number], input[type=password], input[type=email], input[type=date], input[type=datetime], textarea, button {
 		width: 55%;
+		float:left;
+		height:1.2em;
+	}
+	option{
 		float:left;
 		height:1.2em;
 	}
@@ -346,7 +360,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		width: 40%;
 	}
 	
-	form label {
+	form label, .formDiv label {
 		width: 35%;
 		text-align:right;
 		line-height: 1.2em;
@@ -361,12 +375,12 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	}
 }
 @media screen and (max-width: 959px) and (min-width: 651px) {
-	form {
+	form, .forDiv {
 		width: 95%;
 		margin: 0 auto;
 		background: #eee;
 	}
-	fieldset {
+	fieldset, .fieldsetDiv {
 		display: block;
 		margin: 1em 0;
 		border: none;
@@ -390,7 +404,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	.elem-3	select, .elem-3 input[type="text"]{
 		width: 40%;
 	}
-	form label {
+	form label, .formDiv label {
 		width: 35%;
 		text-align:right;
 		line-height: 1.2em;
@@ -406,12 +420,12 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 }
 
 @media screen and (max-width: 650px) {
-	form {
+	form, .formDiv {
 		width: 98%;
 		margin: 0 auto;
 		background: #eee;
 	}
-	fieldset {
+	fieldset, .fieldset{
 		display: block;
 		margin: 1em 0;
 		border: none;
@@ -431,7 +445,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		height:1.8em;
 	}
 
-	form label {
+	form label, .formDiv label {
 		width: 90%;
 		line-height: 1.2em;
 	}

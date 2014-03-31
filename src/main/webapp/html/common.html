@@ -78,12 +78,13 @@
 					<input type="text" tabindex="" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
 				</li>
 				<li>
-					<label for="vatPerc">Vat Percentage : </label>
+					<label for="vatPerc">Vat Percentage (%) : </label>
 					<input type="text" tabindex="" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
 				</li>
 				<li>
-					<input tabindex="" type="reset" value="Reset " id="typeReset" name="typeReset"/>
 					<input tabindex="" type="submit" value="Save" id="addItemTypesubmitbtn" name="addItemTypesubmitbtn"/>
+					<input tabindex="" type="reset" value="Reset " id="typeReset" name="typeReset"/>
+					<input id="itemTypeCancel" type="button" value="Cancel" />
 				</li>
 			</ul>
 	</form>
@@ -117,12 +118,25 @@
 		
 		<ul>
 		<li>
-			<label class="required" for="cust_type_desc" th:text="@{Binding Type Description}">Binding Type Description : </label>
-			<input type="text" tabindex="20" autocomplete="on" required="on" name="bindingTypeName" id="bindingTypeName" th:field="*{bindingTypeName}"/>
+			<label class="required" for="bindingTypeName" th:text="@{Binding Type Description : }">Binding Type Description : </label>
+			<input type="text" autocomplete="on" required="on" name="bindingTypeName" id="bindingTypeName" th:field="*{bindingTypeName}"/>
 		</li>
 		<li>
-			<input tabindex="40" type="reset" value="Reset " id="bindingReset" name="bindingReset"/>
-			<input tabindex="10" type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
+			<label class="required" for="length" th:text="@{Length (inches) : }">Length : </label>
+			<input type="text" autocomplete="on" required="on" name="length" id="length" />
+		</li>
+		<li>
+			<label class="required" for="height" th:text="@{Height (inches) : }">Height : </label>
+			<input type="text" autocomplete="on" required="on" name="height" id="height" />
+		</li>
+		<li>
+			<label class="required" for="width" th:text="@{Width (inches) : }">Width : </label>
+			<input type="text" autocomplete="on" required="on" name="width" id="width" />
+		</li>
+		<li>
+			<input type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
+			<input type="reset" value="Reset " id="bindingReset" name="bindingReset"/>
+			<input type="button" value="Cancel " id="bindingTypeCancel" name="bindingTypeCancel"/>
 		</li>
 		</ul>
 		
@@ -144,8 +158,9 @@
 					<input type="text" tabindex="" autocomplete="on" required="on" name="languageName" id="languageName" th:field="*{languageName}"/>
 				</li>
 				<li>
-					<input tabindex="" type="reset" value="Reset " id="languageReset" name="languageReset"/>
 					<input tabindex="" type="submit" value="Save" id="submitLanguageTypebtn" name="submitLanguageTypebtn"/>
+					<input tabindex="" type="reset" value="Reset " id="languageReset" name="languageReset"/>
+					<input id="languageCancel" type="button" value="Cancel" />
 				</li>
 				</ul>
 			
@@ -159,85 +174,121 @@
 		<form  class="clearfix tableDataFields" id="itemsEditionForm"  th:object="${itemsedition}"  th:action="@{javascript:submitadditemeditionAjax();}" action="message.html" name="discountForm"  method="post">
 			<ul>
 				<li>
-					<label for="name" th:text="@{Item Edition }" class="required">Item Edition : </label>
-					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsedition" id="itemsedition" th:field="*{edition}"/>
+					<label for="name" th:text="@{Item Edition : }" class="required">Item Edition : </label>
+					<input type="text" autocomplete="on" required="on"  maxlength="500" name="itemsedition" id="itemsedition" th:field="*{edition}"/>
 				</li>
 				<li>
 					<label class="required" for="editionMonth">Edition Month: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="editionMonth" th:field="*{editionMonth}"/>
+					<select autocomplete="on" required="on" name="editionMonth" id="editionMonth" th:field="*{editionMonth}">
+						<option value="">Select Month</option>
+						<option value="1">01-January</option>
+						<option value="2">02-February</option>
+						<option value="3">03-March</option>
+						<option value="4">04-April</option>
+						<option value="5">05-May</option>
+						<option value="6">06-June</option>
+						<option value="7">07-July</option>
+						<option value="8">08-August</option>
+						<option value="9">09-September</option>
+						<option value="10">10-October</option>
+						<option value="11">11-November</option>
+						<option value="12">12-December</option>
+					</select>
 				</li>
 				<li>
 					<label class="required" for="editionYear">Edition Year: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="editionYear" th:field="*{editionYear}"/>
+					<input type="text" autocomplete="on" required="on" name="vatPerc" id="editionYear" th:field="*{editionYear}"/>
 				</li>
 				<li>
-					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
-					<input tabindex="10" type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>
+					<input type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>				
+					<input type="reset" value="Reset " id="edtionReset" name="edtionReset"/>
+					<input type="button" value="Calnce " id="edtionCancel" name="edtionCancel"/>	
 				</li>
 			</ul>
 		
 	</form>
 	</div>
 <!-- Form for adding new Reprint-->
-	<form th:fragment="itemReprintFragment" class="clearfix tableDataFields" id="itemsReprintForm"  th:object="${itemsReprint}"  th:action="@{javascript:submitadditemReprintAjax();}" action="message.html" name="reprintForm"  method="post">
-		<fieldset title="Add Item Reprint">
+	<div th:fragment="itemReprintFragment" >
+	<div id="reprintValidationFeedback">
+			<span></span>
+		</div>
+	<form class="clearfix tableDataFields" id="itemsReprintForm"  th:object="${itemsReprint}"  th:action="@{javascript:submitadditemReprintAjax();}" action="message.html" name="reprintForm"  method="post">
+		
 			<ul>
 				<li>
-					<label for="name" th:text="@{Item Reprint}" class="required">Item Reprint : </label>
-					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="itemsreprint" id="itemsreprint" th:field="*{reprint}"/>
+					<label for="name" th:text="@{Item Reprint : }" class="required">Item Reprint : </label>
+					<input type="text" autocomplete="on" required="on"  maxlength="500" name="itemsreprint" id="itemsreprint" th:field="*{reprint}"/>
 				</li>
 				<li>
 					<label class="required" for="reprintMonth">Reprint Month: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" th:field="*{reprintMonth}"/>
+					<select autocomplete="on" required="on" name="reprintMonth" id="reprintMonth" th:field="*{reprintMonth}">
+						<option value="">Select Month</option>
+						<option value="1">01-January</option>
+						<option value="2">02-February</option>
+						<option value="3">03-March</option>
+						<option value="4">04-April</option>
+						<option value="5">05-May</option>
+						<option value="6">06-June</option>
+						<option value="7">07-July</option>
+						<option value="8">08-August</option>
+						<option value="9">09-September</option>
+						<option value="10">10-October</option>
+						<option value="11">11-November</option>
+						<option value="12">12-December</option>
+					</select>
 				</li>
 				<li>
-					<label class="required" for="editionYear">Reprint Year: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="reprintYear" id="reprintYear" th:field="*{reprintYear}"/>
+					<label class="required" for="reprintYear">Reprint Year: </label>
+					<input type="text" autocomplete="on" required="on" name="reprintYear" id="reprintYear" th:field="*{reprintYear}"/>
 				</li>
 				<li>
-					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
-					<input tabindex="10" type="submit" value="Save" id="additemsreprintsubmitbtn" name="additemsreprintsubmitbtn"/>
+					<input type="submit" value="Save" id="additemsreprintsubmitbtn" name="additemsreprintsubmitbtn"/>
+					<input type="reset" value="Reset " id="additemsreprintReset" name="additemsreprintReset"/>
+					<input type="button" value="Cancel " id="additemsreprintCancel" name="additemsreprintCancel"/>			
 				</li>
 			</ul>
-		</fieldset>
 	</form>
-
+	</div>
 	<!-- Form for adding new Stock Center-->
-	<form th:fragment="additemStockCenterFragment" class="clearfix tableDataFields" id="itemStockCenterForm"  th:object="${itemstockcenter}"  th:action="@{javascript:submitStockCenterAjax();}" action="message.html" name="discountForm"  method="post">
-		<fieldset title="Add Stock Center" >
+	<div th:fragment="additemStockCenterFragment">
+		<div id="addStockCenterValidationFeedback">
+			<span></span>
+		</div>
+	<form class="clearfix tableDataFields" id="itemStockCenterForm"  th:object="${itemstockcenter}"  th:action="@{javascript:submitStockCenterAjax();}" action="message.html" name="discountForm"  method="post">
 			<ul>
 			<li>
 				<label for="cust_en_name" th:text="@{Stock Center Name : }" class="required">Stock Center Name : </label>
-				<input type="text" tabindex="20" autocomplete="on" required="on" name="stockCenterHead" id="stockCenterHead" th:field="*{stockCenterHead}"/>
+				<input type="text" autocomplete="on" required="on" name="stockCenterHead" id="stockCenterHead" th:field="*{stockCenterHead}"/>
 			</li>
 			<li>
 				<label for="cust_mr_name" th:text="@{Address Line 1 : }" class="required">Address Line 1 : </label>
-				<input type="text" tabindex="30" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
+				<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
 			</li>
 			<li>
 				<label for="address1" th:text="@{Address Line 2 : }" class="required">Address Line 2 : </label>
-				<input type="text" tabindex="40" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
+				<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
 			</li>
 			<li>
-				<label for="address2" th:text="@{Address Line 3 : }" class="required">Address Line 3 : </label>
-				<input type="text" tabindex="50" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
+				<label for="address2" th:text="@{Address Line 3 : }">Address Line 3 : </label>
+				<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
 			</li>
 			<li>
 				<label for="address3" th:text="@{Phone1 : }" class="required">Phone 1 : </label>
-				<input type="text" tabindex="50" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
+				<input type="text" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
 			</li>
 			<li>
 				<label for="pincode" th:text="@{Phone2 : }" class="required">Phone2 : </label>
-				<input type="text" tabindex="60" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
+				<input type="text" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
 			</li>
 			<li>
 				<label for="contactPerson" th:text="@{Contact Person : }" class="required">Contact Person : </label>
-				<input type="text" tabindex="70" autocomplete="on" required="on" name="contactPerson" id="contactPerson" th:field="*{contactPerson}"/>
+				<input type="text" autocomplete="on" required="on" name="contactPerson" id="contactPerson" th:field="*{contactPerson}"/>
 			</li>
 			
 			<li>
 				<label for="centerCount" th:text="@{Center Count : }" class="required">Center Count : </label>
-				<input type="text" tabindex="75" autocomplete="on" required="on" name="centerCount" id="centerCount" th:field="*{centerCount}"/>
+				<input type="text" autocomplete="on" required="on" name="centerCount" id="centerCount" th:field="*{centerCount}"/>
 			</li>
 			<li>
 				<label for="canCreateInvoice" th:text="@{Can Create Invoice : }" class="required">Can Create Invoice : </label>
@@ -248,57 +299,57 @@
 				
 			</li>
 			<li>
-				<input tabindex="150" type="reset" value="Reset " id="reset" name="reset"/>
-				<input tabindex="160" type="submit" value="Save" id="addStockCentersubmitbtn" name="addStockCentersubmitbtn"/>
+				<input type="submit" value="Save" id="addStockCentersubmitbtn" name="addStockCentersubmitbtn"/>
+				<input type="reset" value="Reset " id="addStockCenterReset" name="addStockCenterReset"/>
+				<input type="button" value="Cancel " id="addStockCenterCancel" name="addStockCenterCancel"/>
 			</li>
-			</ul>							
-		</fieldset>					
+			</ul>				
 	</form>
-	
+	</div>
 	<!-- Form for adding new Author-->
 	<div th:fragment="additemAuthorFragment" >
 		<div id="authorValidationFeedback">
 		<span></span>
 		</div>	
 		<form class="clearfix tableDataFields" id="itemAuthorForm"  th:object="${itemsauthor}"  th:action="@{javascript:submitaddauthorAjax();}" action="message.html" name="discountForm"  method="post">
-				<fieldset title="&nbsp;" class="foldedset">
+				<div title="&nbsp;" class="fieldsetDiv foldedset">
 				<ul>
 				
-				<li class="elem-3">
-					<label for="auth_en_name" th:text="@{English Name}" class="required">English Name : </label>
+				<li>
+					<label for="auth_en_name" th:text="@{English Name : }" class="required">English Name : </label>
 					<input type="text" autocomplete="on" required="on" name="auth_en_name" id="auth_en_name" th:field="*{englishName}"/>
 				</li>
-				<li class="elem-3">
-					<label for="auth_mr_name" th:text="@{Marathi Name}" class="required">Marathi Name : </label>
+				<li>
+					<label for="auth_mr_name" th:text="@{Marathi Name : }" class="required">Marathi Name : </label>
 					<input type="text" autocomplete="on" required="on" name="auth_mr_name" id="auth_mr_name" th:field="*{marathiName}"/>
 				</li>
-				<li class="elem-3">
-					<label for="address1" th:text="@{Address Line 1 }" >Address Line 1 : </label>
+				<li>
+					<label for="address1" th:text="@{Address Line 1  : }" >Address Line 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
 				</li>
-				<li class="elem-3">
-					<label for="address2" th:text="@{Address Line 2 }" >Address Line 2 : </label>
+				<li>
+					<label for="address2" th:text="@{Address Line 2  : }" >Address Line 2 : </label>
 					<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
 				</li>
-				<li class="elem-3">
-					<label for="address3" th:text="@{Address Line 3 }" >Address Line 3 : </label>
+				<li>
+					<label for="address3" th:text="@{Address Line 3  : }" >Address Line 3 : </label>
 					<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
 				</li>
-				<li class="elem-3">
-					<label for="pincode" th:text="@{Pincode }" class="required">Pincode : </label>
+				<li>
+					<label for="pincode" th:text="@{Pincode  : }" class="required">Pincode : </label>
 					<input type="text" autocomplete="on" required="on" name="pincode" id="pincode" th:field="*{pincode}"/>
 				</li>
-				<li class="elem-3">
-					<label for="city" th:text="@{City }" class="required">City : </label>
+				<li>
+					<label for="city" th:text="@{City  : }" class="required">City : </label>
 					<input type="text" autocomplete="on" required="on" name="city" id="city" th:field="*{city}"/>
 				</li>
 				
-				<li class="elem-3">
-					<label for="state" th:text="@{State }" class="required">State : </label>
+				<li>
+					<label for="state" th:text="@{State  : }" class="required">State : </label>
 					<input type="text" autocomplete="on" required="on" name="state" id="state" th:field="*{state}"/>
 				</li>
-				<li class="elem-3">
-					<label for="country" th:text="@{Country }" class="required">Country : </label>
+				<li>
+					<label for="country" th:text="@{Country  : }" class="required">Country : </label>
 					<select autocomplete="on" required="on" name="country" id="country" th:field="*{country}">
 						<option value="">Select Country</option>
 						<option value="India">India</option>
@@ -544,54 +595,55 @@
 						<option value="Zimbabwe">Zimbabwe</option>
 					</select>
 				</li>
-				<li class="elem-3">
-					<label for="email" th:text="@{E-mail }" >E-mail : </label>
+				<li>
+					<label for="email" th:text="@{E-mail  : }" >E-mail : </label>
 					<input type="email" autocomplete="on" required="on" name="email" id="email" th:field="*{email}"/>
 				</li>
 				</ul>
-				</fieldset>
-				<fieldset title="&nbsp;" class="foldedset">
+				</div>
+				<div title="&nbsp;" class="foldedset fieldsetDiv">
 					<ul>
 				
-				<li class="elem-3">
-					<label for="phone1" th:text="@{Phone No 1 }" >Phone No 1 : </label>
+				<li>
+					<label for="phone1" th:text="@{Phone No 1  : }" >Phone No 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
 				</li>
-				<li class="elem-3">
-					<label for="phone2" th:text="@{Phone No 2 }" >Phone No 2 : </label>
+				<li>
+					<label for="phone2" th:text="@{Phone No 2  : }" >Phone No 2 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
 				</li>
-				<li class="elem-3">
-					<label for="fax" th:text="@{Fax }" >Fax : </label>
+				<li>
+					<label for="fax" th:text="@{Fax  : }" >Fax : </label>
 					<input type="text" autocomplete="on" required="on" name="fax" id="fax" th:field="*{fax}"/>
 				</li>
-				<li class="elem-3">
-					<label for="mobile" th:text="@{Mobile }" >Mobile : </label>
+				<li>
+					<label for="mobile" th:text="@{Mobile  : }" >Mobile : </label>
 					<input type="text" autocomplete="on" required="on" name="mobile" id="mobile" th:field="*{mobile}"/>
 				</li>
-				<li class="elem-3">
-					<label for="prefix" th:text="@{Prefix }" >Prefix : </label>
+				<li>
+					<label for="prefix" th:text="@{Prefix  : }" >Prefix : </label>
 					<input type="text" autocomplete="on" required="on" name="prefix" id="prefix" th:field="*{prefix}"/>
 				</li>
 				<li class="elem-3">
-					<label for="photo" th:text="@{Picture }" >Picture : </label>
+					<label for="photo" th:text="@{Picture  : }" >Picture : </label>
 					<input type="file" autocomplete="on" required="on" name="photo" id="photo" th:field="*{photo}"/>
 					<input type="button" value="Upload" id="uploadbtn" name="uploadbtn"/>
 				</li>
-				<li class="elem-3">
-					<label for="dob" th:text="@{Date of Birth}" >Date of Birth : </label>
+				<li>
+					<label for="dob" th:text="@{Date of Birth : }" >Date of Birth : </label>
 					<input type="text" autocomplete="on" required="on" name="dateOfBirth" id="dateOfBirth" th:field="*{dateOfBirth}"/>
 				</li>
-				<li class="elem-3">
-					<label for="doe" th:text="@{Died on Date }">Died on Date : </label>
+				<li>
+					<label for="doe" th:text="@{Died on Date  : }">Died on Date : </label>
 					<input type="text" autocomplete="on" required="on" name="expiredDate" id="expiredDate" th:field="*{expiredDate}"/>
 				</li>
-				<li class="elem-3">
-					<input type="reset" value="Reset " id="authorReset" name="authorReset"/>
+				<li>
 					<input type="submit" value="Save" id="submitbtn" name="submitbtn"/>
+					<input type="reset" value="Reset " id="authorReset" name="authorReset"/>
+					<input id="authorCancel" type="button" value="Cancel" />
 				</li>
 				</ul>
-				</fieldset>				
+				</div>				
 		</form>	
 	</div>
 	<!-- Form for adding new Publish Supplier-->
@@ -600,46 +652,38 @@
 			<span></span>
 		</div>	
 		<form class="clearfix tableDataFields" id="itemsPublSupplForm"  th:object="${itemspublsuppl}"  th:action="@{javascript:submitpublsupplAjax();}" action="message.html" name="discountForm"  method="post">
-			<fieldset title="&nbsp;" class="foldedset">
+			<div  class="fieldsetDiv foldedset">
 				<ul>
-					<li class="elem-3">
+					<li>
 						<label for="name" th:text="@{English Name : }" class="required">English Name : </label>
 						<input type="text" autocomplete="on"  maxlength="500" name="englishName" id="englishName" th:field="*{englishName}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label class="required" for="vatPerc" th:text="@{Marathi Name : }">Marathi Name : </label>
 						<input type="text"  autocomplete="on" required="on" name="pubsupplmarathiName" id="pubsupplmarathiName" th:field="*{marathiName}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 					<label for="cust_mr_name" th:text="@{Address Line 1 : }" >Address Line 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="address1" th:text="@{Address Line 2 : }" >Address Line 2 : </label>
 						<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="address2" th:text="@{Address Line 3 : }" >Address Line 3 : </label>
-						<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
+						<input type="text" autocomplete="on" name="address3" id="address3" th:field="*{address3}"/>
 					</li>
-					<li class="elem-3">
-					<label for="pincode" th:text="@{Pincode }" class="required">Pincode : </label>
+					<li>
+					<label for="pincode" th:text="@{Pincode : }" class="required">Pincode : </label>
 					<input type="text" autocomplete="on" required="on" name="pincode" id="pincode" th:field="*{pincode}"/>
 					</li>
-					<li class="elem-3">
-						<label for="city" th:text="@{City }" class="required">City : </label>
+					<li>
+						<label for="city" th:text="@{City : }" class="required">City : </label>
 						<input type="text" autocomplete="on" required="on" name="city" id="city" th:field="*{city}"/>
 					</li>
-					<!--
-						State field needs to be added to the table
-					
-					<li class="elem-3">
-					<label for="state" th:text="@{State }" class="required">State : </label>
-					<input type="text" autocomplete="on" required="on" name="state" id="state" th:field="*{}"/>
-					</li>
-					-->
-					<li class="elem-3">
-					<label for="country" th:text="@{Country }" class="required">Country : </label>
+					<li>
+					<label for="country" th:text="@{Country : }" class="required">Country : </label>
 					<select tabindex="80" autocomplete="on" required="on" name="country" id="country" th:field="*{country}">
 						<option value="">Select Country</option>
 						<option value="India">India</option>
@@ -885,45 +929,46 @@
 						<option value="Zimbabwe">Zimbabwe</option>
 					</select>
 					</li>
-					<li class="elem-3">
-					<label for="email" th:text="@{E-mail }" >E-mail : </label>
+					<li>
+					<label for="email" th:text="@{E-mail : }" >E-mail : </label>
 					<input type="email" autocomplete="on" required="on" name="email" id="email" th:field="*{email}"/>
 					</li>
 				</ul>
-			</fieldset>
-				<fieldset title="&nbsp;" class="foldedset">
+			</div>
+			<div class="fieldsetDiv foldedset">
 				<ul>
-					<li class="elem-3">
+					<li>
 					<label for="phone1" th:text="@{Phone No 1 : }" >Phone No 1 : </label>
 					<input type="text" autocomplete="on" required="on" name="phone1" id="phone1" th:field="*{phone1}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="phone2" th:text="@{Phone No 2 : }" >Phone No 2 : </label>
 						<input type="text" autocomplete="on" required="on" name="phone2" id="phone2" th:field="*{phone2}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="fax" th:text="@{Fax : }" >Fax : </label>
 						<input type="text" autocomplete="on" required="on" name="fax" id="fax" th:field="*{fax}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="mobile" th:text="@{Mobile :}">Mobile : </label>
 						<input type="text" autocomplete="on" required="on" name="mobile" id="mobile" th:field="*{mobile}"/>
 					</li>
-					<li class="elem-3">
+					<li>
 						<label for="website" th:text="@{Website : }" >Website : </label>
 						<input type="text" autocomplete="on" required="on" name="website" id="website" th:field="*{website}"/>
 					</li>
 					
-					<li class="elem-3">
+					<li>
 					<label for="contactPerson" th:text="@{Contact Person : }" class="required">Contact Person : </label>
 					<input type="text" autocomplete="on" required="on" name="contactPerson" id="contactPerson" th:field="*{contactPerson}"/>
 					</li>
-					<li class="elem-3">
-						<input type="reset" value="Reset " id="publishReset" name="publishReset"/>
+					<li>
 						<input type="submit" value="Save" id="addpublsupplsubmitbtn" name="addpublsupplsubmitbtn"/>
+						<input type="reset" value="Reset " id="publishReset" name="publishReset"/>
+						<input type="button" value="Cancel " id="addpublsupplCancel" name="addpublsupplCancel"/>
 					</li>
 				</ul>
-			</fieldset>
+			</div>
 		</form>
 	</div>
 	
@@ -937,19 +982,20 @@
 			<ul>
 				<li>
 					<label for="name" th:text="@{Translated  From}" class="required">Translated From: </label>
-					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="translatedfrom" id="translatedfrom" th:field="*{translatedfrom}"/>
+					<input type="text" autocomplete="on" required="on"  maxlength="500" name="translatedfrom" id="translatedfrom" th:field="*{translatedfrom}"/>
 				</li>
 				<li>
 					<label class="required" for="originalname" th:text="@{Original Name}">Original Name: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="originalname" id="originalname" th:field="*{originalname}"/>
+					<input type="text" autocomplete="on" required="on" name="originalname" id="originalname" th:field="*{originalname}"/>
 				</li>
 				<li>
 					<label class="required" for="originalauthor" th:text="@{Original Author}">Original Author: </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="originalauthor" id="originalauthor" th:field="*{originalauthor}"/>
+					<input type="text" autocomplete="on" required="on" name="originalauthor" id="originalauthor" th:field="*{originalauthor}"/>
 				</li>
 				<li>
-					<input tabindex="40" type="reset" value="Reset " id="translationReset" name="translationReset"/>
-					<input tabindex="10" type="submit" value="Save" id="addtranslationsubmitbtn" name="addtranslationsubmitbtn"/>
+					<input type="submit" value="Save" id="addtranslationsubmitbtn" name="addtranslationsubmitbtn"/>
+					<input type="reset" value="Reset " id="translationReset" name="translationReset"/>
+					<input id="translationCancel" type="button" value="Cancel" />					
 				</li>
 			</ul>
 		
@@ -961,7 +1007,6 @@
 			<span></span>
 		</div>
 	<form  class="clearfix tableDataFields" id="itemCategoryForm"  th:object="${itemscategory}"  th:action="@{javascript:submitadditemcategoryAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
-		<fieldset title="Add Categories">
 			<ul>
 				<li>
 					<label for="categoryHeadEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>
@@ -972,11 +1017,11 @@
 					<input type="text" autocomplete="on" required="on" name="categoryHeadMarathi" id="categoryHeadMarathi" th:field="*{categoryHeadMarathi}"/>
 				</li>
 				<li>
-					<input type="reset" value="Reset " id="categoryReset" name="categoryReset"/>
 					<input type="submit" value="Save" id="addCategorysubmitbtn" name="addCategorysubmitbtn"/>
+					<input type="reset" value="Reset " id="categoryReset" name="categoryReset"/>
+					<input type="button" value="Cancel " id="categoryCancel" name="categoryCancel"/>
 				</li>
 			</ul>
-		</fieldset>
 	</form>
 	</div>
 	<!-- Form for adding new Awards -->
@@ -985,8 +1030,7 @@
 			<span></span>
 		</div>
 		<form  class="clearfix tableDataFields" id="itemAwardForm"  th:object="${itemsAward}"  th:action="@{javascript:submitadditemAwardAjax();}" action="message.html" name="itemCatecoryForm"  method="post">
-			<fieldset title="Add Award Details">
-				<ul>
+			<ul>
 					<li>
 						<label for="awardDetailsEnglish" th:text="@{English Heading : }" class="required">English Heading : </label>
 						<input type="text" autocomplete="on" required="on"  maxlength="500" name="awardDetailsEnglish" id="awardDetailsEnglish" th:field="*{awardDetailsEnglish}"/>
@@ -997,81 +1041,78 @@
 					</li>
 					<li>
 						<label for="dateOfAward" th:text="@{Award Date : }" class="required">Date Of Award : </label>
-						<input type="text" tabindex="430" autocomplete="on" required="on" name="dateOfAward" id="dateOfAward" th:field="*{dateOfAward}"/>
+						<input type="text" autocomplete="on" required="on" name="dateOfAward" id="dateOfAward" th:field="*{dateOfAward}"/>
 					</li>
 					<li>
-						<input type="reset" value="Reset " id="awardReset" name="awardReset"/>
 						<input type="submit" value="Save" id="addAwardsubmitbtn" name="addAwardsubmitbtn"/>
+						<input type="reset" value="Reset " id="awardReset" name="awardReset"/>
+						<input type="button" value="Cancel " id="awardCancel" name="awardCancel"/>
 					</li>
 				</ul>
-			</fieldset>
 		</form>
 	</div>
 	
-	<div th:fragment="uploadItemCoverFragment">
-<form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
- <h4>Upload a book image</h4>
- <p>Maximum size of file that can be uploaded is 5MB</p>
-  <fieldset title="Add Item Cover">
-	<ul>
-       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
-        <li> <input id="uploadItemCoverSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadItemCoverFile(event);"/> </li>
-         <li>   <input id="uploadItemCoverCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
-          </ul>
-             
-             <input th:id="@{picture}" type="hidden" name="picture"/>
-            
-	</fieldset>
- </form>
+<div th:fragment="uploadItemCoverFragment">
+	<div id="itemCoverValidationFeedback"> </div>
+	<form  id="uploadItemCover" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadItemCoverFile.html}" method="post" enctype="multipart/form-data" >
+		<p>Maximum size of file that can be uploaded is 5MB</p>
+		<ul>
+		    <li><input type="file" name="file" th:id="@{file}"/><br/> </li>
+		    <li>
+		    	<input id="uploadItemCoverSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadItemCoverFile(event);" /> <!---->
+		    	<input type="reset" value="Reset " id="itemCoverReset" name="itemCoverReset"/>
+		    	<input id="uploadItemCoverCancel" type="button" value="Cancel" onclick="javascript:closeDialog(event);"/><!---->
+		    </li>
+		</ul>
+	        <input th:id="@{picture}" type="hidden" name="picture"/>
+	</form>
  
  <div id="dialog" title="Upload Error" style="display: none;">
-  <p>Please select a file to upload</p>
+  	<p>Please select a file to upload</p>
 </div>
 
 </div>
 
 <div th:fragment="ebookFileFragment">
-<form  id="uploadebookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadebookFile.html}" method="post" enctype="multipart/form-data" >
- <h4>Upload an Ebook file</h4>
- <p>Maximum size of file that can be uploaded is 5MB</p>
-  <fieldset title="Add Ebook">
-	<ul>
-       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
-        <li> <input id="uploadebookFileSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadebookFile(event);"/> </li>
-         <li>   <input id="uploadebookFileCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
-          </ul>
-             
-             <input th:id="@{picture}" type="hidden" name="picture"/>
-            
-	</fieldset>
- </form>
+	<div id="ebookValidationFeedback"> </div>
+	<form  id="uploadebookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadebookFile.html}" method="post" enctype="multipart/form-data" >
+	 <p>Maximum size of file that can be uploaded is 5MB</p>
+		<ul>
+	       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+	        <li> 
+	        	<input id="uploadebookFileSubmit" type="submit" value="Upload Ebook" onclick="javascript:uploadebookFile(event);"/>
+	        	<input type="reset" value="Reset " id="ebookReset" name="ebookReset"/>
+	            <input id="uploadebookFileCancel" type="button" value="Cancel" onclick="javascript:closeDialog(event);"/> 
+	        </li>
+	    </ul>           
+	             <input th:id="@{ebook}" type="hidden" name="ebook"/> 
+	 </form>
  
- <div id="dialog" title="Upload Error" style="display: none;">
-  <p>Please select a file to upload</p>
-</div>
+	 <div id="dialog" title="Upload Error" style="display: none;">
+	  	<p>Please select a file to upload</p>
+	</div>
 
 </div>
 
 
 <div th:fragment="audiobookFileFragment">
-<form  id="uploadaudiobookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadaudiobookFileSubmit.html}" method="post" enctype="multipart/form-data" >
- <h4>Upload an Audiobook file</h4>
- <p>Maximum size of file that can be uploaded is 5MB</p>
-  <fieldset title="Add Audio book">
-	<ul>
-       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
-        <li> <input id="uploadaudiobookFileSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadaudiobookFile(event);"/> </li>
-         <li>   <input id="uploadaudiobookFileCancel" type="submit" value="Cancel" onclick="javascript:closeDialog(event);"/> </li>
-          </ul>
-             
-             <input th:id="@{picture}" type="hidden" name="picture"/>
-            
-	</fieldset>
- </form>
+	<div id="audiobookValidationFeedback"> </div>
+	<form  id="uploadaudiobookFile" th:object="${uploadedFile}" class="clearfix tableDataFields" th:action="@{/admin/uploadaudiobookFileSubmit.html}" method="post" enctype="multipart/form-data" >
+	 <p>Maximum size of file that can be uploaded is 5MB</p>
+		<ul>
+	       <li>   <input type="file" name="file" th:id="@{file}"/><br/> </li>
+	        <li> 
+	        	<input id="uploadaudiobookFileSubmit" type="submit" value="Upload Picture" onclick="javascript:uploadaudiobookFile(event);"/>
+	        	<input type="reset" value="Reset " id="audiobookReset" name="audiobookReset"/>
+	        	<input id="uploadaudiobookFileCancel" type="button" value="Cancel" onclick="javascript:closeDialog(event);"/> 
+	        </li>
+	    </ul>
+		<input th:id="@{audiobook}" type="hidden" name="picture"/>
+	 </form>
  
- <div id="dialog" title="Upload Error" style="display: none;">
-  <p>Please select a file to upload</p>
-</div>
+	<div id="dialog" title="Upload Error" style="display: none;">
+	  <p>Please select a file to upload</p>
+	</div>
 
 </div>
 
@@ -1081,7 +1122,7 @@
 	
 	
 	
-	<!-- Start : Itemtype List fragment  -->		
+<!-- Start : Itemtype List fragment  -->		
 		<div th:fragment="itemTypeListFragment">
 			<table id="example">
   			<thead title="itemType Table">
