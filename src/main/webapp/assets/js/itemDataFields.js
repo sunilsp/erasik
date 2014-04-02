@@ -2,7 +2,9 @@
  * @author manasi
  */
 $("document").ready(function() {
-	
+	/*
+	 * Start of Set pop-up for Stock Center
+	 */
 	$("#selectStockCenter").dialog({
 		autoOpen: false,
 		height: 300,
@@ -12,10 +14,47 @@ $("document").ready(function() {
 		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 		});
 	$("#tempFileId").val(tempId);
-	$("#isbnno").focus();
 	$( "#selectStockCenter" ).dialog( "option", "height", 250 );
 	$( "#selectStockCenter" ).dialog( "option", "title", "Select Stock Center" );
 	$( "#selectStockCenter").dialog("open");
+	$("#stockcenterValidationFeedback").hide();
+	
+	 
+	 var stockcenterValidator = $("#itemStockcenter").validate
+		({
+	        rules : {
+	        	stockCenterDD: {
+	                required : true
+	            }
+	        },
+	        faultPlacement : function(fault, element) {
+	            
+	            fault.insertAfter(element);
+	        },
+	        invalidHandler : function(form, validator) {
+		        var errors = validator.numberOfInvalids();
+		        if (errors) {
+		            var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+		            $("#stockcenterValidationFeedback span").html(message);
+		            $("#stockcenterValidationFeedback").show();
+		        } else {
+		            $("#stockcenterValidationFeedback").hide();
+		       
+		        }
+	        
+	        },
+	        submitHandler : function(form){
+	        	$("#selectStockCenter").dialog("close");
+	        },
+	        onkeyup : true,
+	    });
+	 
+	 /*
+	  * Start of Set pop-up for Stock Center
+	  */
+
+	$("#isbnno").focus();
+	
 	/*
 	 * Make fields optional on radio click
 	 */
@@ -543,12 +582,14 @@ $("document").ready(function() {
 			({
 		        rules : {
 		        	languageName: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            }
 		        },
 		        messages : {
 		        	languageName: {
-		                required : "Provide language name."
+		                required : "Provide language name.",
+		                maxlength : "Language name is too long. Allowed length 25."
 		            }
 		        },
 		        faultPlacement : function(fault, element) {
@@ -1768,13 +1809,7 @@ $("document").ready(function() {
 			   window.location="showItemTypes.html";
 		   });
 		   
-		   $("#selectStockCenterSubmit").click(function(){
-			   if($("#stockCenterDD").val() == ""){
-				   alert("Please select a stock Center");
-			   }
-			   else
-				   $("#selectStockCenter").dialog("close");
-		   });
+		  
 		
 		   var englishNameofBook="";
 		  /* $("#marathiName").keypress(function(event){

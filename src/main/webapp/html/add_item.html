@@ -258,8 +258,8 @@ xmlns:th="http://www.thymeleaf.org">
 			</div>
 		</div>
 		<div id="selectStockCenter">
-			<!--<form> Error! when form tag is enabled -->
-			<div class="formDiv">
+			<div id="stockcenterValidationFeedback"> <span></span></div>
+			<form id="itemStockcenter" class="clearfix tableDataFields" > <!--Error! when form tag is enabled -->
 				<ul>
 					<li class="elem-3">
 						<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>
@@ -267,15 +267,14 @@ xmlns:th="http://www.thymeleaf.org">
 						<option value="" th:text="Select ">Select</option>
 						<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterHead}">Wireframe</option>
 						</select>
-						<input type="button" tabindex="120" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
+						<input type="button" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
 					</li>
 					<li>
 						<input type="submit" value="Proceed" id="selectStockCenterSubmit" name="selectStockCenterSubmit"/>
 						<input type="button" value="Cancel " id="exitAddItem" name="exitAddItem"/>
 					</li>
 				 </ul>
-			</div>
-			<!--</form> -->
+			</form><!-- -->
 		</div>
 		
 		<div id="float-modal-form" title="Add new information">
@@ -293,6 +292,9 @@ xmlns:th="http://www.thymeleaf.org">
 	<!--<script>
 	window.jQuery || document.write('<script type="text/javascript" src="../assets/js/jquery-1.8.1.min.js"><\/script>')
 	</script>-->
+	<!-- -->
+	<script type="text/javascript" src="../assets/js/jquery-1.8.1.min.js"></script>
+	<!-- -->
 	<script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
 	<script type="text/javascript" src="../assets/js/itemDataFields.js"></script>
 	<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js"></script>

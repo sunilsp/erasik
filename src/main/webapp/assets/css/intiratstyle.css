@@ -293,7 +293,7 @@ em {
 }
 #validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
 #authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, #categoryValidationFeedback, #awardValidationFeedback, #addStockCenterValidationFeedback
-,#reprintValidationFeedback{
+,#reprintValidationFeedback, #stockcenterValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;
