@@ -27,10 +27,6 @@ $("document").ready(function() {
 	                required : true
 	            }
 	        },
-	        faultPlacement : function(fault, element) {
-	            
-	            fault.insertAfter(element);
-	        },
 	        invalidHandler : function(form, validator) {
 		        var errors = validator.numberOfInvalids();
 		        if (errors) {
@@ -134,6 +130,13 @@ $("document").ready(function() {
 	/*
 	 * custom validation
 	 */
+	
+	jQuery.validator.setDefaults({
+	    errorPlacement: function(error, element) {
+	        error.appendTo(element.prev().parent());
+	    }
+	});
+	
 	jQuery.validator.addMethod("numberGreaterThan", 
 			function(value, element, params) {
 
@@ -294,11 +297,6 @@ $("document").ready(function() {
         messages : {
             
         },
-       
-        faultPlacement : function(fault, element) {
-           
-                fault.insertAfter(element);
-        },
         invalidHandler : function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
@@ -408,10 +406,6 @@ $("document").ready(function() {
 				                required : "Provide item description."
 				            }				           
 				        },
-				        faultPlacement : function(fault, element) {
-				            
-				            fault.insertAfter(element);
-				        },
 				        invalidHandler : function(form, validator) {
 					        var errors = validator.numberOfInvalids();
 					        if (errors) {
@@ -472,7 +466,8 @@ $("document").ready(function() {
 	$("#addBindingTypeAjax").click(function(){		  
     	$.get( "addBindingTypeAjax.html", function( data ) {
   			$( "#float-modal-form" ).dialog( "open" );
-  			$( "#float-modal-form" ).dialog( "option", "height", 420 );
+  			$( "#float-modal-form" ).dialog( "option", "width", 650 );
+  			$( "#float-modal-form" ).dialog( "option", "height", 500 );
   			$( "#float-modal-form" ).dialog( "option", "title", "Add Binding Types" );
 			$( "#float-modal-form" ).html( data );
 			$( "#bindingValidationFeedback").hide();
@@ -494,10 +489,6 @@ $("document").ready(function() {
 		                required : true,
 		                number:true
 		            }
-		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -592,10 +583,6 @@ $("document").ready(function() {
 		                maxlength : "Language name is too long. Allowed length 25."
 		            }
 		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
-		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
 			        if (errors) {
@@ -675,10 +662,6 @@ $("document").ready(function() {
 		            	required : true,
 		            	max:nowYear
 		            }
-		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -778,10 +761,6 @@ $("document").ready(function() {
 		            	required:true
 		            }
 		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
-		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
 			        if (errors) {
@@ -848,7 +827,7 @@ $("document").ready(function() {
 			$( "#authorValidationFeedback").hide();
 			/*
 			 * custom validation
-			 */
+			*/
 			jQuery.validator.addMethod("dateGreaterThan", 
 					function(value, element, params) {
 
@@ -933,7 +912,7 @@ $("document").ready(function() {
 		                required : false,
 		                dateFormat: 'dd-mm-yyyy',
 		                date:true,
-		                dateLessThan: "#expiredDate"
+		                dateLessThan: '#expiredDate'
 		            },
 		            expiredDate: {
 		            	required : false,
@@ -944,10 +923,6 @@ $("document").ready(function() {
 		            photo: {
 		                required : false
 		            },
-		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -1051,10 +1026,6 @@ $("document").ready(function() {
 		            	max:nowYear
 		            }
 		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
-		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
 			        if (errors) {
@@ -1156,10 +1127,6 @@ $("document").ready(function() {
 		                required : true
 		            }
 		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
-		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
 			        if (errors) {
@@ -1215,10 +1182,6 @@ $("document").ready(function() {
 		                required : true
 		            }
 		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
-		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
 			        if (errors) {
@@ -1261,19 +1224,18 @@ $("document").ready(function() {
 			({
 		        rules : {
 		        	translatedfrom: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            originalname: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            }
 		            ,
 		            originalauthor: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            }
-		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -1357,10 +1319,6 @@ $("document").ready(function() {
 		                dateFormat: 'dd-mm-yy',
 		                date:true
 		            }
-		        },
-		        faultPlacement : function(fault, element) {
-		            
-		            fault.insertAfter(element);
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -1448,10 +1406,6 @@ $("document").ready(function() {
 				                required : true
 				            }
 				        },
-				        faultPlacement : function(fault, element) {
-				            
-				            fault.insertAfter(element);
-				        },
 				        invalidHandler : function(form, validator) {
 					        var errors = validator.numberOfInvalids();
 					        if (errors) {
@@ -1520,10 +1474,6 @@ $("document").ready(function() {
 				                required : true
 				            }
 				        },
-				        faultPlacement : function(fault, element) {
-				            
-				            fault.insertAfter(element);
-				        },
 				        invalidHandler : function(form, validator) {
 					        var errors = validator.numberOfInvalids();
 					        if (errors) {
@@ -1570,10 +1520,6 @@ $("document").ready(function() {
 				        	file: {
 				                required : true
 				            }
-				        },
-				        faultPlacement : function(fault, element) {
-				            
-				            fault.insertAfter(element);
 				        },
 				        invalidHandler : function(form, validator) {
 					        var errors = validator.numberOfInvalids();

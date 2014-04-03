@@ -275,11 +275,12 @@ label.error {
 	vertical-align: top;
 	display: inline-block;
 	width: auto;
-	float: right;
+	float: left;
 	padding: none;
-	clear: right;
+	clear: left;
 	background:none;
 	font-size:80%;
+	color:#AA0338;
 }
 label.required:before {
 	content: "*";

@@ -325,15 +325,15 @@
 				</li>
 				<li>
 					<label for="address1" th:text="@{Address Line 1  : }" >Address Line 1 : </label>
-					<input type="text" autocomplete="on" required="on" name="address1" id="address1" th:field="*{address1}"/>
+					<input type="text" autocomplete="on" name="address1" id="address1" th:field="*{address1}"/>
 				</li>
 				<li>
 					<label for="address2" th:text="@{Address Line 2  : }" >Address Line 2 : </label>
-					<input type="text" autocomplete="on" required="on" name="address2" id="address2" th:field="*{address2}"/>
+					<input type="text" autocomplete="on" name="address2" id="address2" th:field="*{address2}"/>
 				</li>
 				<li>
 					<label for="address3" th:text="@{Address Line 3  : }" >Address Line 3 : </label>
-					<input type="text" autocomplete="on" required="on" name="address3" id="address3" th:field="*{address3}"/>
+					<input type="text" autocomplete="on" name="address3" id="address3" th:field="*{address3}"/>
 				</li>
 				<li>
 					<label for="pincode" th:text="@{Pincode  : }" class="required">Pincode : </label>
@@ -981,15 +981,15 @@
 		
 			<ul>
 				<li>
-					<label for="name" th:text="@{Translated  From}" class="required">Translated From: </label>
+					<label for="name" th:text="@{Translated  From : }" class="required">Translated From: </label>
 					<input type="text" autocomplete="on" required="on"  maxlength="500" name="translatedfrom" id="translatedfrom" th:field="*{translatedfrom}"/>
 				</li>
 				<li>
-					<label class="required" for="originalname" th:text="@{Original Name}">Original Name: </label>
+					<label class="required" for="originalname" th:text="@{Original Name : }">Original Name: </label>
 					<input type="text" autocomplete="on" required="on" name="originalname" id="originalname" th:field="*{originalname}"/>
 				</li>
 				<li>
-					<label class="required" for="originalauthor" th:text="@{Original Author}">Original Author: </label>
+					<label class="required" for="originalauthor" th:text="@{Original Author : }">Original Author: </label>
 					<input type="text" autocomplete="on" required="on" name="originalauthor" id="originalauthor" th:field="*{originalauthor}"/>
 				</li>
 				<li>
