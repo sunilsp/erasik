@@ -46,7 +46,7 @@ $("document").ready(function() {
 	    });
 	 
 	 /*
-	  * Start of Set pop-up for Stock Center
+	  * End of Set pop-up for Stock Center
 	  */
 
 	$("#isbnno").focus();
@@ -138,15 +138,15 @@ $("document").ready(function() {
 	});
 	
 	jQuery.validator.addMethod("numberGreaterThan", 
-			function(value, element, params) {
-
-			    if (!/Invalid|NaN/.test(value)) {
-			        return (Number(value) >= Number($(params).val()));
-			    }
-
-			    return isNaN(value) && isNaN($(params).val()) 
-			        || (Number(value) >= Number($(params).val())); 
-			},'Must be greater than {0}.');
+		function(value, element, params) {
+	
+		    if (!/Invalid|NaN/.test(value)) {
+		        return (Number(value) >= Number($(params).val()));
+		    }
+	
+		    return isNaN(value) && isNaN($(params).val()) 
+		        || (Number(value) >= Number($(params).val())); 
+		},'Must be greater than {0}.');
 
 	jQuery.validator.addMethod("numberLessThan", 
 			function(value, element, params) {
@@ -830,6 +830,7 @@ $("document").ready(function() {
 			*/
 			jQuery.validator.addMethod("dateGreaterThan", 
 					function(value, element, params) {
+						if($(params).val()=="") return true;
 
 					    if (!/Invalid|NaN/.test(new Date(value))) {
 					        return new Date(value) > new Date($(params).val());
@@ -841,6 +842,7 @@ $("document").ready(function() {
 
 			jQuery.validator.addMethod("dateLessThan", 
 					function(value, element, params) {
+						if($(params).val()=="") return true;
 
 					    if (!/Invalid|NaN/.test(new Date(value))) {
 					        return new Date(value) < new Date($(params).val());
@@ -850,25 +852,30 @@ $("document").ready(function() {
 					        || (Number(value) < Number($(params).val())); 
 					},'Must be less than {0}.');
 			/*
-			 * custom validation
+			 *End of custom validation
 			 */
 			var typeValidator = $("#itemAuthorForm").validate
 			({
-		        rules : {
+		       rules : {
 		        	auth_en_name: {
-		                required : true
-		            },
+		                required : true,
+		                maxlength:25
+		            } ,
 		            auth_mr_name: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            address1: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            address2: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            address3: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            pincode: {
 		                required : true,
@@ -877,17 +884,20 @@ $("document").ready(function() {
 		                maxlength:6
 		            },
 		            city: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            state: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            country: {
 		                required : true
 		            },
 		            email: {
 		                required : false,
-		                email:true
+		                email:true,
+		                maxlength:25
 		            },
 		            phone1: {
 		                required : false,
@@ -910,19 +920,17 @@ $("document").ready(function() {
 		            },
 		            dateOfBirth: {
 		                required : false,
-		                dateFormat: 'dd-mm-yyyy',
 		                date:true,
 		                dateLessThan: '#expiredDate'
 		            },
 		            expiredDate: {
 		            	required : false,
 		                date:true,
-		                dateFormat: 'dd-mm-yyyy',
 		                dateGreaterThan: "#dateOfBirth"
 		            },
 		            photo: {
 		                required : false
-		            },
+		            }/**/
 		        },
 		        invalidHandler : function(form, validator) {
 			        var errors = validator.numberOfInvalids();
@@ -997,12 +1005,7 @@ $("document").ready(function() {
 		  });	
 		
 	}
-	submitAuthorAjax=function(){
-		$.post("submitAuthor.html",$("#itemAuthorForm").serialize(),function(data){
-			alert(data);
-			$( "#float-modal-form" ).dialog( "close" );
-		});
-	}
+
 	
 	$("#addItemsReprintAjax").click(function(){
 		$.get( "addItemReprintAjax.html", function( data ) {
@@ -1073,32 +1076,42 @@ $("document").ready(function() {
 			({
 		        rules : {
 		        	englishName: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            pubsupplmarathiName: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            address1: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            address2: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            address3: {
-		                required : false
+		                required : false,
+		                maxlength:25
 		            },
 		            pincode: {
 		                required : true,
-		                number:true
+		                number:true,
+		                maxlength:6,
+		                minlength:6
 		            },
 		            city: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            state: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            country: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            },
 		            email: {
 		                required : true,
@@ -1124,7 +1137,8 @@ $("document").ready(function() {
 		                url:true
 		            },
 		            contactPerson: {
-		                required : true
+		                required : true,
+		                maxlength:25
 		            }
 		        },
 		        invalidHandler : function(form, validator) {
