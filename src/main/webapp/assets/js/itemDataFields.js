@@ -916,7 +916,7 @@ $("document").ready(function() {
 		                number:true
 		            },
 		            prefix: {
-		                required : true
+		                required : false
 		            },
 		            dateOfBirth: {
 		                required : false,
