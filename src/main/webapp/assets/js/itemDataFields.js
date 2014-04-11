@@ -175,7 +175,7 @@ $("document").ready(function() {
                 required : true
             },
             isbnno: {
-                required : true
+                required : false
             },
         	itemTypeDropdown : {
                 required : true
