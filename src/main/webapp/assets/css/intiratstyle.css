@@ -271,7 +271,7 @@ fieldset:before {
 
 label.error {
 	padding: 0 !important;
-	margin: 0 !important;
+	margin: 0.5em 0 !important;
 	vertical-align: top;
 	display: inline-block;
 	width: auto;
@@ -367,8 +367,9 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		line-height: 1.2em;
 	}
 	
-	.elem-3 label{
+	.elem-3 label:first-child{
 		width: 25%;
+		height:auto;
 	}
 	
 	.elem-3 label+label{
@@ -411,8 +412,9 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		line-height: 1.2em;
 	}
 	
-	.elem-3 label{
+	.elem-3 label:first-child{
 		width: 25%;
+		height:auto;
 	}
 	.elem-3 label+label{
 		width: 40%;

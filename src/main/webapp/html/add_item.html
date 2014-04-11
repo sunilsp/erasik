@@ -30,7 +30,6 @@ xmlns:th="http://www.thymeleaf.org">
 				<h2>Rasik Database</h2>
 			</hgroup>
 		</section>
-		<!-- // banner ends -->
 		<div class="ym-wrapper">
 			<div class="ym-grid">
 				<article class="ym-g960-12 ym-gl">
@@ -44,8 +43,8 @@ xmlns:th="http://www.thymeleaf.org">
 								<ul>
 								
 									<li class="elem-3">
-										<label for="isbnno" th:text="@{ISBN No : }" >ISBN No : </label>
-										<input type="text" autofocus="autofocus" tabindex="20" autocomplete="on" required="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
+										<label for="isbnno" th:text="@{ISBN No : }" class="required">ISBN No : </label>
+										<input  class="required" required="required" type="text" autofocus="autofocus" tabindex="20" autocomplete="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
 									</li>
 								
 									<li class="elem-3">
@@ -227,8 +226,8 @@ xmlns:th="http://www.thymeleaf.org">
 
 									</li>
 									<li class="elem-3">
-										<input tabindex="500" type="reset" value="Reset " id="reset" name="reset"/>
-										<input tabindex="510" type="submit" value="Save" id="addItemsubmitbtn" name="addItemsubmitbtn"/>
+										<input tabindex="500" type="submit" value="Save" id="addItemsubmitbtn" name="addItemsubmitbtn"/>
+										<input tabindex="510" type="reset" value="Reset " id="reset" name="reset"/>
 									</li>
 								</ul>
 							</fieldset>

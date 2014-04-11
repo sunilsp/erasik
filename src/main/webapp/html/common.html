@@ -75,15 +75,15 @@
 			<ul>
 				<li>
 					<label for="name" th:text="@{Item Description}" class="required">Item Description : </label>
-					<input type="text" tabindex="" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
+					<input type="text" autocomplete="on" required="on"  maxlength="50" name="description" id="description" th:field="*{description}"/>
 				</li>
 				<li>
 					<label for="vatPerc">Vat Percentage (%) : </label>
-					<input type="text" tabindex="" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
+					<input type="text" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
 				</li>
 				<li>
-					<input tabindex="" type="submit" value="Save" id="addItemTypesubmitbtn" name="addItemTypesubmitbtn"/>
-					<input tabindex="" type="reset" value="Reset " id="typeReset" name="typeReset"/>
+					<input type="submit" value="Save" id="addItemTypesubmitbtn" name="addItemTypesubmitbtn"/>
+					<input type="reset" value="Reset " id="typeReset" name="typeReset"/>
 					<input id="itemTypeCancel" type="button" value="Cancel" />
 				</li>
 			</ul>
@@ -95,15 +95,15 @@
 			<ul>
 				<li>
 					<label for="name" th:text="@{Discount Description}" class="required">Discount Description : </label>
-					<input type="text" tabindex="10" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
+					<input type="text" autocomplete="on" required="on"  maxlength="500" name="description" id="description" th:field="*{description}"/>
 				</li>
 				<li>
 					<label  for="vatPerc">Vat Percentage : </label>
-					<input type="text" tabindex="20" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
+					<input type="text" autocomplete="on" required="on" name="vatPerc" id="vatPerc" th:field="*{vatPerc}"/>
 				</li>
 				<li>
-					<input tabindex="40" type="reset" value="Reset " id="reset" name="reset"/>
-					<input tabindex="10" type="submit" value="Save" id="adddiscountsubmitbtn" name="adddiscountsubmitbtn"/>
+					<input type="reset" value="Reset " id="reset" name="reset"/>
+					<input type="submit" value="Save" id="adddiscountsubmitbtn" name="adddiscountsubmitbtn"/>
 				</li>
 			</ul>
 		</fieldset>
@@ -155,11 +155,11 @@
 				<ul>
 				<li>
 					<label class="required" for="cust_type_desc" th:text="@{Language Name :}">Language Name : </label>
-					<input type="text" tabindex="" autocomplete="on" required="on" name="languageName" id="languageName" th:field="*{languageName}"/>
+					<input type="text" autocomplete="on" required="on" name="languageName" id="languageName" th:field="*{languageName}"/>
 				</li>
 				<li>
-					<input tabindex="" type="submit" value="Save" id="submitLanguageTypebtn" name="submitLanguageTypebtn"/>
-					<input tabindex="" type="reset" value="Reset " id="languageReset" name="languageReset"/>
+					<input type="submit" value="Save" id="submitLanguageTypebtn" name="submitLanguageTypebtn"/>
+					<input type="reset" value="Reset " id="languageReset" name="languageReset"/>
 					<input id="languageCancel" type="button" value="Cancel" />
 				</li>
 				</ul>
@@ -684,7 +684,7 @@
 					</li>
 					<li>
 					<label for="country" th:text="@{Country : }" class="required">Country : </label>
-					<select tabindex="80" autocomplete="on" required="on" name="country" id="country" th:field="*{country}">
+					<select autocomplete="on" required="on" name="country" id="country" th:field="*{country}">
 						<option value="">Select Country</option>
 						<option value="India">India</option>
 						<option value="US">United States of America</option>

@@ -204,11 +204,14 @@ $("document").ready(function() {
             price : {
                 required : true,
                 number:true,
-                min:0
+                min:0,
+                max:10000000
             },
             discountedprice : {
                 required : false ,
-                number:true
+                number:true,
+                min:0,
+                max:10000000
             },
             discountedpriceEndDate: {
                 required : true,
@@ -218,22 +221,28 @@ $("document").ready(function() {
                 required : true,
                 number:true,
                 numberLessThan:"#price",
-                min:0
+                min:0,
+                max:10000000
             },
             purchaseDiscountPercent: {
-                required : false ,
+                required : true ,
                 number:true,
-                min:0
+                min:0,
+                max:100
             },
             
             maxSaleDiscountPrecent:{
             	reuired:true,
-                number:true
+                number:true,
+                min:0,
+                max:100
             },
             
             maxSaleDiscountPrice:{
             	required:true,
-                number:true
+                number:true,
+                min:0,
+                max:10000000
             },
             editionDropdown: {
                 required : true
@@ -253,7 +262,9 @@ $("document").ready(function() {
             },
             noOfPages:{
             	required:true,
-            	number:true
+            	number:true,
+            	max:10000000,
+            	min:0
             },
             bindingTypeDropdown : {
                 required : true
@@ -295,7 +306,12 @@ $("document").ready(function() {
             }
         },
         messages : {
-            
+        	 purchaseDiscountPercent: {
+                 required : "Discount percent should be at least 0."
+             },
+             purchasePrice: {
+                 numberLessThan:"Should be less than Printed Price."
+             },
         },
         invalidHandler : function(form, validator) {
             var errors = validator.numberOfInvalids();
@@ -357,13 +373,17 @@ $("document").ready(function() {
 	 * End of Add Item Form validations 
 	 */
 	
+	var dateOptions = {
+		    dateFormat: "dd/mm/yy",
+			changeMonth:true,
+			changeYear:true
+		};
 	
 	
-	
-	$( "#maxSalePriceEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
-	$( "#maxOwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
-	$( "#maxInwDiscountEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
-	$( "#discountedpriceEndDate" ).datepicker({ dateFormat: "dd/mm/yy" });
+	$( "#maxSalePriceEndDate" ).datepicker(dateOptions);
+	$( "#maxOwDiscountEndDate" ).datepicker(dateOptions);
+	$( "#maxInwDiscountEndDate" ).datepicker(dateOptions);
+	$( "#discountedpriceEndDate" ).datepicker(dateOptions);
     
     /**
      * 
@@ -391,7 +411,8 @@ $("document").ready(function() {
 					({
 				        rules : {
 				        	description: {
-				                required : true
+				                required : true,
+				                maxlength:50
 				            },
 				            vatPerc: {
 				                number:true,
@@ -479,15 +500,21 @@ $("document").ready(function() {
 		            },
 		            height: {
 		                required : true,
-		                number:true
+		                number:true,
+		                min:0,
+		                max:10000000
 		            },
 		            width: {
 		                required : true,
-		                number:true
+		                number:true,
+		                min:0,
+		                max:10000000
 		            },
 		            length: {
 		                required : true,
-		                number:true
+		                number:true,
+		                min:0,
+		                max:10000000
 		            }
 		        },
 		        invalidHandler : function(form, validator) {
@@ -574,7 +601,7 @@ $("document").ready(function() {
 		        rules : {
 		        	languageName: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            }
 		        },
 		        messages : {
@@ -859,23 +886,23 @@ $("document").ready(function() {
 		       rules : {
 		        	auth_en_name: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            } ,
 		            auth_mr_name: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address1: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address2: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address3: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            pincode: {
 		                required : true,
@@ -885,11 +912,11 @@ $("document").ready(function() {
 		            },
 		            city: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            state: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            country: {
 		                required : true
@@ -897,23 +924,27 @@ $("document").ready(function() {
 		            email: {
 		                required : false,
 		                email:true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            phone1: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:12
 		            },
 		            phone2: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:12
 		            },
 		            fax: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:12
 		            },
 		            mobile: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:10
 		            },
 		            prefix: {
 		                required : false
@@ -960,16 +991,30 @@ $("document").ready(function() {
 			 * 
 			 */
 			var today = new Date();
-			var dateOptions = {
+			var dateOptionsDOE = {
 			    maxDate: today,
-			    dateFormat: "dd/mm/yy"
+			    dateFormat: "dd/mm/yy",
+				changeMonth:true,
+				changeYear:true,
+				onClose:function(selectedDate){
+					$("#dateOfBirth").datepicker("option","maxDate",selectedDate);
+				}
 			};
+			var dateOptionsDOB = {
+				    maxDate: today,
+				    dateFormat: "dd/mm/yy",
+					changeMonth:true,
+					changeYear:true,
+					onClose:function(selectedDate){
+						$("#expiredDate").datepicker("option","minDate",selectedDate);
+					}
+				};
 			/*
 			 * 
 			 */
 			
-			$( "#expiredDate" ).datepicker(dateOptions);
-			$( "#dateOfBirth" ).datepicker(dateOptions);
+			$( "#expiredDate" ).datepicker(dateOptionsDOE);
+			$( "#dateOfBirth" ).datepicker(dateOptionsDOB);
 			
 			$( "#authorCancel").click(function() {
 				$( "#float-modal-form" ).dialog( "close" );
@@ -1077,23 +1122,23 @@ $("document").ready(function() {
 		        rules : {
 		        	englishName: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            pubsupplmarathiName: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address1: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address2: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            address3: {
 		                required : false,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            pincode: {
 		                required : true,
@@ -1103,15 +1148,14 @@ $("document").ready(function() {
 		            },
 		            city: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            state: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            country: {
-		                required : true,
-		                maxlength:25
+		                required : true
 		            },
 		            email: {
 		                required : true,
@@ -1119,18 +1163,22 @@ $("document").ready(function() {
 		            },
 		            phone1: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:12
 		            },
 		            phone2: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:12
 		            },
 		            fax: {
-		                required : false
+		                required : false,
+		                maxlength:12
 		            },
 		            mobile: {
 		                required : false,
-		                number:true
+		                number:true,
+		                maxlength:10
 		            },
 		            website: {
 		                required : false,
@@ -1138,7 +1186,7 @@ $("document").ready(function() {
 		            },
 		            contactPerson: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            }
 		        },
 		        invalidHandler : function(form, validator) {
@@ -1239,16 +1287,16 @@ $("document").ready(function() {
 		        rules : {
 		        	translatedfrom: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            },
 		            originalname: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            }
 		            ,
 		            originalauthor: {
 		                required : true,
-		                maxlength:25
+		                maxlength:50
 		            }
 		        },
 		        invalidHandler : function(form, validator) {
@@ -1367,7 +1415,9 @@ $("document").ready(function() {
 			var today = new Date();
 			var dateOptions = {
 			    maxDate: today,
-			    dateFormat: "dd/mm/yy"
+			    dateFormat: "dd/mm/yy",
+			    changeMonth:true,
+			    changeYear:true
 			};
 			/*
 			 * 
