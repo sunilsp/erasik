@@ -96,12 +96,15 @@ header {
   padding: 15px 0 0;
 }
 #logo {
-  color: #3891cf;
-  font: 30px 'Oswald', 'Century Gothic', 'Trebuchet MS', Tahoma;
-  height: 32px;
-  display: block;
-  float: left;
-  margin: 15px 0 0;
+  	color: #3891cf;
+	font: 1.8em 'Oswald', 'Century Gothic', 'Trebuchet MS', Tahoma;
+	/* min-height: 75px; */
+	display: block;
+	float: left;
+	/* margin: 15px 0 0; */
+	background: url(../images/RasikLOGO-sm.jpg) no-repeat .5em 0;
+	content: "";
+	padding-top: 75px;
 }
 #logo .icon {
   padding-right: 5px;
@@ -141,9 +144,29 @@ header {
   transform: scaleY(-1);
   filter: flipv;
 }
+/*Localise icons - added by manasi */
+.localise-icons{
+	float: right;
+  	margin: 0;
+  	overflow: hidden;
+  	margin-top:0.2em;
+  	clear:right;
+}
+.localise-icons li {
+  float: left;
+  list-style: none;
+  margin: 0;
+  border-right: 1px dotted #999;
+  border-top: 1px dotted #999;
+  padding : 0.2em;
+}
+.localise-icons li:last-child {
+  border-right: none;
+}
+/*Localise icons */
 nav {
   float: right;
-  margin: 15px 0 0;
+  margin: 0.2em 0 0;
   clear: both;
 }
 ul[role=navigation] {
@@ -199,7 +222,7 @@ section[role=banner] hgroup {
   border-top: 4px dotted #444;
   border-bottom: 4px dotted #444;
   margin: 0 0 30px;
-  padding: 20px 0;
+  padding: 0.5em 0;
 }
 section[role=banner] hgroup h1,
 section[role=banner] hgroup h2 {

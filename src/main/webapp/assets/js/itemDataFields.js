@@ -1,7 +1,7 @@
 /**
  * @author manasi
  */
-$("document").ready(function() {
+$("document"). ready(function() {
 	/*
 	 * Start of Set pop-up for Stock Center
 	 */
@@ -59,11 +59,10 @@ $("document").ready(function() {
 	{
 		$("#translationDetails").show();
 		$("#TranslationsDD").attr("required","on");
-		$("#TranslationsDD").rules('add', {
-				languageDropdown : {
+		$("#TranslationsDD").rules('add',{
 	                required : true
 	            }
-			});
+			);
 		}
 	});
 	
@@ -71,11 +70,7 @@ $("document").ready(function() {
 		if ( $( this ).is( ":checked" ) ){
 			$("#translationDetails").hide();
 			$("#TranslationsDD").removeAttr( "required" );
-			$("#TranslationsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
+			$("#TranslationsDD").rules('remove', 'required');
 		}
 	});
 	
@@ -85,10 +80,8 @@ $("document").ready(function() {
 			$("#reprintDetails").show();
 			$("#reprintDropdown").attr("required","on");
 			$("#reprintDropdown").rules('add', {
-				languageDropdown : {
 	                required : true
-	            }
-			});
+	            });
 		}
 	});
 	
@@ -96,11 +89,7 @@ $("document").ready(function() {
 		if ( $( this ).is( ":checked" ) ){
 			$("#reprintDetails").hide();
 			$("#reprintDropdown").removeAttr( "required" );
-			$("#reprintDropdown").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
+			$("#reprintDropdown").rules('remove','required');
 		}
 	});
 	
@@ -110,21 +99,15 @@ $("document").ready(function() {
 			$("#awardDetails").show();
 			$("#AwarddetailsDD").attr("required","on");
 			$("#AwarddetailsDD").rules('add', {
-				languageDropdown : {
 	                required : true
-	            }
-			});
+	            });
 		}
 	});
 	$("#awardRadioNAjax").change(function(){
 		if ( $( this ).is( ":checked" ) ){
 			$("#awardDetails").hide();
 			$("#AwarddetailsDD").removeAttr( "required" );
-			$("#AwarddetailsDD").rules('remove', {
-				languageDropdown : {
-	                required : true
-	            }
-			});
+			$("#AwarddetailsDD").rules('remove','required');
 		}
 	});
 	/*
@@ -160,6 +143,61 @@ $("document").ready(function() {
 			},'Must be less than {0}.');
 	/*
 	 * custom validation
+	 */
+	/*
+	 * User Login validations
+	 */
+	var loginValidator = $("#loginForm").validate({
+		rules : {
+			userName : {
+				required : true,
+				maxlength : 24
+			},
+			userPassword : {
+				required : true,
+				password:true,
+				minlength : 8,
+				maxlength : 24
+			}
+		},
+		invalidHandler : function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+				$("#loginValidationFeedback span").html(message);
+				$("#loginValidationFeedback").show();
+			} else {
+				$("#loginValidationFeedback").hide();
+
+			}
+		},
+		submitHandler : function(form) {
+			form.submit();
+
+		},
+		onkeyup : true,
+	});
+	$("#loginReset").click(function() {
+		loginValidator.resetForm();
+		$("#loginValidationFeedback span").html("");
+		$("#loginValidationFeedback").hide();
+	});
+
+	$("#loginCancel").click(function() {
+		$("#float-modal-form").dialog("close");
+		event.preventDefault();
+	});
+
+	$("#showPassword").click(function() {
+		console.log("in funct");
+		if ($(this).is(':checked')) {
+			document.getElementById("userPassword").setAttribute("type", "text");
+		} else {
+			document.getElementById("userPassword").setAttribute("type", "password");
+		}
+	});
+	/*
+	 * end of user login validation
 	 */
 	/*
 	 * Start of Add Item Form validations 

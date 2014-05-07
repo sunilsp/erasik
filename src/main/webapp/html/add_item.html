@@ -2,32 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 	<head th:substituteby="html/common :: headerFragment1">
-
-		<script src="http://code.jquery.com/jquery.min.js"></script>
-
-		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>
-		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js">	</script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js">	</script>
 	</head>
 	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
 	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
 	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
 	<!--[if gt IE 8]><!-->
 	<body>
-	
-		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" >
-		</script>
-	
+		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" >	</script>
 		<!--<![endif]-->
 		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
 		<header class="clearfix">
-			<div class="container" th:include="html/common :: contactMenuFragment"></div>
+			<div class="container" th:include="html/common :: contactMenuFragment">	</div>
 		</header>
-
 		<section role="banner">
 			<hgroup>
-				<h1>Edit Database</h1>
-				<h2>Rasik Database</h2>
+				<h2>Rasik Database - Add Item</h2>
 			</hgroup>
 		</section>
 		<div class="ym-wrapper">
@@ -35,18 +27,15 @@ xmlns:th="http://www.thymeleaf.org">
 				<article class="ym-g960-12 ym-gl">
 					<div class="ym-gbox">
 						<div id="validationFeedback">
-							<span></span>
+							<span>	</span>
 						</div>
 						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{submitaddItem.html}"  th:object="${item}"  action="message.html" name="addItemForm"  method="post">
-
 							<fieldset title="Add New Item" class="foldedset">
 								<ul>
-								
 									<li class="elem-3">
 										<label for="isbnno" th:text="@{ISBN No : }" class="required">ISBN No : </label>
 										<input  class="required" required="required" type="text" autofocus="autofocus" tabindex="20" autocomplete="on" name="isbnno" id="isbnno" th:field="*{isbnno}"/>
 									</li>
-								
 									<li class="elem-3">
 										<label for="itemTypeDropdown" th:text="@{Item Type : }" class="required">Item Type : </label>
 										<select tabindex="30" id="itemTypeDropdown" name="itemTypeDropdown">
@@ -54,12 +43,10 @@ xmlns:th="http://www.thymeleaf.org">
 											<option th:each="itemtype : ${itemTypeList}" th:value="${itemtype.itemTypeId}" th:text="${itemtype.description}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="40" th:id="addItemTypeAjax" id="addItemType" name="addItemType" value="New Item Type"/>
-										
 									</li>
-									
 									<li class="elem-3" id="languageDetails">
 										<label for="languageDropdown" th:text="@{Language : }" class="required">Language: </label>
-										<select tabindex="70" id="languageDropdown" name="languageDropdown" required="on">
+										<select tabindex="70" id="languageDropdown" name="languageDropdown" required="required">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemLanguage : ${itemLanguagesList}" th:value="${itemLanguage.languageId}" th:text="${itemLanguage.languageName}">Wireframe</option>
 										</select>
@@ -67,8 +54,10 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="translationCheck" th:text="@{Has Translation : }" class="required">Has Translation: </label>
-										<input type="radio" tabindex="90" name="translationRadio" value="Yes" th:id="translationRadioYAjax" id="translationRadioY" required="on" checked="true"/> Yes
-										<input type="radio" tabindex="100" name="translationRadio" value="No" th:id="translationRadioNAjax" id="translationRadioN" required="on" /> No
+										<input type="radio" tabindex="90" name="translationRadio" value="Yes" th:id="translationRadioYAjax" id="translationRadioY" required="required" checked="true"/>
+										Yes
+										<input type="radio" tabindex="100" name="translationRadio" value="No" th:id="translationRadioNAjax" id="translationRadioN" required="required" />
+										No
 									</li>
 									<li class="elem-3" id="translationDetails">
 										<label for="Translations" th:text="@{Translations : }" class="required">Translations : </label>
@@ -78,15 +67,15 @@ xmlns:th="http://www.thymeleaf.org">
 										</select>
 										<input type="button" tabindex="120" th:id="addTranslationsAjax" id="addTranslationsAjax" name="addTranslationsAjax" value="New Translation"/>
 									</li>
-								
-								 <li class="elem-3">
+
+									<li class="elem-3">
 										<label for="marathiName" th:text="@{Item printed Name : }" class="required">Item printed Name : </label>
-										<input type="text" tabindex="130" autocomplete="on" required="on" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
+										<input type="text" tabindex="130" autocomplete="on" required="required" name="marathiName" id="marathiName" th:field="*{marathiName}"/>
 									</li>
-									
+
 									<li class="elem-3">
 										<label for="englishName" th:text="@{English Name : }">Item Name (English) : </label>
-										<input type="text" tabindex="140" autocomplete="on" required="on" name="englishName" id="englishName" th:field="*{englishName}"/>
+										<input type="text" tabindex="140" autocomplete="on" required="required" name="englishName" id="englishName" th:field="*{englishName}"/>
 									</li>
 									<li class="elem-3">
 										<label for="Author" th:text="@{Author : }" class="required">Author : </label>
@@ -106,34 +95,32 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="price" th:text="@{Printed Price : }" class="required">Printed Price : </label>
-										<input type="text" tabindex="190" autocomplete="on" required="on" name="price" id="price" th:field="*{price}"/>
+										<input type="text" tabindex="190" autocomplete="on" required="required" name="price" id="price" th:field="*{price}"/>
 									</li>
 									<li class="elem-3">
 										<label for="purchaseprice" th:text="@{Purchase Price : }" class="required">Purchase Price : </label>
-										<input type="text" tabindex="220" autocomplete="on" required="on" name="purchasePrice" id="purchasePrice" th:field="*{purchasePrice}"/>
+										<input type="text" tabindex="220" autocomplete="on" required="required" name="purchasePrice" id="purchasePrice" th:field="*{purchasePrice}"/>
 									</li>
 									<li class="elem-3">
 										<label for="purchaseDiscountPercent" th:text="@{Purchase Discount(%) : }" class="required">Purchase Discount(%) : </label>
-										<input type="text" tabindex="230" autocomplete="on" required="on" name="purchaseDiscountPercent" id="purchaseDiscountPercent" th:field="*{purchaseDiscountPercent}"/>
+										<input type="text" tabindex="230" autocomplete="on" required="required" name="purchaseDiscountPercent" id="purchaseDiscountPercent" th:field="*{purchaseDiscountPercent}"/>
 									</li>
 									<li class="elem-3">
 										<label for="maxSaleDiscountPrecent" th:text="@{Maximum sale discount(%) : }" class="required">Maximum sale discount(%) : </label>
-										<input type="text" tabindex="240" autocomplete="on" required="on" name="maxSaleDiscountPrecent" id="maxSaleDiscountPrecent" th:field="*{maxSaleDiscountPrecent}"/>
+										<input type="text" tabindex="240" autocomplete="on" required="required" name="maxSaleDiscountPrecent" id="maxSaleDiscountPrecent" th:field="*{maxSaleDiscountPrecent}"/>
 									</li>
-									
+
 									<li class="elem-3">
 										<label for="maxSaleDiscountPrice" th:text="@{Minimum Sale Discount Price : }" class="required">Manimum Sale Discount Price : </label>
-										<input type="text" tabindex="250" autocomplete="on" required="on" name="maxSaleDiscountPrice" id="maxSaleDiscountPrice" th:field="*{maxSaleDiscountPrice}"/>
+										<input type="text" tabindex="250" autocomplete="on" required="required" name="maxSaleDiscountPrice" id="maxSaleDiscountPrice" th:field="*{maxSaleDiscountPrice}"/>
 									</li>
-									
-									
 
 								</ul>
 							</fieldset>
 
 							<fieldset title="&nbsp;" class="foldedset">
 								<ul>
-									
+
 									<li class="elem-3">
 										<label for="edition" th:text="@{Edition : }" class="required">Edition : </label>
 										<select tabindex="270" id="editionDropdown" name="editionDropdown">
@@ -144,11 +131,11 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="reprintCheck" th:text="@{Reprint : }" class="required">Reprint : </label>
-										<input type="radio" tabindex="290" name="reprintRadio" value="Yes" th:id="reprintRadioYAjax" id="reprintRadioY" required="on" checked="true"/> Yes
-										<input type="radio" tabindex="300" name="reprintRadio" value="No" th:id="reprintRadioNAjax" id="reprintRadioN" required="on" /> No
+										<input type="radio" tabindex="290" name="reprintRadio" value="Yes" th:id="reprintRadioYAjax" id="reprintRadioY" required="required" checked="true"/>Yes
+										<input type="radio" tabindex="300" name="reprintRadio" value="No" th:id="reprintRadioNAjax" id="reprintRadioN" required="required" />No
 									</li>
 									<li class="elem-3" id="reprintDetails">
-									<label for="reprint" th:text="@{Reprint : }" class="required">Reprint : </label>
+										<label for="reprint" th:text="@{Reprint : }" class="required">Reprint : </label>
 										<select tabindex="3010" id="reprintDropdown" name="reprintDropdown">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemsReprint : ${reprintList}" th:value="${itemsReprint.reprintId}" th:text="${itemsReprint.reprint}">Wireframe</option>
@@ -157,8 +144,8 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="noOfPages" th:text="@{No of Pages / Duration : }" class="required">No of Pages : </label>
-										<input type="text" tabindex="310" autocomplete="on" required="on" name="noOfPages" id="noOfPages" th:field="*{noOfPages}"/>
-									</li>									
+										<input type="text" tabindex="310" autocomplete="on" required="required" name="noOfPages" id="noOfPages" th:field="*{noOfPages}"/>
+									</li>
 									<li class="elem-3">
 										<label for="bindingTypeDropdown" th:text="@{Binding Type : }" class="required">Binding Type : </label>
 										<select tabindex="320" id="bindingTypeDropdown" name="bindingTypeDropdown">
@@ -167,18 +154,18 @@ xmlns:th="http://www.thymeleaf.org">
 										</select>
 										<input type="button" tabindex="330" th:id="addBindingTypeAjax" id="addbindingType" name="addbindingType" value="New binding Type"/>
 									</li>
-									
+
 									<li class="elem-3">
 										<label for="rackLocation" th:text="@{Rack Location : }" class="required">Rack Location : </label>
-										<input type="text" tabindex="350" autocomplete="on" required="on" name="location" id="location" th:field="*{location}"/>
+										<input type="text" tabindex="350" autocomplete="on" required="required" name="location" id="location" th:field="*{location}"/>
 									</li>
 									<li class="elem-3">
 										<label for="maxLevel" th:text="@{Max Lvl : }" class="required">Max Lvl : </label>
-										<input type="text" tabindex="360" autocomplete="on" required="on" name="maxLevel" id="maxLevel" th:field="*{maxLevel}"/>
+										<input type="text" tabindex="360" autocomplete="on" required="required" name="maxLevel" id="maxLevel" th:field="*{maxLevel}"/>
 									</li>
 									<li class="elem-3">
 										<label for="minLevel" th:text="@{Min Lvl : }" class="required">Min Lvl : </label>
-										<input type="text" tabindex="370" autocomplete="on" required="on" name="minLevel" id="minLevel" th:field="*{minLevel}"/>
+										<input type="text" tabindex="370" autocomplete="on" required="required" name="minLevel" id="minLevel" th:field="*{minLevel}"/>
 									</li>
 									<li class="elem-3">
 										<label for="Categories" th:text="@{Categories : }" class="required">Categories : </label>
@@ -187,15 +174,17 @@ xmlns:th="http://www.thymeleaf.org">
 											<option th:each="itemsCategories : ${categoryList}" th:value="${itemsCategories.categoryId}" th:text="${itemsCategories.categoryHeadEnglish}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="390" id="addCategories" th:id="addCategoriesAjax" name="addCategories" value="New Category"/>
-									</li>	
+									</li>
 									<li class="elem-3">
 										<label for="description" th:text="@{Description : }">Description : </label>
-										<textarea tabindex="400" autocomplete="on" name="description" id="description" th:field="*{description}" style="min-height:5em; max-height:10em"></textarea>
+										<textarea tabindex="400" autocomplete="on" name="description" id="description" th:field="*{description}" style="min-height:5em; max-height:10em">	</textarea>
 									</li>
 									<li class="elem-3">
 										<label for="awardsCheck" th:text="@{Won Awards : }" class="required">Won Awards: </label>
-										<input type="radio" tabindex="400" name="awardRadio" value="Yes" th:id="awardRadioYAjax" id="awardRadioY" required="on" checked="true"/> Yes
-										<input type="radio" tabindex="410" name="awardRadio" value="No" th:id="awardRadioNAjax" id="awardRadioN" required="on" /> No
+										<input type="radio" tabindex="400" name="awardRadio" value="Yes" th:id="awardRadioYAjax" id="awardRadioY" required="required" checked="true"/>
+										Yes
+										<input type="radio" tabindex="410" name="awardRadio" value="No" th:id="awardRadioNAjax" id="awardRadioN" required="required" />
+										No
 									</li>
 									<li class="elem-3" id="awardDetails">
 										<label for="addawarddetails" th:text="@{Award Detail : }" class="required">Award Details : </label>
@@ -203,26 +192,27 @@ xmlns:th="http://www.thymeleaf.org">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="awardDetails : ${awarddetailsList}" th:value="${awardDetails.awardDetailId}" th:text="${awardDetails.awardDetailsEnglish}">Wireframe</option>
 										</select>
-										<input type="button" tabindex="430" id="addAwarddetails" th:id="addAwarddetailsAjax" name="addAwarddetails" value="New Award"/>									
+										<input type="button" tabindex="430" id="addAwarddetails" th:id="addAwarddetailsAjax" name="addAwarddetails" value="New Award"/>
 									</li>
 									<li class="elem-3">
 										<label for="itemCoverImage" th:text="@{Item Cover : }" class="required">Item Cover : </label>
-										<label id="itemCoverImageFileName" th:text="@{Select a File to upload}" >Select a File to upload </label> 
-										<input type="hidden" tabindex="440" autocomplete="on" required="on" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
+										<label id="itemCoverImageFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
+										<input type="hidden" tabindex="440" autocomplete="on" required="required" name="itemCoverImage" id="itemCoverImage" th:field="*{itemCoverImage}"/>
 										<input tabindex="450" type="button" value="Upload" id="uploadItemCoverbtn" name="uploadItemCoverbtn"/>
 									</li>
 									<li class="elem-3">
 										<label for="ebookFile" th:text="@{E-Book File : }">E-Book File : </label>
 										<label id="ebookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
-								
+
 										<input type="hidden" tabindex="460" autocomplete="on" name="ebookFile" id="ebookFile" th:field="*{ebookFile}"/>
-										<input tabindex="470" type="button" value="Upload" id="uploadebookFilebtn" name="uploadebookFilebtn"/>									</li>
+										<input tabindex="470" type="button" value="Upload" id="uploadebookFilebtn" name="uploadebookFilebtn"/>
+									</li>
 									<li class="elem-3">
 										<label for="audioBookFile" th:text="@{Audio Book File : }">Audio Book File : </label>
-											<label id="audioBookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
-								
-											<input type="hidden" tabindex="480" autocomplete="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
-											<input tabindex="490" type="button" value="Upload" id="uploadaudioBookbtn" name="uploadaudioBookbtn"/>
+										<label id="audioBookFileName" th:text="@{Select a File to upload}" >Select a File to upload </label>
+
+										<input type="hidden" tabindex="480" autocomplete="on" name="audioBookFile" id="audioBookFile" th:field="*{audioBookFile}"/>
+										<input tabindex="490" type="button" value="Upload" id="uploadaudioBookbtn" name="uploadaudioBookbtn"/>
 
 									</li>
 									<li class="elem-3">
@@ -232,12 +222,11 @@ xmlns:th="http://www.thymeleaf.org">
 								</ul>
 							</fieldset>
 
-							<!-- <input type="hidden" autocomplete="on" name="hitemId" id="hitemId" th /> -->
 							<input type="hidden" autocomplete="on" name="hbindingtype" id="hbindingtype" />
 							<input type="hidden" autocomplete="on" name="hitemtype" id="hitemtype" />
 							<input type="hidden" autocomplete="on" name="hitemlanguage" id="hitemlanguage" />
 							<input type="hidden" autocomplete="on" name="hitemsedition" id="hitemsedition" />
-							
+
 							<input type="hidden" autocomplete="on" name="hitemCoverImage" id="hitemCoverImage" th:field="*{itemCoverImage}"/>
 							<input type="hidden" autocomplete="on" name="hebookFile" id="hebookFile" th:field="*{ebookFile}"/>
 							<input type="hidden" autocomplete="on" name="haudioBookFile" id="haudioBookFile" th:field="*{audioBookFile}"/>
@@ -245,26 +234,28 @@ xmlns:th="http://www.thymeleaf.org">
 							<input type="hidden" autocomplete="on" name="hitemsstockcenters" id="hitemsstockcenters"/>
 							<input type="hidden" autocomplete="on" name="hitemsauthorses" id="hitemsauthorses"/>
 							<input type="hidden" autocomplete="on" name="hitemspublsuppls" id="hitemspublsuppls"/>
-						
+
 							<input type="hidden" autocomplete="on" name="htranslations" id="htranslations"/>
 							<input type="hidden" autocomplete="on" name="hitemscategories" id="hitemscategories"/>
 							<input type="hidden" autocomplete="on" name="hawarddetails" id="hawarddetails"/>
 							<input type="hidden" autocomplete="on" name="tempFileId" id="tempFileId"/>
-							
+
 						</form>
 					</div>
 				</article>
 			</div>
 		</div>
 		<div id="selectStockCenter">
-			<div id="stockcenterValidationFeedback"> <span></span></div>
-			<form id="itemStockcenter" class="clearfix tableDataFields" > <!--Error! when form tag is enabled -->
+			<div id="stockcenterValidationFeedback">
+				<span>	</span>
+			</div>
+			<form id="itemStockcenter" class="clearfix tableDataFields" >
 				<ul>
 					<li class="elem-3">
 						<label for="stockCenter" th:text="@{Stock Center : }" class="required">Stock Center : </label>
 						<select tabindex="110" id="stockCenterDD" name="stockCenterDD">
-						<option value="" th:text="Select ">Select</option>
-						<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterHead}">Wireframe</option>
+							<option value="" th:text="Select ">Select</option>
+							<option th:each="itemsStockCenter : ${itemStockCenterList}" th:value="${itemsStockCenter.stockCenterId}" th:text="${itemsStockCenter.stockCenterHead}">Wireframe</option>
 						</select>
 						<input type="button" id="addStockCenter" th:id="addStockCenterAjax" name="addStockCenter" value="New Stock Center"/>
 					</li>
@@ -272,30 +263,18 @@ xmlns:th="http://www.thymeleaf.org">
 						<input type="submit" value="Proceed" id="selectStockCenterSubmit" name="selectStockCenterSubmit"/>
 						<input type="button" value="Cancel " id="exitAddItem" name="exitAddItem"/>
 					</li>
-				 </ul>
+				</ul>
 			</form><!-- -->
 		</div>
-		
-		<div id="float-modal-form" title="Add new information">
 
-		</div>
+		<div id="float-modal-form" title="Add new information">	</div>
 		<footer role="contentinfo">
 			<p>
-				<span class="left">E-Rasik <a href="#">Goto Top</a></span>
-
+				<span class="left">E-Rasik <a href="#">Goto Top</a>	</span>
 			</p>
 		</footer>
-
+		<script type="text/javascript" src="../assets/js/jquery.validate.js">	</script>
+		<script type="text/javascript" src="../assets/js/itemDataFields.js">	</script>
+		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js">	</script>
 	</body>
-
-	<!--<script>
-	window.jQuery || document.write('<script type="text/javascript" src="../assets/js/jquery-1.8.1.min.js"><\/script>')
-	</script>-->
-	<!-- -->
-	<script type="text/javascript" src="../assets/js/jquery-1.8.1.min.js"></script>
-	<!-- -->
-	<script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
-	<script type="text/javascript" src="../assets/js/itemDataFields.js"></script>
-	<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js"></script>
-
 </html>
