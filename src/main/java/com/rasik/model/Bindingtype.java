@@ -33,6 +33,9 @@ public class Bindingtype implements java.io.Serializable {
 
 	private Integer bindingTypeId;
 	private String bindingTypeName;
+	private Double height;
+	private Double width;
+	private Double length;
 	@JsonBackReference
 	private Set<Items> itemses = new HashSet<Items>(0);
 
@@ -71,6 +74,51 @@ public class Bindingtype implements java.io.Serializable {
 
 	public void setItemses(Set<Items> itemses) {
 		this.itemses = itemses;
+	}
+
+	/**
+	 * @return the length
+	 */
+	@Column(name = "length")
+	public Double getLength() {
+		return length;
+	}
+
+	/**
+	 * @param length the length to set
+	 */
+	public void setLength(Double length) {
+		this.length = length;
+	}
+
+	/**
+	 * @return the height
+	 */
+	@Column(name = "height")
+	public Double getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(Double height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the width
+	 */
+	@Column(name = "width")
+	public Double getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(Double width) {
+		this.width = width;
 	}
 
 }

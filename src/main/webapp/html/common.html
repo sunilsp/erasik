@@ -123,15 +123,15 @@
 		</li>
 		<li>
 			<label class="required" for="length" th:text="@{Length (inches) : }">Length : </label>
-			<input type="text" autocomplete="on" required="on" name="length" id="length" />
+			<input type="text" autocomplete="on" required="on" name="length" id="length" th:field="*{length}"/>
 		</li>
 		<li>
 			<label class="required" for="height" th:text="@{Height (inches) : }">Height : </label>
-			<input type="text" autocomplete="on" required="on" name="height" id="height" />
+			<input type="text" autocomplete="on" required="on" name="height" id="height" th:field="*{height}"/>
 		</li>
 		<li>
 			<label class="required" for="width" th:text="@{Width (inches) : }">Width : </label>
-			<input type="text" autocomplete="on" required="on" name="width" id="width" />
+			<input type="text" autocomplete="on" required="on" name="width" id="width" th:field="*{width}"/>
 		</li>
 		<li>
 			<input type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
