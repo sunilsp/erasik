@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+	<head th:substituteby="html/common :: headerFragment1">
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js">	</script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js">	</script>
+	</head>
+	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
+	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
+	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
+	<!--[if gt IE 8]><!-->
+	<body>
+		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" >	</script>
+		<!--<![endif]-->
+		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
+		<header class="clearfix">
+			<div class="container" th:include="html/common :: contactMenuFragment">	</div>
+		</header>
+		<section role="banner">
+			<hgroup>
+				<h2>Rasik Database - User Login</h2>
+			</hgroup>
+		</section>
+		<div class="ym-wrapper">
+			<div class="ym-grid">
+				<article class="ym-g960-12 ym-gl">
+					<div class="ym-gbox">
+						<div id="loginValidationFeedback">
+							<span> </span>
+						</div>
+						<form class="clearfix" id="loginForm"  th:object="${itemType}" th:action="@{/j_spring_security_check}" action="/j_spring_security_check" name="loginForm"  method="post">
+							<ul>
+								<li>
+									<label for="userName" th:text="@{User Name : }" class="required" >User Name : </label>
+									<input type="text" autocomplete="on" required="required"  maxlength="50" placeholder="User Name" name="j_username" id="j_username"/>
+								</li>
+								<li>
+									<label for="userPassword" th:text="@{User Password : }" class="required" >Password : </label>
+									<input type="password" autocomplete="on" required="required" name="j_password" placeholder="Password" id="j_password"/>
+									<div class="fieldInstructions">
+										<input type="checkbox" name="showpassword" id="showPassword"/>
+										Show Password
+									</div>
+								</li>
+								<li>
+									<span>New User? <a href="#">Register</a></span>
+								</li>
+								<li>
+									<input type="submit" value="Login" id="loginsubmitbtn" name="loginsubmitbtn"/>
+									<input type="reset" value="Reset " id="loginReset" name="loginReset"/>
+									<input id="loginCancel" type="button" value="Cancel" />
+								</li>
+							</ul>
+						</form>
+		</div>
+		</article>
+		</div>
+		</div>
+		
+
+		<div id="float-modal-form" title="Add new information">	</div>
+		<footer role="contentinfo">
+			<p>
+				<span class="left">E-Rasik <a href="#">Goto Top</a>	</span>
+			</p>
+		</footer>
+		
+	</body>
+</html>

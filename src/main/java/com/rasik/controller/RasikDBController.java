@@ -981,6 +981,18 @@ class RasikDBController {
 	}
 
 
+	@RequestMapping(value =
+		{
+				"userlogin.html"
+		}, method = RequestMethod.GET)
+		public ModelAndView userlogin(Model model)
+		{
+			logger.info("Inside userlogin()");
+			ModelAndView mav = new ModelAndView("html/userlogin");
+			return mav;
+			
+		}
+	
 	
 
 		@RequestMapping(value =
