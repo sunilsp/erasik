@@ -2,20 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 	<head th:substituteby="html/common :: headerFragment1">
-		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js">	</script>
-		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js">	</script>
+		<script th:remove="all"  src="../assets/js/jquery-1.8.1.min.js"></script>
+		<script th:remove="all" src="../assets/js/pages.js"></script>
+		<script th:remove="all" src="../assets/js/thymol.js"></script>
 	</head>
 	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
 	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
 	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
 	<!--[if gt IE 8]><!-->
 	<body>
-		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" >	</script>
+		<script th:utext="'var tempId = ' + ${tempFileId}" > </script>
 		<!--<![endif]-->
-		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
+		<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em>
+			<a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+			<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<header class="clearfix">
-			<div class="container" th:include="html/common :: contactMenuFragment">	</div>
+			<div class="container" th:include="html/common :: contactMenuFragment"> </div>
 		</header>
 		<section role="banner">
 			<hgroup>
@@ -39,17 +41,18 @@ xmlns:th="http://www.thymeleaf.org">
 									<label for="userPassword" th:text="@{User Password : }" class="required" >Password : </label>
 									<input type="password" autocomplete="on" required="required" name="j_password" placeholder="Password" id="j_password"/>
 									<div class="fieldInstructions">
-										<input type="checkbox" name="showpassword" id="showPassword"/>
+										<input type="checkbox" name="showpassword" id="showPassword" tabindex="30"/>
 										Show Password
 									</div>
 								</li>
 								<li>
 									<span>New User? <a href="#">Register</a></span>
+									<span>Forgot Password? <a href"#">Reset Password</a></span>
 								</li>
 								<li>
-									<input type="submit" value="Login" id="loginsubmitbtn" name="loginsubmitbtn"/>
-									<input type="reset" value="Reset " id="loginReset" name="loginReset"/>
-									<input id="loginCancel" type="button" value="Cancel" />
+									<input type="submit" value="Login" id="loginsubmitbtn" name="loginsubmitbtn" tabindex="40"/>
+									<input type="reset" value="Reset " id="loginReset" name="loginReset" tabindex="50"/>
+									<input id="loginCancel" type="button" value="Cancel" tabindex="60"/>
 								</li>
 							</ul>
 						</form>

@@ -144,6 +144,7 @@ $("document"). ready(function() {
 	/*
 	 * custom validation
 	 */
+	
 	/*
 	 * User Login validations
 	 */
