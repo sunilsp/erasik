@@ -325,7 +325,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	border-color: #01B0EC !important;
 	background: -moz-linear-gradient(center top , #EDEDED 0%, #F6F6F6 53%, #FFFFFF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
-//user login styles
+/*user login styles*/
 .fieldInstructions {
 	float: right;
 }
@@ -334,7 +334,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	text-decoration: underline;
 	font-weight: bold;
 }
-//user login styles
+/*user login styles*/
 @media screen and (min-width: 960px) {
 	form,.formDiv {
 		width: 100%;
