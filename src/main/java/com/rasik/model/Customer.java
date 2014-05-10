@@ -51,6 +51,12 @@ public class Customer implements java.io.Serializable {
 	private String mobile;
 	private String contactPerson;
 	private String username;
+	private String companyName;
+	private String designation;
+
+	private String firstName;
+	private String lastName;
+	
 	@JsonBackReference
 	private Set<Items> items = new HashSet<Items>(
 			0);
@@ -69,7 +75,11 @@ public class Customer implements java.io.Serializable {
 			String englishName, String marathiName, String address1,
 			String address2, String address3, String pincode, String city,String state,
 			String country, String email, String phone1, String phone2,
-			String fax, String mobile, String contactPerson,
+			String fax, String mobile, String contactPerson, String companyName,
+			String designation,
+			String firstName,
+			String lastName,
+
 			Set<Items> items) {
 		this.customerId = customerId;
 		this.customertype = customertype;
@@ -88,6 +98,12 @@ public class Customer implements java.io.Serializable {
 		this.fax = fax;
 		this.mobile = mobile;
 		this.contactPerson = contactPerson;
+		this.companyName=companyName;
+		this.designation=designation;
+
+		this.firstName=firstName;
+		this.lastName=lastName;
+
 		this.items = items;
 	}
 
@@ -296,6 +312,78 @@ public class Customer implements java.io.Serializable {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+
+
+	/**
+	 * @return the designation
+	 */
+	public String getDesignation() {
+		return designation;
+	}
+
+
+
+	/**
+	 * @param designation the designation to set
+	 */
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+
+
+	/**
+	 * @return the companyName
+	 */
+	public String getCompanyName() {
+		return companyName;
+	}
+
+
+
+	/**
+	 * @param companyName the companyName to set
+	 */
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }

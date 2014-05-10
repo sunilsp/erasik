@@ -28,16 +28,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 						<div id="registerValidationFeedback">
 							<span> </span>
 						</div>
-						<form class="clearfix tableDataFields" id="userRegistration"  th:action=""  th:object=""  action="" name="userRegistration"  method="post">
+						<form class="clearfix tableDataFields" id="userRegistration"  th:action="@{submitRegistration.html}" name="userRegistration"  method="post" th:object="${customerObject}">
 							<fieldset>
 								<ul>
 									<li class="elem-3">
 										<label for="firstname" th:text="@{First Name : }" class="required">First Name : </label>
-										<input  class="required" required="required" type="text" autofocus="autofocus" tabindex="20" autocomplete="on" name="firstname" id="firstname" th:field="*{firstname}"/>
+										<input  class="required" required="required" type="text" autofocus="autofocus" tabindex="20" autocomplete="on" name="firstName" id="firstname" th:field="*{firstName}"/>
 									</li>
 									<li class="elem-3">
 										<label for="lastname" th:text="@{Last Name : }" class="required">Last Name : </label>
-										<input  class="required" required="required" type="text" tabindex="30" autocomplete="on" name="lastname" id="lastname" th:field="*{lastname}"/>
+										<input  class="required" required="required" type="text" tabindex="30" autocomplete="on" name="lastName" id="lastName" th:field="*{lastName}"/>
 									</li>
 									<li class="elem-3">
 										<label for="address1" th:text="@{Address Line 1 : }" class="required">Address Line 1 : </label>
@@ -340,7 +340,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									</li>
 									<li>
 										<label for="phone" th:text="@{Phone No : }" >Phone No : </label>
-										<input type="text" autocomplete="on" required="required" name="phone" id="phone" th:field="*{phone}" tabindex="90" />
+										<input type="text" autocomplete="on" required="required" name="phone1" id="phone1" th:field="*{phone1}" tabindex="90" />
 									</li>
 									<li>
 										<label for="email" th:text="@{E-mail  : }" >E-mail : </label>
@@ -348,7 +348,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									</li>
 									<li class="elem-3">
 										<label for="company" th:text="@{Company Name : }" >Company Name : </label>
-										<input type="text" tabindex="110" autocomplete="on" name="company" id="company" th:field="*{company}" value="Rasik Sahitya Pvt. Ltd."/>
+										<input type="text" tabindex="110" autocomplete="on" name="companyName" id="companyName" th:field="*{companyName}" value="Rasik Sahitya Pvt. Ltd."/>
 									</li>
 									<li class="elem-3">
 										<label for="designation" th:text="@{Designation : }">Designation : </label>
@@ -394,4 +394,5 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<script src="../assets/js/jquery.validate.js"></script>
 		<script src="../assets/js/registervalidation.js"></script>
 		<script src="../assets/js/jquery-ui-1.10.4.custom.js"></script>
+		</body>
 </html>

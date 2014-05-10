@@ -992,7 +992,21 @@ class RasikDBController {
 			return mav;
 			
 		}
+
 	
+	@RequestMapping(value =
+		{
+				"registration.html"
+		}, method = RequestMethod.GET)
+		public ModelAndView registration(Model model)
+		{
+			logger.info("Inside registration()");
+			ModelAndView mav = new ModelAndView("html/registration");
+			mav.addObject("customerObject", new Customer());
+			return mav;
+			
+		}
+
 	
 
 		@RequestMapping(value =
