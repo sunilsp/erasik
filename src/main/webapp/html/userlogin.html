@@ -31,23 +31,23 @@ xmlns:th="http://www.thymeleaf.org">
 						<div id="loginValidationFeedback">
 							<span> </span>
 						</div>
-						<form class="clearfix" id="loginForm"  th:object="${itemType}" th:action="" action="message.html" name="loginForm"  method="post">
+						<form class="clearfix" id="loginForm"  th:object="${itemType}" th:action="@{/j_spring_security_check}" action="/j_spring_security_check" name="loginForm"  method="post">
 							<ul>
 								<li>
 									<label for="userName" th:text="@{User Name : }" class="required" >User Name : </label>
-									<input type="text" autocomplete="on" required="required" autofocus="autofocus" maxlength="50" placeholder="User Name" name="userName" id="userName" tabindex="10"/>
+									<input type="text" autocomplete="on" required="required"  maxlength="50" placeholder="User Name" name="j_username" id="j_username"/>
 								</li>
 								<li>
 									<label for="userPassword" th:text="@{User Password : }" class="required" >Password : </label>
-									<input type="password" autocomplete="on" required="required" name="userPassword" placeholder="Password" id="userPassword" tabindex="20"/>
+									<input type="password" autocomplete="on" required="required" name="j_password" placeholder="Password" id="j_password"/>
 									<div class="fieldInstructions">
 										<input type="checkbox" name="showpassword" id="showPassword" tabindex="30"/>
 										Show Password
 									</div>
 								</li>
 								<li>
-									<span>New User? <a href"#">Register</a></span>
-									<span>Forgot Password? <a href"#">Reset Password</a></span>
+									<span>New User? <a href="registration.html" th:href="@{registration.html}" >Register</a></span>
+									<span>Forgot Password? <a href="#">Reset Password</a></span>
 								</li>
 								<li>
 									<input type="submit" value="Login" id="loginsubmitbtn" name="loginsubmitbtn" tabindex="40"/>
@@ -56,14 +56,18 @@ xmlns:th="http://www.thymeleaf.org">
 								</li>
 							</ul>
 						</form>
-					</div>
-					<footer role="contentinfo">
-						<p>
-							<span class="left">E-Rasik <a href="#">Goto Top</a> </span>
-						</p>
-					</footer>
-					<script src="../assets/js/jquery.validate.js"></script>
-					<script src="../assets/js/loginvalidation.js"></script>
-					<script src="../assets/js/jquery-ui-1.10.4.custom.js"></script>
+		</div>
+		</article>
+		</div>
+		</div>
+		
+
+		<div id="float-modal-form" title="Add new information">	</div>
+		<footer role="contentinfo">
+			<p>
+				<span class="left">E-Rasik <a href="#">Goto Top</a>	</span>
+			</p>
+		</footer>
+		
 	</body>
 </html>

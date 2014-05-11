@@ -15,9 +15,10 @@
 <http use-expressions='true' auto-config="true">
 		<intercept-url pattern="/security*" access="hasAnyRole('ROLE_USER')" />
 		<intercept-url pattern="/admin/*" access="hasAnyRole('ROLE_ADMIN')" />
+
+<form-login login-page="/userlogin.html"  authentication-failure-url="/login.do?authfailed=true"/>
 		
 </http>
-
 
 	
  

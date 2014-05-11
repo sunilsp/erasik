@@ -29,6 +29,10 @@
   	<script src="../assets/js/script.min.js" th:src="@{/assets/js/script.min.js}">	</script>
   	<script src="../assets/js/jquery.json-2.4.min.js" th:src="@{/assets/js/jquery.json-2.4.min.js}">	</script>
   	<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js">	</script>
+  	
+ 	 	<script type="text/javascript" src="../assets/js/jquery.validate.js" th:src="@{/assets/js/jquery.validate.js}">	</script>
+		<script type="text/javascript" src="../assets/js/itemDataFields.js" th:src="@{/assets/js/itemDataFields.js}">	</script>
+		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js" th:src="@{/assets/js/jquery-ui-1.10.4.custom.js}">	</script>
 </head>
 <body>
 	<header class="clearfix" th:fragment="contactMenuFragment">
@@ -110,38 +114,38 @@
 	</div>
 	<!-- Form for adding new Binding Type-->
 	<div th:fragment="bindingTypeFragment" >
-			<div id="bindingValidationFeedback">
-				<span>	</span>
-			</div>
-			<form  th:action="@{javascript:submitBindingTypeAjax();}" class="clearfix tableDataFields"
-			id="bindingTypeForm"  th:object="${bindingType}"  action="message.html" name="bindingTypeForm"  method="post">
-				<ul>
-					<li>
-						<label class="required" for="bindingTypeName" th:text="@{Binding Type Description : }">Binding Type Description : </label>
-						<input type="text" autocomplete="on" required="required" name="bindingTypeName"
-						id="bindingTypeName" th:field="*{bindingTypeName}"/>
-					</li>
-					<li>
-						<label class="required" for="length" th:text="@{Length (inches) : }">Length : </label>
-						<input type="text" autocomplete="on" required="required" name="length" id="length" />
-					</li>
-					<li>
-						<label class="required" for="height" th:text="@{Height (inches) : }">Height : </label>
-						<input type="text" autocomplete="on" required="required" name="height" id="height" />
-					</li>
-					<li>
-						<label class="required" for="width" th:text="@{Width (inches) : }">Width : </label>
-						<input type="text" autocomplete="on" required="required" name="width" id="width" />
-					</li>
-					<li>
-						<input type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
-						<input type="reset" value="Reset " id="bindingReset" name="bindingReset"/>
-						<input type="button" value="Cancel " id="bindingTypeCancel" name="bindingTypeCancel"/>
-					</li>
-				</ul>
-			</form>
-		</div>
-
+	<div id="bindingValidationFeedback">
+		<span></span>
+	</div>
+	<form  th:action="@{javascript:submitBindingTypeAjax();}" class="clearfix tableDataFields" id="bindingTypeForm"  th:object="${bindingType}"  action="message.html" name="bindingTypeForm"  method="post">
+		
+		<ul>
+		<li>
+			<label class="required" for="bindingTypeName" th:text="@{Binding Type Description : }">Binding Type Description : </label>
+			<input type="text" autocomplete="on" required="on" name="bindingTypeName" id="bindingTypeName" th:field="*{bindingTypeName}"/>
+		</li>
+		<li>
+			<label class="required" for="length" th:text="@{Length (inches) : }">Length : </label>
+			<input type="text" autocomplete="on" required="on" name="length" id="length" th:field="*{length}"/>
+		</li>
+		<li>
+			<label class="required" for="height" th:text="@{Height (inches) : }">Height : </label>
+			<input type="text" autocomplete="on" required="on" name="height" id="height" th:field="*{height}"/>
+		</li>
+		<li>
+			<label class="required" for="width" th:text="@{Width (inches) : }">Width : </label>
+			<input type="text" autocomplete="on" required="on" name="width" id="width" th:field="*{width}"/>
+		</li>
+		<li>
+			<input type="submit" value="Save" id="submitbindingTypebtn" name="submitbindingTypebtn"/>
+			<input type="reset" value="Reset " id="bindingReset" name="bindingReset"/>
+			<input type="button" value="Cancel " id="bindingTypeCancel" name="bindingTypeCancel"/>
+		</li>
+		</ul>
+		
+	</form>
+	</div>
+	
 	<!-- Form for adding new Language-->
 	<div th:fragment="languageFragment" >
 		<div id="languageValidationFeedback">
