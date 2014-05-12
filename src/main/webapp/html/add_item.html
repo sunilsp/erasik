@@ -2,20 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 	<head th:substituteby="html/common :: headerFragment1">
-		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js">	</script>
-		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js">	</script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/pages.js"></script>
+		<script th:remove="all" type="text/javascript" src="../assets/js/thymol.js"></script>
 	</head>
 	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
 	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
 	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
 	<!--[if gt IE 8]><!-->
 	<body>
-		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" >	</script>
+		<script type="text/javascript" th:utext="'var tempId = ' + ${tempFileId}" ></script>
 		<!--<![endif]-->
 		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<!-- <header th:include="html/common :: contactMenuFragment" /> -->
 		<header class="clearfix">
-			<div class="container" th:include="html/common :: contactMenuFragment">	</div>
+			<div class="container" th:include="html/common :: contactMenuFragment"></div>
 		</header>
 		<section role="banner">
 			<hgroup>
@@ -27,7 +27,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<article class="ym-g960-12 ym-gl">
 					<div class="ym-gbox">
 						<div id="validationFeedback">
-							<span>	</span>
+							<span> </span>
 						</div>
 						<form class="clearfix tableDataFields" id="addItemForm"  th:action="@{submitaddItem.html}"  th:object="${item}"  action="message.html" name="addItemForm"  method="post">
 							<fieldset title="Add New Item" class="foldedset">
@@ -131,8 +131,10 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3">
 										<label for="reprintCheck" th:text="@{Reprint : }" class="required">Reprint : </label>
-										<input type="radio" tabindex="290" name="reprintRadio" value="Yes" th:id="reprintRadioYAjax" id="reprintRadioY" required="required" checked="true"/>Yes
-										<input type="radio" tabindex="300" name="reprintRadio" value="No" th:id="reprintRadioNAjax" id="reprintRadioN" required="required" />No
+										<input type="radio" tabindex="290" name="reprintRadio" value="Yes" th:id="reprintRadioYAjax" id="reprintRadioY" required="required" checked="true"/>
+										Yes
+										<input type="radio" tabindex="300" name="reprintRadio" value="No" th:id="reprintRadioNAjax" id="reprintRadioN" required="required" />
+										No
 									</li>
 									<li class="elem-3" id="reprintDetails">
 										<label for="reprint" th:text="@{Reprint : }" class="required">Reprint : </label>
@@ -247,7 +249,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div id="selectStockCenter">
 			<div id="stockcenterValidationFeedback">
-				<span>	</span>
+				<span> </span>
 			</div>
 			<form id="itemStockcenter" class="clearfix tableDataFields" >
 				<ul>
@@ -267,14 +269,10 @@ xmlns:th="http://www.thymeleaf.org">
 			</form><!-- -->
 		</div>
 
-		<div id="float-modal-form" title="Add new information">	</div>
-		<footer role="contentinfo">
-			<p>
-				<span class="left">E-Rasik <a href="#">Goto Top</a>	</span>
-			</p>
-		</footer>
-		<script type="text/javascript" src="../assets/js/jquery.validate.js">	</script>
-		<script type="text/javascript" src="../assets/js/itemDataFields.js">	</script>
-		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js">	</script>
+		<div id="float-modal-form" title="Add new information"></div>
+		<footer role="contentinfo" th:substituteby="html/common :: footerFragment">	</footer>
+		<script type="text/javascript" src="../assets/js/jquery.validate.js" th:src="@{/assets/js/jquery.validate.js}"></script>
+		<script type="text/javascript" src="../assets/js/itemDataFields.js" th:src="@{/assets/js/itemDataFields.js}"></script>
+		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js" th:src="@{/assets/js/jquery-ui-1.10.4.custom.js}"></script>
 	</body>
 </html>

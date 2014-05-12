@@ -192,7 +192,8 @@ form label, .formDiv label {
 	width: 40%;
 	padding: 0.3em;
 	float: left;
-	height:1.2em;
+	line-height:1.2em;
+	height:auto
 }
 
 form ul li, .formDiv ul li {
@@ -294,7 +295,7 @@ em {
 }
 #validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
 #authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, #categoryValidationFeedback, #awardValidationFeedback, #addStockCenterValidationFeedback
-,#reprintValidationFeedback, #stockcenterValidationFeedback{
+,#reprintValidationFeedback, #stockcenterValidationFeedback, #registerValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;
@@ -328,6 +329,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 /*user login styles*/
 .fieldInstructions {
 	float: right;
+	color:#666
 }
 #loginForm a {
 	color: #01B0EC;
@@ -335,6 +337,11 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	font-weight: bold;
 }
 /*user login styles*/
+/* vertical center align */
+.singleFieldContainer{
+	display:inline-block;
+	margin: 1em;
+}
 @media screen and (min-width: 960px) {
 	form,.formDiv {
 		width: 100%;
@@ -367,7 +374,9 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		height:1.8em;
 	}
 	
-	.elem-3	select, .elem-3 input[type="text"]{
+	.elem-3	select, .elem-3 input[type="text"], .elem-3 input[type=text], 
+	.elem-3 input[type=number], .elem-3 input[type=password], .elem-3 input[type=email], 
+	.elem-3 input[type=date], .elem-3 input[type=datetime]{
 		width: 40%;
 	}
 	
@@ -375,6 +384,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		width: 35%;
 		text-align:right;
 		line-height: 1.2em;
+		height:auto
 	}
 	
 	.elem-3 label:first-child{
@@ -420,6 +430,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 		width: 35%;
 		text-align:right;
 		line-height: 1.2em;
+		height:auto
 	}
 	
 	.elem-3 label:first-child{
@@ -461,6 +472,7 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	form label, .formDiv label {
 		width: 90%;
 		line-height: 1.2em;
+		height:auto
 	}
 
 }
