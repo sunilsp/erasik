@@ -3,8 +3,8 @@
 xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head th:substituteby="html/common :: headerFragment1">
-		<script th:remove="all" src="../assets/js/pages.js"></script>
-		<script th:remove="all" src="../assets/js/thymol.js"></script>
+		<script th:remove="all" src="../assets/js/pages.js">	</script>
+		<script th:remove="all" src="../assets/js/thymol.js">	</script>
 	</head>
 	<!--[if lt IE 7]> <body class="ie6 oldies"> <![endif]-->
 	<!--[if IE 7]>    <body class="ie7 oldies"> <![endif]-->
@@ -13,7 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<body>
 		<!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<header class="clearfix">
-			<div th:include="html/common :: contactMenuFragment" class="container"></div>
+			<div th:include="html/common :: contactMenuFragment" class="container">	</div>
 		</header>
 		<section role="banner">
 			<hgroup>
@@ -396,7 +396,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 			</div>
 		</div>
 		<footer role="contentinfo" th:substituteby="html/common :: footerFragment">	</footer>
-		<script type="text/javascript" src="../../erasik/assets/js/jquery.validate.js"></script>
-		<script type="text/javascript" src="../../erasik/assets/js/registervalidation.js"></script>
+		<script type="text/javascript" src="../../erasik/assets/js/jquery.validate.js">	</script>
+		<script type="text/javascript" src="../../erasik/assets/js/registervalidation.js">	</script>
 	</body>
 </html>

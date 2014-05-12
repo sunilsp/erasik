@@ -293,9 +293,12 @@ label.required:before {
 em {
 	color: red;
 }
-#validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, #languageValidationFeedback, #translationValidationFeedback,
-#authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, #categoryValidationFeedback, #awardValidationFeedback, #addStockCenterValidationFeedback
-,#reprintValidationFeedback, #stockcenterValidationFeedback, #registerValidationFeedback{
+#validationFeedback, #typeValidationFeedback, #bindingValidationFeedback, 
+#languageValidationFeedback, #translationValidationFeedback,
+#authorValidationFeedback, #pubSupplValidationFeedback, #editionValidationFeedback, 
+#categoryValidationFeedback, #awardValidationFeedback, #addStockCenterValidationFeedback,
+#reprintValidationFeedback, #stockcenterValidationFeedback, #registerValidationFeedback,
+#loginValidationFeedback{
 	width: 50%;
 	display: block;
 	background: #01B0EC;
@@ -333,8 +336,18 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 }
 #loginForm a {
 	color: #01B0EC;
-	text-decoration: underline;
+	text-decoration: none;
 	font-weight: bold;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+#loginForm a:hover {
+	background-color: #01B0EC;
+	color: #fff;
 }
 /*user login styles*/
 /* vertical center align */

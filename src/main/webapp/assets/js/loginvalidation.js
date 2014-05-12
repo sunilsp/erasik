@@ -8,11 +8,11 @@ $(function(){
 	$("#loginValidationFeedback").hide();
 	var loginValidator = $("#loginForm").validate({
 		rules : {
-			userName : {
+			j_username : {
 				required : true,
 				maxlength : 24
 			},
-			userPassword : {
+			j_password : {
 				required : true,
 				password:true,
 				minlength : 8,
@@ -50,9 +50,9 @@ $(function(){
 	$("#showPassword").click(function() {
 		console.log("in funct");
 		if ($(this).is(':checked')) {
-			document.getElementById("userPassword").setAttribute("type", "text");
+			document.getElementById("j_password").setAttribute("type", "text");
 		} else {
-			document.getElementById("userPassword").setAttribute("type", "password");
+			document.getElementById("j_password").setAttribute("type", "password");
 		}
 	});
 });

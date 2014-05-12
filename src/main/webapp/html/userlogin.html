@@ -11,13 +11,13 @@ xmlns:th="http://www.thymeleaf.org">
 	<!--[if IE 8]>    <body class="ie8 oldies"> <![endif]-->
 	<!--[if gt IE 8]><!-->
 	<body>
-		<script th:utext="'var tempId = ' + ${tempFileId}" > </script>
+		<script th:utext="'var tempId = ' + ${tempFileId}" ></script>
 		<!--<![endif]-->
 		<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em>
-			<a href="http://browsehappy.com/">Upgrade to a different browser</a> or
-			<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+		<a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+		<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 		<header class="clearfix">
-			<div class="container" th:include="html/common :: contactMenuFragment"> </div>
+			<div class="container" th:include="html/common :: contactMenuFragment"></div>
 		</header>
 		<section role="banner">
 			<hgroup>
@@ -25,8 +25,11 @@ xmlns:th="http://www.thymeleaf.org">
 			</hgroup>
 		</section>
 		<div class="ym-wrapper">
-			<div class="ym-grid">
-				<article class="ym-g960-12 ym-gl">
+			<div class="ym-grid linearize-level-1">
+				<section class="ym-g960-2 ym-gl">
+					&nbsp;
+				</section>
+				<section class="ym-g960-8 ym-gl">
 					<div class="ym-gbox">
 						<div id="loginValidationFeedback">
 							<span> </span>
@@ -56,18 +59,15 @@ xmlns:th="http://www.thymeleaf.org">
 								</li>
 							</ul>
 						</form>
+					</div>
+				</section>
+				<section class="ym-g960-2 ym-gl">
+					&nbsp;
+				</section>
+			</div>
 		</div>
-		</article>
-		</div>
-		</div>
-		
-
-		<div id="float-modal-form" title="Add new information">	</div>
-		<footer role="contentinfo">
-			<p>
-				<span class="left">E-Rasik <a href="#">Goto Top</a>	</span>
-			</p>
-		</footer>
-		
+		<footer role="contentinfo" th:substituteby="html/common :: footerFragment">	</footer>
+		<script type="text/javascript" src="../../erasik/assets/js/jquery.validate.js">	</script>
+		<script type="text/javascript" src="../../erasik/assets/js/loginvalidation.js">	</script>
 	</body>
 </html>
