@@ -50,12 +50,13 @@ public class Customer implements java.io.Serializable {
 	private String fax;
 	private String mobile;
 	private String contactPerson;
-	private String username;
 	private String companyName;
 	private String designation;
 
 	private String firstName;
 	private String lastName;
+	private String username;
+	private String password;
 	
 	@JsonBackReference
 	private Set<Items> items = new HashSet<Items>(
@@ -79,7 +80,8 @@ public class Customer implements java.io.Serializable {
 			String designation,
 			String firstName,
 			String lastName,
-
+			String userName,
+			String password,
 			Set<Items> items) {
 		this.customerId = customerId;
 		this.customertype = customertype;
@@ -103,6 +105,8 @@ public class Customer implements java.io.Serializable {
 
 		this.firstName=firstName;
 		this.lastName=lastName;
+		this.username=userName;
+		this.password=password;
 
 		this.items = items;
 	}
@@ -298,27 +302,9 @@ public class Customer implements java.io.Serializable {
 
 
 	/**
-	 * @return the username
-	 */
-	@Column(name = "username", length = 45)
-	public String getUsername() {
-		return username;
-	}
-
-
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-
-	/**
 	 * @return the designation
 	 */
+	@Column(name = "designation", length = 145)
 	public String getDesignation() {
 		return designation;
 	}
@@ -337,6 +323,7 @@ public class Customer implements java.io.Serializable {
 	/**
 	 * @return the companyName
 	 */
+	@Column(name = "companyName", length = 145)
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -355,6 +342,7 @@ public class Customer implements java.io.Serializable {
 	/**
 	 * @return the firstName
 	 */
+	@Column(name = "firstName", length = 45)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -373,6 +361,7 @@ public class Customer implements java.io.Serializable {
 	/**
 	 * @return the lastName
 	 */
+	@Column(name = "lastName", length = 45)
 	public String getLastName() {
 		return lastName;
 	}
@@ -384,6 +373,44 @@ public class Customer implements java.io.Serializable {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+
+
+	/**
+	 * @return the username
+	 */
+	@Column(name = "username", length = 45)
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String userName) {
+		this.username = userName;
+	}
+
+
+
+	/**
+	 * @return the password
+	 */
+	@Column(name = "password", length = 45)
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

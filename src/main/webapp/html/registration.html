@@ -356,11 +356,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									</li>
 									<li>
 										<label for="userName" th:text="@{User Name : }" class="required" >User Name : </label>
-										<input type="text" autocomplete="on" required="required"  tabindex="130" placeholder="User Name" name="userName" id="userName"/>
+										<input type="text" autocomplete="on" required="required"  tabindex="130" placeholder="User Name" name="userName" id="userName" th:field="*{username}"/>
 									</li>
 									<li>
 										<label for="userPassword" th:text="@{User Password : }" class="required" >Password : </label>
-										<input type="password" autocomplete="on" required="required" tabindex="140" name="userPassword" placeholder="Password" id="userPassword"/>
+										<input type="password" autocomplete="on" required="required" tabindex="140" name="userPassword" placeholder="Password" id="userPassword" th:field="*{password}"/>
 										<div class="fieldInstructions">
 											<small>Entered Password may not necessarily be your EMail ID Password</small>
 										</div>

@@ -1007,7 +1007,20 @@ class RasikDBController {
 			
 		}
 
-	
+
+	@RequestMapping(value =
+		{
+				"submitRegistration.html"
+		}, method = RequestMethod.POST)
+		public String submitRegistration(Model model,@ModelAttribute Customer customerInfo)
+		{
+			logger.info("Inside submitregistration()");
+			rasikSvc.saveCustomer(customerInfo);
+			model.addAttribute("message", "Customer/User saved.");
+			return "html/message";
+			
+		}
+
 
 		@RequestMapping(value =
 					{
