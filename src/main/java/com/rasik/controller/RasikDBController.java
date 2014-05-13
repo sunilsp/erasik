@@ -3,6 +3,7 @@ package com.rasik.controller;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.rasik.beans.ItemtypeList;
+import com.rasik.model.CustomerRoles;
 import com.rasik.model.Authors;
 import com.rasik.model.Awarddetail;
 import com.rasik.model.Bindingtype;
@@ -63,8 +65,12 @@ import java.text.ParseException;
 
 
 
+
+
 import javax.servlet.http.HttpSession;
  
+
+
 
 
 
@@ -1015,6 +1021,13 @@ class RasikDBController {
 		public String submitRegistration(Model model,@ModelAttribute Customer customerInfo)
 		{
 			logger.info("Inside submitregistration()");
+			if(customerInfo.getDesignation().equals("Manager")){
+				CustomerRoles customerRoles=new CustomerRoles();
+				customerRoles.setAuthority("ROLE_ADMIN");
+				Set<CustomerRoles> customerRolesSet=new HashSet<CustomerRoles>();
+				customerRolesSet.add(customerRoles);
+				customerInfo.setCustomerRoleses(customerRolesSet);
+			}
 			rasikSvc.saveCustomer(customerInfo);
 			model.addAttribute("message", "Customer/User saved.");
 			return "html/message";

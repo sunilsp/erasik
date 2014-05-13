@@ -4,6 +4,7 @@
 /*
  * User Login validations
  */
+
 $(function() {
 	$("#registerValidationFeedback").hide();
 	var registerValidator = $("#userRegistrationForm")
@@ -31,6 +32,7 @@ $(function() {
 							},
 							state : {
 								required : true
+						
 							},
 							country : {
 								required : true
@@ -56,14 +58,14 @@ $(function() {
 								required : true,
 								maxlength : 12
 							},
-							password : {
+							upassword : {
 								required : true,
 								minlength : 8
 							},
 							confirmPassword : {
 								required : true,
 								minlength : 8,
-								equalTo : "#userPassword"
+								equalTo : "#password"
 							}
 						},
 						messages : {
