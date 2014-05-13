@@ -200,7 +200,7 @@ form ul li, .formDiv ul li {
 	display: block;
 	float: left;
 	width: 95%;
-	margin: 0 0.5em;
+	margin: 0.01em 0.5em;
 	border-top: #fff solid 1px;
 	border-bottom: #aaa solid 1px;
 	padding: 1em 0 0.5em;
@@ -332,7 +332,8 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 /*user login styles*/
 .fieldInstructions {
 	float: right;
-	color:#666
+	color:#333;
+	font-size:80%;
 }
 #loginForm a {
 	color: #01B0EC;

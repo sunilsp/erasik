@@ -422,6 +422,7 @@ public class Customer implements java.io.Serializable {
 	/**
 	 * @return the customerRoleses
 	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	public Set<CustomerRoles> getCustomerRoleses() {
 		return customerRoleses;
 	}

@@ -4,8 +4,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 // Generated May 12, 2014 8:05:35 PM by Hibernate Tools 4.0.0
@@ -41,7 +44,8 @@ public class CustomerRoles implements java.io.Serializable {
 		this.customerRolesid = customerRolesid;
 	}
 
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CustomerId", nullable = false)
 	public Customer getCustomer() {
 		return this.customer;
 	}
