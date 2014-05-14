@@ -33,20 +33,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 						<form class="clearfix tableDataFields" id="userRegistrationForm"  th:action="@{submitRegistration.html}" name="userRegistrationForm"  method="post" th:object="${customerObject}">
 							<ul>
 								<li class="">
-									<label for="firstname" th:text="@{First Name : }" class="required">First Name : </label>
+									<label for="firstName" th:text="@{First Name : }" class="required">First Name : </label>
 									<input  class="required" required="required" type="text" autofocus="autofocus" tabindex="20" autocomplete="on" name="firstName" id="firstName" th:field="*{firstName}" placeholder="First Name" />
 								</li>
 								<li class="">
-									<label for="lastname" th:text="@{Last Name : }">Last Name : </label>
-									<input  class="required" required="required" type="text" tabindex="30" autocomplete="on" name="lastName" id="lastname" th:field="*{lastName}" placeholder="Last Name" />
+									<label for="lastName" th:text="@{Last Name : }">Last Name : </label>
+									<input type="text" tabindex="30" autocomplete="on" name="lastName" id="lastName" th:field="*{lastName}" placeholder="Last Name" />
 								</li>
 								<li class="">
 									<label for="address1" th:text="@{Address Line 1 : }">Address Line 1 : </label>
-									<input  class="required" required="required" type="text" tabindex="40" autocomplete="on" name="address1" id="address1" th:field="*{address1}" placeholder="Address Line 1" />
+									<input  type="text" tabindex="40" autocomplete="on" name="address1" id="address1" th:field="*{address1}" placeholder="Address Line 1" />
 								</li>
 								<li class="">
 									<label for="address2" th:text="@{Address Line 2 : }">Address Line 2 : </label>
-									<input  class="required" required="required" type="text" tabindex="50" autocomplete="on" name="address2" id="address2" th:field="*{address2}" placeholder="Address Line 2"/>
+									<input  type="text" tabindex="50" autocomplete="on" name="address2" id="address2" th:field="*{address2}" placeholder="Address Line 2"/>
 								</li>
 								<li class="">
 									<label for="country" th:text="@{Country  : }" class="required">Country : </label>
@@ -80,7 +80,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									</div>
 								</li>
 								<li class="">
-									<label for="company" th:text="@{Company Name : }" >Company Name : </label>
+									<label for="companyName" th:text="@{Company Name : }" >Company Name : </label>
 									<input type="text" tabindex="110" autocomplete="on" name="companyName" id="companyName" th:field="*{companyName}" value="Rasik Sahitya Pvt. Ltd."/>
 								</li>
 								<li class="">
@@ -88,7 +88,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									<input type="text" tabindex="120" autocomplete="on" name="designation" id="designation" th:field="*{designation}" placeholder="Designation"/>
 								</li>
 								<li class="">
-									<label for="userName" th:text="@{User Name : }" class="required" >User Name : </label>
+									<label for="username" th:text="@{User Name : }" class="required" >User Name : </label>
 									<input type="text" autocomplete="on" required="required"  tabindex="130" name="username" id="username" th:field="*{username}" placeholder="erasikuser"/>
 								</li>
 								<li class="">
@@ -115,13 +115,49 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									<input id="registerCancel" type="button" value="Cancel" tabindex="200"/>
 								</li>
 							</ul>
-							<input type="hidden" name="designationHidden " id="designationHidden " />
-							<input type="hidden" name="companyHidden " id="companyHidden " />
+							<input type="hidden" name="designationHidden" id="designationHidden" />
+							<input type="hidden" name="companyHidden" id="companyHidden" />
 						</form>
 					</div>
 				</section>
 				<section class="ym-g960-2 ym-gl">
 					&nbsp;
+				</section>
+			</div>
+			<div id="verification-dialog" style="display:none;">
+				<section id="verification-accordion">
+					<div id="step1-email">
+						<h1>Email ID Verification</h1>
+						<p>Please check your Inbox for Email ID Confirmation.</p>
+						<p><input type="button" alt="Proceed to verify Mobile Number" value="Proceed to verify Mobile Number" title="Proceed to verify Mobile Number" name="nextToStep2"/></p>
+					</div>
+					<div id="step2-OTP">
+						<h1>One Time Password</h1>
+						<p>One Time Password has been sent to your registered Mobile No ending with <span id="cell-no">00000</span></p>
+						<form name="OPTForm" id="OTPForm" action="" class="clearfix tableDataFields">
+							<ul>
+								<li>
+									<label for="OTPValue" th:text="@{OTP : }" class="required">OTP : </label>
+									<input  class="required" required="required" type="text" autofocus="autofocus" autocomplete="on" name="OTPValue" id="OTPValue" placeholder="OTP" />
+									<div class="fieldInstructions">
+										Enter 6 digit number as received on your mobile.
+									</div>
+								</li>
+								<li>
+									<input type="button" value="Confirm" name="nextToStep3" title="Confirm" alt="Confirm"/>
+								</li>
+							</ul>
+						</form>
+					</div>
+					<div id="step3-OTPSuccess">
+						<p>Thank you! your mobile number is verified.</p>
+					</div>
+					<div id="step4-OTPFailed">
+						<p>OTP entered was incorrect.</p>
+						<p>
+							<input type="button" value="Submit OPT" name="backToStep2" title="Submit OPT" alt="Submit OPT"/>
+						</p>
+					</div>
 				</section>
 			</div>
 		</div>

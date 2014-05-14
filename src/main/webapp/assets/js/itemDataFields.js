@@ -42,7 +42,7 @@ $("document"). ready(function() {
 	        submitHandler : function(form){
 	        	$("#selectStockCenter").dialog("close");
 	        },
-	        onkeyup : true,
+	        
 	    });
 	 
 	 /*
@@ -157,145 +157,138 @@ $("document"). ready(function() {
 	var queryValidator = $("#addItemForm").validate({
         rules : {        	
         	userBookCode: {
-                required : true
+                required : true,
             },
             isbnno: {
-                required : false
+                required : false,
             },
         	itemTypeDropdown : {
-                required : true
+                required : true,
             }, 
             languageDropdown : {
-                required : true
+                required : true,
             },
             translationsDD : {
-            	required : true
+            	required : true,
             },
             reprintDropdown : {
-            	required : true
+            	required : true,
             },
             englishName: {
-                required : false
+                required : false,
             },
             marathiName : {
-                required : true
+                required : true,
             },
             authorDD : {
-            	required : true
+            	required : true,
             },
             PublSupplDD : {
-            	required : true
+            	required : true,
             },
             price : {
                 required : true,
                 number:true,
-                min:0,
-                max:10000000
+                range:[0,10000000],
             },
             discountedprice : {
-                required : false ,
+                required : false,
                 number:true,
-                min:0,
-                max:10000000
+                range:[0,10000000],
             },
             discountedpriceEndDate: {
                 required : true,
-                date:true
+                date:true,
             },
             purchasePrice: {
                 required : true,
                 number:true,
                 numberLessThan:"#price",
-                min:0,
-                max:10000000
+                range:[0,10000000],
             },
             purchaseDiscountPercent: {
-                required : true ,
+                required : true,
                 number:true,
-                min:0,
-                max:100
+                range:[0,100],
             },
             
             maxSaleDiscountPrecent:{
             	reuired:true,
                 number:true,
-                min:0,
-                max:100
+                range:[0,100],
             },
             
             maxSaleDiscountPrice:{
             	required:true,
                 number:true,
-                min:0,
-                max:10000000
+                range:[0,100],
             },
             editionDropdown: {
-                required : true
+                required : true,
             },
             CategoriesDD : {
-            	required : true
+            	required : true,
             },       
             AwarddetailsDD : {
-                required : true
+                required : true,
             },
             awardRadio:{
-            	required:true
+            	required:true,
             },
             qtyInHand : {
                 required : true,
-                number:true
+                number:true,
             },
             noOfPages:{
             	required:true,
             	number:true,
-            	max:10000000,
-            	min:0
+            	range:[1,1000000],
             },
             bindingTypeDropdown : {
-                required : true
+                required : true,
             },
             stockAmount:{
             	required:true,
-                number:true
+                number:true,
             },
             location:{
-            	required:true
+            	required:true,
             },
             minLevel : {
                 required : true,
                 number:true,
-                min:0
+                min:0,
             },
             maxLevel : {
                 required : true,
                 number:true,
-                min:0
+                min:0,
             },
             itemCoverImageFileName:{
-            	required:true
+            	required:true,
             },
             maxSalePrice : {
                 required : true,
-                number:true
+                number:true,
             },            
             description : {
-                maxlength : 24
+                maxlength : 24,
             },            
             maxSalePriceEndDate : {
             	required : true,
-                date : true
+                date : true,
             },        	
             maxOwDiscountPrecent : {
                 required : true,
-                number: true
+                number: true,
             }
         },
         messages : {
         	 purchaseDiscountPercent: {
-                 required : "Discount percent should be at least 0."
+                 required : "Discount percent should be at least 0.",
              },
              purchasePrice: {
-                 numberLessThan:"Should be less than Printed Price."
+                 numberLessThan:"Should be less than Printed Price.",
              },
         },
         invalidHandler : function(form, validator) {
@@ -326,7 +319,7 @@ $("document"). ready(function() {
             
         },
 
-        onkeyup : true,
+        
         
     });
 	
@@ -427,7 +420,7 @@ $("document"). ready(function() {
 				        	form.submit();
 				        
 				        },
-				        onkeyup : true,
+				        
 				    });
 					$( "#typeReset").click(function() {
 						typeValidator.resetForm();
@@ -517,7 +510,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#bindingReset").click(function() {
 				typeValidator.resetForm();
@@ -610,7 +603,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#languageReset").click(function() {
 				typeValidator.resetForm();
@@ -690,7 +683,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#edtionReset").click(function() {
 				typeValidator.resetForm();
@@ -788,7 +781,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#addStockCenterReset").click(function() {
 				typeValidator.resetForm();
@@ -964,7 +957,7 @@ $("document"). ready(function() {
 		        
 		        },
 		        
-		        onkeyup : true,
+		        
 		    });
 			$( "#authorReset").click(function() {
 				typeValidator.resetForm();
@@ -1074,7 +1067,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#additemsreprintReset").click(function() {
 				typeValidator.resetForm();
@@ -1189,7 +1182,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#publishReset").click(function() {
 				typeValidator.resetForm();
@@ -1244,7 +1237,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#categoryReset").click(function() {
 				typeValidator.resetForm();
@@ -1299,7 +1292,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#translationReset").click(function() {
 				typeValidator.resetForm();
@@ -1382,7 +1375,7 @@ $("document"). ready(function() {
 		        	form.submit();
 		        
 		        },
-		        onkeyup : true,
+		        
 		    });
 			$( "#awardReset").click(function() {
 				typeValidator.resetForm();
@@ -1489,7 +1482,7 @@ $("document"). ready(function() {
 								});	
 				        
 				        },
-				        onkeyup : true,
+				        
 				    });
 					$( "#itemCoverReset").click(function() {
 						typeValidator.resetForm();
@@ -1537,7 +1530,7 @@ $("document"). ready(function() {
 				        submitHandler : function(form){
 				        	
 				        },
-				        onkeyup : true,
+				        
 				    });
 					$( "#itemCoverReset").click(function() {
 						typeValidator.resetForm();
@@ -1584,7 +1577,7 @@ $("document"). ready(function() {
 				        submitHandler : function(form){
 				        	
 				        },
-				        onkeyup : true,
+				        
 				    });
 					$( "#audiobookReset").click(function() {
 						typeValidator.resetForm();

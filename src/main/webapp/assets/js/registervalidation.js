@@ -3,130 +3,136 @@
  */
 /*
  * User Login validations
- */
+
 $(window).bind("pageshow", function() {
 	    var form = $('form'); 
 	    // let the browser natively reset defaults
 	    form[0].reset();
-	});
+	}); */
+
 $(function() {
 	$("#registerValidationFeedback").hide();
-	var registerValidator = $("#userRegistrationForm")
-			.validate(
+	jQuery.validator.setDefaults({
+	    errorPlacement: function(error, element) {
+	        error.appendTo(element.prev().parent());
+	    }
+	});
+	var registerValidator = $("#userRegistrationForm").validate(
 					{
 						rules : {
 							firstName : {
 								required : true,
 								minlength : 1,
-								maxlength : 100
+								maxlength : 100,
 							},
 							lastName : {
-								required : false,
 								minlength : 1,
-								maxlength : 100
+								maxlength : 100,
 							},
 							address1 : {
-								required : false,
-								maxlength : 100
+								maxlength : 100,
 							},
 							address2 : {
-								required : false,
-								maxlength : 100
+								maxlength : 100,
 							},
 							city : {
-								required : true
+								required : true,
 							},
 							state : {
-								required : true						
+								required : true,
 							},
 							country : {
-								required : true
+								required : true,
 							},
 							phone1 : {
 								required : true,
 								number : true,
-								maxlength : 13,
-								minlength : 10
+								rangelength : [10,13],
 							},
+							
 							email : {
 								required : true,
 								email : true,
-								isRasikEmp : /@erasik.com/
+								isRasikEmp : true,
 							},
 							companyName : {
-								maxlength : 100
+								maxlength : 100,
 							},
-							designation : {
-								maxlength : 100
+							designation:{
+								required: {
+						            depends: function(element) {
+						            	var pattern=/@erasik.com/;
+						        		return (pattern.test($("#email").val())) ;
+						            }
+								},
 							},
 							username : {
 								required : true,
-								maxlength : 100
+								maxlength : 100,
 							},
 							password : {
 								required : true,
-								minlength : 8
+								minlength : 8,
 							},
 							confirmPassword : {
 								required : true,
-								minlength : 8,
-								maxlength : 12,
-								equalTo : "#password"
-							}
+								rangelength : [8,12],
+								equalTo : "#password",
+							},
 						},
 						messages : {
 							firstName : {
 								required : "Please enter First Name.",
-								maxlength : "First Name is longer than 100 characters."
+								maxlength : "First Name is longer than 100 characters.",
 							},
 							lastName : {
-								maxlength : "First Last is longer than 100 characters."
+								maxlength : "First Last is longer than 100 characters.",
 							},
 							address1 : {
-								maxlength : "Address Line 1 is longer than 100 characters."
+								maxlength : "Address Line 1 is longer than 100 characters.",
 							},
 							address2 : {
-								maxlength : "Address Line 2 is longer than 100 characters."
+								maxlength : "Address Line 2 is longer than 100 characters.",
 							},
 							city : {
-								required : "Please enter City."
+								required : "Please enter City.",
 							},
 							state : {
-								required : "Please select State."
+								required : "Please select State.",
 							},
 							country : {
-								required : "Please select Country."
+								required : "Please select Country.",
 							},
 							phone1 : {
 								required : "Please enter Phone No.",
 								number : "Please enter valid Phone No.",
-								maxlength : "Phone No is longer than 10 digits."
+								maxlength : "Phone No is longer than 10 digits.",
 							},
 							email : {
 								required : "Please enter EMail ID.",
 								email : "Please enter valid EMail ID.",
 							},
 							companyName : {
-								maxlength : "Company name is longer than 100 characters."
+								maxlength : "Company name is longer than 100 characters.",
 							},
 							designation : {
 								required : "Please select designation.",
-								maxlength : "Designation is longer than 100 characters."
+								maxlength : "Designation is longer than 100 characters.",
 							},
 							username : {
 								required : "Please enter User Name.",
-								maxlength : "User name is longer than 100 characters."
+								maxlength : "User name is longer than 100 characters.",
 							},
 							password : {
 								required : "Please enter password",
 								minlength : "Password should be minimum 8 characters long.",
-								maxlength : "Password is longer than 12 characters."
+								maxlength : "Password is longer than 12 characters.",
 							},
 							confirmPassword : {
 								required : "Please re-enter Password.",
 								minlength : "Password should be minimum 8 characters long.",
-								equalTo : "Please enter Confirm Password same as Password."
-							}
+								equalTo : "Please enter Confirm Password same as Password.",
+							},
 						},
 						invalidHandler : function(form, validator) {
 							var errors = validator.numberOfInvalids();
@@ -135,20 +141,25 @@ $(function() {
 										: 'You missed '
 												+ errors
 												+ ' fields. They have been highlighted';
-								$("#registerValidationFeedback span").html(
-										message);
+								$("#registerValidationFeedback span").html(message);
 								$("#registerValidationFeedback").show();
 							} else {
 								$("#registerValidationFeedback").hide();
 
 							}
 						},
-						submitHandler : function(form) {
+						submitHandler: function(form) { 
 							$("#designationHidden").val($("#designation").val());
-							$("#companyHidden").val($("#company").val());
+							$("#companyHidden").val($("#companyName").val());
 							form.submit();
 						},
-						onkeyup : true,
+						
+						/*onfocusout: function(element) {
+							console.log($(element).attr("id"));
+							if($(element).attr("id")!="email" && $(element).attr("id")!="companyname"){
+							$(element).valid();}
+							
+						},*/
 					});
 	$("#registerReset").click(function() {
 		registerValidator.resetForm();
@@ -161,9 +172,9 @@ $(function() {
 		event.preventDefault();
 	});
 
-	$.validator.addMethod("isRasikEmp", function(value, element, regexp) {
-		console.log(regexp.test(value));
-		if (regexp.test(value)) {
+	$.validator.addMethod("isRasikEmp", function(value) {
+		var pattern=/@erasik.com/;
+		if (pattern.test(value)) {
 			$("#companyName").val("Rasik Sahitya Pvt. Ltd.");
 			$("#companyName").prop( "disabled", true );
 			$("#designation").remove();
@@ -173,25 +184,27 @@ $(function() {
 			html_content+="<option value='accountant'>Accountant</option>";
 			html_content+="</select>";
 			$("#companyName").parent().next().append(html_content);
-			$("#designation").focus();
-			$("#designation").rules('add','required');
 			$("#designation").prev().attr('class','required');
+			$("#designation").focus();
 		} else {
 			$("#companyName").val("");
 			$("#companyName").prop( "disabled", false );
 			$("#designation").remove();
 			var html_content='<input type="text" tabindex="120" autocomplete="on" name="designation" id="designation" th:field="*{designation}" placeholder="Designation"/>';
 			$("#companyName").parent().next().append(html_content);
-			$("#designation").rules('remove','required');
-			$("#companyName").focus();
 			$("#designation").prev().removeClass('required');
+			$("#companyName").focus();
 		}
+		
 		$("#designation").bind("change",function(){
-			$("#designationHidden").val($(this).val());
+			var value=$(this).val();
+			$("#designationHidden").val(value);
+			$("#companyHidden").val($("#companyName").val());
 		});
 		
-		$("#company").bind("change",function(){
-			$("#companyHidden").val($(this).val());
+		$("#companyName").bind("change",function(){
+			var value=$(this).val();
+			$("#companyHidden").val(value);
 		});
 		return true;
 	}, "");
@@ -218,11 +231,13 @@ $(function() {
 		
 	});
 	$("#needverify").bind("change",function(){
-		if($(this).is(":checked")&& registerValidator.element("#email")){
-			$("#email").parent().find(".fieldInstructions").html("E-mail ID verification pending.");
-		}
-		if($(this).is(":checked")&& registerValidator.element("#phone1")){
-			$("#phone1").parent().find(".fieldInstructions").html("Phone number verification pending...");
+		if($(this).is(":checked")){
+			if(registerValidator.element("#email")){
+				$("#email").parent().find(".fieldInstructions").html("E-mail ID verification pending...");
+			}
+			if(registerValidator.element("#phone1")){
+				$("#phone1").parent().find(".fieldInstructions").html("Phone number verification pending...");
+			}
 		}
 	});
 	$("#email").bind("blur",function(){
