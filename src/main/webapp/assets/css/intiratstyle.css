@@ -350,6 +350,10 @@ input[type=text].error, input[type=number].error, input[type=password].error, in
 	background-color: #01B0EC;
 	color: #fff;
 }
+
+#verification-dialog{
+	font-size:80%;
+}
 /*user login styles*/
 /* vertical center align */
 .singleFieldContainer{

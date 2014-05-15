@@ -12,11 +12,35 @@ $(window).bind("pageshow", function() {
 
 $(function() {
 	$("#registerValidationFeedback").hide();
+	$("#eRasikContainer").hide();
+	//$("#phone1").mask("(999)99-99-999999");
 	jQuery.validator.setDefaults({
 	    errorPlacement: function(error, element) {
 	        error.appendTo(element.prev().parent());
 	    }
 	});
+	$("#verification-dialog").dialog({
+		autoOpen:false,
+		height:450,
+		width:550,
+		modal:true,
+		title:"E-mail ID and Phone number verification"
+	});
+	
+	$( "#verification-dialog" ).on( "dialogopen", function( event, ui ) {
+		$("#verification-accordion").accordion({ heightStyle: "fill" });
+		$("#step1-email :button").on("click",function(){
+			$("#verification-accordion").accordion("option","active",1);
+		});
+		$("#step2-OTP :button").on("click",function(){
+			$("#verification-accordion").accordion("option","active",2);
+		});
+		$("#step4-OTPFailed :button").on("click",function(){
+			$("#verification-accordion").accordion("option","active",1);
+		});
+	} );
+	
+	
 	var registerValidator = $("#userRegistrationForm").validate(
 					{
 						rules : {
@@ -53,7 +77,7 @@ $(function() {
 							email : {
 								required : true,
 								email : true,
-								isRasikEmp : true,
+								//isRasikEmp : true,
 							},
 							companyName : {
 								maxlength : 100,
@@ -149,17 +173,16 @@ $(function() {
 							}
 						},
 						submitHandler: function(form) { 
-							$("#designationHidden").val($("#designation").val());
+							console.log("in Submit handler");
+							$("#designationHidden").val(($("#eRasikDesignation").val())?$("#eRasikDesignation").val():$("#nonERasikDesignation").val());
 							$("#companyHidden").val($("#companyName").val());
-							form.submit();
+							$("#verification-dialog").dialog("open");
+							//form.submit();
 						},
 						
-						/*onfocusout: function(element) {
-							console.log($(element).attr("id"));
-							if($(element).attr("id")!="email" && $(element).attr("id")!="companyname"){
-							$(element).valid();}
-							
-						},*/
+						onfocusout: function(element) {
+							$(element).valid();
+						},
 					});
 	$("#registerReset").click(function() {
 		registerValidator.resetForm();
@@ -173,41 +196,21 @@ $(function() {
 	});
 
 	$.validator.addMethod("isRasikEmp", function(value) {
-		var pattern=/@erasik.com/;
-		if (pattern.test(value)) {
-			$("#companyName").val("Rasik Sahitya Pvt. Ltd.");
-			$("#companyName").prop( "disabled", true );
-			$("#designation").remove();
-			var html_content='<select tabindex="120" name="designation" id="designation" th:field="*{designation}" placeholder="Designation" required="required">';
-			html_content+="<option value=''>Please select</option>";
-			html_content+="<option value='manager'>Manager</option>";
-			html_content+="<option value='accountant'>Accountant</option>";
-			html_content+="</select>";
-			$("#companyName").parent().next().append(html_content);
-			$("#designation").prev().attr('class','required');
-			$("#designation").focus();
-		} else {
-			$("#companyName").val("");
-			$("#companyName").prop( "disabled", false );
-			$("#designation").remove();
-			var html_content='<input type="text" tabindex="120" autocomplete="on" name="designation" id="designation" th:field="*{designation}" placeholder="Designation"/>';
-			$("#companyName").parent().next().append(html_content);
-			$("#designation").prev().removeClass('required');
-			$("#companyName").focus();
-		}
 		
-		$("#designation").bind("change",function(){
-			var value=$(this).val();
-			$("#designationHidden").val(value);
-			$("#companyHidden").val($("#companyName").val());
-		});
 		
-		$("#companyName").bind("change",function(){
-			var value=$(this).val();
-			$("#companyHidden").val(value);
-		});
+		
 		return true;
 	}, "");
+	
+	$("#designation").bind("change",function(){
+		$("#designationHidden").val(($("#eRasikDesignation").val())?$("#eRasikDesignation").val():$("#nonERasikDesignation").val());
+		$("#companyHidden").val($("#companyName").val());
+	});
+	
+	$("#companyName").bind("change",function(){
+		var value=$(this).val();
+		$("#companyHidden").val(value);
+	});
 	$("#country").change(function(){
 		var selectedCountry=$(this).val();
 		var statesArray=[];
@@ -241,12 +244,31 @@ $(function() {
 		}
 	});
 	$("#email").bind("blur",function(){
-		if(registerValidator.element("#email") && $("#needverify").is(":checked")){
-			$(this).parent().find(".fieldInstructions").html("E-mail ID verification pending.");
+		if(registerValidator.element("#email")){
+		if($("#needverify").is(":checked")){
+			$(this).parent().find(".fieldInstructions").html("E-mail ID verification pending...");
+		}
+		var pattern=/@erasik.com/;
+		if (pattern.test($(this).val())) {
+			console.log("is erasik employee");
+			$("#nonERasikDesignation").val("");			
+			$("#companyName").val("Rasik Sahitya Pvt. Ltd.");
+			$("#companyName").prop( "disabled", true );
+			$("#eRasikContainer").show();
+			$("#nonERasikContainer").hide();
+			$("#eRasikDesignation").focus();
+		} else {
+			console.log("is not erasik employee");
+			$("#eRasikDesignation").val("");
+			$("#companyName").val("");
+			$("#companyName").prop( "disabled", false );
+			$("#eRasikContainer").hide();
+			$("#nonERasikContainer").show();
+			$("#companyName").focus();
+		}
 	}
 	});
 	$("#phone1").bind("blur",function(){
-		console.log($("#phone1").parent().find(".fieldInstructions"));
 		if(registerValidator.element("#phone1") && $("#needverify").is(":checked")){
 			$(this).parent().find(".fieldInstructions").html("Phone number verification pending...");
 	}

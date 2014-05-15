@@ -83,9 +83,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 									<label for="companyName" th:text="@{Company Name : }" >Company Name : </label>
 									<input type="text" tabindex="110" autocomplete="on" name="companyName" id="companyName" th:field="*{companyName}" value="Rasik Sahitya Pvt. Ltd."/>
 								</li>
-								<li class="">
-									<label for="designation" th:text="@{Designation : }">Designation : </label>
-									<input type="text" tabindex="120" autocomplete="on" name="designation" id="designation" th:field="*{designation}" placeholder="Designation"/>
+								<li class="" id="nonERasikContainer">
+									<label for="nonERasikDesignation" th:text="@{Designation : }">Designation : </label>
+									<input type="text" tabindex="120" autocomplete="on" name="designation" id="nonERasikDesignation" th:field="*{designation}" placeholder="Designation"/>
+								</li>
+								<li class="" id="eRasikContainer">
+									<label for="eRasikDesignation" th:text="@{Designation : }">Designation : </label>
+									<select tabindex="120" name="designation" id="eRasikDesignation" th:field="*{designation}" placeholder="Designation">
+										<option value=''>Please select</option>
+										<option value='manager'>Manager</option>
+										<option value='accountant'>Accountant</option>
+									</select>
 								</li>
 								<li class="">
 									<label for="username" th:text="@{User Name : }" class="required" >User Name : </label>
@@ -124,16 +132,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 					&nbsp;
 				</section>
 			</div>
-			<div id="verification-dialog" style="display:none;">
+			<div id="verification-dialog">
 				<section id="verification-accordion">
+					<h3>Email ID Verification</h3>
 					<div id="step1-email">
-						<h1>Email ID Verification</h1>
-						<p>Please check your Inbox for Email ID Confirmation.</p>
+						<p>Verification E-mail is sent to your ID <span id="email-id">name@domain.com</span>. Please check your Inbox for E-mail ID Confirmation.</p>
+						<hr/>
 						<p><input type="button" alt="Proceed to verify Mobile Number" value="Proceed to verify Mobile Number" title="Proceed to verify Mobile Number" name="nextToStep2"/></p>
 					</div>
+					<h3>One Time Password</h3>
 					<div id="step2-OTP">
-						<h1>One Time Password</h1>
-						<p>One Time Password has been sent to your registered Mobile No ending with <span id="cell-no">00000</span></p>
+						<p>One Time Password has been sent to your registered Mobile Number ending with <span id="cell-no">00000</span></p>
 						<form name="OPTForm" id="OTPForm" action="" class="clearfix tableDataFields">
 							<ul>
 								<li>
@@ -149,13 +158,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 							</ul>
 						</form>
 					</div>
+					<h3>Done</h3>
 					<div id="step3-OTPSuccess">
 						<p>Thank you! your mobile number is verified.</p>
 					</div>
+					<h3>Verification Failed</h3>
 					<div id="step4-OTPFailed">
 						<p>OTP entered was incorrect.</p>
 						<p>
-							<input type="button" value="Submit OPT" name="backToStep2" title="Submit OPT" alt="Submit OPT"/>
+							<input type="button" value="Re-Submit OPT" name="backToStep2" title="Re-Submit OPT" alt="Re-Submit OPT"/>
 						</p>
 					</div>
 				</section>
@@ -164,5 +175,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<footer role="contentinfo" th:substituteby="html/common :: footerFragment">	</footer>
 		<script type="text/javascript" src="../../erasik/assets/js/jquery.validate.js">	</script>
 		<script type="text/javascript" src="../../erasik/assets/js/registervalidation.js">	</script>
+		<script type="text/javascript" src="../../erasik/assets/js/jquery-ui-1.10.4.custom.js"></script>
 	</body>
 </html>
