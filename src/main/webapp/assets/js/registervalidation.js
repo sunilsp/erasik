@@ -173,11 +173,14 @@ $(function() {
 							}
 						},
 						submitHandler: function(form) { 
-							console.log("in Submit handler");
-							$("#designationHidden").val(($("#eRasikDesignation").val())?$("#eRasikDesignation").val():$("#nonERasikDesignation").val());
-							$("#companyHidden").val($("#companyName").val());
-							$("#verification-dialog").dialog("open");
-							//form.submit();
+							if($("#needverify").is(":checked")){
+								$("#designationHidden").val(($("#eRasikDesignation").val())?$("#eRasikDesignation").val():$("#nonERasikDesignation").val());
+								$("#companyHidden").val($("#companyName").val());
+								$("#verification-dialog").dialog("open");
+							}
+							else{
+								form.submit();
+							}
 						},
 						
 						onfocusout: function(element) {
@@ -195,13 +198,31 @@ $(function() {
 		event.preventDefault();
 	});
 
-	$.validator.addMethod("isRasikEmp", function(value) {
-		
-		
-		
-		return true;
-	}, "");
-	
+	$("#username").on("focusout",function(){
+		if(registerValidator.element($(this))){
+			var checkUsername= $.get("http://www.google.com",{username:$(this).val()})
+			.done(function(data) {
+				var iuserName=$("#username").val();
+				var refStatus=$("#username").parent().find(".fieldInstructions");
+				if(data){
+					refStatus.html("Username "+iuserName+" is available.");
+				}
+				else{
+					refStatus.html("Username "+iuserName+" is not available. Please chose another name.");
+					$("#username").val("");
+				}
+			})
+			.fail(function(data) {
+				var refStatus=$("#username").parent().find(".fieldInstructions");
+				refStatus.html("Checking if username is available. Can not contact server.");
+					
+			})
+			.always(function(data) {
+				var refStatus=$("#username").parent().find(".fieldInstructions");
+				refStatus.html("Checking if username is available...");
+			});
+		}
+	});
 	$("#designation").bind("change",function(){
 		$("#designationHidden").val(($("#eRasikDesignation").val())?$("#eRasikDesignation").val():$("#nonERasikDesignation").val());
 		$("#companyHidden").val($("#companyName").val());
@@ -244,11 +265,36 @@ $(function() {
 		}
 	});
 	$("#email").bind("blur",function(){
+		
+		if(registerValidator.element($(this))){
+			var checkEmail= $.get("http://www.google.com",{username:$(this).val()})
+			.done(function(data) {
+				/*var iEmail=$("#email").val();
+				var refStatus=$("#email").parent().find(".fieldInstructions");
+				if(data){
+					refStatus.html("EMail ID "+iEmail+" is not yet registered.");
+				}
+				else{
+					refStatus.html("Username "+iEmail+" is already registered.");
+					$("#username").val("");
+				}*/
+			})
+			.fail(function(data) {
+				var refStatus=$("#username").parent().find(".fieldInstructions");
+				refStatus.html("Checking if EMail ID is already registered. Can not contact server.");
+					
+			})
+			.always(function(data) {
+				var refStatus=$("#username").parent().find(".fieldInstructions");
+				refStatus.html("Checking if EMail ID is already registered is available...");
+			});
+		}
+		// script to run only if E-mail ID is not already registered.
 		if(registerValidator.element("#email")){
 		if($("#needverify").is(":checked")){
 			$(this).parent().find(".fieldInstructions").html("E-mail ID verification pending...");
 		}
-		var pattern=/@erasik.com/;
+		var pattern=/@erasik.com/i;
 		if (pattern.test($(this).val())) {
 			console.log("is erasik employee");
 			$("#nonERasikDesignation").val("");			
