@@ -198,7 +198,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 					<li>
 						<input type="submit" value="Save" id="additemseditionsubmitbtn" name="additemseditionsubmitbtn"/>
 						<input type="reset" value="Reset " id="edtionReset" name="edtionReset"/>
-						<input type="button" value="Calnce " id="edtionCancel" name="edtionCancel"/>
+						<input type="button" value="Cancel" id="edtionCancel" name="edtionCancel"/>
 					</li>
 				</ul>
 			</form>
@@ -929,7 +929,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 							</select>
 						</li>
 						<li>
-							<label for="email" th:text="@{E-mail : }" >E-mail : </label>
+							<label for="email" th:text="@{E-mail : }" class="required">E-mail : </label>
 							<input type="email" autocomplete="on" required="required" name="email" id="email" th:field="*{email}"/>
 						</li>
 					</ul>

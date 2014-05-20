@@ -138,7 +138,7 @@ xmlns:th="http://www.thymeleaf.org">
 									</li>
 									<li class="elem-3" id="reprintDetails">
 										<label for="reprint" th:text="@{Reprint : }" class="required">Reprint : </label>
-										<select tabindex="3010" id="reprintDropdown" name="reprintDropdown">
+										<select tabindex="310" id="reprintDropdown" name="reprintDropdown">
 											<option value="" th:text="Select ">Select</option>
 											<option th:each="itemsReprint : ${reprintList}" th:value="${itemsReprint.reprintId}" th:text="${itemsReprint.reprint}">Wireframe</option>
 										</select>
@@ -176,6 +176,9 @@ xmlns:th="http://www.thymeleaf.org">
 											<option th:each="itemsCategories : ${categoryList}" th:value="${itemsCategories.categoryId}" th:text="${itemsCategories.categoryHeadEnglish}">Wireframe</option>
 										</select>
 										<input type="button" tabindex="390" id="addCategories" th:id="addCategoriesAjax" name="addCategories" value="New Category"/>
+										<div class="fieldInstructions">
+										Select multiple categories by pressing Ctrl key.
+									</div>
 									</li>
 									<li class="elem-3">
 										<label for="description" th:text="@{Description : }">Description : </label>
@@ -272,7 +275,9 @@ xmlns:th="http://www.thymeleaf.org">
 		<div id="float-modal-form" title="Add new information"></div>
 		<footer role="contentinfo" th:substituteby="html/common :: footerFragment">	</footer>
 		<script type="text/javascript" src="../assets/js/jquery.validate.js" th:src="@{/assets/js/jquery.validate.js}"></script>
-		<script type="text/javascript" src="../assets/js/itemDataFields.js" th:src="@{/assets/js/itemDataFields.js}"></script>
 		<script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.custom.js" th:src="@{/assets/js/jquery-ui-1.10.4.custom.js}"></script>
+		<script type="text/javascript" src="../assets/js/globalize.js" th:src="@{/assets/js/globalize.js}"></script>
+		<script type="text/javascript" src="../assets/js/jquery.validate.globalize.js" th:src="@{/assets/js/jquery.validate.globalize.js}"></script>
+		<script type="text/javascript" src="../assets/js/itemDataFields.js" th:src="@{/assets/js/itemDataFields.js}"></script>
 	</body>
 </html>

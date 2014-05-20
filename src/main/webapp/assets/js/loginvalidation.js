@@ -15,9 +15,8 @@ $(function(){
 			j_password : {
 				required : true,
 				password:true,
-				minlength : 8,
-				maxlength : 24
-			}
+				rangelength:[8,24],
+			},
 		},
 		invalidHandler : function(form, validator) {
 			var errors = validator.numberOfInvalids();
@@ -34,7 +33,6 @@ $(function(){
 			form.submit();
 
 		},
-		onkeyup : true,
 	});
 	$("#loginReset").click(function() {
 		loginValidator.resetForm();
